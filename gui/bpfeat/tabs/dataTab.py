@@ -11,7 +11,6 @@ class dataTab(object):
     """
 
     def __init__(self):
-        self.addDataW.setVisible(False)
 
         # Manage path to data :
         self._cd = '/media/etienne/E438C4AE38C480D2/Users/Etienne Combrisson/Documents/MATLAB/Sujets/C_rev/Données' #QtCore.QDir.currentPath()
@@ -21,11 +20,7 @@ class dataTab(object):
 
         # Dataset :
         self.selectData.currentIndexChanged.connect(self.fcn_selectDataVar)
-        self.selectName.editingFinished.connect(self._checkVisibleInfo)
-        self.addNewData.clicked.connect(self.fcn_addDataset)
-        self.rmDataset.clicked.connect(self.fcn_rmDataset)
-
-        self.fcn_updateTreeFiles()
+        self.fcn_detectFilesIncd()
 
     ########################################################################
     # PATH MANAGEMENT
@@ -34,9 +29,9 @@ class dataTab(object):
         """Change the current directory
         """
         self._cd = str(QtGui.QFileDialog.getExistingDirectory(self, "Select Directory"))
-        self.fcn_updateTreeFiles()
+        self.fcn_detectFilesIncd()
 
-    def fcn_updateTreeFiles(self):
+    def fcn_detectFilesIncd(self):
         """Update files in current directory
         """
         filter = ["*.pickle", '*.npy', '*.mat', '*.npz'] 
@@ -81,6 +76,7 @@ class dataTab(object):
         self.selectData.clear()
         self.selectData.addItems(list(data.keys()))
         self.fcn_selectDataVar()
+        self.fcn_userMsg('File loaded. Specify data variable')
 
     ########################################################################
     # SELECT VARIABLE
@@ -88,75 +84,36 @@ class dataTab(object):
     def fcn_selectDataVar(self):
         """Select data
         """
+        self.cleanfig()
         # Current variable name :
         curDataVar = self.selectData.currentText()
         var = self._temp[curDataVar]
         # Check variable :
         if not isinstance(var, np.ndarray):
             self.dataShape.setText('DATA MUST A MATRIX')
-            self._var = None
-            self.addDataW.setVisible(False)
+            self._data = None
+            self.fcn_manageTabs(False)
+            self.fcn_userMsg('Data not compatible')
         else:
             if var.ndim != 3:
                 self.dataShape.setText('DATA MUST HAVE 3 DIMENSIONS\n(N_elec x N_pts x N_trials)')
-                self._var = None
-                self.addDataW.setVisible(False)
+                self._data = None
+                self.fcn_manageTabs(False)
+                self.fcn_userMsg('Data not compatible')
             else:
+                self._sf = self.selectSf.value()
                 self.dataShape.setText('Shape: '+str(var.shape))
-                self._var = var
-                self.addDataW.setVisible(True)
-        self._checkVisibleInfo()
-
-
-    def _checkVisibleInfo(self):
-        """
-        """
-        check = []
-        # Check data :
-        check.append(self._var is not None)
-        # Check name :
-        check.append(self.selectName.text() is not '')
-        # Display push buttons :
-        self.addNewData.setVisible(np.all(check))
-
-
-    def fcn_addDataset(self):
-        """
-        """
-        datasetName = self.selectName.text()
-        if datasetName != '':
-            if self._var is not None:
-                self._data[datasetName] = [{'data':self._var, 'sf':self.selectSf.value()}]
-                self.datasetValid.setText('DATA ADDED TO SUMMARIZE :D')
-                self.fcn_updateSummarize()
-            else:
-                self.datasetValid.setText('NO DATA DETECTED')
-        else:
-            self.datasetValid.setText('PLEASE ENTER A NAME FOR THE DATASET')
-
-
-    ########################################################################
-    # SUMMARIZE
-    ########################################################################
-    def fcn_updateSummarize(self):
-        """
-        """
-        self.sumTable.clear()
-        # print(self._data)
-        for k, name in enumerate(self._data.keys()):
-            self.sumTable.insertRow(k)
-            curdata = self._data[name][0]
-            self.sumTable.setItem(k , 0, QtGui.QTableWidgetItem(name))
-            self.sumTable.setItem(k , 1, QtGui.QTableWidgetItem(str(curdata['data'].shape)))
-            self.sumTable.setItem(k , 2, QtGui.QTableWidgetItem(str(curdata['sf'])))
-
-    def fcn_rmDataset(self):
-        """
-        """
-        indices = self.sumTable.selectionModel().selectedRows()
-        for index in indices:
-            name = self.sumTable.item(index.row(), 0).text()
-            # self.sumTable.removeRow(index.row())
-            del self._data[name]
-        self.fcn_updateSummarize()
+                self._data = var
+                self._nelec, self._npts, self._ntrials = self._data.shape
+                self._timevec = (np.arange(1, self._npts+1)/self._sf).ravel()
+                self.fcn_userMsg('Data loaded !!')
+                self.fcn_manageTabs(True)
+                # Initialize most basics objects :
+                self.fcn_powerInit()
+                self.fcn_tfInit()
+                self.getConfig.setVisible(True)
+                self.cleanAx.setVisible(True)
+                # self.fcn_rawChan()
+                # self._updatePowerObject()
+                print('-> Data loaded')
 
