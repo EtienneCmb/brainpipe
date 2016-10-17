@@ -13,7 +13,7 @@ class dataTab(object):
     def __init__(self):
 
         # Manage path to data :
-        self._cd = '/media/etienne/E438C4AE38C480D2/Users/Etienne Combrisson/Documents/MATLAB/Sujets/C_rev/Données' #QtCore.QDir.currentPath()
+        self._cd = QtCore.QDir.currentPath() #'/media/etienne/E438C4AE38C480D2/Users/Etienne Combrisson/Documents/MATLAB/Sujets/C_rev/Données'
         self._file, self._data, self._dataset = None, pd.DataFrame({}), 0
         self.uicd.clicked.connect(self.fcn_changecd)
         self.treeFiles.clicked.connect(self.fcn_varInsideFile)

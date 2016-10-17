@@ -60,6 +60,7 @@ class powTab(object):
         self.powSave.clicked.connect(self.fcn_powSave)
         self.powLoad.clicked.connect(self.fcn_powLoad)
         self.powSave.setVisible(False)
+        self.powLoad.setVisible(False)
 
         # -----------------------------------------------------------------
         # Advanced tab :
@@ -272,12 +273,12 @@ class powTab(object):
         savename = os.path.splitext(savename)[0] + '.mat'
         # Define data to save :
         data = {}
-        data['x'] = self._fce2plt
+        data['x'] = self._fce2plt.mean(2)
         data['powObj'] = self._power
         data['sf'] = self._sf
         data['conf'] = str(self._power)
         data['fcename'] = list(self._fce.keys())
-        data['fcemat'] = list(self._fce.values)
+        data['fcemat'] = np.array(list(self._fce.values[0]))
         data['chanselect'] = self._powSelect
         data['chanval'] = self.powChan.value()
         # Save then clean data :

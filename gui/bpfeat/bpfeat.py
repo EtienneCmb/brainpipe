@@ -3,22 +3,19 @@ from PyQt4 import QtGui, QtCore
 import numpy as np
 
 from PyQt4.uic import loadUiType
- 
-from matplotlib.figure import Figure
-from matplotlib.backends.backend_qt4agg import (
-    FigureCanvasQTAgg as FigureCanvas,
-    NavigationToolbar2QT as NavigationToolbar)
+
 import matplotlib.pyplot as plt
 
 
 from ui import Ui_bpui
 from tabs import uiTabs
 from brainpipe.visual import *
+from brainpipe.gui.subpltClass import subpltClass
 
 
 
 
-class featInit(QtGui.QMainWindow, Ui_bpui, uiTabs):
+class featInit(QtGui.QMainWindow, Ui_bpui, uiTabs, subpltClass):
 
     """Load all ui elements from pyqt
     """
@@ -28,6 +25,7 @@ class featInit(QtGui.QMainWindow, Ui_bpui, uiTabs):
         super(featInit, self).__init__(None)
         self.setupUi(self)
         uiTabs.__init__(self)
+        subpltClass.__init__(self)
 
         # Set tabs enable false :
         self.fcn_manageTabs(False)
@@ -38,7 +36,7 @@ class featInit(QtGui.QMainWindow, Ui_bpui, uiTabs):
         self.fcn_userMsg('Wait for loading data')
 
         # Quit :
-        exitAction = QtGui.QAction(QtGui.QIcon('exit.png'), '&Exit', self)        
+        exitAction = QtGui.QAction(QtGui.QIcon('exit.png'), '&Exit', self)
         exitAction.setShortcut('Ctrl+Q')
         exitAction.setStatusTip('Exit application')
         exitAction.triggered.connect(QtGui.qApp.quit)
@@ -92,7 +90,7 @@ class featInit(QtGui.QMainWindow, Ui_bpui, uiTabs):
         """Display advanced tab
         """
         advBool = self.actionAdvanced.isChecked()
-        self.tabWidget_2.setTabEnabled(3, advBool)
+        self.tabWidget_2.setTabEnabled(2, advBool)
         self.tabWidget_3.setTabEnabled(1, advBool)
         self.advResume.setVisible(advBool)
         self.tfResume.setVisible(advBool)
@@ -104,61 +102,8 @@ class featInit(QtGui.QMainWindow, Ui_bpui, uiTabs):
 
 
     ################################################################
-    # PLOTTING
-    ################################################################
-    def addmpl(self, fig):
-        # Remove plot
-        self.rmmpl()
-        # Create canvas :
-        self.canvas = FigureCanvas(fig)
-        # Add toolbar :
-        self.toolbar = NavigationToolbar(self.canvas, 
-                self.mplwindow, coordinates=True)
-        self.mplbox.addWidget(self.toolbar)
-        # Add plot :
-        self.mplbox.addWidget(self.canvas)
-        self.canvas.draw()
-
-
-    def rmmpl(self,):
-        try:
-            self.mplbox.removeWidget(self.canvas)
-            self.canvas.close()
-            self.mplbox.removeWidget(self.toolbar)
-            self.toolbar.close()
-        except:
-            pass
-
-    def cleanfig(self):
-        plt.cla()
-        plt.clf()
-        plt.close()
-        self.rmmpl()
-
-    def _setplot(self, data2plot, title='', xlabel='Time (ms)', ylabel='uV'):
-        """Plot data
-        """
-        plt.xlabel(xlabel), plt.ylabel(ylabel)
-        plt.title(title), plt.axis('tight')
-        self.addmpl(self._fig)
-
-
-    def fcn_cleanAx(self):
-        """
-        """
-        self.cleanfig()
-        self.rmmpl()
-
-
-
-    ################################################################
     # USER SYSTEM
     ################################################################
-    def fcn_userMsg(self, msg='   '):
-        """Send a user message
-        """
-        self.userMsg.setText(msg)
-
     def fcn_userConfig(self):
         """Get current config
         """
