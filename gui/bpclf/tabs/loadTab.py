@@ -80,6 +80,7 @@ class loadTab(object):
         # Check :
         x1, x2 = self._data1['x'], self._data2['x']
         fce1, fce2 = list(self._data1['fcename']), list(self._data2['fcename'])
+        self._chnames, self._chxy = self._data1['chnames'], self._data1['chxy']
         if x1.shape != x2.shape: # Check matrices inside
             self.fcn_userMsg("Les données dans les deux fichiers n'ont pas la même taille...")
         

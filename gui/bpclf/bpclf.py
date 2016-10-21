@@ -3,7 +3,7 @@ from PyQt4 import QtGui, QtCore
 import numpy as np
 
 from PyQt4.uic import loadUiType
- 
+
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_qt4agg import (
     FigureCanvasQTAgg as FigureCanvas,
@@ -17,11 +17,9 @@ from brainpipe.visual import *
 from brainpipe.gui.subpltClass import subpltClass
 
 
-
 class clfInit(QtGui.QMainWindow, Ui_bpui, uiTabs, subpltClass):
 
-    """Load all ui elements from pyqt
-    """
+    """Load all ui elements from pyqt."""
 
     def __init__(self):
         # Create the main window :
@@ -34,19 +32,16 @@ class clfInit(QtGui.QMainWindow, Ui_bpui, uiTabs, subpltClass):
 
         self.fcn_userMsg('Load power files for eyes open / closed')
 
-
     def fcn_advanced(self):
-    	"""
-    	"""
-    	# self.tabWidget.setTabEnabled(1, self.actionAdvanced.isChecked())
-    	# self.tabWidget.setTabEnabled(2, self.actionAdvanced.isChecked())
-    	self.clfGrp.setVisible(self.actionAdvanced.isChecked())
+        """"""
+        # self.tabWidget.setTabEnabled(1, self.actionAdvanced.isChecked())
+        # self.tabWidget.setTabEnabled(2, self.actionAdvanced.isChecked())
+        self.clfGrp.setVisible(self.actionAdvanced.isChecked())
 
 
 class bpclf(clfInit):
 
-    """
-    """
+    """"""
 
     def __init__(self, *args, **kwargs):
         # Create the app and initialize all graphical elements :

@@ -29,7 +29,7 @@ class featInit(QtGui.QMainWindow, Ui_bpui, uiTabs, subpltClass):
 
         # Set tabs enable false :
         self.fcn_manageTabs(False)
-        self.tabWidget_2.setTabEnabled(3, False)
+        self.tabWidget_2.setTabEnabled(2, False)
         self.tabWidget_3.setTabEnabled(1, False)
         self.advResume.setVisible(False)
         self.tfResume.setVisible(False)

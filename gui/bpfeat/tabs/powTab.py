@@ -3,6 +3,8 @@ from PyQt4 import QtGui
 from ui import Ui_bpui
 import os
 from time import sleep
+from mne.viz import plot_topomap
+
 
 import numpy as np
 import pandas as pd
@@ -53,6 +55,7 @@ class powTab(object):
         self.powPer1D.clicked.connect(self.fcn_powPlot)
         self.powPer2D.clicked.connect(self.fcn_powPlot)
         self.powAcross.clicked.connect(self.fcn_powPlot)
+        self.powTopo.clicked.connect(self.fcn_powPlot)
         self.powChan.valueChanged.connect(self.fcn_powPlot)
 
         # Load/save :
@@ -233,19 +236,22 @@ class powTab(object):
         index = self.powFce2Plt.currentIndex()
         name = self.powFce2Plt.currentText()
         try:
-            # Across or per channel :
-            if self.powAcross.isChecked():
+            if self.powAcross.isChecked(): # Across channel
                 self.powChan.setVisible(False)
                 data2plot = self._fce2plt[index, ...].mean(0)
                 title = 'Power in '+name+' band across channels'
-            elif self.powPer1D.isChecked():
+            elif self.powPer1D.isChecked(): # 1D power
                 self.powChan.setVisible(True)
                 data2plot = self._fce2plt[index, self.powChan.value(), :, :]
                 title = '1D Power in '+name+' band for channel'+str(self._powSelect[self.powChan.value()])
-            elif self.powPer2D.isChecked():
+            elif self.powPer2D.isChecked(): # 2D power
                 self.powChan.setVisible(True)
                 data2plot = self._fce2plt[index, self.powChan.value(), :, :]
                 title = '2D Power in '+name+' band for channel'+str(self._powSelect[self.powChan.value()])
+            elif self._topoEnable and self.powTopo.isChecked():
+                self.powChan.setVisible(False)
+                data2plot = self._fce2plt[index, ...].mean(1).mean(1).ravel()
+                title = ''
             self.fcn_userMsg('Plotting: '+title)
             # Send the figure :
             self.cleanfig()
@@ -253,10 +259,14 @@ class powTab(object):
             if self.powAcross.isChecked() or self.powPer1D.isChecked():
                 BorderPlot(self._timevec, data2plot, color='#ab4642', kind='sem')
                 self._setplot(data2plot, title, 'Time (ms)', 'uV²/hz')
-            else:
+            elif not self.powTopo.isChecked():
                 self._power.plot2D(self._fig, data2plot.T, cblabel=name+' power modulations',
                                    xvec=self._timevec, **self._pow2DPlt)
                 self._setplot(data2plot, title, 'Time (ms)', 'Trials')
+            else:
+                plot_topomap(data2plot, self._chxy, show=False, **self._pow2DPlt)
+                self._setplot(data2plot, title, '', '')
+                plt.axis('square')
         except:
             self.fcn_userMsg('Oups :d (power plot)')
 
@@ -281,6 +291,8 @@ class powTab(object):
         data['fcemat'] = np.array(list(self._fce.values[0]))
         data['chanselect'] = self._powSelect
         data['chanval'] = self.powChan.value()
+        data['chxy'] = self._chxy
+        data['chnames'] = self._chname
         # Save then clean data :
         savemat(savename, data)
         del data
@@ -368,7 +380,7 @@ class powTab(object):
             self._PowArgs['order'] = 3
             self._PowArgs['cycle'] = 3
             # Transformation :
-            self._PowArgs['method'] = 'wavelet'
+            self._PowArgs['method'] = 'hilbert1'
             self._PowArgs['wltWidth'] = 7
             # Detrend:
             self._PowArgs['dtrd'] = False

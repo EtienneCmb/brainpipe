@@ -180,6 +180,8 @@ class tfTab(object):
                 self._tfArgs['baseline'] = [self.tfBslFrom.value(), self.tfBslTo.value()]
             else:
                 self._tfArgs['baseline'] = None
+
+            self._tf = TF(self._sf, self._npts, **self._tfArgs)
             self.tfResume.setText(str(self._tf))
 
             # -------------------------------------------

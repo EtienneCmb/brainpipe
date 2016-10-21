@@ -25,11 +25,6 @@ class sfTab(object):
         # Run classification :
         self.runSF.clicked.connect(self.fcn_runClf)
 
-        # Plotting :
-        # self.daUpper.valueChanged.connect(self.fcn_Plotclf)
-        self.updatePlot.clicked.connect(self.fcn_Plotclf)
-
-
 
     ################################################################
     # CLF OBJECTS MANAGEMENT
@@ -125,23 +120,7 @@ class sfTab(object):
         """
         self._da = self._cla.fit(self._x[self._selectedFce, ...].T, center=self._center)[0]
         self.tabWidget.setTabEnabled(2, True)
-        self.fcn_Plotclf()
+        self.vminSpin.setValue(self._da.mean(0).min())
+        self.vmaxSpin.setValue(self._da.mean(0).max())
+        self.fcn_barPlot()
 
-
-    def fcn_Plotclf(self):
-        """Plot classification
-        """
-        # Get da upper to :
-        xticks = np.arange(self._nelec)
-        daUpper = self._da.mean(0) >= self.daUpper.value()
-        xticks = xticks[daUpper]
-        self.cleanfig()
-        self._fig = plt.figure()
-        self._cla.daplot(self._da[:, daUpper], chance_method='bino', chance_level=self._chanceLevel)
-        ax = plt.gca()
-        ax.set_xticklabels(xticks, rotation=45)
-        plt.xlabel('Channels')
-        title = 'Eyes open vs Eyes Closed classification using power in '+self._fce[self._selectedFce]+' band\n(Classifier: '+self._clf.lgStr+' / Cross-validation: '+self._cv.lgStr+')'
-        plt.title(title, y=1.02)
-        # plt.xticklabels()
-        self.addmpl(self._fig)
