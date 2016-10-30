@@ -25,7 +25,6 @@ def filter_fcn(sf, npts, f=None, filtname='fir1', cycle=3, order=3, ftype='bandp
     # -------------------------------------------------------------
     # Input management :
     if f is None:
-        f = 0
         filtname = None
     if filtname not in ['bessel', 'butter', 'fir1', None]:
         raise ValueError(
@@ -37,11 +36,12 @@ def filter_fcn(sf, npts, f=None, filtname='fir1', cycle=3, order=3, ftype='bandp
         raise ValueError(
             "For lowpass and highpass filters, use either 'butter' or 'bessel'")
     if (ftype is not 'bandpass') and not isinstance(f, (int, float)):
-        raise ValueError(
-            'For lowpass and highpass filters, f must be a float or int')
+        if isinstance(f, (int, float)):
+            raise ValueError(
+                'For lowpass and highpass filters, f must be a float or int')
     if (ftype == 'bandpass') and not isinstance(f, np.ndarray):
         f = np.array(f)
-    if filtname is not 'fir1':
+    if (filtname in ['butter', 'bessel']) and (f is not None):
         f = np.multiply(f, 2 / sf)
 
     # -------------------------------------------------------------
@@ -50,19 +50,19 @@ def filter_fcn(sf, npts, f=None, filtname='fir1', cycle=3, order=3, ftype='bandp
     if filtname == 'fir1':
         fOrder = fir_order(sf, npts, f[0], cycle=cycle)
         b, a = fir1(fOrder, f / (sf / 2))
-        sup = ', order='+str(fOrder)+', cycle='+str(cycle)
+        sup = ', order=' + str(fOrder) + ', cycle=' + str(cycle)
 
     # butterworth filter :
     elif filtname == 'butter':
         b, a = scisig.butter(order, f, btype=ftype)
         fOrder = None
-        sup = ', order='+str(order)+', type='+ftype
+        sup = ', order=' + str(order) + ', type=' + ftype
 
     # bessel filter :
     elif filtname == 'bessel':
         b, a = scisig.bessel(order, f, btype=ftype)
         fOrder = None
-        sup = ', order='+str(order)+', type='+ftype
+        sup = ', order=' + str(order) + ', type=' + ftype
 
     # None :
     else:
@@ -80,10 +80,9 @@ def filter_fcn(sf, npts, f=None, filtname='fir1', cycle=3, order=3, ftype='bandp
         def filtFcn(x):
             return scisig.filtfilt(b, a, x, padlen=fOrder)
 
-
     # -------------------------------------------------------------
     # String management :
-    filtStr = 'Filter(name='+str(filtname)+'{})'.format(sup)
+    filtStr = 'Filter(name=' + str(filtname) + '{})'.format(sup)
 
     return filtFcn, filtStr
 
@@ -102,7 +101,8 @@ def transfo_fcn(sf, f=None, transname='hilbert', width=7.0):
         raise ValueError(
             "transname must be either 'hilbert' or 'wavelet' or None")
     if (transname == 'wavelet') and (f is None):
-        raise ValueError("When using wavelet, f can not be None. Change f before.")
+        raise ValueError(
+            'When using wavelet, f can not be None. Change f before.')
     # Transformation function :
     if transname == 'hilbert':
         def transFcn(x):
@@ -111,48 +111,45 @@ def transfo_fcn(sf, f=None, transname='hilbert', width=7.0):
     elif transname == 'wavelet':
         def transFcn(x):
             return morlet(x, sf, f, width)
-        sup=', width='+str(width)
+        sup = ', width=' + str(width)
     elif transname is None:
         def transFcn(x):
             return x
         sup = ''
-    transStr = 'Transformation(name='+str(transname)+'{})'.format(sup)
+    transStr = 'Transformation(name=' + str(transname) + '{})'.format(sup)
 
     return transFcn, transStr
 
 
-def feat_fcn(kind=None):
+def feat_fcn(featinfo=None):
     """Return a function to compute either the amplitude, power, phase or
     identity features.
 
-    :kind: either 'amplitude', 'power', 'phase', None
-    :returns: the features kind function
+    :featinfo: either 'amplitude', 'power', 'phase', None
+    :returns: the features featinfo function
 
     """
     # Check input :
-    if kind not in ['amplitude', 'power', 'phase', None]:
+    if featinfo not in ['amplitude', 'power', 'phase', None]:
         raise ValueError(
-            "kind must be either 'amplitude', 'power', 'phase' or None")
-    # Features kind function :
-    if kind == 'amplitude':
-        def kindFcn(x):
-            np.abs(x, x)
-            return x
-    elif kind == 'power':
-        def kindFcn(x):
-            np.abs(x, x)
-            np.square(x, x)
-            return x
-    elif kind == 'phase':
-        def kindFcn(x):
+            "featinfo must be either 'amplitude', 'power', 'phase' or None")
+    # Features featinfo function :
+    if featinfo == 'amplitude':
+        def featinfoFcn(x):
+            return np.abs(x)
+    elif featinfo == 'power':
+        def featinfoFcn(x):
+            return np.square(np.abs(x))
+    elif featinfo == 'phase':
+        def featinfoFcn(x):
             return np.angle(x)
-    elif kind is None:
-        def kindFcn(x):
+    elif featinfo is None:
+        def featinfoFcn(x):
             return x
-    # Features kind string :
-    kindStr = 'Feature(kind=' + str(kind) + ')'
+    # Features featinfo string :
+    featinfoStr = 'Feature(featinfo=' + str(featinfo) + ')'
 
-    return kindFcn, kindStr
+    return featinfoFcn, featinfoStr
 
 
 def preproc_fcn(detrend=False, demean=False, axis=0):
@@ -185,7 +182,10 @@ def preproc_fcn(detrend=False, demean=False, axis=0):
         x = dtrd_fcn(x, axis=axis)
         return x
     # String :
-    preprocStr = 'Preprocessing(detrend=' + str(detrend) + \
-        ', demean=' + str(demean) + ')'
+    preprocStr = 'Preprocessing({})'
+    if detrend or demean:
+        sup = 'detrend=' + str(detrend) + ', demean=' + str(demean)
+    else:
+        sup = 'None'
 
-    return preprocFcn, preprocStr
+    return preprocFcn, preprocStr.format(sup)

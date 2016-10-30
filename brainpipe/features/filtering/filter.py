@@ -20,6 +20,7 @@ def filter_fcn(sf, npts, f, filtname='fir1', cycle=3, order=3, ftype='bandpass',
     :returns:the filtering function
 
     """
+    print('OKIIIIIIII')
     # Input management :
     if filtname not in ['bessel', 'butter', 'fir1']:
         raise ValueError(
@@ -37,11 +38,11 @@ def filter_fcn(sf, npts, f, filtname='fir1', cycle=3, order=3, ftype='bandpass',
     if filtname is not 'fir1':
         f = np.multiply(f, 2 / sf)
 
+    print('OKI: ', f)
     # fir1 filter :
     if filtname == 'fir1':
         fOrder = fir_order(sf, npts, f[0], cycle=cycle)
         b, a = fir1(fOrder, f / (sf / 2))
-
     # butterworth filter :
     elif filtname == 'butter':
         b, a = scisig.butter(order, f, btype=ftype)

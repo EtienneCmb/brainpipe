@@ -3,9 +3,10 @@
 import numpy as np
 from .method import *
 from ..utils import _listcheck
+from joblib import Parallel, delayed
 
 
-class ChainTransform(object):
+class Chain(object):
     """Design a chain of transformations to apply to multi-dimentional array.
     This class can be used to pre-processed your data, to extract spectral
     informations (using the hilbert or wavelet transform) or to compute phase /
@@ -54,7 +55,7 @@ class ChainTransform(object):
             Width of the wavelet transform. It's preferable to use width >= 5
             (Bertrand, 1996)
 
-        kind: string, optional, (def: None)
+        featinfo: string, optional, (def: None)
             Define the type of information to extract from the signal. Use
             either None, 'amplitude', 'power' or 'phase'.
 
@@ -77,9 +78,9 @@ class ChainTransform(object):
 
     """
 
-    def __init__(self, sf, npts, f=None, filtname='fir1', cycle=3, order=3,
-                 ftype='bandpass', padlen=None, transname='hilbert', width=7.0,
-                 kind=None, detrend=False, demean=False, verbose=0):
+    def __init__(self, sf, npts, f=None, filtname=None, cycle=3, order=3,
+                 ftype='bandpass', padlen=None, transname=None, width=7.0,
+                 featinfo=None, detrend=False, demean=False, verbose=0):
         self._sf = float(sf)
         self._npts = float(npts)
         self._f = f
@@ -90,7 +91,7 @@ class ChainTransform(object):
         self._padlen = padlen
         self._transname = transname
         self._width = float(width)
-        self._kind = kind
+        self._featinfo = featinfo
         self._detrend = detrend
         self._demean = demean
         self._verbose = verbose
@@ -120,82 +121,96 @@ class ChainTransform(object):
         # Return list of function :
         return self._chain
 
-    def apply(self, x, axis=0):
+    def apply(self, x, n_jobs=1, axis=0):
         """Apply the list of transformations to the data x.
+
         Specify where is the time dimension using axis. The 'axis'
-        dimension must correspond to the input parameter npts.
-        This function return an array of shape (n_f, x.shape) with
-        n_f the number of frequencies in f.
+        dimension must correspond to the input parameter npts. This
+        function return an array of shape (n_f, x.shape) with n_f the
+        number of frequencies in f.
+
         """
-        # Get latest update :
-        self._update()
+        # Check shape of x :
+        xaxis = float(x.shape[axis])
+        if not np.equal(xaxis, self._npts):
+            raise ValueError('The dimension of x on axis ' + str(axis) + ' is ' + str(
+                x.shape[axis]) + " and doesn't correspond to the variable npts=" + str(self._npts))
+        # Check n_jobs n_frequencies = 1:
+        if len(self._f) == 1:
+            n_jobs = 1
+        # Apply function :
+        xf = Parallel(n_jobs=n_jobs)(delayed(_apply)(x, self, k, axis=axis)
+                                     for k in self._f)
+        return np.array(xf)
 
     # -------------------------------------------------------
     #                    DEEP FUNCTIONS
     # -------------------------------------------------------
-    def _inputCompatibility(self):
+    def _checkInputs(self):
         """Check if inputs are compatible."""
-        if self._transname == 'wavelet':
+        # -----------------------------------------
+        # Transname checking :
+        # -----------------------------------------
+        # Force to add a feature kind in case of complex transformation :
+        if (self._transname is not None) and (self._featinfo is None):
+            raise ValueError("""Using a complex decomposition like 'hilbert'
+                    or 'wavelet', you must define the featinfo parameter
+                    (either 'amplitude', 'power' or 'phase')""")
+        # Wavelet checking :
+        if self._transname is 'wavelet':
             self._filtname = None
 
-    def _fSpecificChain(self, f):
-        """Build a chain of transformations for one f."""
-        # Get preprocessing function :
-        preprocFcn, self._preprocStr = preproc_fcn(detrend=self._detrend,
-                                                   demean=self._demean)
-        # Get the filter function:
-        filtFcn, self._filtStr = filter_fcn(self._sf, self._npts, f=f, filtname=self._filtname,
-                                            cycle=self._cycle, order=self._order, ftype=self._ftype,
-                                            padlen=self._padlen)
-        # Get the transformation function:
-        transFcn, self._transStr = transfo_fcn(self._sf, f=f, transname=self._transname,
-                                               width=self._width)
-        # Get feature type function :
-        featFcn, self._featStr = feat_fcn(kind=self._kind)
+        # -----------------------------------------
+        # Frequency checking :
+        # -----------------------------------------
+        # No filtering if no frequency :
+        if self._f is None:
+            self._filtname = None
 
-        # Now, build a unique function for this frequency :
-        def fSpecific(x, axis=0):
-            """Apply transformation on x.
-
-            This function mix vector and matrix operations
-
-            """
-            # Matricial preprocessing :
-            x = preprocFcn(x, axis=axis)
-            # Filt and transformation (on vector) :
-
-            def _fSpecific(v):
-                """Transformation chain."""
-                v = filtFcn(v)
-                v = transFcn(v)
-                return v
-            # Apply on axis :
-            x = np.apply_along_axis(_fSpecific, axis, x)
-            # Extract features using ndarray :
-            x = featFcn(x)
-            return x
-        return fSpecific
-
-    def _buildchain(self):
-        """Build the final chain of transformation and return a list for each
-        frequency in self._f."""
-        self._chain = [self._fSpecificChain(k) for k in self._f]
-        if (self._verbose > 0) and (self._verbose <= 1):
-            print('Chain updated')
-        elif self._verbose > 1:
-            print('Chain updated to: ' + self.__str__())
+        if (self._f is not None) or (self._filtname is not None):
+            # Check frequency vector :
+            if not isinstance(self._f, np.ndarray) or np.array(self._f).ndim == 1:
+                self._f = np.atleast_2d(self._f)
+            fshape = self._f.shape
+            # f must be a (1, N) or (2, N) array :
+            if (1 not in fshape) and (2 not in fshape):
+                raise ValueError('Shape of frequency vector is not compatible.')
+            # Shape of f checking according to ftype :
+            if (self._ftype is 'bandpass') and (self._transname is not 'wavelet'):
+                if 2 not in fshape:
+                    raise ValueError(
+                        'For a bandpass filter, f must be a (2, n_frequency) array')
+                elif fshape[0] is not 2:
+                    self._f = self._f.T
+            elif (self._ftype is not 'bandpass'):
+                if 1 not in fshape:
+                    raise ValueError(
+                        "For a 'lowpass'/'highpass' filter, f must be a (1, n_frequency)")
+                elif fshape[0] is not 1:
+                    self._f = self._f.T
+            # Shape of f checking according to transname :
+            if (self._transname is 'wavelet') and (fshape[0] != 1):
+                self._f = np.atleast_2d(self._f.mean(0))
+            # No filtering / No wavelet :
+            if (self._transname is not 'wavelet') and (self._filtname is None):
+                self._f = [None]
+        else:
+            self._f = [None]
+        self._f = list(np.array(self._f).astype(float).T)
 
     def _update(self):
         """Update configuration."""
         # Check inputs compatibility :
-        self._inputCompatibility()
-        # Check inputs :
-        if self._f is not None:
-            self._f = _listcheck(self._f)
-        else:
-            self._f = [None]
+        self._checkInputs()
         # Get list of functions :
-        self._buildchain()
+        _, propStr = _getFilterProperties(self, self._f[0])
+        # Update string :
+        self._preprocStr, self._filtStr, self._transStr, self._featStr = propStr
+        # Print output :
+        if (self._verbose > 0) and (self._verbose <= 1):
+            print('Chain updated')
+        elif self._verbose > 1:
+            print('Chain updated to: ' + self.__str__())
 
     # -------------------------------------------------------
     #                    PROPERTIES
@@ -300,14 +315,14 @@ class ChainTransform(object):
         self._width = value
         self._update()
 
-    # Feature kind :
+    # Feature featinfo :
     @property
-    def kind(self):
-        return self._kind
+    def featinfo(self):
+        return self._featinfo
 
-    @kind.setter
-    def kind(self, value):
-        self._kind = value
+    @featinfo.setter
+    def featinfo(self, value):
+        self._featinfo = value
         self._update()
 
     # De-trending :
@@ -339,3 +354,51 @@ class ChainTransform(object):
     def verbose(self, value):
         self._verbose = value
         self._update()
+
+
+def _getFilterProperties(self, f):
+    """This function return the diffrents functions for pre-processing,
+    filtering, complex transformation and apply a feature type.
+
+    This function is outside the class because of parallel processing.
+
+    """
+    # Get preprocessing function :
+    preprocFcn, preprocStr = preproc_fcn(detrend=self._detrend,
+                                         demean=self._demean)
+    # Get the filter function:
+    filtFcn, filtStr = filter_fcn(self._sf, self._npts, f=f, filtname=self._filtname,
+                                  cycle=self._cycle, order=self._order, ftype=self._ftype,
+                                  padlen=self._padlen)
+    # Get the transformation function:
+    transFcn, transStr = transfo_fcn(self._sf, f=f, transname=self._transname,
+                                     width=self._width)
+    # Get feature type function :
+    featFcn, featStr = feat_fcn(featinfo=self._featinfo)
+
+    # Now, build a unique function for this frequency :
+    def fSpecific(x, axis=0):
+        """Apply transformation on x.
+
+        This function mix vector and matrix operations
+
+        """
+        # Matricial preprocessing :
+        x = preprocFcn(x, axis=axis)
+        # Filt and transformation (on vector) :
+
+        def _fSpecific(v):
+            """Transformation chain."""
+            v = filtFcn(v)
+            return featFcn(transFcn(v))
+        # Apply on axis :
+        return np.apply_along_axis(_fSpecific, axis, x)
+    return fSpecific, (preprocStr, filtStr, transStr, featStr)
+
+
+def _apply(x, self, f, axis=0):
+    # Get latest updated function (for frequency f) :
+    fcn, _ = _getFilterProperties(self, f)
+    # Apply this function for f :
+    x = fcn(x, axis=axis)
+    return x
