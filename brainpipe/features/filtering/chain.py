@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 from .method import *
-from ..utils import _listcheck
 from joblib import Parallel, delayed
 
 
@@ -96,7 +95,7 @@ class Chain(object):
         self._demean = demean
         self._verbose = verbose
         # Get associated functions and build chain :
-        self._update()
+        self._ConfUpdate()
 
     def __str__(self):
         chain = 'Chain(Settings(sf=' + str(self._sf) + ', npts=' + \
@@ -117,7 +116,7 @@ class Chain(object):
 
         """
         # Get latest update :
-        self._update()
+        self._ConfUpdate()
         # Return list of function :
         return self._chain
 
@@ -198,7 +197,7 @@ class Chain(object):
             self._f = [None]
         self._f = list(np.array(self._f).astype(float).T)
 
-    def _update(self):
+    def _ConfUpdate(self):
         """Update configuration."""
         # Check inputs compatibility :
         self._checkInputs()
@@ -223,7 +222,7 @@ class Chain(object):
     @sf.setter
     def sf(self, value):
         self._sf = value
-        self._update()
+        self._ConfUpdate()
 
     # Time points :
     @property
@@ -233,7 +232,7 @@ class Chain(object):
     @npts.setter
     def npts(self, value):
         self._npts = value
-        self._update()
+        self._ConfUpdate()
 
     # Frequency :
     @property
@@ -243,7 +242,7 @@ class Chain(object):
     @f.setter
     def f(self, value):
         self._f = value
-        self._update()
+        self._ConfUpdate()
 
     # Filter name :
     @property
@@ -253,7 +252,7 @@ class Chain(object):
     @filtname.setter
     def filtname(self, value):
         self._filtname = value
-        self._update()
+        self._ConfUpdate()
 
     # Number of cycle (firls)
     @property
@@ -263,7 +262,7 @@ class Chain(object):
     @cycle.setter
     def cycle(self, value):
         self._cycle = value
-        self._update()
+        self._ConfUpdate()
 
     # Filter order (bessel / butter)
     @property
@@ -273,7 +272,7 @@ class Chain(object):
     @order.setter
     def order(self, value):
         self._order = value
-        self._update()
+        self._ConfUpdate()
 
     # Filter type :
     @property
@@ -283,7 +282,7 @@ class Chain(object):
     @ftype.setter
     def ftype(self, value):
         self._ftype = value
-        self._update()
+        self._ConfUpdate()
 
     # Padlen (for fir1)
     @property
@@ -293,7 +292,7 @@ class Chain(object):
     @padlen.setter
     def padlen(self, value):
         self._padlen = value
-        self._update()
+        self._ConfUpdate()
 
     # Transformation name :
     @property
@@ -303,7 +302,7 @@ class Chain(object):
     @transname.setter
     def transname(self, value):
         self._transname = value
-        self._update()
+        self._ConfUpdate()
 
     # Wavelet width :
     @property
@@ -313,7 +312,7 @@ class Chain(object):
     @width.setter
     def width(self, value):
         self._width = value
-        self._update()
+        self._ConfUpdate()
 
     # Feature featinfo :
     @property
@@ -323,7 +322,7 @@ class Chain(object):
     @featinfo.setter
     def featinfo(self, value):
         self._featinfo = value
-        self._update()
+        self._ConfUpdate()
 
     # De-trending :
     @property
@@ -333,7 +332,7 @@ class Chain(object):
     @detrend.setter
     def detrend(self, value):
         self._detrend = value
-        self._update()
+        self._ConfUpdate()
 
     # De-meaning :
     @property
@@ -343,7 +342,7 @@ class Chain(object):
     @demean.setter
     def demean(self, value):
         self._demean = value
-        self._update()
+        self._ConfUpdate()
 
     # Verbose :
     @property
@@ -353,7 +352,7 @@ class Chain(object):
     @verbose.setter
     def verbose(self, value):
         self._verbose = value
-        self._update()
+        self._ConfUpdate()
 
 
 def _getFilterProperties(self, f):
