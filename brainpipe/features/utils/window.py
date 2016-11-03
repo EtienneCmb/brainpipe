@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 from warnings import warn
+
 from .makebin import binarize, binarray
+from .unit import time_to_sample, sample_to_time
 
 
 class Window(object):
@@ -34,7 +36,7 @@ class Window(object):
                 'ms' for respectively second and miliseconds unit.
 
         Return:
-            A window object with a .get() and .apply() methods.
+            A window object with a .apply() method.
 
         """
         self._sf = float(sf)
@@ -173,7 +175,8 @@ class Window(object):
             # Apply on window :
             if self._window is not None:
                 self._window = np.array(self._window).astype(float)
-                self._window = np.multiply(self._window, self._mult).astype(int)
+                self._window = np.multiply(
+                    self._window, self._mult).astype(int)
                 self._converted = True
             elif any(paraFloat):
                 if (self._start is not None) and not self._paraconverted[0]:
@@ -283,10 +286,116 @@ class Window(object):
         self._WinUpdate()
 
 
-# class TimeSplit(object):
+class TimeSplit(object):
 
-#     """Docstring for TimeSplit."""
+    """Docstring for TimeSplit."""
 
-#     def __init__(self):
-#         """TODO: to be defined1."""
-#         pass
+    def __init__(self, sf, duration, unit='s', keepout=False):
+        """Split an array according to defined duration.
+
+        Args:
+            sf: float
+                Sampling frequency
+
+            duration: int/float
+                Splitting duration
+
+        Kargs:
+            unit: string, optional, (def: 's')
+                Control the unit of the duration parameter. Use either
+                'sample', 's' (seconde) or 'ms' (milliseconde)
+
+            keepout: bool, optional, (def: False)
+                If keeput is True, this allow to split an array into
+                multiple sub-arrays of non-equal size.
+
+        Return:
+            A TimeSplit object with a .apply() method.
+
+        """
+        self._sf = sf
+        self._duration = duration
+        self._unit = unit
+        self._keepout = keepout
+
+        # -----------------------------------------
+        #             INPUTS CHECKING
+        # -----------------------------------------
+        # Sampling frequency :
+        if not isinstance(self._sf, (int, float)):
+            raise ValueError(
+                'Sampling frequency must be either a float or an interger.')
+        else:
+            self._sf = float(self._sf)
+        # Duration checking :
+        if not isinstance(self._duration, (int, float)):
+            raise ValueError('duration must be either a float or an interger.')
+        else:
+            self._duration = float(self._duration)
+        # Unit :
+        if self._unit is 'sample':
+            pass
+        elif self._unit in ['s', 'ms']:
+            self._duration = time_to_sample(self._duration,
+                                        self._sf, from_unit=self._unit)
+        else:
+            raise ValueError("unit must be either 'sample', 's' or 'ms'")
+
+    #####################################################
+    #                   USER FUNCTION
+    #####################################################
+
+    def apply(self, x, axis=0):
+        """Apply the time split object to an array x.
+
+        Specify the axis along which splitting.
+
+        """
+        # Get axis :
+        npts = x.shape[axis]
+        # Get the number of section :
+        nsec = int(npts // self._duration)
+        # Split x :
+        if self._keepout:
+            return np.array_split(x, nsec, axis=axis)
+        else:
+            # Truncate the matrix before splitting :
+            idx = [slice(None)] * x.ndim
+            # Find the correct number of points :
+            idx[axis] = slice(int(nsec * self._duration))
+            return np.array(np.split(x[idx], nsec, axis=axis))
+
+    #####################################################
+    #                   PROPERTIES
+    #####################################################
+    @property
+    def sf(self):
+        return self._sf
+
+    @sf.setter
+    def sf(self, value):
+        self._sf = value
+
+    @property
+    def duration(self):
+        return self._duration
+
+    @duration.setter
+    def duration(self, value):
+        self._duration = value
+
+    @property
+    def unit(self):
+        return self._unit
+
+    @unit.setter
+    def unit(self, value):
+        self._unit = value
+
+    @property
+    def keepout(self):
+        return self._keepout
+
+    @keepout.setter
+    def keepout(self, value):
+        self._keepout = value
