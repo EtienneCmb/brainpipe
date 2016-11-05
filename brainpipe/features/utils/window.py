@@ -35,7 +35,8 @@ class Window(object):
 
             unit: string, optional, (def: 'sample')
                 Define if window's should be either in 'sample' or, 's' or
-                'ms' for respectively second and miliseconds unit.
+                'ms' for respectively second and miliseconds unit. Note that
+                window or auto parameter are going to be converted in sample.
 
         Return:
             A window object with a .apply() method.
@@ -45,10 +46,12 @@ class Window(object):
         self._window = window
         self._auto = auto
         self._unit = unit
+        self._converted = False
+        self._str = '{sup}, unit={unit}, converted={conv}'
         self._WinCheckInputs()
 
     def __str__(self):
-        pass
+        return 'Window('+self._str+')'
 
     ########################################################
     #                   USER FUNCTIONS
@@ -90,6 +93,7 @@ class Window(object):
                 raise ValueError('auto must be either a tuple/list/array')
             else:
                 self._auto = np.ravel(self._auto)
+                sup = 'auto='+str(tuple(self._auto))
                 if len(self._auto) is not 4:
                     raise ValueError(
                         'auto parameter must have a length of 4: (start, end, width, step)')
@@ -97,6 +101,8 @@ class Window(object):
         if (self._window is not None) and (self._auto is not None):
             warn('window and auto or both defined. Only window is consider.')
             self._auto = None
+        elif (self._window is not None) and (self._auto is None):
+            sup = 'window=manual'
 
         # ------------- VALUE CHECKING -----------
         # start > end :
@@ -109,6 +115,7 @@ class Window(object):
                     self._auto = time_to_sample(self._auto, self._sf,
                                                 from_unit=self._unit)
                     self._unit = 'sample'
+                    self._converted = True
                 self._window = binarize(*tuple(self._auto))
         # window shape checking :
         if self._window is not None:
@@ -125,6 +132,11 @@ class Window(object):
                 self._window = time_to_sample(self._window, self._sf,
                                               from_unit=self._unit)
                 self._unit = 'sample'
+                self._converted = True
+
+        # string construction :
+        self._str = self._str.format(sup=sup, unit=self._unit,
+                                     conv=str(self._converted))
 
     ########################################################
     #                   PROPERTIES
