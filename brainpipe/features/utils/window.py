@@ -11,8 +11,7 @@ class Window(object):
 
     """Docstring for Window."""
 
-    def __init__(self, sf, start=None, end=None, width=None, step=None,
-                 window=None, wintype='shift', unit='sample'):
+    def __init__(self, sf, window=None, auto=None, unit='sample'):
         """Take the mean of a signal inside defined windows.
 
         Arg:
@@ -20,16 +19,19 @@ class Window(object):
                 Sampling frequency
 
         Kargs:
-            start/end/width/step: int/float, optional, (def: None)
-                Parameters to define automatic window behavior.
-
             window: list/array, optional, (def: None)
-                Manually defined a window.
+                Manually defined a window.You can precise if each values
+                inside have to be considered in sample, second or millisecond
+                using the unit parameter.
 
-            wintype: int/float, optional, (def: None)
-                Define the type of window like. Use either:
-                    - 'shift': [[start, start+width], [start+step, start+width+step], ..., [end-width, end]]
-                    - 'center': [[start-width/2, start+width/2], ..., [end-width/2, end+width/2]]
+            auto: tuple/list/array, optional, (def: None)
+                Automatically defined a sliding window. The auto parameter
+                must be a tuple/list/array of length 4. This tuple represent
+                (start, end, width step) with start/end control the begining
+                and the end of the baseline, each window has a length of width
+                and move with step. You can precise if each values inside
+                have to be considered in sample, second or millisecond
+                using the unit parameter.
 
             unit: string, optional, (def: 'sample')
                 Define if window's should be either in 'sample' or, 's' or
@@ -39,21 +41,11 @@ class Window(object):
             A window object with a .apply() method.
 
         """
-        self._sf = float(sf)
-        self._start = start
-        self._end = end
-        self._width = width
-        self._step = step
+        self._sf = sf
         self._window = window
-        self._wintype = wintype
+        self._auto = auto
         self._unit = unit
-        self._windefined = False
-        self._allpara = False
-        self._alreadydefined = False
-        self._force = False
-        self._converted = False
-        self._paraconverted = [False, False, False, False]
-        self._WinUpdate()
+        self._WinCheckInputs()
 
     def __str__(self):
         pass
@@ -61,9 +53,6 @@ class Window(object):
     ########################################################
     #                   USER FUNCTIONS
     ########################################################
-
-    def get(self):
-        pass
 
     def apply(self, x, axis=0):
         """Apply the window on the array x.
@@ -73,125 +62,69 @@ class Window(object):
 
         """
         if self._window is not None:
-            return binarray(x, self._window, axis)
+            return binarray(x, np.ndarray.tolist(self._window), axis)
         else:
             warn('No window detected.')
-
-    def clear(self):
-        """Clear all predifined parameters and window."""
-        self._start, self._end = None, None
-        self._width, self._step = None, None
-        self._window = None
-        self._windefined = False
-        self._allpara = False
-        self._alreadydefined = False
-        self._force = False
+            return x
 
     ########################################################
     #                   SUB FUNCTIONS
     ########################################################
 
-    def _WinUpdate(self):
-        """Update window configuration."""
-        # Check inputs :
-        self._WinCheckInputs()
-        # Build window :
-        self._BuildWin()
-
     def _WinCheckInputs(self):
         """Check inputs."""
         # ------------- TYPE CHECKING -----------
+        # Sampling frequency checking :
+        if not isinstance(self._sf, (int, float)):
+            raise ValueError(
+                'Sampling frequency must be either a float or an integer.')
+        else:
+            self._sf = float(self._sf)
         # Unit checking :
-        if not isinstance(self._unit, str) or self._unit not in ['sample', 's', 'ms']:
+        if self._unit not in ['sample', 's', 'ms']:
             raise ValueError(
                 "'unit' parameter must be either 'sample' or 's' or 'ms'")
-        # wintype checking :
-        if not isinstance(self._wintype, str) or self._wintype not in ['center', 'shift']:
-            raise ValueError(
-                "'wintype' parameter must be either 'center' or 'shift'")
-        # start/end/width/step checking :
-        paraNone = [k is None or isinstance(k, (int, float)) for k in [
-            self._start, self._end, self._width, self._step]]
-        if not all(paraNone):
-            raise ValueError(
-                "'start', 'end', 'width' and 'step' parameters must be either int or float.")
+        # auto checking :
+        if self._auto is not None:
+            if not isinstance(self._auto, (list, tuple, np.ndarray)):
+                raise ValueError('auto must be either a tuple/list/array')
+            else:
+                self._auto = np.ravel(self._auto)
+                if len(self._auto) is not 4:
+                    raise ValueError(
+                        'auto parameter must have a length of 4: (start, end, width, step)')
         # Window and start/end/step/width defined :
-        paraFloat = [isinstance(k, (int, float)) for k in [
-            self._start, self._end, self._width, self._step]]
-        if (self._window is not None) and any(paraFloat) and not self._alreadydefined:
-            warn(
-                "'window' is defined, 'start', 'end', 'width' and 'step' are going to be ignored.")
-            self._start, self._end, self._step, self._width = None, None, None, None
+        if (self._window is not None) and (self._auto is not None):
+            warn('window and auto or both defined. Only window is consider.')
+            self._auto = None
 
         # ------------- VALUE CHECKING -----------
         # start > end :
-        if (self._start is not None) and (self._end is not None) and (self._start >= self._end):
-            raise ValueError(
-                "'start' must be strictly inferior to 'end' parameter")
-        # Bool (start, end, step, width) :
-        if all(paraFloat):
-            self._allpara = True
+        if self._auto is not None:
+            if self._auto[0] > self._auto[1]:
+                raise ValueError(
+                    'Using the auto parameter, start must be < to end.')
+            else:
+                if self._unit in ['s', 'ms']:
+                    self._auto = time_to_sample(self._auto, self._sf,
+                                                from_unit=self._unit)
+                    self._unit = 'sample'
+                self._window = binarize(*tuple(self._auto))
         # window shape checking :
         if self._window is not None:
-            self._window = np.atleast_2d(np.array(self._window))
+            # Tansform in a 2D array :
+            self._window = np.atleast_2d(np.asarray(self._window))
             winshape = self._window.shape
+            # Check shape :
             if 2 not in winshape:
                 raise ValueError("'window' must be a (2, N) array")
-            elif ((2 in winshape) and (winshape[0] != 2)) or (winshape[0] is 1):
+            elif winshape == (2, 1):
                 self._window = self._window.T
-            if (winshape[0] == 1) and (winshape[1] == 2):
-                self._window = self._window.T
-            else:
-                self._nwin = self._window.shape[1]
-                self._windefined = True
-        self._BuildWin()
-
-    def _BuildWin(self):
-        """Build the window."""
-        # Check unit conversion :
-        self._UnitConvert()
-        paraFloat = [isinstance(k, (int, float)) for k in [
-            self._start, self._end, self._width, self._step]]
-        # In case of start/end/width/step :
-        if (not self._windefined and self._allpara) or (self._force and self._allpara):
-            self._window = np.atleast_2d(binarize(self._start, self._end,
-                                                  self._width, self._step))
-            self._force = False
-            self._alreadydefined = True
-        # Array to list :
-        if (self._window is not None) and not isinstance(self._window, list):
-            self._window = np.ndarray.tolist(self._window)
-
-    def _UnitConvert(self):
-        """Convert time unit to sample unit."""
-        paraFloat = [isinstance(k, (int, float)) for k in [
-            self._start, self._end, self._width, self._step]]
-        if self._unit in ['s', 'ms'] and not self._converted:
-            # Define multiplicative coefficient :
-            if self._unit is 's':
-                self._mult = self._sf
-            elif self._unit is 'ms':
-                self._mult = self._sf / 1000.0
-            # Apply on window :
-            if self._window is not None:
-                self._window = np.array(self._window).astype(float)
-                self._window = np.multiply(
-                    self._window, self._mult).astype(int)
-                self._converted = True
-            elif any(paraFloat):
-                if (self._start is not None) and not self._paraconverted[0]:
-                    self._start = int(self._start * self._mult)
-                    self._paraconverted[0] = True
-                if (self._end is not None) and not self._paraconverted[1]:
-                    self._end = int(self._end * self._mult)
-                    self._paraconverted[1] = True
-                if (self._width is not None) and not self._paraconverted[2]:
-                    self._width = int(self._width * self._mult)
-                    self._paraconverted[2] = True
-                if (self._step is not None) and not self._paraconverted[3]:
-                    self._step = int(self._step * self._mult)
-                    self._paraconverted[3] = True
-                self._converted = True
+            # Convert if not already done :
+            if self._unit in ['s', 'ms']:
+                self._window = time_to_sample(self._window, self._sf,
+                                              from_unit=self._unit)
+                self._unit = 'sample'
 
     ########################################################
     #                   PROPERTIES
@@ -201,89 +134,17 @@ class Window(object):
     def sf(self):
         return self._sf
 
-    @sf.setter
-    def sf(self, value):
-        self._sf = value
-        self._WinUpdate()
-
     @property
-    def start(self):
-        return self._start
-
-    @start.setter
-    def start(self, value):
-        self._start = value
-        self._force = True
-        self._window = None
-        self._converted = False
-        self._paraconverted[0] = False
-        self._WinUpdate()
-
-    @property
-    def end(self):
-        return self._end
-
-    @end.setter
-    def end(self, value):
-        self._end = value
-        self._force = True
-        self._window = None
-        self._converted = False
-        self._paraconverted[1] = False
-        self._WinUpdate()
-
-    @property
-    def width(self):
-        return self._width
-
-    @width.setter
-    def width(self, value):
-        self._width = value
-        self._force = True
-        self._window = None
-        self._converted = False
-        self._paraconverted[2] = False
-        self._WinUpdate()
-
-    @property
-    def step(self):
-        return self._step
-
-    @step.setter
-    def step(self, value):
-        self._step = value
-        self._force = True
-        self._window = None
-        self._converted = False
-        self._paraconverted[3] = False
-        self._WinUpdate()
+    def auto(self):
+        return self._auto
 
     @property
     def window(self):
         return self._window
 
-    @window.setter
-    def window(self, value):
-        self._window = value
-        self._WinUpdate()
-
-    @property
-    def wintype(self):
-        return self._wintype
-
-    @wintype.setter
-    def wintype(self, value):
-        self._wintype = value
-        self._WinUpdate()
-
     @property
     def unit(self):
         return self._unit
-
-    @unit.setter
-    def unit(self, value):
-        self._unit = value
-        self._WinUpdate()
 
 
 class TimeSplit(object):
@@ -337,7 +198,7 @@ class TimeSplit(object):
             pass
         elif self._unit in ['s', 'ms']:
             self._duration = time_to_sample(self._duration,
-                                        self._sf, from_unit=self._unit)
+                                            self._sf, from_unit=self._unit)
         else:
             raise ValueError("unit must be either 'sample', 's' or 'ms'")
 

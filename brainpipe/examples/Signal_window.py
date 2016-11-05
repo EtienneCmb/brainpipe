@@ -30,10 +30,10 @@ if __name__ == "__main__":
     print('Window (s): ', pwin.window, 'Window (ms)', pwin_ms.window)
 
     # Define an automatic sliding window :
-    pwin_sl = Window(sf, start=100, end=600, width=10, step=5, unit='ms')
+    pwin_sl = Window(sf, auto=(100, 600, 10, 5), unit='ms')
     sig_sl = pwin_sl.apply(sig)
     t_sl = pwin_sl.apply(t)
-    pwin_S = Window(sf, start=700, end=990, width=20, step=10, unit='sample')
+    pwin_S = Window(sf, auto=(700, 990, 20, 10), unit='sample')
     sig_S = pwin_S.apply(sig)
     t_S = pwin_S.apply(t)
     pwin_P = Window(sf, window=[[595, 605], [1360, 1370]], unit='ms')
@@ -45,19 +45,12 @@ if __name__ == "__main__":
     signd = np.matlib.repmat(sig, rep, 1) + np.random.rand(rep, npts)
     sig_nd = pwin_sl.apply(signd, axis=1)
 
-    # After creating a window object, you can update parameters :
-    pwin_sl.end = 1350
-    pwin_sl.start = 600
-    sig_up = pwin_sl.apply(sig)
-    t_up = pwin_sl.apply(t)
-
     # Plot :
     plt.subplot(211)
     plt.plot(t, sig, color='lightgray', label='Original signal')
     plt.xlabel('Time'), plt.ylabel('Amplitude')
     plt.plot(t_pwin, sig_pwin, marker='o', color='r', label='Mean inside [400ms, 450ms]')
     plt.plot(t_sl, sig_sl, marker='^', color='slateblue', label='Sliding window (unit=ms)')
-    plt.plot(t_up, sig_up, marker='^', color='orange', label='Updated sliding window (unit=ms)')
     plt.plot(t_S, sig_S, marker='o', color='olive', label='Sliding window (unit=sample)')
     plt.plot(t_P, sig_P, marker='o', color='firebrick', label='Multi windows')
     plt.legend(ncol=2)
