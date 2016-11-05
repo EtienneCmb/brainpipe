@@ -21,10 +21,8 @@ def binarize(start, end, width, step, kind='shift'):
         ('square')
 
     """
-    # Inputs checking :
-    if any([not isinstance(k, int) for k in (start, end, width, end)]):
-        raise ValueError(
-            "'start', 'end', 'width' and 'step' parameters must be integers.")
+    # Force integer convertion :
+    start, end, width, step = int(start), int(end), int(width), int(step)
     if kind not in ['shift', 'square']:
         raise ValueError("kind must be either 'shift' or 'square'")
     # Sub-bin function :
