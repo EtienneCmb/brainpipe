@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""This script explain how to split a signal. For instance, if you have a
+long time series, you may want to split it in 30 seconds window.
+"""
 import numpy as np
 import matplotlib.pyplot as plt
 

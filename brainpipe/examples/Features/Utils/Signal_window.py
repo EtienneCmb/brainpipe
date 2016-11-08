@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""this scripts illustrate how to take the mean of a signal
-inside defined windows.
+"""This scripts illustrate how to take the mean of a signal
+inside defined windows. The Window() object can use manually defined
+windows, automatic sliding windows and then, take the mean of a
+multi-dimentional array inside those windows.
 """
 import numpy as np
 import matplotlib.pyplot as plt

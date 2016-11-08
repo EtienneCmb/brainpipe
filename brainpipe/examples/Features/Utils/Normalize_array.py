@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""This script illustrate how to normalize an array."""
+"""This script illustrate how to normalize an array. This is
+particulary use to normalize a power time series with a defined
+baseline.
+"""
 import numpy as np
 import matplotlib.pyplot as plt
 from brainpipe.features import Normalization
@@ -30,17 +33,17 @@ if __name__ == '__main__':
     no = Normalization(sf)
     x0 = no.apply(x)
     # Normalization A-B :
-    no1 = Normalization(sf, norm=1, baseline=(5, 10), unit='s')
+    no1 = Normalization(sf, kind=1, baseline=(5, 10), unit='s')
     x1 = no1.apply(x, axis=1)
     # Normalization A/B :
-    no2 = Normalization(sf, norm='A/B', baseline=(2250, 15257), unit='ms')
+    no2 = Normalization(sf, kind='A/B', baseline=(2250, 15257), unit='ms')
     no2Str = str(no2)
     x2 = no2.apply(x, axis=1)
     # Normalization A-B/B :
-    no2.norm = 3 # Update precedent object
+    no2.kind = 3 # Update precedent object
     x3 = no2.apply(x, axis=1)
     # Normalization z-score :
-    no3 = Normalization(sf, norm=4, baseline=(1000, 1500))
+    no3 = Normalization(sf, kind=4, baseline=(1000, 1500))
     x4 = no3.apply(x, axis=1)
 
     # Plot :

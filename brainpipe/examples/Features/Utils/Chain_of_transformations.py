@@ -7,6 +7,8 @@
 - Complex decomposition (wavelet or hilbert)
 - Type extraction (amplitude, phase or power)
 
+Then, use .apply() method to apply the transformation on a muli-dimentional
+array.
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -78,14 +80,16 @@ if __name__ == '__main__':
     f = 10
     sin = np.sin(2 * np.pi * f * timevec) + np.random.rand(npts)
     # Extract amplitude :
-    ct_comp = Chain(sf, npts, transname='hilbert', verbose=2,
-                             featinfo='amplitude', f=[9, 11], filtname='butter')
+    ct_comp = Chain(sf, npts, transname='hilbert', f=[9, 11],
+                             featinfo='amplitude', filtname='butter')
     xAmp = ct_comp.apply(sin).ravel()
     # Extract phase :
     ct_comp.featinfo = 'phase'
+    ct_comp.update()
     xPha = ct_comp.apply(sin).ravel()
     # Extract power :
     ct_comp.featinfo = 'power'
+    ct_comp.update()
     xPow = ct_comp.apply(sin).ravel()
     # Figure :
     plt.figure()
