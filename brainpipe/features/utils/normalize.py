@@ -5,8 +5,8 @@ from warnings import warn
 from .unit import time_to_sample
 
 
-def normalize(A, B, norm=0, axis=0):
-    """normalize A by B using the 'norm' parameter.
+def normalize(A, B, kind=0, axis=0):
+    """normalize A by B using the 'kind' parameter.
 
     Parameters
     ----------
@@ -16,7 +16,7 @@ def normalize(A, B, norm=0, axis=0):
     B : np.ndarray
         Array used for normalization.
 
-    norm : int, optional [def : 0]
+    kind : int, optional [def : 0]
         0 // None : No normalisation
         1 // 'A-B' : Substraction
         2 // 'A/B' : Division
@@ -42,8 +42,8 @@ def normalize(A, B, norm=0, axis=0):
     else:
         B = B.astype(float)
     # Check existing norm :
-    if norm not in [0, 1, 2, 3, 4, None, 'A-B', 'A/B', 'A-B/B', 'zscore']:
-        raise ValueError(norm + ' is not an existing normalization. Use ' + str(0) + ', ' + str(
+    if kind not in [0, 1, 2, 3, 4, None, 'A-B', 'A/B', 'A-B/B', 'zscore']:
+        raise ValueError(kind + ' is not an existing normalization. Use ' + str(0) + ', ' + str(
             1) + ', ' + str(2) + ', ' + str(3) + ', ' + str(4) + ", None, 'A-B', 'A/B', 'A-B/B' or 'zscore'")
 
     # ----------------- NORMALIZATION ------------------
@@ -51,23 +51,23 @@ def normalize(A, B, norm=0, axis=0):
     Bm = np.mean(B, axis=axis, keepdims=True)
     Bstd = np.std(B, axis=axis, keepdims=True)
     # No normalisation
-    if norm in [0, None]:
+    if kind in [0, None]:
         return A
     # Substraction
-    elif norm in [1, 'A-B']:
+    elif kind in [1, 'A-B']:
         np.subtract(A, Bm, out=A)
         return A
     # Division
-    elif norm in [2, 'A/B']:
+    elif kind in [2, 'A/B']:
         np.divide(A, Bm, out=A)
         return A
     # Substract then divide
-    elif norm in [3, 'A-B/B']:
+    elif kind in [3, 'A-B/B']:
         np.subtract(A, Bm, out=A)
         np.divide(A, Bm, out=A)
         return A
     # Z-score
-    elif norm in [4, 'zscore']:
+    elif kind in [4, 'zscore']:
         np.subtract(A, Bm, out=A)
         np.divide(A, Bstd, out=A)
         return A
@@ -77,7 +77,7 @@ class Normalization(object):
 
     """Normalize an array by a defined baseline."""
 
-    def __init__(self, sf, norm=None, baseline=None, unit='sample'):
+    def __init__(self, sf, kind=None, baseline=None, unit='sample'):
         """Normalize an array.
 
         Args:
@@ -85,7 +85,7 @@ class Normalization(object):
                 The sampling frequency
 
         Kargs:
-            norm : int, optional [def : 0]
+            kind : int, optional [def : 0]
                 0 // None : No normalisation
                 1 // 'A-B' : Substraction
                 2 // 'A/B' : Division
@@ -106,7 +106,7 @@ class Normalization(object):
 
         """
         self._sf = sf
-        self._norm = norm
+        self._kind = kind
         self._baseline = baseline
         self._unit = unit
         self._str = ''
@@ -126,18 +126,18 @@ class Normalization(object):
                 'Sampling frequency must be either a float or an integer')
         else:
             self._sf = float(self._sf)
-        # Check norm :
-        if self._norm not in [0, 1, 2, 3, 4, None, 'A-B', 'A/B', 'A-B/B', 'zscore']:
-            raise ValueError(self._norm + ' is not an existing normalization. Use ' + str(0) + ', ' + str(
+        # Check kind :
+        if self._kind not in [0, 1, 2, 3, 4, None, 'A-B', 'A/B', 'A-B/B', 'zscore']:
+            raise ValueError(self._kind + ' is not an existing normalization. Use ' + str(0) + ', ' + str(
                 1) + ', ' + str(2) + ', ' + str(3) + ', ' + str(4) + ", None, 'A-B', 'A/B', 'A-B/B' or 'zscore'")
         else:
-            if (self._norm not in [0, None]) and (self._baseline is None):
+            if (self._kind not in [0, None]) and (self._baseline is None):
                 warn(
-                    'If norm is not None (or 0), you should not let the baseline parameter to None')
-                self._norm = None
-            if self._norm in [0, None]:
+                    'If kind is not None (or 0), you should not let the baseline parameter to None')
+                self._kind = None
+            if self._kind in [0, None]:
                 self._baseline = None
-                self._norm = None
+                self._kind = None
         # Check the baseline :
         if self._baseline is not None:
             if not isinstance(self._baseline, (tuple, list, np.ndarray)):
@@ -159,20 +159,20 @@ class Normalization(object):
                                                 self._sf, from_unit=self._unit)
                 self._unit = 'sample'
         # String management :
-        if (self._baseline is None) or (self._norm is None):
+        if (self._baseline is None) or (self._kind is None):
             self._str = 'None'
         else:
             # Detect normalization type and set string :
-            if self._norm in [1, 'A-B']:
+            if self._kind in [1, 'A-B']:
                 sup = 'A - mean(Baseline)'
-            elif self._norm in [2, 'A/B']:
+            elif self._kind in [2, 'A/B']:
                 sup = 'A / mean(Baseline)'
-            elif self._norm in [3, 'A-B/B']:
+            elif self._kind in [3, 'A-B/B']:
                 sup = '(A - mean(Baseline) / mean(Baseline)'
-            elif self._norm in [4, 'zscore']:
+            elif self._kind in [4, 'zscore']:
                 sup = 'A - mean(Baseline) / std(Baseline)'
             # Build string :
-            self._str = 'norm=' + sup + \
+            self._str = 'kind=' + sup + \
                 ', baseline=(' + str(self._baseline[0]) + ', ' + \
                 str(self._baseline[1]) + '), unit=' + self._unit
 
@@ -192,7 +192,7 @@ class Normalization(object):
                 idx[axis] = slice(self._baseline[0], self._baseline[1])
         else:
             idx = [slice(None)] * x.ndim
-        return normalize(x, x[idx], self._norm, axis=axis)
+        return normalize(x, x[idx], self._kind, axis=axis)
 
     ########################################################
     #                   PROPERTIES
@@ -207,12 +207,12 @@ class Normalization(object):
         self._NormCheckInputs()
 
     @property
-    def norm(self):
-        return self._norm
+    def kind(self):
+        return self._kind
 
-    @norm.setter
-    def norm(self, value):
-        self._norm = value
+    @kind.setter
+    def kind(self, value):
+        self._kind = value
         self._NormCheckInputs()
 
     @property
