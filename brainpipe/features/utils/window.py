@@ -47,7 +47,7 @@ class Window(object):
         self._auto = auto
         self._unit = unit
         self._converted = False
-        self._str = '{sup}, unit={unit}, converted={conv}'
+        self._str = 'window={sup}, unit={unit}, converted={conv}'
         self._WinCheckInputs()
 
     def __str__(self):
@@ -67,7 +67,6 @@ class Window(object):
         if self._window is not None:
             return binarray(x, np.ndarray.tolist(self._window), axis)
         else:
-            warn('No window detected.')
             return x
 
     ########################################################
@@ -76,6 +75,7 @@ class Window(object):
 
     def _WinCheckInputs(self):
         """Check inputs."""
+        sup = 'None'
         # ------------- TYPE CHECKING -----------
         # Sampling frequency checking :
         if not isinstance(self._sf, (int, float)):
@@ -133,10 +133,11 @@ class Window(object):
                                               from_unit=self._unit)
                 self._unit = 'sample'
                 self._converted = True
-
-        # string construction :
-        self._str = self._str.format(sup=sup, unit=self._unit,
-                                     conv=str(self._converted))
+            # string construction :
+            self._str = self._str.format(sup=sup, unit=self._unit,
+                                         conv=str(self._converted))
+        else:
+            self._str = 'None'
 
     ########################################################
     #                   PROPERTIES
