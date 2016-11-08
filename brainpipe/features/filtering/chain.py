@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import numpy as np
-from .method import *
+from warnings import warn
 from joblib import Parallel, delayed
+from .method import *
 
 
 class Chain(object):
@@ -64,11 +65,6 @@ class Chain(object):
         demean: bool, optional, (def: False)
             Remove the mean of the signal.
 
-        verbose: int, optional, (def: 0)
-            Control to display or not informations when defining your chain
-            of transformations. Use 0 for no output, 1 inform when the chain
-            is updated and > 1 for more details.
-
     Return:
         A chain object. Inside this object, you can change parameters
         dynamically. Use the .get() method to get a list of transformations
@@ -79,7 +75,7 @@ class Chain(object):
 
     def __init__(self, sf, npts, f=None, filtname=None, cycle=3, order=3,
                  ftype='bandpass', padlen=None, transname=None, width=7.0,
-                 featinfo=None, detrend=False, demean=False, verbose=0):
+                 featinfo=None, detrend=False, demean=False):
         self._sf = float(sf)
         self._npts = float(npts)
         self._f = f
@@ -93,7 +89,6 @@ class Chain(object):
         self._featinfo = featinfo
         self._detrend = detrend
         self._demean = demean
-        self._verbose = verbose
         # Get associated functions and build chain :
         self._ConfUpdate()
 
@@ -135,12 +130,20 @@ class Chain(object):
             raise ValueError('The dimension of x on axis ' + str(axis) + ' is ' + str(
                 x.shape[axis]) + " and doesn't correspond to the variable npts=" + str(self._npts))
         # Check n_jobs n_frequencies = 1:
-        if len(self._f) == 1:
+        if self._f is None:
+            fapply = [[None]]
+        else:
+            fapply = self._f
+        if len(fapply) == 1:
             n_jobs = 1
         # Apply function :
         xf = Parallel(n_jobs=n_jobs)(delayed(_apply)(x, self, k, axis=axis)
-                                     for k in self._f)
+                                     for k in fapply)
         return np.array(xf)
+
+    def update(self):
+        """Update the chain configuration"""
+        self._ConfUpdate()
 
     # -------------------------------------------------------
     #                    DEEP FUNCTIONS
@@ -158,58 +161,53 @@ class Chain(object):
         # Wavelet checking :
         if self._transname is 'wavelet':
             self._filtname = None
+            self._ftype = None
 
         # -----------------------------------------
         # Frequency checking :
         # -----------------------------------------
         # No filtering if no frequency :
         if self._f is None:
+            if self._filtname is not None:
+                warn("f is None but not filtname.")
+            if self._transname is not None:
+                warn("f is None but not transname.")
             self._filtname = None
-
-        if (self._f is not None) or (self._filtname is not None):
-            # Check frequency vector :
-            if not isinstance(self._f, np.ndarray) or np.array(self._f).ndim == 1:
-                self._f = np.atleast_2d(self._f)
-            fshape = self._f.shape
-            # f must be a (1, N) or (2, N) array :
-            if (1 not in fshape) and (2 not in fshape):
-                raise ValueError('Shape of frequency vector is not compatible.')
-            # Shape of f checking according to ftype :
-            if (self._ftype is 'bandpass') and (self._transname is not 'wavelet'):
-                if 2 not in fshape:
-                    raise ValueError(
-                        'For a bandpass filter, f must be a (2, n_frequency) array')
-                elif fshape[0] is not 2:
-                    self._f = self._f.T
-            elif (self._ftype is not 'bandpass'):
-                if 1 not in fshape:
-                    raise ValueError(
-                        "For a 'lowpass'/'highpass' filter, f must be a (1, n_frequency)")
-                elif fshape[0] is not 1:
-                    self._f = self._f.T
-            # Shape of f checking according to transname :
-            if (self._transname is 'wavelet') and (fshape[0] != 1):
-                self._f = np.atleast_2d(self._f.mean(0))
-            # No filtering / No wavelet :
-            if (self._transname is not 'wavelet') and (self._filtname is None):
-                self._f = [None]
+            self._transname = None
         else:
-            self._f = [None]
-        self._f = list(np.array(self._f).astype(float).T)
+            if (self._filtname is None) and (self._transname is None):
+                raise ValueError("f is not None but there is no filtname or no transformation.")
+            else:
+                # Force f to be a 2D array :
+                self._f = np.atleast_2d(self._f)
+                fshape = self._f.shape
+                ######### f.shape = (1, N) ##########
+                if (self._ftype in ['lowpass', 'highpass']) or (self._transname is 'wavelet'):
+                    self._f = np.ravel(self._f)
+                ######### f.shape = (2, N) ##########
+                elif (self._ftype is 'bandpass') and (self._transname is not 'wavelet'):
+                    if 2 not in fshape:
+                        raise ValueError(
+                            'Using a bandpass filter, the f parameter must be a (2, N) array')
+                    elif fshape[0] is not 2:
+                        self._f = self._f.T
+                    else:
+                        raise ValueError(
+                            'The shape of f is not compatible. Must be a 2D array')
+                    self._f = np.ndarray.tolist(self._f.T)
 
     def _ConfUpdate(self):
         """Update configuration."""
         # Check inputs compatibility :
         self._checkInputs()
-        # Get list of functions :
-        _, propStr = _getFilterProperties(self, self._f[0])
+        # Get string of configuration (send f None)
+        if self._f is None:
+            fapply = None
+        else:
+            fapply = self._f[0]
+        _, propStr = _getFilterProperties(self, fapply)
         # Update string :
         self._preprocStr, self._filtStr, self._transStr, self._featStr = propStr
-        # Print output :
-        if (self._verbose > 0) and (self._verbose <= 1):
-            print('Chain updated')
-        elif self._verbose > 1:
-            print('Chain updated to: ' + self.__str__())
 
     # -------------------------------------------------------
     #                    PROPERTIES
@@ -222,7 +220,6 @@ class Chain(object):
     @sf.setter
     def sf(self, value):
         self._sf = value
-        self._ConfUpdate()
 
     # Time points :
     @property
@@ -232,7 +229,6 @@ class Chain(object):
     @npts.setter
     def npts(self, value):
         self._npts = value
-        self._ConfUpdate()
 
     # Frequency :
     @property
@@ -242,7 +238,6 @@ class Chain(object):
     @f.setter
     def f(self, value):
         self._f = value
-        self._ConfUpdate()
 
     # Filter name :
     @property
@@ -252,7 +247,6 @@ class Chain(object):
     @filtname.setter
     def filtname(self, value):
         self._filtname = value
-        self._ConfUpdate()
 
     # Number of cycle (firls)
     @property
@@ -262,7 +256,6 @@ class Chain(object):
     @cycle.setter
     def cycle(self, value):
         self._cycle = value
-        self._ConfUpdate()
 
     # Filter order (bessel / butter)
     @property
@@ -272,7 +265,6 @@ class Chain(object):
     @order.setter
     def order(self, value):
         self._order = value
-        self._ConfUpdate()
 
     # Filter type :
     @property
@@ -282,7 +274,6 @@ class Chain(object):
     @ftype.setter
     def ftype(self, value):
         self._ftype = value
-        self._ConfUpdate()
 
     # Padlen (for fir1)
     @property
@@ -292,7 +283,6 @@ class Chain(object):
     @padlen.setter
     def padlen(self, value):
         self._padlen = value
-        self._ConfUpdate()
 
     # Transformation name :
     @property
@@ -302,7 +292,6 @@ class Chain(object):
     @transname.setter
     def transname(self, value):
         self._transname = value
-        self._ConfUpdate()
 
     # Wavelet width :
     @property
@@ -312,7 +301,6 @@ class Chain(object):
     @width.setter
     def width(self, value):
         self._width = value
-        self._ConfUpdate()
 
     # Feature featinfo :
     @property
@@ -322,7 +310,6 @@ class Chain(object):
     @featinfo.setter
     def featinfo(self, value):
         self._featinfo = value
-        self._ConfUpdate()
 
     # De-trending :
     @property
@@ -332,7 +319,6 @@ class Chain(object):
     @detrend.setter
     def detrend(self, value):
         self._detrend = value
-        self._ConfUpdate()
 
     # De-meaning :
     @property
@@ -342,7 +328,6 @@ class Chain(object):
     @demean.setter
     def demean(self, value):
         self._demean = value
-        self._ConfUpdate()
 
     # Verbose :
     @property
@@ -352,7 +337,6 @@ class Chain(object):
     @verbose.setter
     def verbose(self, value):
         self._verbose = value
-        self._ConfUpdate()
 
 
 def _getFilterProperties(self, f):

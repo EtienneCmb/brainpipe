@@ -29,7 +29,7 @@ def filter_fcn(sf, npts, f=None, filtname='fir1', cycle=3, order=3, ftype='bandp
     if filtname not in ['bessel', 'butter', 'fir1', None]:
         raise ValueError(
             "filtname must be either 'bessel', 'butter' or 'fir1'")
-    if ftype not in ['bandpass', 'lowpass', 'highpass']:
+    if ftype not in [None, 'bandpass', 'lowpass', 'highpass']:
         raise ValueError(
             "ftype must be either 'bandpass', 'lowpass' or 'highpass'")
     if (ftype is not 'bandpass') and filtname == 'fir1':
