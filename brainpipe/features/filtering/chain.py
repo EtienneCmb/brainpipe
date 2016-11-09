@@ -4,9 +4,11 @@ import numpy as np
 from warnings import warn
 from joblib import Parallel, delayed
 from .method import *
+from ..utils import BandSplit
 
 
 class Chain(object):
+
     """Design a chain of transformations to apply to multi-dimentional array.
     This class can be used to pre-processed your data, to extract spectral
     informations (using the hilbert or wavelet transform) or to compute phase /
@@ -26,6 +28,11 @@ class Chain(object):
             use f=[[f1, f2], ..., [fn, fm]]. For a lowpass/highpass filter,
             use f=[f1, f2, ..., fn]. The f parameter is only active if
             filtname is not None.
+
+        bandsplit: list, optional, (def: None)
+            Use this parameter to split a frequency band in multiple sub
+            frequency bands. bandsplit must be a list of integers with the
+            same length as f.
 
         filtname: string, optional, (def: None)
             Define a filter in order to extract spectral informations in specific
@@ -73,12 +80,14 @@ class Chain(object):
 
     """
 
-    def __init__(self, sf, npts, f=None, filtname=None, cycle=3, order=3,
-                 ftype='bandpass', padlen=None, transname=None, width=7.0,
-                 featinfo=None, detrend=False, demean=False):
+    def __init__(self, sf, npts, f=None, bandsplit=None, filtname=None,
+                 cycle=3, order=3, ftype='bandpass', padlen=None,
+                 transname=None, width=7.0, featinfo=None, detrend=False,
+                 demean=False):
         self._sf = float(sf)
         self._npts = float(npts)
         self._f = f
+        self._bandsplit = bandsplit
         self._filtname = filtname
         self._cycle = cycle
         self._order = order
@@ -89,13 +98,21 @@ class Chain(object):
         self._featinfo = featinfo
         self._detrend = detrend
         self._demean = demean
+        # Split or not the frequency band :
+        if (self._filtname is not None) and (self._ftype is 'bandpass') or (self._transname is 'wavelet'):
+            self.split = BandSplit(f, bandsplit)
+        else:
+            self.split = BandSplit([0, 1], None)
+        self._splitStr = str(self.split)
         # Get associated functions and build chain :
         self._ConfUpdate()
 
     def __str__(self):
         chain = 'Chain(Settings(sf=' + str(self._sf) + ', npts=' + \
-            str(self._npts) + '), {pre}, {filter}, {trans}, {feat})'
-        return chain.format(filter=self._filtStr, trans=self._transStr, feat=self._featStr, pre=self._preprocStr)
+            str(self._npts) + '), {split}, {pre}, {filter}, {trans}, {feat})'
+        return chain.format(filter=self._filtStr, trans=self._transStr,
+                            feat=self._featStr, pre=self._preprocStr,
+                            split=self._splitStr)
 
     # -------------------------------------------------------
     #                    USER FUNCTIONS
@@ -133,7 +150,10 @@ class Chain(object):
         if self._f is None:
             fapply = [[None]]
         else:
-            fapply = self._f
+            if self.split.splitted is None:
+                fapply = self._f
+            else:
+                fapply = self.split.fsplit
         if len(fapply) == 1:
             n_jobs = 1
         # Apply function :
@@ -142,7 +162,7 @@ class Chain(object):
         return np.array(xf)
 
     def update(self):
-        """Update the chain configuration"""
+        """Update the chain configuration."""
         self._ConfUpdate()
 
     # -------------------------------------------------------
@@ -169,32 +189,30 @@ class Chain(object):
         # No filtering if no frequency :
         if self._f is None:
             if self._filtname is not None:
-                warn("f is None but not filtname.")
+                warn('f is None but not filtname.')
             if self._transname is not None:
-                warn("f is None but not transname.")
+                warn('f is None but not transname.')
             self._filtname = None
             self._transname = None
         else:
             if (self._filtname is None) and (self._transname is None):
-                raise ValueError("f is not None but there is no filtname or no transformation.")
+                raise ValueError(
+                    'f is not None but there is no filtname or no transformation.')
             else:
                 # Force f to be a 2D array :
                 self._f = np.atleast_2d(self._f)
                 fshape = self._f.shape
-                ######### f.shape = (1, N) ##########
+                print('TRANS: ', self._transname)
+                ######### f.shape = (N,) ##########
                 if (self._ftype in ['lowpass', 'highpass']) or (self._transname is 'wavelet'):
                     self._f = np.ravel(self._f)
-                ######### f.shape = (2, N) ##########
+                ######### f.shape = (N, 2) ##########
                 elif (self._ftype is 'bandpass') and (self._transname is not 'wavelet'):
                     if 2 not in fshape:
                         raise ValueError(
-                            'Using a bandpass filter, the f parameter must be a (2, N) array')
-                    elif fshape[0] is not 2:
+                            'Using a bandpass filter, the f parameter must be a (N, 2) array')
+                    elif fshape[1] is not 2:
                         self._f = self._f.T
-                    else:
-                        raise ValueError(
-                            'The shape of f is not compatible. Must be a 2D array')
-                    self._f = np.ndarray.tolist(self._f.T)
 
     def _ConfUpdate(self):
         """Update configuration."""
