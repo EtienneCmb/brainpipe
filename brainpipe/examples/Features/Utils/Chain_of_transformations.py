@@ -9,6 +9,7 @@
 
 Then, use .apply() method to apply the transformation on a muli-dimentional
 array.
+
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -43,31 +44,44 @@ if __name__ == '__main__':
     # Define a random signal containing multiple frequencies :
     randsig = np.random.rand(npts)
     # Bandpass filter between 2 and 5hz
-    ct_band = Chain(
-        sf, npts, f=[200, 300], filtname='butter', ftype='bandpass')
+    ct_band = Chain(sf, npts, f=[200, 300], filtname='butter',
+                    ftype='bandpass')
     sigF = ct_band.apply(randsig).ravel()
     plt.figure()
-    plt.subplot(151)
+    plt.subplot(161)
     plt.plot(timevec, randsig), plt.title(
         'Original signal'), plt.xlabel('Time')
-    plt.subplot(152)
+    plt.subplot(162)
     plt.plot(timevec, sigF), plt.title(
         'Bandpass filtered signal'), plt.xlabel('Time')
-    plt.subplot(153)
+    plt.subplot(163)
     plt.psd(sigF, 256, Fs=sf), plt.title(
         'PSD bandpass [200, 300]hz (Butterworth)')
     # Lowpass under 200hz :
-    ct_low = Chain(
-        sf, npts, f=200, filtname='butter', ftype='lowpass')
+    ct_low = Chain(sf, npts, f=200, filtname='butter', ftype='lowpass')
     sigL = ct_low.apply(randsig).ravel()
-    plt.subplot(154)
+    plt.subplot(164)
     plt.psd(sigL, 256, Fs=sf), plt.title('PSD lowpass <200hz (Butterworth)')
     # Highpass over 300hz :
-    ct_high = Chain(
-        sf, npts, f=300, filtname='bessel', ftype='highpass')
+    ct_high = Chain(sf, npts, f=300, filtname='bessel', ftype='highpass')
     sigH = ct_high.apply(randsig).ravel()
-    plt.subplot(155)
+    plt.subplot(165)
     plt.psd(sigH, 256, Fs=sf), plt.title('PSD highpass >300hz (Bessel)')
+    # Finally, you have the possibility to split frequency bands in multiple
+    # sub-frequency bands. to do this, use the bandsplit parameter :
+    f = 50
+    xSp = np.sin(2 * np.pi * f * timevec) + np.random.rand(npts) / 100
+    ct_split = Chain(sf, npts, f=[[10, 100], [40, 60], [1, 100]],
+                     bandsplit=[None, None, 5], filtname='bessel',
+                     ftype='bandpass')
+    sigSp = ct_split.apply(xSp)
+    plt.subplot(166)
+    plt.plot(sigSp.mean(1), '*r'), plt.title('Signal in multiple frequency bands')
+    # Then, after extracting in multiple frequency bands, you can
+    # take the mean of the array inside those sub-bands :
+    xSpjoin = ct_split.split.joinsplit(sigSp)
+    print('Shape of the signal in sub-bands: ', sigSp.shape,
+          ', shape by taking the mean inside sub-bands:', xSpjoin.shape)
 
     # --------------------------------------------------
     #             COMPLEX TRANSFORMATION
@@ -81,7 +95,7 @@ if __name__ == '__main__':
     sin = np.sin(2 * np.pi * f * timevec) + np.random.rand(npts)
     # Extract amplitude :
     ct_comp = Chain(sf, npts, transname='hilbert', f=[9, 11],
-                             featinfo='amplitude', filtname='butter')
+                    featinfo='amplitude', filtname='butter')
     xAmp = ct_comp.apply(sin).ravel()
     # Extract phase :
     ct_comp.featinfo = 'phase'
@@ -116,7 +130,7 @@ if __name__ == '__main__':
     # Now, we compute the amplitude using the wavelet transformation :
     f = np.arange(1, 20, 2)
     xwav = Chain(sf, npts, f=f, transname='wavelet',
-                          featinfo='amplitude')
+                 featinfo='amplitude')
     # The parallel processing is effective on the number of frequency bands
     # defined.
     xwavAmp = xwav.apply(xndim, axis=2, n_jobs=-1)
