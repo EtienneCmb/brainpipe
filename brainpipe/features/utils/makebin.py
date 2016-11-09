@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 
+__all__ = ['binarray', 'binarize']
 
 def binarize(start, end, width, step, kind='shift'):
     """Generate a window to binarize a signal.

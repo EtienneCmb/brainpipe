@@ -6,6 +6,7 @@ from warnings import warn
 from .makebin import binarize, binarray
 from .unit import time_to_sample, sample_to_time
 
+__all__ = ['Window', 'TimeSplit']
 
 class Window(object):
 

@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 
+__all__ = ['time_to_sample', 'sample_to_time']
 
 def time_to_sample(x, sf, from_unit='s'):
     """Convert x from a time unit to a sample unit using the sampling
