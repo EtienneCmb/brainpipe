@@ -11,10 +11,38 @@ __all__ = ['ERP', 'SigFilt', 'Amplitude', 'Power',
 
 class ERP(_base):
 
-    """Docstring for ERP."""
+    """Extract Event Related Potential from an N-dimentional signal.
+
+    Args:
+        sf: int/float
+            Sampling frequency
+
+    Kargs:
+        chain: Chain, optional, (def: None)
+            Define a chain object for controling the lowpass frequency,
+            the filter type, the order... By default, the ERP use a lowpass
+            Butterworth filter under 10Hz, with an order 3. Alternatively,
+            you can use a dictionnary to directly pass arguments.
+
+
+        win: Window, optional, (def: None)
+            Pass a Window object to get the mean of an N-dimentional signal
+            inside sliding windows. Alternatively, you can use a dictionnary
+            to directly pass arguments.
+
+        norm: Normalization, optional, (def: None)
+            Pass a Normalization object to normalize an N-dimentional signal
+            by a baseline period. Alternatively, you can use a dictionnary to
+            directly pass arguments.
+
+    Return:
+        A ERP object with an apply() method. After defining the object, use
+        str() to check parameters. See examples/Features/00_ERP.py to see an
+        exemple of use.
+
+    """
 
     def __init__(self, sf, npts, chain=None, win=None, norm=None):
-        """TODO: to be defined1."""
         _base.__init__(self, sf, npts, chain, win, norm)
         # Force ERP :
         self._feat = 'ERP'
@@ -25,6 +53,7 @@ class ERP(_base):
             self.chain.filtname = 'butter'
         if not isinstance(self.chain.f, (int, float)) or (self.chain.f is None):
             self.chain.f = 10.0
+        # Update chain and base :
         self.chain.update()
         self._update()
 
@@ -34,7 +63,6 @@ class SigFilt(_base):
     """Docstring for SigFilt."""
 
     def __init__(self, sf, npts, chain=None, win=None, norm=None):
-        """TODO: to be defined1."""
         _base.__init__(self, sf, npts, chain, win, norm)
         # Force power :
         self._feat = 'SigFilt'
@@ -46,7 +74,6 @@ class Amplitude(_base):
     """Docstring for Amplitude."""
 
     def __init__(self, sf, npts, chain=None, win=None, norm=None):
-        """TODO: to be defined1."""
         _base.__init__(self, sf, npts, chain, win, norm)
         # Force power :
         self._feat = 'Amplitude'
@@ -58,7 +85,6 @@ class Power(_base):
     """Docstring for Power."""
 
     def __init__(self, sf, npts, chain=None, win=None, norm=None):
-        """TODO: to be defined1."""
         _base.__init__(self, sf, npts, chain, win, norm)
         # Force power :
         self._feat = 'Power'
@@ -70,7 +96,6 @@ class TimeFrequencyMap(_base):
     """Docstring for TimeFrequencyMap."""
 
     def __init__(self, sf, npts, chain=None, win=None, norm=None):
-        """TODO: to be defined1."""
         _base.__init__(self, sf, npts, chain, win, norm)
         # Force power :
         self._feat = 'Power'
@@ -82,7 +107,6 @@ class Phase(_base):
     """Docstring for Phase."""
 
     def __init__(self, sf, npts, chain=None, win=None, norm=None):
-        """TODO: to be defined1."""
         _base.__init__(self, sf, npts, chain, win, norm)
         # Force power :
         self._feat = 'Phase'
