@@ -48,7 +48,7 @@ class LeavePSubjectOut(clfplt):
         self._nsuj = nsuj
         self._pout = pout
         # Manage cross-validation:
-        self._cv = LeavePGroupsOut(np.arange(nsuj), pout)
+        self._cv = LeavePGroupsOut(pout)
         self._cv.shStr = 'Leave '+str(pout)+' subjects out'
         self._cv.lgStr = self._cv.shStr
         self._cv.rep = 1
@@ -251,13 +251,14 @@ def _checkXY(x, y, mf, grp, center, self):
             x = pd.DataFrame([[k[:, np.where(grp == i)[0]] for i in ugrp] for k in x])
     else:
         x = pd.DataFrame([np.ndarray.tolist(k.T) for k in x])
-    y = pd.DataFrame([[k] for k in y])
 
     # Create training and testing set:
     train, test = [], []
-    for training, testing in self._cv:
+    iteract = self._cv.split(np.random.rand(self._nsuj), np.arange(self._nsuj), np.arange(self._nsuj))
+    for training, testing in iteract:
         train.append(list(training))
         test.append(list(testing))
+    y = pd.DataFrame([[k] for k in y])
     return x, y, train, test
 
 def dfshuffle(df, axis=0, rnd=0):

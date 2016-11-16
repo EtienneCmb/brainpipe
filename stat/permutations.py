@@ -350,7 +350,9 @@ def perm_pvalue2level(perm, p=0.05, maxst=False):
     n2take = int(np.round(n_perm*p))
     if n2take < 1:
         n2take = 1
+    # Sort permutations :
+    perm.sort(axis=0)
+    perm = perm[-n2take, :]
     if maxst:
         perm = maxstat(perm, axis=0)
-    perm.sort(axis=0)
-    return perm[-n2take, :]
+    return perm

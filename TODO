@@ -1,7 +1,0 @@
-- copie rsync !!!!!!!!!!!!
-- Mettre le filtrage dans preproc
-- updater tout les numpy n -> np
-- updater toute les docs
-- copie site-packages : bpold
-- tout les _utils dans les dossiers associés
-
