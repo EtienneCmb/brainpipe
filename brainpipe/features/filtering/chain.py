@@ -202,7 +202,6 @@ class Chain(object):
                 # Force f to be a 2D array :
                 self._f = np.atleast_2d(self._f)
                 fshape = self._f.shape
-                print('TRANS: ', self._transname)
                 ######### f.shape = (N,) ##########
                 if (self._ftype in ['lowpass', 'highpass']) or (self._transname is 'wavelet'):
                     self._f = np.ravel(self._f)
