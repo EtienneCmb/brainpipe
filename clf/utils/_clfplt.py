@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from matplotlib.cm import ScalarMappable
 from warnings import warn
 import numpy as np
 from brainpipe.visu.cmon_plt import _pltutils, addLines, tilerplot
@@ -64,7 +65,8 @@ class clfplt(object):
             bar = plt.bar(np.arange(nda), da, align='center', width=0.9)
             # Manage colormap:
             if cmap is not None:
-                cmap = eval('plt.cm.'+cmap+'(np.arange(nda)/nda)')
+                cm = ScalarMappable(cmap=cmap)
+                cmap = np.ndarray.tolist(cm.to_rgba(da, alpha=1))
                 [bar[k].set_color(cmap[k]) for k in range(len(da))]
 
         # Boxplot :
@@ -81,7 +83,8 @@ class clfplt(object):
                 flier.set(marker='o', color='#ab4642', alpha=0.5)
             # Manage colormap:
             if cmap is not None:
-                cmap = eval('plt.cm.'+cmap+'(np.arange(nda)/nda)')
+                cm = ScalarMappable(cmap=cmap)
+                cmap = np.ndarray.tolist(cm.to_rgba(da.mean(0), alpha=1))
                 for k, box in enumerate(bar['boxes']):
                     box.set( color='gray', linewidth=2)
                     box.set( facecolor=cmap[k], alpha=0.9)
@@ -113,7 +116,10 @@ class clfplt(object):
 
         # Binomial chance level:
         if chance_method == 'bino':
-            level = bino_p2da(self._y, chance_level)
+            if hasattr(self, '_ry'):
+                level = bino_p2da(self._ry, chance_level)
+            else:
+                level = bino_p2da(self._y, chance_level)
             addLines(ax, hLines=[level], hColor=[chance_color], hWidth=[2], hShape=['--'])
         # Permutations chance level:
         elif chance_method == 'perm':
