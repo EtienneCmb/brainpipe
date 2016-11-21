@@ -23,7 +23,7 @@ def _mf(x, Id, grp, self, display, probOccur):
     for k, i in enumerate(cvOut):
 
         predCv, yTestCv = [], []
-        for train_index, test_index in i:
+        for train_index, test_index in i.split(x,y):
 
             # Get training and testing sets:
             xTrain, xTest, yTrain, yTest = x[train_index, :], x[
