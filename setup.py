@@ -1,31 +1,31 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-from setuptools import setup
+import os
+from setuptools import setup, find_packages
+import brainpipe
 
-with open('README.md') as f:
-    readme = f.read()
-
-with open('LICENSE') as f:
-    license = f.read()
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(
         name='brainpipe',
-        version='0.3.0',
-        packages=['brainpipe'],
+        version=brainpipe.__version__,
+        packages=find_packages(),
         description='Neural signals: data mining and machine learning',
-        long_description=readme,
+        long_description=read('README'),
         install_requires=[
             'numpy',
             'scipy',
             'pandas',
             'matplotlib',
-            'scikit-learn',
-            'joblib',
+            'scikit-learn>=0.18',
+            'joblib>=0.10.3',
         ],
         author='Etienne Combrisson',
         maintainer='Etienne Combrisson',
         author_email='e.combrisson@gmail.com',
         url='https://github.com/EtienneCmb/brainpipe',
-        license=license,
+        license=read('LICENSE'),
+        include_package_data=True,
         keywords='power phase PAC feature classification machine learning neuroscience',
 )
