@@ -6,7 +6,7 @@ from ..utils import Window, Normalization
 from ..filtering import Chain
 
 
-class _base(object):
+class _local(object):
 
     """Base class for basics features (Power, Phase, Amplitude, SigFilt, TF)"""
 
@@ -14,7 +14,7 @@ class _base(object):
         self._sf = sf
         self._npts = npts
         self._str = ''
-        self._feat = 'base'
+        self._feat = 'local'
         self.chain = chain
         self.win = win
         self.norm = norm

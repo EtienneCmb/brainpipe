@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import numpy as np
-from .base import _base
+from ._localbase import _local
 from ..filtering import Chain
 
 
@@ -9,7 +9,7 @@ __all__ = ['ERP', 'SigFilt', 'Amplitude', 'Power',
            'TimeFrequencyMap', 'Phase']
 
 
-class ERP(_base):
+class ERP(_local):
 
     """Extract Event Related Potential from an N-dimentional signal.
 
@@ -43,7 +43,7 @@ class ERP(_base):
     """
 
     def __init__(self, sf, npts, chain=None, win=None, norm=None):
-        _base.__init__(self, sf, npts, chain, win, norm)
+        _local.__init__(self, sf, npts, chain, win, norm)
         # Force ERP :
         self._feat = 'ERP'
         # Check frequency and filter :
@@ -58,56 +58,56 @@ class ERP(_base):
         self._update()
 
 
-class SigFilt(_base):
+class SigFilt(_local):
 
     """Docstring for SigFilt."""
 
     def __init__(self, sf, npts, chain=None, win=None, norm=None):
-        _base.__init__(self, sf, npts, chain, win, norm)
+        _local.__init__(self, sf, npts, chain, win, norm)
         # Force power :
         self._feat = 'SigFilt'
         self.chain.featinfo = None
 
 
-class Amplitude(_base):
+class Amplitude(_local):
 
     """Docstring for Amplitude."""
 
     def __init__(self, sf, npts, chain=None, win=None, norm=None):
-        _base.__init__(self, sf, npts, chain, win, norm)
+        _local.__init__(self, sf, npts, chain, win, norm)
         # Force power :
         self._feat = 'Amplitude'
         self.chain.featinfo = 'amplitude'
 
 
-class Power(_base):
+class Power(_local):
 
     """Docstring for Power."""
 
     def __init__(self, sf, npts, chain=None, win=None, norm=None):
-        _base.__init__(self, sf, npts, chain, win, norm)
+        _local.__init__(self, sf, npts, chain, win, norm)
         # Force power :
         self._feat = 'Power'
         self.chain.featinfo = 'power'
 
 
-class TimeFrequencyMap(_base):
+class TimeFrequencyMap(_local):
 
     """Docstring for TimeFrequencyMap."""
 
     def __init__(self, sf, npts, chain=None, win=None, norm=None):
-        _base.__init__(self, sf, npts, chain, win, norm)
+        _local.__init__(self, sf, npts, chain, win, norm)
         # Force power :
         self._feat = 'Power'
         self.chain.featinfo = 'power'
 
 
-class Phase(_base):
+class Phase(_local):
 
     """Docstring for Phase."""
 
     def __init__(self, sf, npts, chain=None, win=None, norm=None):
-        _base.__init__(self, sf, npts, chain, win, norm)
+        _local.__init__(self, sf, npts, chain, win, norm)
         # Force power :
         self._feat = 'Phase'
         self.chain.featinfo = 'phase'

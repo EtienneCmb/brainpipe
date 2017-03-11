@@ -1,9 +1,17 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
+"""Find coefficients and filter order of a fir1 filter
+"""
+
 import numpy as np
 from numpy import matlib
 
-def NoddFcn(F, M, W, L):  # N is odd
+__all__ = ['fir1', 'fir_order']
+
+def _NoddFcn(F, M, W, L):
+    """Filter coefficient for odd filter order
+    """
     # Variables :
     b0 = 0
     m = np.arange(int(L + 1))
@@ -34,7 +42,9 @@ def NoddFcn(F, M, W, L):  # N is odd
     return h
 
 
-def NevenFcn(F, M, W, L):  # N is even
+def _NevenFcn(F, M, W, L): 
+    """Filter coefficient for even filter order
+    """
     # Variables :
     k = np.arange(0, int(L) + 1, 1) + 0.5
     b = np.zeros(k.shape)
@@ -56,9 +66,9 @@ def NevenFcn(F, M, W, L):  # N is even
     return h
 
 
-def firls(N, F, M):
-    """Switch between odd/even."""
-    # Variables definition :
+def _firls(N, F, M):
+    """Get filter coefficient for odd and even filter order
+    """
     W = np.ones(round(len(F) / 2), dtype=float)
     N += 1
     F /= 2
@@ -67,15 +77,28 @@ def firls(N, F, M):
     Nodd = bool(N % 2)
 
     if Nodd:    # Odd case
-        h = NoddFcn(F, M, W, L)
+        h = _NoddFcn(F, M, W, L)
     else:       # Even case
-        h = NevenFcn(F, M, W, L)
+        h = _NevenFcn(F, M, W, L)
 
     return h
 
 
 def fir1(N, Wn):
-    """Get fir1 coefficients."""
+    """Get fir1 coefficients.
+    
+    Parameters
+    ----------
+    N: integer
+        Filter order
+
+    Wn: array shape (2,)
+        Normalized frequency vector
+
+    Returns
+    -------
+    The filter coefficients (b, 1)
+    """
     # Variables definition :
     nbands = len(Wn) + 1
     ff = np.array((0, Wn[0], Wn[0], Wn[1], Wn[1], 1))
@@ -87,7 +110,7 @@ def fir1(N, Wn):
     aa = np.ravel(matlib.repmat(mags, 2, 1), order='F')
 
     # Get filter coefficients :
-    h = firls(L - 1, ff, aa)
+    h = _firls(L - 1, ff, aa)
 
     # Apply a window to coefficients :
     Wind = np.hamming(L)
@@ -99,8 +122,29 @@ def fir1(N, Wn):
 
 
 def fir_order(Fs, sizevec, flow, cycle=3):
-    """Get firls order filter."""
-    filtorder = cycle * (Fs // flow)
+    """Get filter order based on the number of cycle and the lowest
+    frequency
+    
+    Parameters
+    ----------
+    Fs: float
+        Sampling frequency
+
+    sizevec: integer
+        Number of time points in the signal.
+
+    flow: float
+        The lowest frequency
+
+    cycle: integer, optional
+        Number of cycle to use
+
+    Returns
+    -------
+    f: integer
+        The filter order
+    """
+    filtorder = cycle * (float(Fs) // float(flow))
 
     if (sizevec < 3 * filtorder):
         filtorder = (sizevec - 1) // 3

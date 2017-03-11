@@ -6,5 +6,7 @@
  
 __version__ = "0.3.0"
 
-from .features import *
-from .visual import *
+# __all__ = ['features']
+# import features
+# from .features import *
+# from .visual import *
