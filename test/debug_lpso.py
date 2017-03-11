@@ -1,7 +1,7 @@
 import numpy as np
 from sklearn.datasets import make_classification
-# from brainpipe.classification import *
-from clf._lpso import LeavePSubjectOut
+import brainpipe
+from brainpipe.classification import LeavePSubjectOut
 
 n_features = 5
 
