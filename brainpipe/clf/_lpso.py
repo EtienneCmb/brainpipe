@@ -147,7 +147,22 @@ class LeavePSubjectOut(clfplt):
         # -------------------------------------------------------------
         # -> Shuffle the labels :
         elif method == 'label_rnd':
-            y_sh = [_checkXY(xbk, [np.random.permutation(i) for i in self._y],
+            # Get length of each label vector :
+            l = [0] + [len(k) for k in self._y]
+            # Get consecutive sum elements :
+            cm = np.cumsum(l)
+            # Build a slice list containing shape of each label vector :
+            sl = [slice(cm[k], cm[k+1]) for k in range(len(cm)-1)]
+            # Define intra-shuffle :
+            def _intraSh():
+                # Ravel full y :
+                yc = np.concatenate(self._y).ravel()
+                # Permute yc :
+                yc_perm = np.random.permutation(yc)
+                # Reshape yc_perm to fit to each label shape :
+                return [yc_perm[k] for k in sl]
+            # Build shuffle y :
+            y_sh = [_checkXY(xbk, _intraSh(),
                              mf, grp, center, self)[1] for k in range(n_perm)]
             cvs = Parallel(n_jobs=n_jobs)(delayed(_fit)(
                     x, y_sh[k], train, test, self, 1)
