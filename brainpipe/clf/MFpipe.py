@@ -321,7 +321,7 @@ class MFpipe(object):
         self.pipeline = Pipeline(pipeline)
         self.grid = grid
         self._pipename = name
-        print('Default pipeline set')
+        # print('Default pipeline set')
         # print('\nCOMBINE: ', self.combine, '\n\nPIPELINE: ', self.pipeline, '\n\nGRID: ', self.grid)
 
 

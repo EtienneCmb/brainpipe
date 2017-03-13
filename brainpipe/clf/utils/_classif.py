@@ -39,9 +39,6 @@ class _classification(object):
     def __init__(self, y, clf='lda', cvtype='skfold', clfArg={}, cvArg={}):
 
         self._y = y
-        if not hasattr(clf, 'shStr') or not hasattr(clf, 'lgStr'):
-            clf.shStr, clf.lgStr = 'custom', 'Custom classifier'
-        self._lgStr = ''
         # Defineclassifier and cross-valdation :
         self._defineClf(clf, **clfArg)
         self._defineCv(cvtype, **cvArg)
@@ -60,6 +57,10 @@ class _classification(object):
         """
         if isinstance(clf, (int, str)):
             clf = defClf(self._y, clf=clf, **clfArg)
+        else:
+            if not hasattr(clf, 'shStr') or not hasattr(clf, 'lgStr'):
+                clf.shStr, clf.lgStr = 'custom', 'Custom classifier'
+        self._lgStr = ''
         self._clf = clf
 
     def _defineCv(self, cvtype='skfold', **cvArg):

@@ -333,26 +333,28 @@ class generalization(object):
         self.cv = cvtype
         if isinstance(cvtype, list):
             cvtype = cvtype[0]
-
+        print(cvtype)
         # Check the size of x:
+        x = np.atleast_3d(x)
         npts, ntrials = len(time), len(y)
-        if len(x.shape) == 2:
-            x = np.matrix(x)
-        # x = adaptsize(x, (2, 0, 1))
+        if x.shape[0] is not npts:
+            raise ValueError('First dimension of x must be '+str(npts))
+        if x.shape[1] is not ntrials:
+            raise ValueError('Second dimension of x must be '+str(ntrials))
 
         da = np.zeros([npts, npts])
         # Training dimension
         for k in range(npts):
-            xx = x[[k], ...]
+            xx = x[k, ...]
             # Testing dimension
             for i in range(npts):
-                xy = x[[i], ...]
+                xy = x[i, ...]
                 # If cv is defined, do a cv on the diagonal
                 if (k == i) and (cvtype is not None):
-                    da[i, k] = _cvscore(np.ravel(xx), y, clf, cvtype)[0]/100
+                    da[i, k] = _cvscore(xx, y, clf, self._cv.cvr[0])[0]/100
                 # If cv is not defined, let the diagonal at zero
                 elif (k == i) and (cvtype is None):
                     pass
                 else:
-                    da[i, k] = accuracy_score(y, clf.fit(xx.T, y).predict(xy.T))
+                    da[i, k] = accuracy_score(y, clf.fit(xx, y).predict(xy))
         return 100*da
