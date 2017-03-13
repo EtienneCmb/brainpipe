@@ -9,7 +9,7 @@ def read(fname):
 
 setup(
     name='brainpipe',
-    version='0.1.6',
+    version='0.1.8',
     packages=find_packages(),
     description='Bridge between neural signal datasets and machine learning',
     long_description=read('README.md'),
