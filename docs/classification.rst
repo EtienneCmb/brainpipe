@@ -72,7 +72,7 @@ Generalization
    :members: generalization
    :noindex:
 
-.. figure::  ../images/tg.png
+.. figure::  images/tg.png
    :align:   center
 
    Time-generalization using two features (alpha and gamma power)

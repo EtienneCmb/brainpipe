@@ -18,7 +18,7 @@ Border plot
    :members: BorderPlot
    :noindex:
 
-.. figure::  ../images/borderplot.png
+.. figure::  images/borderplot.png
    :align:   center
 
    Border plot example
@@ -31,7 +31,7 @@ p-value plot
    :members: addPval
    :noindex:
 
-.. figure::  ../images/pval.png
+.. figure::  images/pval.png
    :align:   center
 
    Add p-values to an existing plot
@@ -42,7 +42,7 @@ Continuous color
    :members: continuouscol
    :noindex:
 
-.. figure::  ../images/contcol.png
+.. figure::  images/contcol.png
    :align:   center
 
    Continuous color-line
@@ -56,7 +56,7 @@ Add lines
    :members: addLines
    :noindex:
 
-.. figure::  ../images/lines.png
+.. figure::  images/lines.png
    :align:   center
 
    Quickly add some lines to your plot
@@ -69,7 +69,7 @@ tilerplot
    :members: tilerplot
    :noindex:
 
-.. figure::  ../images/plot2D.png
+.. figure::  images/plot2D.png
    :align:   center
 
    Automatic 1D and 2D plot

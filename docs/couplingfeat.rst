@@ -6,7 +6,7 @@ Phase-Amplitude Coupling
    :members: pac
    :noindex:
 
-.. figure::  ../images/pac.png
+.. figure::  images/pac.png
    :align:   center
 
    Example of PAC maps for a synthetic coupled signal
@@ -19,7 +19,7 @@ Prefered-phase
    :members: pfdphase
    :noindex:
 
-.. figure::  ../images/pfdphase.png
+.. figure::  images/pfdphase.png
    :align:   center
 
    Example of preferred phase for an alpha-gamma coupling in BA6
@@ -32,7 +32,7 @@ Phase-locked power
    :members: PhaseLockedPower
    :noindex:
 
-.. figure::  ../images/plp.png
+.. figure::  images/plp.png
    :align:   center
 
    Event Related Phase-Amplitude 
@@ -45,7 +45,7 @@ Event Related Phase-Amplitude Coupling
    :members: erpac
    :noindex:
 
-.. figure::  ../images/erpac.png
+.. figure::  images/erpac.png
    :align:   center
 
    Event Related Phase-Amplitude Coupling
@@ -59,7 +59,7 @@ Phase-Locking Value
    :members: PLV
    :noindex:
 
-.. figure::  ../images/plv.png
+.. figure::  images/plv.png
    :align:   center
 
    Example of an alpha PLV

@@ -30,7 +30,7 @@ Time-Frequency
    :members: TF
    :noindex:
 
-.. figure::  ../images/tf.png
+.. figure::  images/tf.png
    :align:   center
 
    Example of a Time-frequency map
@@ -51,7 +51,7 @@ Phase-Locking Factor
    :members: PLF
    :noindex:
 
-.. figure::  ../images/plf.png
+.. figure::  images/plf.png
    :align:   center
 
    Example of a Phase-Locking Factor map

@@ -18,19 +18,30 @@ Please, check if you have this toolbox installed and already up-to-date:
 - joblib (parallel computing)
 - scipy
 - numpy
+- psutil
 
 Installation
 ************
-For instance, the easiest way of installing brainpipe is to use github (`brainpipe <https://github.com/EtienneCmb/brainpipe>`_ ). 
 
-Go to your python site-package folder (ex: anaconda3/lib/python3.5/site-packages) and in a terminal run
+Ru the following commands :
 
-.. code-block:: python
+.. code-block:: bash
 
 	git clone git@github.com:EtienneCmb/brainpipe.git
 
+Then, go to the brainpipe cloned folder and run :
+
+.. code-block:: python
+
+   python setup.py install
+
 What's new
 **********
+v0.1.8
+=======
+- Fix LeavePSubjectOut permutations for unique labels.
+- Fix classification plot colors.
+
 v0.1.6
 =======
 - Fix scikit-learn v0.18 compatibility
