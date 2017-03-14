@@ -1,0 +1,1191 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Filtered signal &mdash; brainpipe 0.1.8 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="brainpipe 0.1.8 documentation" href="index.html"/>
+        <link rel="up" title="Presentation" href="feature.html"/>
+        <link rel="next" title="Phase-Amplitude Coupling" href="couplingfeat.html"/>
+        <link rel="prev" title="Presentation" href="feature.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> brainpipe</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <p class="caption"><span class="caption-text">PRE-PROCESSING</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Bipolarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html#physiology">Physiology</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FEATURES</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="feature.html">Presentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="feature.html#filtering-based">Filtering based</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Filtered signal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#amplitude">Amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#power">Power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#time-frequency">Time-Frequency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#phase">Phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#phase-locking-factor">Phase-Locking Factor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#coupling-features">Coupling features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html">Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#prefered-phase">Prefered-phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#phase-locked-power">Phase-locked power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#event-related-phase-amplitude-coupling">Event Related Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#phase-locking-value">Phase-Locking Value</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#psd-based-features">PSD based features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html">Power Spectrum Density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html#power-psd">Power PSD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html#spectral-entropy">Spectral entropy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#tools">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="featools.html">Physiological bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="featools.html#cross-frequency-vector">Cross-frequency vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="featools.html#simulation">Simulation</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">CLASSIFICATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classification.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#define-a-classifier">Define a classifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#define-a-cross-validation">Define a cross-validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#classify">Classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#leave-p-subjects-out">Leave p-subjects out</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#generalization">Generalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#multi-features">Multi-features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">STATISTICS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="stat.html">Binomial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stat.html#permutations">Permutations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#evaluation">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#generate">Generate</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stat.html#multiple-comparisons">Multiple-comparisons</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#bonferroni">Bonferroni</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#false-discovery-rate-fdr">False Discovery Rate (FDR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#maximum-statistic">Maximum statistic</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stat.html#circular-statistics-toolbox">Circular statistics toolbox</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VISUALIZATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">1-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#border-plot">Border plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#p-value-plot">p-value plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#continuous-color">Continuous color</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html#d-or-2-d-graphics">1-D or 2-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#add-lines">Add lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#tilerplot">tilerplot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html#tools">Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OTHERS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#bpstudy">Bpstudy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#pandas-complements">Pandas complements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#arrays">Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#file-management">File management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#others">Others</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">REFERENCES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="references.html#pre-processing">Pre-processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#classification">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#statistics">Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#visualization">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#tools">Tools</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">brainpipe</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="feature.html">Presentation</a> &raquo;</li>
+      
+    <li>Filtered signal</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/filtfeat.rst.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="filtered-signal">
+<span id="sigfilt"></span><h1>Filtered signal<a class="headerlink" href="#filtered-signal" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">feature.</code><code class="descname">sigfilt</code><span class="sig-paren">(</span><em>sf, npts, f=[60, 200], baseline=None, norm=None, window=None, width=None, step=None, split=None, time=None, **kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/feat/basics.html#sigfilt"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Extract the filtered signal. This class is optimized for 3D arrays.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>sf: int</dt>
+<dd>Sampling frequency</dd>
+<dt>npts: int</dt>
+<dd>Number of points of the time serie</dd>
+<dt>f: tuple/list</dt>
+<dd><p class="first">List containing the couple of frequency bands to extract spectral
+informations. Alternatively, f can be define with the form
+f=(fstart, fend, fwidth, fstep) where fstart and fend are the
+starting and endind frequencies, fwidth and fstep are the width
+and step of each band.</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Specify each band:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">35</span><span class="p">],</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">45</span><span class="p">],</span> <span class="p">[</span><span class="mi">35</span><span class="p">,</span> <span class="mi">55</span><span class="p">],</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">60</span><span class="p">],</span> <span class="p">[</span><span class="mi">55</span><span class="p">,</span> <span class="mi">75</span><span class="p">]</span> <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Second option:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>window: tuple/list/None, optional [def: None]</dt>
+<dd>List/tuple: [100,1500]
+List of list/tuple: [(100,500),(200,4000)]
+None and the width and step parameters will be considered</dd>
+<dt>width: int, optional [def: None]</dt>
+<dd>width of a single window.</dd>
+<dt>step: int, optional [def: None]</dt>
+<dd>Each window will be spaced by the &#8220;step&#8221; value.</dd>
+<dt>time: list/array, optional [def: None]</dt>
+<dd>Define a specific time vector</dd>
+</dl>
+</dd>
+<dt>norm: int, optional [def: None]</dt>
+<dd><blockquote class="first">
+<div><dl class="docutils">
+<dt>Number to choose the normalization method</dt>
+<dd><ul class="first last simple">
+<li>0: No normalisation</li>
+<li>1: Substraction</li>
+<li>2: Division</li>
+<li>3: Substract then divide</li>
+<li>4: Z-score</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="docutils">
+<dt>baseline: tuple/list of int [def: None]</dt>
+<dd>Define a window to normalize the power</dd>
+<dt>split: int or list of int, optional [def: None]</dt>
+<dd>Split the frequency band f in &#8220;split&#8221; band width.
+If f is a list which contain couple of frequencies,
+split is a list too.</dd>
+</dl>
+<p>kwargs: supplementar arguments for filtering</p>
+<dl class="last docutils">
+<dt>filtname: string, optional [def: &#8216;fir1&#8217;]</dt>
+<dd><dl class="first last docutils">
+<dt>Name of the filter. Possible values are:</dt>
+<dd><ul class="first last simple">
+<li>&#8216;fir1&#8217;: Window-based FIR filter design</li>
+<li>&#8216;butter&#8217;: butterworth filter</li>
+<li>&#8216;bessel&#8217;: bessel filter</li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>cycle: int, optional [def: 3]</dt>
+<dd>Number of cycle to use for the filter. This parameter
+is only avaible for the &#8216;fir1&#8217; method</dd>
+<dt>order: int, optional [def: 3]</dt>
+<dd>Order of the &#8216;butter&#8217; or &#8216;bessel&#8217; filter</dd>
+<dt>axis: int, optional [def: 0]</dt>
+<dd>Filter accross the dimension &#8216;axis&#8217;</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="method">
+<dt id="feature.sigfilt.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>x</em>, <em>statmeth=None</em>, <em>tail=2</em>, <em>n_perm=200</em>, <em>metric='m_center'</em>, <em>maxstat=False</em>, <em>n_jobs=-1</em><span class="sig-paren">)</span><a class="headerlink" href="#feature.sigfilt.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the spectral feature of the signal x.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>x: array</dt>
+<dd>Data with a shape of (n_electrodes x n_pts x n_trials)</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>statmeth: string, optional, [def: None]</dt>
+<dd><p class="first">Method to evaluate the statistical significiancy. To get p-values,
+the program will compare real values with a defined baseline. As a
+consequence, the &#8216;norm&#8217; and &#8216;baseline&#8217; parameter should not be None.</p>
+<ul class="last simple">
+<li>&#8216;permutation&#8217;: randomly shuffle real data with baseline.Control the number of permutations with the n_perm parameter. For example, if n_perm = 1000, this mean that minimum p-valueswill be 0.001.</li>
+<li>&#8216;wilcoxon&#8217;: Wilcoxon signed-rank test</li>
+<li>&#8216;kruskal&#8217;: Kruskal-Wallis H-test</li>
+</ul>
+</dd>
+<dt>n_perm: integer, optional, [def: 200]</dt>
+<dd>Number of permutations for assessing statistical significiancy.</dd>
+<dt>tail: int, optional, [def: 2]</dt>
+<dd>For the permutation method, get p-values from one or two tails of
+the distribution. Use -1 for testing A&lt;B, 1 for A&gt;B and 2 for A~=B.</dd>
+<dt>metric: string/function type, optional, [def: &#8216;m_center&#8217;]</dt>
+<dd><p class="first">Use diffrent metrics to normalize data and permutations by the
+defined baseline. Use:</p>
+<ul class="last simple">
+<li>None: compare directly values without transformation</li>
+<li>&#8216;m_center&#8217;: (A-B)/mean(B) transformation</li>
+<li>&#8216;m_zscore&#8217;: (A-B)/std(B) transformation</li>
+<li>&#8216;m_minus&#8217;: (A-B) transformation</li>
+<li>function: user defined function [def myfcn(A, B): return array_like]</li>
+</ul>
+</dd>
+<dt>maxstat: bool, optional, [def: False]</dt>
+<dd>Correct p-values with maximum statistique. If maxstat is True,
+the correction will be applied only trhough frequencies.</dd>
+<dt>n_jobs: integer, optional, [def: -1]</dt>
+<dd>Control the number of jobs to extract features. If
+n_jobs = -1, all the jobs are used.</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd><dl class="first last docutils">
+<dt>xF: array</dt>
+<dd>The un/normalized feature of x, with a shape of
+(n_frequency x n_electrodes x n_window x n_trials)</dd>
+<dt>pvalues: array</dt>
+<dd>p-values with a shape of (n_frequency x n_electrodes x n_window)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="amplitude">
+<span id="id1"></span><h1>Amplitude<a class="headerlink" href="#amplitude" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">feature.</code><code class="descname">amplitude</code><span class="sig-paren">(</span><em>sf, npts, f=[60, 200], baseline=None, norm=None, method='hilbert1', window=None, width=None, step=None, split=None, time=None, **kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/feat/basics.html#amplitude"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Extract the amplitude of the signal. This class is optimized for 3D arrays.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>sf: int</dt>
+<dd>Sampling frequency</dd>
+<dt>npts: int</dt>
+<dd>Number of points of the time serie</dd>
+<dt>f: tuple/list</dt>
+<dd><p class="first">List containing the couple of frequency bands to extract spectral
+informations. Alternatively, f can be define with the form
+f=(fstart, fend, fwidth, fstep) where fstart and fend are the
+starting and endind frequencies, fwidth and fstep are the width
+and step of each band.</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Specify each band:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">35</span><span class="p">],</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">45</span><span class="p">],</span> <span class="p">[</span><span class="mi">35</span><span class="p">,</span> <span class="mi">55</span><span class="p">],</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">60</span><span class="p">],</span> <span class="p">[</span><span class="mi">55</span><span class="p">,</span> <span class="mi">75</span><span class="p">]</span> <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Second option:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>window: tuple/list/None, optional [def: None]</dt>
+<dd>List/tuple: [100,1500]
+List of list/tuple: [(100,500),(200,4000)]
+None and the width and step parameters will be considered</dd>
+<dt>width: int, optional [def: None]</dt>
+<dd>width of a single window.</dd>
+<dt>step: int, optional [def: None]</dt>
+<dd>Each window will be spaced by the &#8220;step&#8221; value.</dd>
+<dt>time: list/array, optional [def: None]</dt>
+<dd>Define a specific time vector</dd>
+</dl>
+</dd>
+<dt>norm: int, optional [def: None]</dt>
+<dd><blockquote class="first">
+<div><dl class="docutils">
+<dt>Number to choose the normalization method</dt>
+<dd><ul class="first last simple">
+<li>0: No normalisation</li>
+<li>1: Substraction</li>
+<li>2: Division</li>
+<li>3: Substract then divide</li>
+<li>4: Z-score</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="last docutils">
+<dt>baseline: tuple/list of int [def: None]</dt>
+<dd>Define a window to normalize the power</dd>
+<dt>split: int or list of int, optional [def: None]</dt>
+<dd>Split the frequency band f in &#8220;split&#8221; band width.
+If f is a list which contain couple of frequencies,
+split is a list too.</dd>
+</dl>
+</dd>
+<dt>method: string</dt>
+<dd><dl class="first docutils">
+<dt>Method to transform the signal. Possible values are:</dt>
+<dd><ul class="first last simple">
+<li>&#8216;hilbert&#8217;: apply a hilbert transform to each column</li>
+<li>&#8216;hilbert1&#8217;: hilbert transform to a whole matrix</li>
+<li>&#8216;hilbert2&#8217;: 2D hilbert transform</li>
+<li>&#8216;wavelet&#8217;: wavelet transform</li>
+</ul>
+</dd>
+</dl>
+<p>kwargs: supplementar arguments for filtering</p>
+<dl class="last docutils">
+<dt>filtname: string, optional [def: &#8216;fir1&#8217;]</dt>
+<dd><dl class="first last docutils">
+<dt>Name of the filter. Possible values are:</dt>
+<dd><ul class="first last simple">
+<li>&#8216;fir1&#8217;: Window-based FIR filter design</li>
+<li>&#8216;butter&#8217;: butterworth filter</li>
+<li>&#8216;bessel&#8217;: bessel filter</li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>cycle: int, optional [def: 3]</dt>
+<dd>Number of cycle to use for the filter. This parameter
+is only avaible for the &#8216;fir1&#8217; method</dd>
+<dt>order: int, optional [def: 3]</dt>
+<dd>Order of the &#8216;butter&#8217; or &#8216;bessel&#8217; filter</dd>
+<dt>axis: int, optional [def: 0]</dt>
+<dd>Filter accross the dimension &#8216;axis&#8217;</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="method">
+<dt id="feature.amplitude.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>x</em>, <em>statmeth=None</em>, <em>tail=2</em>, <em>n_perm=200</em>, <em>metric='m_center'</em>, <em>maxstat=False</em>, <em>n_jobs=-1</em><span class="sig-paren">)</span><a class="headerlink" href="#feature.amplitude.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the spectral feature of the signal x.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>x: array</dt>
+<dd>Data with a shape of (n_electrodes x n_pts x n_trials)</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>statmeth: string, optional, [def: None]</dt>
+<dd><p class="first">Method to evaluate the statistical significiancy. To get p-values,
+the program will compare real values with a defined baseline. As a
+consequence, the &#8216;norm&#8217; and &#8216;baseline&#8217; parameter should not be None.</p>
+<ul class="last simple">
+<li>&#8216;permutation&#8217;: randomly shuffle real data with baseline.Control the number of permutations with the n_perm parameter. For example, if n_perm = 1000, this mean that minimum p-valueswill be 0.001.</li>
+<li>&#8216;wilcoxon&#8217;: Wilcoxon signed-rank test</li>
+<li>&#8216;kruskal&#8217;: Kruskal-Wallis H-test</li>
+</ul>
+</dd>
+<dt>n_perm: integer, optional, [def: 200]</dt>
+<dd>Number of permutations for assessing statistical significiancy.</dd>
+<dt>tail: int, optional, [def: 2]</dt>
+<dd>For the permutation method, get p-values from one or two tails of
+the distribution. Use -1 for testing A&lt;B, 1 for A&gt;B and 2 for A~=B.</dd>
+<dt>metric: string/function type, optional, [def: &#8216;m_center&#8217;]</dt>
+<dd><p class="first">Use diffrent metrics to normalize data and permutations by the
+defined baseline. Use:</p>
+<ul class="last simple">
+<li>None: compare directly values without transformation</li>
+<li>&#8216;m_center&#8217;: (A-B)/mean(B) transformation</li>
+<li>&#8216;m_zscore&#8217;: (A-B)/std(B) transformation</li>
+<li>&#8216;m_minus&#8217;: (A-B) transformation</li>
+<li>function: user defined function [def myfcn(A, B): return array_like]</li>
+</ul>
+</dd>
+<dt>maxstat: bool, optional, [def: False]</dt>
+<dd>Correct p-values with maximum statistique. If maxstat is True,
+the correction will be applied only trhough frequencies.</dd>
+<dt>n_jobs: integer, optional, [def: -1]</dt>
+<dd>Control the number of jobs to extract features. If
+n_jobs = -1, all the jobs are used.</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd><dl class="first last docutils">
+<dt>xF: array</dt>
+<dd>The un/normalized feature of x, with a shape of
+(n_frequency x n_electrodes x n_window x n_trials)</dd>
+<dt>pvalues: array</dt>
+<dd>p-values with a shape of (n_frequency x n_electrodes x n_window)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="power">
+<span id="id2"></span><h1>Power<a class="headerlink" href="#power" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">feature.</code><code class="descname">power</code><span class="sig-paren">(</span><em>sf, npts, f=[60, 200], baseline=None, norm=None, method='hilbert1', window=None, width=None, step=None, split=None, time=None, **kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/feat/basics.html#power"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Extract the power of the signal. This class is optimized for 3D arrays.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>sf: int</dt>
+<dd>Sampling frequency</dd>
+<dt>npts: int</dt>
+<dd>Number of points of the time serie</dd>
+<dt>f: tuple/list</dt>
+<dd><p class="first">List containing the couple of frequency bands to extract spectral
+informations. Alternatively, f can be define with the form
+f=(fstart, fend, fwidth, fstep) where fstart and fend are the
+starting and endind frequencies, fwidth and fstep are the width
+and step of each band.</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Specify each band:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">35</span><span class="p">],</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">45</span><span class="p">],</span> <span class="p">[</span><span class="mi">35</span><span class="p">,</span> <span class="mi">55</span><span class="p">],</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">60</span><span class="p">],</span> <span class="p">[</span><span class="mi">55</span><span class="p">,</span> <span class="mi">75</span><span class="p">]</span> <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Second option:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>window: tuple/list/None, optional [def: None]</dt>
+<dd>List/tuple: [100,1500]
+List of list/tuple: [(100,500),(200,4000)]
+None and the width and step parameters will be considered</dd>
+<dt>width: int, optional [def: None]</dt>
+<dd>width of a single window.</dd>
+<dt>step: int, optional [def: None]</dt>
+<dd>Each window will be spaced by the &#8220;step&#8221; value.</dd>
+<dt>time: list/array, optional [def: None]</dt>
+<dd>Define a specific time vector</dd>
+</dl>
+</dd>
+<dt>norm: int, optional [def: None]</dt>
+<dd><blockquote class="first">
+<div><dl class="docutils">
+<dt>Number to choose the normalization method</dt>
+<dd><ul class="first last simple">
+<li>0: No normalisation</li>
+<li>1: Substraction</li>
+<li>2: Division</li>
+<li>3: Substract then divide</li>
+<li>4: Z-score</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="last docutils">
+<dt>baseline: tuple/list of int [def: None]</dt>
+<dd>Define a window to normalize the power</dd>
+<dt>split: int or list of int, optional [def: None]</dt>
+<dd>Split the frequency band f in &#8220;split&#8221; band width.
+If f is a list which contain couple of frequencies,
+split is a list too.</dd>
+</dl>
+</dd>
+<dt>method: string</dt>
+<dd><dl class="first docutils">
+<dt>Method to transform the signal. Possible values are:</dt>
+<dd><ul class="first last simple">
+<li>&#8216;hilbert&#8217;: apply a hilbert transform to each column</li>
+<li>&#8216;hilbert1&#8217;: hilbert transform to a whole matrix</li>
+<li>&#8216;hilbert2&#8217;: 2D hilbert transform</li>
+<li>&#8216;wavelet&#8217;: wavelet transform</li>
+</ul>
+</dd>
+</dl>
+<p>kwargs: supplementar arguments for filtering</p>
+<dl class="last docutils">
+<dt>filtname: string, optional [def: &#8216;fir1&#8217;]</dt>
+<dd><dl class="first last docutils">
+<dt>Name of the filter. Possible values are:</dt>
+<dd><ul class="first last simple">
+<li>&#8216;fir1&#8217;: Window-based FIR filter design</li>
+<li>&#8216;butter&#8217;: butterworth filter</li>
+<li>&#8216;bessel&#8217;: bessel filter</li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>cycle: int, optional [def: 3]</dt>
+<dd>Number of cycle to use for the filter. This parameter
+is only avaible for the &#8216;fir1&#8217; method</dd>
+<dt>order: int, optional [def: 3]</dt>
+<dd>Order of the &#8216;butter&#8217; or &#8216;bessel&#8217; filter</dd>
+<dt>axis: int, optional [def: 0]</dt>
+<dd>Filter accross the dimension &#8216;axis&#8217;</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="method">
+<dt id="feature.power.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>x</em>, <em>statmeth=None</em>, <em>tail=2</em>, <em>n_perm=200</em>, <em>metric='m_center'</em>, <em>maxstat=False</em>, <em>n_jobs=-1</em><span class="sig-paren">)</span><a class="headerlink" href="#feature.power.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the spectral feature of the signal x.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>x: array</dt>
+<dd>Data with a shape of (n_electrodes x n_pts x n_trials)</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>statmeth: string, optional, [def: None]</dt>
+<dd><p class="first">Method to evaluate the statistical significiancy. To get p-values,
+the program will compare real values with a defined baseline. As a
+consequence, the &#8216;norm&#8217; and &#8216;baseline&#8217; parameter should not be None.</p>
+<ul class="last simple">
+<li>&#8216;permutation&#8217;: randomly shuffle real data with baseline.Control the number of permutations with the n_perm parameter. For example, if n_perm = 1000, this mean that minimum p-valueswill be 0.001.</li>
+<li>&#8216;wilcoxon&#8217;: Wilcoxon signed-rank test</li>
+<li>&#8216;kruskal&#8217;: Kruskal-Wallis H-test</li>
+</ul>
+</dd>
+<dt>n_perm: integer, optional, [def: 200]</dt>
+<dd>Number of permutations for assessing statistical significiancy.</dd>
+<dt>tail: int, optional, [def: 2]</dt>
+<dd>For the permutation method, get p-values from one or two tails of
+the distribution. Use -1 for testing A&lt;B, 1 for A&gt;B and 2 for A~=B.</dd>
+<dt>metric: string/function type, optional, [def: &#8216;m_center&#8217;]</dt>
+<dd><p class="first">Use diffrent metrics to normalize data and permutations by the
+defined baseline. Use:</p>
+<ul class="last simple">
+<li>None: compare directly values without transformation</li>
+<li>&#8216;m_center&#8217;: (A-B)/mean(B) transformation</li>
+<li>&#8216;m_zscore&#8217;: (A-B)/std(B) transformation</li>
+<li>&#8216;m_minus&#8217;: (A-B) transformation</li>
+<li>function: user defined function [def myfcn(A, B): return array_like]</li>
+</ul>
+</dd>
+<dt>maxstat: bool, optional, [def: False]</dt>
+<dd>Correct p-values with maximum statistique. If maxstat is True,
+the correction will be applied only trhough frequencies.</dd>
+<dt>n_jobs: integer, optional, [def: -1]</dt>
+<dd>Control the number of jobs to extract features. If
+n_jobs = -1, all the jobs are used.</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd><dl class="first last docutils">
+<dt>xF: array</dt>
+<dd>The un/normalized feature of x, with a shape of
+(n_frequency x n_electrodes x n_window x n_trials)</dd>
+<dt>pvalues: array</dt>
+<dd>p-values with a shape of (n_frequency x n_electrodes x n_window)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="time-frequency">
+<span id="tf"></span><h1>Time-Frequency<a class="headerlink" href="#time-frequency" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">feature.</code><code class="descname">TF</code><span class="sig-paren">(</span><em>sf</em>, <em>npts</em>, <em>f=(2</em>, <em>200</em>, <em>10</em>, <em>5)</em>, <em>baseline=None</em>, <em>norm=None</em>, <em>method='hilbert1'</em>, <em>window=None</em>, <em>width=None</em>, <em>step=None</em>, <em>time=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/feat/basics.html#TF"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Extract the time-frequency map of the signal. This class is optimized for 3D arrays.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>sf: int</dt>
+<dd>Sampling frequency</dd>
+<dt>npts: int</dt>
+<dd>Number of points of the time serie</dd>
+<dt>f: tuple/list</dt>
+<dd><p class="first">List containing the couple of frequency bands to extract spectral
+informations. Alternatively, f can be define with the form
+f=(fstart, fend, fwidth, fstep) where fstart and fend are the
+starting and endind frequencies, fwidth and fstep are the width
+and step of each band.</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Specify each band:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">35</span><span class="p">],</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">45</span><span class="p">],</span> <span class="p">[</span><span class="mi">35</span><span class="p">,</span> <span class="mi">55</span><span class="p">],</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">60</span><span class="p">],</span> <span class="p">[</span><span class="mi">55</span><span class="p">,</span> <span class="mi">75</span><span class="p">]</span> <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Second option:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>window: tuple/list/None, optional [def: None]</dt>
+<dd>List/tuple: [100,1500]
+List of list/tuple: [(100,500),(200,4000)]
+None and the width and step parameters will be considered</dd>
+<dt>width: int, optional [def: None]</dt>
+<dd>width of a single window.</dd>
+<dt>step: int, optional [def: None]</dt>
+<dd>Each window will be spaced by the &#8220;step&#8221; value.</dd>
+<dt>time: list/array, optional [def: None]</dt>
+<dd>Define a specific time vector</dd>
+</dl>
+</dd>
+<dt>norm: int, optional [def: None]</dt>
+<dd><blockquote class="first">
+<div><dl class="docutils">
+<dt>Number to choose the normalization method</dt>
+<dd><ul class="first last simple">
+<li>0: No normalisation</li>
+<li>1: Substraction</li>
+<li>2: Division</li>
+<li>3: Substract then divide</li>
+<li>4: Z-score</li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="last docutils">
+<dt>baseline: tuple/list of int [def: None]</dt>
+<dd>Define a window to normalize the power</dd>
+<dt>split: int or list of int, optional [def: None]</dt>
+<dd>Split the frequency band f in &#8220;split&#8221; band width.
+If f is a list which contain couple of frequencies,
+split is a list too.</dd>
+</dl>
+</dd>
+<dt>method: string</dt>
+<dd><dl class="first docutils">
+<dt>Method to transform the signal. Possible values are:</dt>
+<dd><ul class="first last simple">
+<li>&#8216;hilbert&#8217;: apply a hilbert transform to each column</li>
+<li>&#8216;hilbert1&#8217;: hilbert transform to a whole matrix</li>
+<li>&#8216;hilbert2&#8217;: 2D hilbert transform</li>
+<li>&#8216;wavelet&#8217;: wavelet transform</li>
+</ul>
+</dd>
+</dl>
+<p>kwargs: supplementar arguments for filtering</p>
+<dl class="last docutils">
+<dt>filtname: string, optional [def: &#8216;fir1&#8217;]</dt>
+<dd><dl class="first last docutils">
+<dt>Name of the filter. Possible values are:</dt>
+<dd><ul class="first last simple">
+<li>&#8216;fir1&#8217;: Window-based FIR filter design</li>
+<li>&#8216;butter&#8217;: butterworth filter</li>
+<li>&#8216;bessel&#8217;: bessel filter</li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>cycle: int, optional [def: 3]</dt>
+<dd>Number of cycle to use for the filter. This parameter
+is only avaible for the &#8216;fir1&#8217; method</dd>
+<dt>order: int, optional [def: 3]</dt>
+<dd>Order of the &#8216;butter&#8217; or &#8216;bessel&#8217; filter</dd>
+<dt>axis: int, optional [def: 0]</dt>
+<dd>Filter accross the dimension &#8216;axis&#8217;</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="method">
+<dt id="feature.TF.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>x</em>, <em>statmeth=None</em>, <em>tail=2</em>, <em>n_perm=200</em>, <em>metric='m_center'</em>, <em>maxstat=False</em>, <em>n_jobs=-1</em><span class="sig-paren">)</span><a class="headerlink" href="#feature.TF.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the spectral feature of the signal x.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>x: array</dt>
+<dd>Data with a shape of (n_electrodes x n_pts x n_trials)</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>statmeth: string, optional, [def: None]</dt>
+<dd><p class="first">Method to evaluate the statistical significiancy. To get p-values,
+the program will compare real values with a defined baseline. As a
+consequence, the &#8216;norm&#8217; and &#8216;baseline&#8217; parameter should not be None.</p>
+<ul class="last simple">
+<li>&#8216;permutation&#8217;: randomly shuffle real data with baseline.Control the number of permutations with the n_perm parameter. For example, if n_perm = 1000, this mean that minimum p-valueswill be 0.001.</li>
+<li>&#8216;wilcoxon&#8217;: Wilcoxon signed-rank test</li>
+<li>&#8216;kruskal&#8217;: Kruskal-Wallis H-test</li>
+</ul>
+</dd>
+<dt>n_perm: integer, optional, [def: 200]</dt>
+<dd>Number of permutations for assessing statistical significiancy.</dd>
+<dt>tail: int, optional, [def: 2]</dt>
+<dd>For the permutation method, get p-values from one or two tails of
+the distribution. Use -1 for testing A&lt;B, 1 for A&gt;B and 2 for A~=B.</dd>
+<dt>metric: string/function type, optional, [def: &#8216;m_center&#8217;]</dt>
+<dd><p class="first">Use diffrent metrics to normalize data and permutations by the
+defined baseline. Use:</p>
+<ul class="last simple">
+<li>None: compare directly values without transformation</li>
+<li>&#8216;m_center&#8217;: (A-B)/mean(B) transformation</li>
+<li>&#8216;m_zscore&#8217;: (A-B)/std(B) transformation</li>
+<li>&#8216;m_minus&#8217;: (A-B) transformation</li>
+<li>function: user defined function [def myfcn(A, B): return array_like]</li>
+</ul>
+</dd>
+<dt>maxstat: bool, optional, [def: False]</dt>
+<dd>Correct p-values with maximum statistique. If maxstat is True,
+the correction will be applied only trhough frequencies.</dd>
+<dt>n_jobs: integer, optional, [def: -1]</dt>
+<dd>Control the number of jobs to extract features. If
+n_jobs = -1, all the jobs are used.</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd><dl class="first last docutils">
+<dt>xF: array</dt>
+<dd>The un/normalized feature of x, with a shape of
+(n_frequency x n_electrodes x n_window x n_trials)</dd>
+<dt>pvalues: array</dt>
+<dd>p-values with a shape of (n_frequency x n_electrodes x n_window)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="figure align-center" id="id4">
+<img alt="_images/tf.png" src="_images/tf.png" />
+<p class="caption"><span class="caption-text">Example of a Time-frequency map</span></p>
+</div>
+</div>
+<div class="section" id="phase">
+<span id="id3"></span><h1>Phase<a class="headerlink" href="#phase" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">feature.</code><code class="descname">phase</code><span class="sig-paren">(</span><em>sf, npts, f=[2, 4], method='hilbert', window=None, width=None, step=None, time=None, **kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/feat/basics.html#phase"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Extract the phase of a signal. This class is optimized for 3D arrays.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>sf: int</dt>
+<dd>Sampling frequency</dd>
+<dt>npts: int</dt>
+<dd>Number of points of the time serie</dd>
+<dt>f: tuple/list</dt>
+<dd><p class="first">List containing the couple of frequency bands to extract spectral
+informations. Alternatively, f can be define with the form
+f=(fstart, fend, fwidth, fstep) where fstart and fend are the
+starting and endind frequencies, fwidth and fstep are the width
+and step of each band.</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Specify each band:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">35</span><span class="p">],</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">45</span><span class="p">],</span> <span class="p">[</span><span class="mi">35</span><span class="p">,</span> <span class="mi">55</span><span class="p">],</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">60</span><span class="p">],</span> <span class="p">[</span><span class="mi">55</span><span class="p">,</span> <span class="mi">75</span><span class="p">]</span> <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Second option:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>window: tuple/list/None, optional [def: None]</dt>
+<dd>List/tuple: [100,1500]
+List of list/tuple: [(100,500),(200,4000)]
+None and the width and step parameters will be considered</dd>
+<dt>width: int, optional [def: None]</dt>
+<dd>width of a single window.</dd>
+<dt>step: int, optional [def: None]</dt>
+<dd>Each window will be spaced by the &#8220;step&#8221; value.</dd>
+<dt>time: list/array, optional [def: None]</dt>
+<dd>Define a specific time vector</dd>
+</dl>
+</dd>
+<dt>method: string</dt>
+<dd><dl class="first docutils">
+<dt>Method to transform the signal. Possible values are:</dt>
+<dd><ul class="first last simple">
+<li>&#8216;hilbert&#8217;: apply a hilbert transform to each column</li>
+<li>&#8216;hilbert1&#8217;: hilbert transform to a whole matrix</li>
+<li>&#8216;hilbert2&#8217;: 2D hilbert transform</li>
+</ul>
+</dd>
+</dl>
+<p>kwargs: supplementar arguments for filtering</p>
+<dl class="last docutils">
+<dt>filtname: string, optional [def: &#8216;fir1&#8217;]</dt>
+<dd><dl class="first last docutils">
+<dt>Name of the filter. Possible values are:</dt>
+<dd><ul class="first last simple">
+<li>&#8216;fir1&#8217;: Window-based FIR filter design</li>
+<li>&#8216;butter&#8217;: butterworth filter</li>
+<li>&#8216;bessel&#8217;: bessel filter</li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>cycle: int, optional [def: 3]</dt>
+<dd>Number of cycle to use for the filter. This parameter
+is only avaible for the &#8216;fir1&#8217; method</dd>
+<dt>order: int, optional [def: 3]</dt>
+<dd>Order of the &#8216;butter&#8217; or &#8216;bessel&#8217; filter</dd>
+<dt>axis: int, optional [def: 0]</dt>
+<dd>Filter accross the dimension &#8216;axis&#8217;</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="method">
+<dt id="feature.phase.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>x</em>, <em>getstat=True</em>, <em>n_jobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/feat/basics.html#phase.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#feature.phase.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the spectral phase of the signal x.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>x: array</dt>
+<dd>Data with a shape of (n_electrodes x n_pts x n_trials)</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>getstat: bool, optional, [def: True]</dt>
+<dd>Set it to True if p-values should be computed. Satistical
+p-values are comptuted using Rayleigh test.</dd>
+<dt>n_jobs: integer, optional, [def: -1]</dt>
+<dd>Control the number of jobs to extract features. If
+n_jobs = -1, all the jobs are used.</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd><dl class="first last docutils">
+<dt>xF: array</dt>
+<dd>The phase of x, with a shape of
+(n_frequency x n_electrodes x n_window x n_trials)</dd>
+<dt>pvalues: array</dt>
+<dd>p-values with a shape of (n_frequency x n_electrodes x n_window)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">get</code><span class="sig-paren">(</span><em>x</em>, <em>getstat=True</em>, <em>n_jobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/feat/basics.html#phase.get"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Get the spectral phase of the signal x.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>x: array</dt>
+<dd>Data with a shape of (n_electrodes x n_pts x n_trials)</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>getstat: bool, optional, [def: True]</dt>
+<dd>Set it to True if p-values should be computed. Satistical
+p-values are comptuted using Rayleigh test.</dd>
+<dt>n_jobs: integer, optional, [def: -1]</dt>
+<dd>Control the number of jobs to extract features. If
+n_jobs = -1, all the jobs are used.</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd><dl class="first last docutils">
+<dt>xF: array</dt>
+<dd>The phase of x, with a shape of
+(n_frequency x n_electrodes x n_window x n_trials)</dd>
+<dt>pvalues: array</dt>
+<dd>p-values with a shape of (n_frequency x n_electrodes x n_window)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="phase-locking-factor">
+<span id="plf"></span><h1>Phase-Locking Factor<a class="headerlink" href="#phase-locking-factor" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">feature.</code><code class="descname">PLF</code><span class="sig-paren">(</span><em>sf, npts, f=[2, 4], method='hilbert', window=None, width=None, step=None, time=None, **kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/feat/basics.html#PLF"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Extract the phase-locking factor of a signal. This class is optimized for 3D arrays.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>sf: int</dt>
+<dd>Sampling frequency</dd>
+<dt>npts: int</dt>
+<dd>Number of points of the time serie</dd>
+<dt>f: tuple/list</dt>
+<dd><p class="first">List containing the couple of frequency bands to extract spectral
+informations. Alternatively, f can be define with the form
+f=(fstart, fend, fwidth, fstep) where fstart and fend are the
+starting and endind frequencies, fwidth and fstep are the width
+and step of each band.</p>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Specify each band:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">35</span><span class="p">],</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">45</span><span class="p">],</span> <span class="p">[</span><span class="mi">35</span><span class="p">,</span> <span class="mi">55</span><span class="p">],</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">60</span><span class="p">],</span> <span class="p">[</span><span class="mi">55</span><span class="p">,</span> <span class="mi">75</span><span class="p">]</span> <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Second option:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+<dt>window: tuple/list/None, optional [def: None]</dt>
+<dd>List/tuple: [100,1500]
+List of list/tuple: [(100,500),(200,4000)]
+None and the width and step parameters will be considered</dd>
+<dt>width: int, optional [def: None]</dt>
+<dd>width of a single window.</dd>
+<dt>step: int, optional [def: None]</dt>
+<dd>Each window will be spaced by the &#8220;step&#8221; value.</dd>
+<dt>time: list/array, optional [def: None]</dt>
+<dd>Define a specific time vector</dd>
+</dl>
+</dd>
+<dt>method: string</dt>
+<dd><dl class="first docutils">
+<dt>Method to transform the signal. Possible values are:</dt>
+<dd><ul class="first last simple">
+<li>&#8216;hilbert&#8217;: apply a hilbert transform to each column</li>
+<li>&#8216;hilbert1&#8217;: hilbert transform to a whole matrix</li>
+<li>&#8216;hilbert2&#8217;: 2D hilbert transform</li>
+</ul>
+</dd>
+</dl>
+<p>kwargs: supplementar arguments for filtering</p>
+<dl class="last docutils">
+<dt>filtname: string, optional [def: &#8216;fir1&#8217;]</dt>
+<dd><dl class="first last docutils">
+<dt>Name of the filter. Possible values are:</dt>
+<dd><ul class="first last simple">
+<li>&#8216;fir1&#8217;: Window-based FIR filter design</li>
+<li>&#8216;butter&#8217;: butterworth filter</li>
+<li>&#8216;bessel&#8217;: bessel filter</li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>cycle: int, optional [def: 3]</dt>
+<dd>Number of cycle to use for the filter. This parameter
+is only avaible for the &#8216;fir1&#8217; method</dd>
+<dt>order: int, optional [def: 3]</dt>
+<dd>Order of the &#8216;butter&#8217; or &#8216;bessel&#8217; filter</dd>
+<dt>axis: int, optional [def: 0]</dt>
+<dd>Filter accross the dimension &#8216;axis&#8217;</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="method">
+<dt id="feature.PLF.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>x</em>, <em>getstat=True</em>, <em>n_jobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/feat/basics.html#PLF.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#feature.PLF.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the phase-locking factor of the signal x.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>x: array</dt>
+<dd>Data with a shape of (n_electrodes x n_pts x n_trials)</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>getstat: bool, optional, [def: True]</dt>
+<dd>Set it to True if p-values should be computed. Satistical
+p-values are comptuted using Rayleigh test.</dd>
+<dt>n_jobs: integer, optional, [def: -1]</dt>
+<dd>Control the number of jobs to extract features. If
+n_jobs = -1, all the jobs are used.</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd><dl class="first last docutils">
+<dt>plf: array</dt>
+<dd>The PLF of x, with a shape of
+(n_frequency x n_electrodes x n_window)</dd>
+<dt>pvalues: array</dt>
+<dd>p-values with a shape of (n_frequency x n_electrodes x n_window)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">get</code><span class="sig-paren">(</span><em>x</em>, <em>getstat=True</em>, <em>n_jobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/feat/basics.html#PLF.get"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Get the phase-locking factor of the signal x.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>x: array</dt>
+<dd>Data with a shape of (n_electrodes x n_pts x n_trials)</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>getstat: bool, optional, [def: True]</dt>
+<dd>Set it to True if p-values should be computed. Satistical
+p-values are comptuted using Rayleigh test.</dd>
+<dt>n_jobs: integer, optional, [def: -1]</dt>
+<dd>Control the number of jobs to extract features. If
+n_jobs = -1, all the jobs are used.</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd><dl class="first last docutils">
+<dt>plf: array</dt>
+<dd>The PLF of x, with a shape of
+(n_frequency x n_electrodes x n_window)</dd>
+<dt>pvalues: array</dt>
+<dd>p-values with a shape of (n_frequency x n_electrodes x n_window)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="figure align-center" id="id5">
+<img alt="_images/plf.png" src="_images/plf.png" />
+<p class="caption"><span class="caption-text">Example of a Phase-Locking Factor map</span></p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="couplingfeat.html" class="btn btn-neutral float-right" title="Phase-Amplitude Coupling">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="feature.html" class="btn btn-neutral" title="Presentation"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Etienne Combrisson.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.8',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

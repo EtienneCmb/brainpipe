@@ -1,0 +1,566 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>brainpipe.clf._multifeatures &mdash; brainpipe 0.1.8 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="brainpipe 0.1.8 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../index.html" class="fa fa-home"> brainpipe</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <p class="caption"><span class="caption-text">PRE-PROCESSING</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../preprocessing.html">Bipolarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../preprocessing.html#physiology">Physiology</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FEATURES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html#filtering-based">Filtering based</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html">Filtered signal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#amplitude">Amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#power">Power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#time-frequency">Time-Frequency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#phase">Phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#phase-locking-factor">Phase-Locking Factor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html#coupling-features">Coupling features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html">Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html#prefered-phase">Prefered-phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html#phase-locked-power">Phase-locked power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html#event-related-phase-amplitude-coupling">Event Related Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html#phase-locking-value">Phase-Locking Value</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html#psd-based-features">PSD based features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../psdfeat.html">Power Spectrum Density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../psdfeat.html#power-psd">Power PSD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../psdfeat.html#spectral-entropy">Spectral entropy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html#tools">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../featools.html">Physiological bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../featools.html#cross-frequency-vector">Cross-frequency vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../featools.html#simulation">Simulation</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">CLASSIFICATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#define-a-classifier">Define a classifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#define-a-cross-validation">Define a cross-validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#classify">Classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#leave-p-subjects-out">Leave p-subjects out</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#generalization">Generalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#multi-features">Multi-features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">STATISTICS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../stat.html">Binomial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stat.html#permutations">Permutations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#evaluation">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#generate">Generate</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stat.html#multiple-comparisons">Multiple-comparisons</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#bonferroni">Bonferroni</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#false-discovery-rate-fdr">False Discovery Rate (FDR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#maximum-statistic">Maximum statistic</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stat.html#circular-statistics-toolbox">Circular statistics toolbox</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VISUALIZATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../visualization.html">1-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#border-plot">Border plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#p-value-plot">p-value plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#continuous-color">Continuous color</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../visualization.html#d-or-2-d-graphics">1-D or 2-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#add-lines">Add lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#tilerplot">tilerplot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../visualization.html#tools">Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OTHERS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#bpstudy">Bpstudy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#pandas-complements">Pandas complements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#arrays">Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#file-management">File management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#others">Others</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">REFERENCES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#pre-processing">Pre-processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#classification">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#statistics">Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#visualization">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#tools">Tools</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">brainpipe</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>brainpipe.clf._multifeatures</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for brainpipe.clf._multifeatures</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">joblib</span> <span class="k">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
+
+<span class="kn">from</span> <span class="nn">brainpipe.clf.utils._sequence</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">brainpipe.clf.utils._mf</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="kn">from</span> <span class="nn">brainpipe.clf._classification</span> <span class="k">import</span> <span class="n">defClf</span><span class="p">,</span> <span class="n">defCv</span>
+<span class="kn">from</span> <span class="nn">brainpipe.statistics</span> <span class="k">import</span> <span class="n">bino_da2p</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mf&#39;</span><span class="p">,</span> <span class="s1">&#39;sequence&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="mf"><a class="viewcode-back" href="../../../classification.html#classification.mf">[docs]</a><span class="k">class</span> <span class="nc">mf</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Compute multi-features (mf) with the possibility of using methods in</span>
+<span class="sd">    cascade and run the mf on particular groups.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        y: array-like</span>
+<span class="sd">            The target variable to try to predict in the case of</span>
+<span class="sd">            supervised learning</span>
+
+<span class="sd">    Kargs:</span>
+<span class="sd">        Id: string, optional, [def: &#39;0&#39;]</span>
+<span class="sd">            Use this parameter to define a cascade of methods. Here is the list</span>
+<span class="sd">            of the current implemented methods:</span>
+
+<span class="sd">            * &#39;0&#39;: No selection. All the features are used</span>
+<span class="sd">            * &#39;1&#39;: Select &lt;p significant features using either a binomial law or permutations</span>
+<span class="sd">            * &#39;2&#39;: select &#39;nbest&#39; features</span>
+<span class="sd">            * &#39;3&#39;: use &#39;forward&#39;/&#39;backward&#39;/&#39;exhaustive&#39; to  select features</span>
+
+<span class="sd">            If is for example Id=&#39;12&#39;, the program will first select significants</span>
+<span class="sd">            features, then, on this subset, it will find the nbest features. All</span>
+<span class="sd">            the methods can be serialized.</span>
+
+<span class="sd">        p: float, optional, [def: 0.05]</span>
+<span class="sd">            The pvalue to select features for the Id=&#39;1&#39; method</span>
+
+<span class="sd">        n_perm: integer, optional, [def: 200]</span>
+<span class="sd">            Number of permutations for the Id=&#39;1&#39; method</span>
+
+<span class="sd">        stat : string, optional, [def: &#39;bino&#39;]</span>
+<span class="sd">            Statisical test for selecting features for the Id=&#39;1&#39; method. Choose</span>
+<span class="sd">            between:</span>
+
+<span class="sd">            * &#39;bino&#39;: binomial test</span>
+<span class="sd">            * &#39;label_rnd&#39;: randomly shuffle the labels</span>
+<span class="sd">            * &#39;full_rnd&#39;: randomly shuffle the whole array x</span>
+<span class="sd">            * &#39;intra_rnd&#39;: randomly shuffle x inside each class and each feature</span>
+
+<span class="sd">            Methods 2, 3 and 4 are based on permutations. The method 2 and 3</span>
+<span class="sd">            should provide similar results. But 4 should be more conservative.</span>
+
+<span class="sd">        threshold: integer/float, optional, [def: None]</span>
+<span class="sd">            Define a decoding accuracy for thresholding features. equivalent to the</span>
+<span class="sd">            p parameter.</span>
+
+<span class="sd">        nbest: integer, optional, [def: 10]</span>
+<span class="sd">            For the Id=&#39;2&#39;, use this parameter to control the number of features</span>
+<span class="sd">            to select. If nbest=10, the program will classify each feature and then</span>
+<span class="sd">            select the 10 best of them.</span>
+
+<span class="sd">        direction: string, optional, [def: &#39;forward&#39;]</span>
+<span class="sd">            For the method Id=&#39;3&#39;, use:</span>
+
+<span class="sd">            * &#39;forward&#39;</span>
+<span class="sd">            * &#39;backward&#39;</span>
+<span class="sd">            * &#39;exhaustive&#39;</span>
+
+<span class="sd">            to control the direction of the feature selection.</span>
+
+<span class="sd">        occurence: string, optional, [def: &#39;i%&#39;]</span>
+<span class="sd">            Use this parameter to modify the way of visualizing the occurence of</span>
+<span class="sd">            each feature apparition. Choose between :</span>
+
+<span class="sd">            * &#39;%&#39; : in percentage (float)</span>
+<span class="sd">            * &#39;i%&#39; : in integer percentage (int)</span>
+<span class="sd">            * &#39;c&#39; : count (= number of times the feature has been selected)</span>
+
+<span class="sd">        clfIn // clfOut : dictionnary, optional</span>
+<span class="sd">            Use those dictionnaries to control the classifier to use.</span>
+
+<span class="sd">                * clfIn : the classifier use for the training [def: LDA]</span>
+<span class="sd">                * clfOut : the classifier use for the testing [def: LDA]</span>
+
+<span class="sd">            To have more controlable classifiers, see the defClf() class inside</span>
+<span class="sd">            the classification module.</span>
+
+<span class="sd">        cvIn // cvOut : dictionnary, optional</span>
+<span class="sd">            Use those dictionnaries to control the cross-validations (cv) to use.</span>
+
+<span class="sd">            * cvIn : the cv to use for the training [def: 1 time stratified</span>
+<span class="sd">                     10-folds]</span>
+<span class="sd">            * cvOut : the more extern cv, to separate training and testing and</span>
+<span class="sd">                      to avoid over-fitting [def: 10 time stratified 10-folds]</span>
+
+<span class="sd">            To have more controlable cross-validation, see the defCv() class inside</span>
+<span class="sd">            the classification module.</span>
+
+<span class="sd">    Return</span>
+<span class="sd">        A multi-features object with a fit() method to apply to model to the data.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">Id</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;bino&#39;</span><span class="p">,</span>
+                 <span class="n">threshold</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nbest</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s1">&#39;forward&#39;</span><span class="p">,</span> <span class="n">occurence</span><span class="o">=</span><span class="s1">&#39;i%&#39;</span><span class="p">,</span>
+                 <span class="n">clfIn</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;clf&#39;</span><span class="p">:</span> <span class="s1">&#39;lda&#39;</span><span class="p">},</span> <span class="n">clfOut</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;clf&#39;</span><span class="p">:</span> <span class="s1">&#39;lda&#39;</span><span class="p">},</span>
+                 <span class="n">cvIn</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;cvtype&#39;</span><span class="p">:</span> <span class="s1">&#39;skfold&#39;</span><span class="p">,</span> <span class="s1">&#39;n_folds&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;rep&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">},</span>
+                 <span class="n">cvOut</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;cvtype&#39;</span><span class="p">:</span> <span class="s1">&#39;skfold&#39;</span><span class="p">,</span> <span class="s1">&#39;n_folds&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;rep&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">}):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_Id</span> <span class="o">=</span> <span class="n">Id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stat</span> <span class="o">=</span> <span class="n">stat</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">threshold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">bino_da2p</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">threshold</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_p</span> <span class="o">=</span> <span class="n">p</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nbest</span> <span class="o">=</span> <span class="n">nbest</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_n_perm</span> <span class="o">=</span> <span class="n">n_perm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_direction</span> <span class="o">=</span> <span class="n">direction</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_threshold</span> <span class="o">=</span> <span class="n">threshold</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_occurence</span> <span class="o">=</span> <span class="n">occurence</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_clfIn</span> <span class="o">=</span> <span class="n">clfIn</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_clfOut</span> <span class="o">=</span> <span class="n">clfOut</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cvIn</span> <span class="o">=</span> <span class="n">cvIn</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cvOut</span> <span class="o">=</span> <span class="n">cvOut</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Id&#39;</span><span class="p">:</span> <span class="n">Id</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span> <span class="n">p</span><span class="p">,</span> <span class="s1">&#39;n_perm&#39;</span><span class="p">:</span> <span class="n">n_perm</span><span class="p">,</span> <span class="s1">&#39;stat&#39;</span><span class="p">:</span> <span class="n">stat</span><span class="p">,</span>
+                      <span class="s1">&#39;nbest&#39;</span><span class="p">:</span> <span class="n">nbest</span><span class="p">,</span> <span class="s1">&#39;threshold&#39;</span><span class="p">:</span> <span class="n">threshold</span><span class="p">,</span>
+                      <span class="s1">&#39;direction&#39;</span><span class="p">:</span> <span class="n">direction</span><span class="p">,</span> <span class="s1">&#39;occurence&#39;</span><span class="p">:</span> <span class="n">occurence</span><span class="p">,</span>
+                      <span class="s1">&#39;clfIn&#39;</span><span class="p">:</span> <span class="n">defClf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">clfIn</span><span class="p">)</span><span class="o">.</span><span class="n">lgStr</span><span class="p">,</span>
+                      <span class="s1">&#39;clfOut&#39;</span><span class="p">:</span> <span class="n">defClf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">clfOut</span><span class="p">)</span><span class="o">.</span><span class="n">lgStr</span><span class="p">,</span>
+                      <span class="s1">&#39;cvIn&#39;</span><span class="p">:</span> <span class="n">defCv</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">cvIn</span><span class="p">)</span><span class="o">.</span><span class="n">lgStr</span><span class="p">,</span>
+                      <span class="s1">&#39;cvOut&#39;</span><span class="p">:</span> <span class="n">defCv</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">cvOut</span><span class="p">)</span><span class="o">.</span><span class="n">lgStr</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">str</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<div class="viewcode-block" id="mf.fit"><a class="viewcode-back" href="../../../classification.html#classification.mf.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">grp</span><span class="o">=</span><span class="p">[],</span> <span class="n">center</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">combine</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">grpas</span><span class="o">=</span><span class="s1">&#39;single&#39;</span><span class="p">,</span>
+            <span class="n">grplen</span><span class="o">=</span><span class="p">[],</span> <span class="n">display</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run the model on the matrix of features x</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x: array-like</span>
+<span class="sd">                The features. Dimension [n trials x n features]</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            grp: list of strings, optional, [def: []]</span>
+<span class="sd">                Group features by using a list of strings. The length of grp must</span>
+<span class="sd">                be the same as the number of features. If grp is not empty, the</span>
+<span class="sd">                program will run the feature selection inside each group.</span>
+
+<span class="sd">            center: optional, bool, [def: False]</span>
+<span class="sd">                Normalize fatures with a zero mean by substracting then dividing</span>
+<span class="sd">                by the mean. The center parameter should be set to True if the</span>
+<span class="sd">                classifier is a svm.</span>
+
+<span class="sd">            combine: boolean, optional, [def: False]</span>
+<span class="sd">                If a group of features is specified using the grp parameter,</span>
+<span class="sd">                combine give the access of combining or not groups. For example,</span>
+<span class="sd">                if there is three unique groups, combining them will compute the mf</span>
+<span class="sd">                model on each combination : [[1],[2],[3],[1,2],[1,3],[2,3],[1,2,3]]</span>
+
+<span class="sd">            grpas: string, optional, [def: &#39;single&#39;]</span>
+<span class="sd">                Specify how to consider features inside each group. If the</span>
+<span class="sd">                parameter grpas (&quot;group as&quot;) is:</span>
+
+<span class="sd">                    * &#39;single&#39;: inside each combination of group, the features are considered as independant.</span>
+<span class="sd">                    * &#39;group&#39;: inside each combination of group, the features are going to be associated. So the mf model will search to add a one by one feature, but it will add groups of features.</span>
+
+<span class="sd">            grplen: list, optional, [def: []]</span>
+<span class="sd">                Control the number of combinations by specifying the number of</span>
+<span class="sd">                elements to associate. If there is three unique groups, all</span>
+<span class="sd">                possible combinations are : [[1],[2],[3],[1,2],[1,3],[2,3],[1,2,3]]</span>
+<span class="sd">                but if grplen is specify, for example grplen=[1,3], this will</span>
+<span class="sd">                consider combinations of groups only with a length of 1 and 3 and</span>
+<span class="sd">                remove combinations of 2 elements: [[1],[2],[3],[1,2,3]]</span>
+
+<span class="sd">            display: boolean, optional, [def: True]</span>
+<span class="sd">                Display informations for each step of the mf selection. If n_jobs</span>
+<span class="sd">                is -1, it is advise to set the display to False.</span>
+
+<span class="sd">            n_jobs: integer, optional, [def: -1]</span>
+<span class="sd">                Control the number of jobs to cumpute the decoding accuracy. If</span>
+<span class="sd">                n_jobs=-1, all the jobs are used.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            da: list</span>
+<span class="sd">                The decoding accuracy (da) for each group with the selected number</span>
+<span class="sd">                of repetitions, which by default is set to 10 (see : cvOut // rep)</span>
+
+<span class="sd">            prob: list</span>
+<span class="sd">                The appearance probability of each feature. The size of prob is the</span>
+<span class="sd">                same as da.</span>
+
+<span class="sd">            groupinfo: pandas Dataframe</span>
+<span class="sd">                Dataframe to resume the mf feature selection.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># - Check and get elements sizes:</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y</span>
+        <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">ntrial</span><span class="p">,</span> <span class="n">nfeat</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+
+        <span class="c1"># Normalize features :</span>
+        <span class="k">if</span> <span class="n">center</span><span class="p">:</span>
+            <span class="n">x_m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x_m</span><span class="p">)</span><span class="o">/</span><span class="n">x_m</span>
+
+        <span class="c1"># Combine groups :</span>
+        <span class="n">grp_c</span> <span class="o">=</span> <span class="n">combineGroups</span><span class="p">(</span><span class="n">grp</span><span class="p">,</span> <span class="n">nfeat</span><span class="p">,</span> <span class="n">combine</span><span class="p">,</span> <span class="n">grpas</span><span class="o">=</span><span class="n">grpas</span><span class="p">,</span> <span class="n">grplen</span><span class="o">=</span><span class="n">grplen</span><span class="p">)</span>
+        <span class="n">grp_name</span><span class="p">,</span> <span class="n">grp_idx</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">grp_c</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]),</span> <span class="nb">list</span><span class="p">(</span><span class="n">grp_c</span><span class="p">[</span><span class="s1">&#39;idx&#39;</span><span class="p">])</span>
+        <span class="n">ngrp</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">grp_name</span><span class="p">)</span>
+
+        <span class="c1"># - Run the MF model for each combinaition:</span>
+        <span class="n">mfdata</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">_fit</span><span class="p">)(</span>
+            <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">grp_c</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">combine</span><span class="p">,</span> <span class="n">display</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">grp_c</span><span class="p">)))</span>
+
+        <span class="c1"># Get data &amp; complete the Dataframe :</span>
+        <span class="n">da</span><span class="p">,</span> <span class="n">prob</span><span class="p">,</span> <span class="n">MFstr</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">mfdata</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">MFstr</span> <span class="o">=</span> <span class="n">MFstr</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">grp_c</span><span class="p">[</span><span class="s1">&#39;da&#39;</span><span class="p">],</span> <span class="n">grp_c</span><span class="p">[</span><span class="s1">&#39;occurrence&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="nb">sum</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">da</span><span class="p">],</span> <span class="n">prob</span>
+
+        <span class="k">return</span> <span class="n">da</span><span class="p">,</span> <span class="n">prob</span><span class="p">,</span> <span class="n">grp_c</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">_fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">grp_c</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">combine</span><span class="p">,</span> <span class="n">display</span><span class="p">,</span> <span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Run the mf for each combination. Subfunction for parallel</span>
+<span class="sd">    computing</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Display informations :</span>
+    <span class="k">if</span> <span class="n">display</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=&gt; Group : &#39;</span> <span class="o">+</span> <span class="n">grp_c</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">K</span><span class="p">]</span> <span class="o">+</span>
+              <span class="s1">&#39; (&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">K</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">grp_c</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;)&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Check mf inputs :</span>
+    <span class="n">idxgrp</span><span class="p">,</span> <span class="n">group</span> <span class="o">=</span> <span class="n">grp_c</span><span class="p">[</span><span class="s1">&#39;idx&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">K</span><span class="p">],</span> <span class="n">grp_c</span><span class="p">[</span><span class="s1">&#39;group&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">K</span><span class="p">]</span>
+    <span class="n">group</span> <span class="o">=</span> <span class="p">[</span><span class="n">j</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+             <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">group</span><span class="p">))</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">l</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">combine</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">group</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">Id_t</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">Id_t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_Id</span>
+
+    <span class="k">return</span> <span class="n">_mf</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="n">idxgrp</span><span class="p">],</span> <span class="n">Id_t</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">display</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_occurence</span><span class="p">)</span>
+
+
+<span class="k">class</span> <span class="nc">sequence</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Define a sequence object and run a forward/backward/exhaustive feature</span>
+<span class="sd">    selection.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    clfObj : classify object</span>
+<span class="sd">        Define an object with the classify function. This object will include</span>
+<span class="sd">        a classifier an potentially a cross-validation</span>
+
+<span class="sd">    direction : string, optional, [def: &#39;forward&#39;]</span>
+<span class="sd">        Use &#39;forward&#39;, &#39;backward&#39; or &#39;exhaustive&#39;</span>
+
+<span class="sd">    display : boolean, optional, [def: True]</span>
+<span class="sd">        At each step, print the evolution of the features selection.</span>
+
+<span class="sd">    cwi : boolean, optional, [def: False]</span>
+<span class="sd">        cwi stand for &quot;continue while increasing&quot;. If this parameter is set to</span>
+<span class="sd">        True, the feature selection will stop if a feature decrease the</span>
+<span class="sd">        performance.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clfObj</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">display</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cwi</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_clf</span> <span class="o">=</span> <span class="n">clfObj</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_direction</span> <span class="o">=</span> <span class="n">direction</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_display</span> <span class="o">=</span> <span class="n">display</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cwi</span> <span class="o">=</span> <span class="n">cwi</span>
+
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">grp</span><span class="o">=</span><span class="p">[],</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Run the sequence and get the selected features.</span>
+
+<span class="sd">        x : array-like</span>
+<span class="sd">            The data to fit. x should have a shape of (n trials x n features)</span>
+
+<span class="sd">        y : array-like</span>
+<span class="sd">            The target variable to try to predict in the case of</span>
+<span class="sd">            supervised learning.</span>
+
+<span class="sd">        grp : list/array, optionnal, [def: []]</span>
+<span class="sd">            The grp parameter can be used to define groups of features. If grp</span>
+<span class="sd">            is not an empty list, the feature will not be applied on single</span>
+<span class="sd">            features but on group of features.</span>
+
+<span class="sd">        n_jobs : integer, optional, default : 1</span>
+<span class="sd">            The number of CPUs to use to do the computation. -1 means all CPUs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_sequence</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_direction</span><span class="p">,</span> <span class="n">grp</span><span class="p">,</span> <span class="n">n_jobs</span><span class="p">,</span>
+                         <span class="bp">self</span><span class="o">.</span><span class="n">_display</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cwi</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">fit_cv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;TO ADD</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Etienne Combrisson.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.1.8',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

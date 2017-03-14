@@ -1,0 +1,463 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>feat.featools &mdash; brainpipe 0.1.8 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../genindex.html"/>
+        <link rel="search" title="Search" href="../../search.html"/>
+    <link rel="top" title="brainpipe 0.1.8 documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../index.html" class="fa fa-home"> brainpipe</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <p class="caption"><span class="caption-text">PRE-PROCESSING</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../preprocessing.html">Bipolarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../preprocessing.html#physiology">Physiology</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FEATURES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../feature.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../feature.html#filtering-based">Filtering based</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../filtfeat.html">Filtered signal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../filtfeat.html#amplitude">Amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../filtfeat.html#power">Power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../filtfeat.html#time-frequency">Time-Frequency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../filtfeat.html#phase">Phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../filtfeat.html#phase-locking-factor">Phase-Locking Factor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../feature.html#coupling-features">Coupling features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../couplingfeat.html">Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../couplingfeat.html#prefered-phase">Prefered-phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../couplingfeat.html#phase-locked-power">Phase-locked power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../couplingfeat.html#event-related-phase-amplitude-coupling">Event Related Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../couplingfeat.html#phase-locking-value">Phase-Locking Value</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../feature.html#psd-based-features">PSD based features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../psdfeat.html">Power Spectrum Density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../psdfeat.html#power-psd">Power PSD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../psdfeat.html#spectral-entropy">Spectral entropy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../feature.html#tools">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../featools.html">Physiological bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../featools.html#cross-frequency-vector">Cross-frequency vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../featools.html#simulation">Simulation</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">CLASSIFICATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../classification.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../classification.html#define-a-classifier">Define a classifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../classification.html#define-a-cross-validation">Define a cross-validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../classification.html#classify">Classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../classification.html#leave-p-subjects-out">Leave p-subjects out</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../classification.html#generalization">Generalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../classification.html#multi-features">Multi-features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">STATISTICS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../stat.html">Binomial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stat.html#permutations">Permutations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../stat.html#evaluation">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stat.html#generate">Generate</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../stat.html#multiple-comparisons">Multiple-comparisons</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../stat.html#bonferroni">Bonferroni</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stat.html#false-discovery-rate-fdr">False Discovery Rate (FDR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../stat.html#maximum-statistic">Maximum statistic</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../stat.html#circular-statistics-toolbox">Circular statistics toolbox</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VISUALIZATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../visualization.html">1-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../visualization.html#border-plot">Border plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../visualization.html#p-value-plot">p-value plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../visualization.html#continuous-color">Continuous color</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualization.html#d-or-2-d-graphics">1-D or 2-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../visualization.html#add-lines">Add lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../visualization.html#tilerplot">tilerplot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../visualization.html#tools">Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OTHERS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tools.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tools.html#bpstudy">Bpstudy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools.html#pandas-complements">Pandas complements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools.html#arrays">Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools.html#file-management">File management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tools.html#others">Others</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">REFERENCES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../references.html#pre-processing">Pre-processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../references.html#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../references.html#classification">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../references.html#statistics">Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../references.html#visualization">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../references.html#tools">Tools</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">brainpipe</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      
+    <li>feat.featools</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for feat.featools</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cfcRndSignals&#39;</span><span class="p">,</span> <span class="s1">&#39;cfcVec&#39;</span><span class="p">,</span> <span class="s1">&#39;bandRef&#39;</span><span class="p">,</span> <span class="s1">&#39;findBandName&#39;</span><span class="p">,</span> <span class="s1">&#39;findBandFcy&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="cfcRndSignals"><a class="viewcode-back" href="../../featools.html#feat.featools.cfcRndSignals">[docs]</a><span class="k">def</span> <span class="nf">cfcRndSignals</span><span class="p">(</span><span class="n">fPha</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">fAmp</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">sf</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span> <span class="n">ndatasets</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                  <span class="n">tmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">chi</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dPha</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dAmp</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate randomly phase-amplitude coupled signals.</span>
+
+<span class="sd">    Kargs:</span>
+<span class="sd">        fPha: int/float, optional, [def: 2]</span>
+<span class="sd">            Frequency for phase</span>
+
+<span class="sd">        fAmp: int/float, optional, [def: 100]</span>
+<span class="sd">            Frequency for amplitude</span>
+
+<span class="sd">        sf: int, optional, [def: 1024]</span>
+<span class="sd">            Sampling frequency</span>
+
+<span class="sd">        ndatasets : int, optional, [def: 10]</span>
+<span class="sd">            Number of datasets</span>
+
+<span class="sd">        tmax: int/float (1&lt;=tmax&lt;=3), optional, [def: 1]</span>
+<span class="sd">            Length of the time vector. If tmax=2 and sf=1024,</span>
+<span class="sd">            the number of time points npts=1024*2=2048</span>
+
+<span class="sd">        chi: int/float (0&lt;=chi&lt;=1), optional, [def: 0]</span>
+<span class="sd">            Amout of coupling. If chi=0, signals of phase and amplitude</span>
+<span class="sd">            are strongly coupled.</span>
+
+<span class="sd">        noise: int/float (1&lt;=noise&lt;=3), optional, [def: 1]</span>
+<span class="sd">            Amount of noise</span>
+
+<span class="sd">        dPha: int/float (0&lt;=dPha&lt;=100), optional, [def: 0]</span>
+<span class="sd">            Introduce a random incertitude on the phase frequency.</span>
+<span class="sd">            If fPha is 2, and dPha is 50, the frequency for the phase signal</span>
+<span class="sd">            will be between :</span>
+<span class="sd">            [2-0.5*2, 2+0.5*2]=[1,3]</span>
+
+<span class="sd">        dAmp: int/float (0&lt;=dAmp&lt;=100), optional, [def: 0]</span>
+<span class="sd">            Introduce a random incertitude on the amplitude frequency.</span>
+<span class="sd">            If fAmp is 60, and dAmp is 10, the frequency for the amplitude</span>
+<span class="sd">            signal will be between :</span>
+<span class="sd">            [60-0.1*60, 60+0.1*60]=[54,66]</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        data: array</span>
+<span class="sd">            The randomly coupled signals. The shape of data will be</span>
+<span class="sd">            (ndatasets x npts)</span>
+
+<span class="sd">        time: array</span>
+<span class="sd">            The corresponding time vector</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check the inputs variables :</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">tmax</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">tmax</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">):</span>
+        <span class="n">tmax</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">chi</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">chi</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">chi</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">noise</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">noise</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">):</span>
+        <span class="n">noise</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">dPha</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">dPha</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">):</span>
+        <span class="n">dPha</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">dAmp</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">dAmp</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">):</span>
+        <span class="n">dAmp</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">fPha</span><span class="p">,</span> <span class="n">fAmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fPha</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fAmp</span><span class="p">)</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tmax</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="n">sf</span><span class="p">)</span>
+
+    <span class="c1"># Delta parameters :</span>
+    <span class="n">aPha</span> <span class="o">=</span> <span class="p">[</span><span class="n">fPha</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">dPha</span><span class="o">/</span><span class="mi">100</span><span class="p">),</span> <span class="n">fPha</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">dPha</span><span class="o">/</span><span class="mi">100</span><span class="p">)]</span>
+    <span class="n">deltaPha</span> <span class="o">=</span> <span class="n">aPha</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">aPha</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">aPha</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">ndatasets</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">aAmp</span> <span class="o">=</span> <span class="p">[</span><span class="n">fAmp</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">dAmp</span><span class="o">/</span><span class="mi">100</span><span class="p">),</span> <span class="n">fAmp</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">dAmp</span><span class="o">/</span><span class="mi">100</span><span class="p">)]</span>
+    <span class="n">deltaAmp</span> <span class="o">=</span> <span class="n">aAmp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">aAmp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">aAmp</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">ndatasets</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Generate the rnd datasets :</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">ndatasets</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">)))</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ndatasets</span><span class="p">):</span>
+        <span class="c1"># Create signals :</span>
+        <span class="n">xl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">deltaPha</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">time</span><span class="p">)</span>
+        <span class="n">xh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">deltaAmp</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">*</span><span class="n">time</span><span class="p">)</span>
+        <span class="n">e</span> <span class="o">=</span> <span class="n">noise</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xl</span><span class="p">))</span>
+
+        <span class="c1"># Create the coupling :</span>
+        <span class="n">ah</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">chi</span><span class="p">)</span> <span class="o">*</span> <span class="n">xl</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">chi</span><span class="p">)</span>
+        <span class="n">al</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="p">(</span><span class="n">ah</span><span class="o">*</span><span class="n">xh</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">al</span><span class="o">*</span><span class="n">xl</span><span class="p">)</span> <span class="o">+</span> <span class="n">e</span>
+
+    <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">time</span></div>
+
+
+<div class="viewcode-block" id="cfcVec"><a class="viewcode-back" href="../../featools.html#feat.featools.cfcVec">[docs]</a><span class="k">def</span> <span class="nf">cfcVec</span><span class="p">(</span><span class="n">pha</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">amp</span><span class="o">=</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">)):</span>
+    <span class="sd">&quot;&quot;&quot;Generate cross-frequency coupling vectors.</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            pha: tuple, optional, [def: (2, 30, 2, 1)]</span>
+<span class="sd">                Frequency parameters for phase. Each argument inside the tuple</span>
+<span class="sd">                mean (starting fcy, ending fcy, width, step)</span>
+
+<span class="sd">            amp: tuple, optional, [def: (60, 200, 10, 5)]</span>
+<span class="sd">                Frequency parameters for amplitude. Each argument inside the</span>
+<span class="sd">                tuple mean (starting fcy, ending fcy, width, step)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            pVec: array</span>
+<span class="sd">                Centered-frequency vector for the phase</span>
+
+<span class="sd">            aVec: array</span>
+<span class="sd">                Centered-frequency vector for the amplitude</span>
+
+<span class="sd">            pTuple: list</span>
+<span class="sd">                List of tuple. Each tuple contain the (starting, ending)</span>
+<span class="sd">                frequency for phase.</span>
+
+<span class="sd">            aTuple: list</span>
+<span class="sd">                List of tuple. Each tuple contain the (starting, ending)</span>
+<span class="sd">                frequency for amplitude.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get values from tuple:</span>
+    <span class="n">pStart</span><span class="p">,</span> <span class="n">pEnd</span><span class="p">,</span> <span class="n">pWidth</span><span class="p">,</span> <span class="n">pStep</span> <span class="o">=</span> <span class="n">pha</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pha</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">pha</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">pha</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+    <span class="n">aStart</span><span class="p">,</span> <span class="n">aEnd</span><span class="p">,</span> <span class="n">aWidth</span><span class="p">,</span> <span class="n">aStep</span> <span class="o">=</span> <span class="n">amp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">amp</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">amp</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">amp</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+    <span class="c1"># Generate two array for phase and amplitude :</span>
+    <span class="n">pDown</span><span class="p">,</span> <span class="n">pUp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">pStart</span><span class="o">-</span><span class="n">pWidth</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">pEnd</span><span class="o">-</span><span class="n">pWidth</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">pStep</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span>
+        <span class="n">pStart</span><span class="o">+</span><span class="n">pWidth</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">pEnd</span><span class="o">+</span><span class="n">pWidth</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">pStep</span><span class="p">)</span>
+    <span class="n">aDown</span><span class="p">,</span> <span class="n">aUp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">aStart</span><span class="o">-</span><span class="n">aWidth</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">aEnd</span><span class="o">-</span><span class="n">aWidth</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">aStep</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span>
+        <span class="n">aStart</span><span class="o">+</span><span class="n">aWidth</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">aEnd</span><span class="o">+</span><span class="n">aWidth</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">aStep</span><span class="p">)</span>
+
+    <span class="c1"># Generate the center frequency vector :</span>
+    <span class="n">pVec</span><span class="p">,</span> <span class="n">aVec</span> <span class="o">=</span> <span class="p">(</span><span class="n">pUp</span><span class="o">+</span><span class="n">pDown</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">aUp</span><span class="o">+</span><span class="n">aDown</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span>
+
+    <span class="c1"># Generate the tuple for the CrossFrequencyCoupling function :</span>
+    <span class="n">pTuple</span> <span class="o">=</span> <span class="p">[(</span><span class="n">pDown</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">pUp</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">pDown</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+    <span class="n">aTuple</span> <span class="o">=</span> <span class="p">[(</span><span class="n">aDown</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="n">aUp</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">aDown</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+
+    <span class="k">return</span> <span class="n">pVec</span><span class="p">,</span> <span class="n">aVec</span><span class="p">,</span> <span class="n">pTuple</span><span class="p">,</span> <span class="n">aTuple</span></div>
+
+<span class="n">stdF</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;vlfc&#39;</span><span class="p">:[[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">]],</span> <span class="s1">&#39;delta&#39;</span><span class="p">:[[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]],</span> <span class="s1">&#39;theta&#39;</span><span class="p">:[[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]],</span>
+                    <span class="s1">&#39;alpha&#39;</span><span class="p">:[[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">13</span><span class="p">]],</span> <span class="s1">&#39;beta&#39;</span><span class="p">:[[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">30</span><span class="p">]],</span> <span class="s1">&#39;low-gamma&#39;</span><span class="p">:[[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">]],</span>
+                    <span class="s1">&#39;high-gamma&#39;</span><span class="p">:[[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">200</span><span class="p">]]},</span>
+                    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;vlfc&#39;</span><span class="p">,</span> <span class="s1">&#39;delta&#39;</span><span class="p">,</span> <span class="s1">&#39;theta&#39;</span><span class="p">,</span> <span class="s1">&#39;alpha&#39;</span><span class="p">,</span> <span class="s1">&#39;beta&#39;</span><span class="p">,</span> <span class="s1">&#39;low-gamma&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;high-gamma&#39;</span><span class="p">])</span>
+
+<div class="viewcode-block" id="bandRef"><a class="viewcode-back" href="../../featools.html#feat.featools.bandRef">[docs]</a><span class="k">def</span> <span class="nf">bandRef</span><span class="p">(</span><span class="n">return_as</span><span class="o">=</span><span class="s1">&#39;table&#39;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get the traditionnal physiological frequency bands of interest</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        return_as: string, optional, [def: &#39;table]</span>
+<span class="sd">            Say how to return bands. Use either &#39;table&#39; to get a pandas</span>
+<span class="sd">            Dataframe or &#39;list&#39; to have two list containing bands name</span>
+<span class="sd">            and definition.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">return_as</span> <span class="ow">is</span> <span class="s1">&#39;table&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">stdF</span>
+    <span class="k">elif</span> <span class="n">return_as</span> <span class="ow">is</span> <span class="s1">&#39;list&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">stdF</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="nb">list</span><span class="p">(</span><span class="n">stdF</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="findBandName"><a class="viewcode-back" href="../../featools.html#feat.featools.findBandName">[docs]</a><span class="k">def</span> <span class="nf">findBandName</span><span class="p">(</span><span class="n">band</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Find the physiological name of a frequency band</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        band: list</span>
+<span class="sd">            List of frequency bands</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List of band names</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; band = [[13, 60], [0, 1], [5, 7]]</span>
+<span class="sd">        &gt;&gt;&gt; findBandName(band)</span>
+<span class="sd">        &gt;&gt;&gt; [&#39;Low-gamma&#39;, &#39;VLFC&#39;, &#39;Theta&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check input type :</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">band</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">band</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="n">band</span> <span class="o">=</span> <span class="p">[</span><span class="n">band</span><span class="p">]</span>
+    <span class="n">cband</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">band</span><span class="p">])</span>
+    <span class="n">cref</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">stdF</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])])</span>
+    <span class="n">bname</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">stdF</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">bname</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">cref</span><span class="o">-</span><span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">argmin</span><span class="p">()]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">cband</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="findBandFcy"><a class="viewcode-back" href="../../featools.html#feat.featools.findBandFcy">[docs]</a><span class="k">def</span> <span class="nf">findBandFcy</span><span class="p">(</span><span class="n">band</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Find the physiological frequency band for a given name</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        band: list</span>
+<span class="sd">            List of frequency band name</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List of freqeuncy bands</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Check input type :</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">band</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">band</span> <span class="o">=</span> <span class="p">[</span><span class="n">band</span><span class="p">]</span>
+    <span class="n">cref</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">stdF</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">fband</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">band</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">fband</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">stdF</span><span class="p">[</span><span class="n">k</span><span class="o">.</span><span class="n">lower</span><span class="p">()])[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="s1">&#39; not found. Please, search for &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">stdF</span><span class="o">.</span><span class="n">keys</span><span class="p">())))</span>
+    <span class="k">return</span> <span class="n">fband</span></div>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Etienne Combrisson.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.1.8',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

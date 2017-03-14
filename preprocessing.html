@@ -1,0 +1,441 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Bipolarization &mdash; brainpipe 0.1.8 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="brainpipe 0.1.8 documentation" href="index.html"/>
+        <link rel="next" title="Presentation" href="feature.html"/>
+        <link rel="prev" title="Brainpipe" href="index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> brainpipe</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <p class="caption"><span class="caption-text">PRE-PROCESSING</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Bipolarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#physiology">Physiology</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FEATURES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="feature.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#filtering-based">Filtering based</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html">Filtered signal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#amplitude">Amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#power">Power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#time-frequency">Time-Frequency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#phase">Phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#phase-locking-factor">Phase-Locking Factor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#coupling-features">Coupling features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html">Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#prefered-phase">Prefered-phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#phase-locked-power">Phase-locked power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#event-related-phase-amplitude-coupling">Event Related Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#phase-locking-value">Phase-Locking Value</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#psd-based-features">PSD based features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html">Power Spectrum Density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html#power-psd">Power PSD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html#spectral-entropy">Spectral entropy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#tools">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="featools.html">Physiological bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="featools.html#cross-frequency-vector">Cross-frequency vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="featools.html#simulation">Simulation</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">CLASSIFICATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classification.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#define-a-classifier">Define a classifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#define-a-cross-validation">Define a cross-validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#classify">Classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#leave-p-subjects-out">Leave p-subjects out</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#generalization">Generalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#multi-features">Multi-features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">STATISTICS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="stat.html">Binomial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stat.html#permutations">Permutations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#evaluation">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#generate">Generate</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stat.html#multiple-comparisons">Multiple-comparisons</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#bonferroni">Bonferroni</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#false-discovery-rate-fdr">False Discovery Rate (FDR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#maximum-statistic">Maximum statistic</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stat.html#circular-statistics-toolbox">Circular statistics toolbox</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VISUALIZATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">1-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#border-plot">Border plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#p-value-plot">p-value plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#continuous-color">Continuous color</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html#d-or-2-d-graphics">1-D or 2-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#add-lines">Add lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#tilerplot">tilerplot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html#tools">Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OTHERS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#bpstudy">Bpstudy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#pandas-complements">Pandas complements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#arrays">Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#file-management">File management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#others">Others</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">REFERENCES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="references.html#pre-processing">Pre-processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#classification">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#statistics">Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#visualization">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#tools">Tools</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">brainpipe</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Bipolarization</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/preprocessing.rst.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">Add trials rejection (MATLAB code adaptation)</p>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">brainpipe.preprocessing</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<div class="section" id="bipolarization">
+<h1>Bipolarization<a class="headerlink" href="#bipolarization" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="preprocessing.bipolarization">
+<code class="descclassname">preprocessing.</code><code class="descname">bipolarization</code><span class="sig-paren">(</span><em>data</em>, <em>channel</em>, <em>dim=0</em>, <em>xyz=None</em>, <em>sep='.'</em>, <em>unbip=None</em>, <em>rmchan=None</em>, <em>keepchan='all'</em>, <em>rmspace=True</em>, <em>rmalone=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/preproc/reference.html#bipolarization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#preprocessing.bipolarization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bipolarize data</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>data: array</dt>
+<dd>Data to bipolarize</dd>
+<dt>channel: list</dt>
+<dd>List of channels name</dd>
+</dl>
+</dd>
+<dt>Kwargs:</dt>
+<dd><dl class="first last docutils">
+<dt>dim: integer, optional, [def: 0]</dt>
+<dd>Specify where is the channel dimension of data</dd>
+<dt>xyz: array, optional, [def: None]</dt>
+<dd>Electrode coordinates. Must be a n_channel x 3</dd>
+<dt>sep: string, optional, [def: &#8216;.&#8217;]</dt>
+<dd>Separator to simplify electrode names by removing undesired name
+after the sep. For example, if channel = [&#8216;h1.025&#8217;, &#8216;h2.578&#8217;]
+and sep=&#8217;.&#8217;, the final name will be &#8216;h2-h1&#8217;.</dd>
+<dt>unbip: list, optional, [def: None]</dt>
+<dd>Channel that don&#8217;t need a bipolarization but to keep.
+This list can either be the index or the name of the channel.</dd>
+<dt>rmchan: list, optional, [def: None]</dt>
+<dd>Channel to remove. This list can either be the index or the
+name of the channel.</dd>
+<dt>keepchan: list, optional, [def: &#8216;all&#8217;]</dt>
+<dd>Channel to keep. This list can either be the index or the
+name of the channel.</dd>
+<dt>rmspace: bool, optional, [def: True]</dt>
+<dd>Remove undesired space in channel names.</dd>
+<dt>rmalone: bool, optional, [def: True]</dt>
+<dd>Remove electrodes that cannot be bipolarized.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>data_b: array</dt>
+<dd>Bipolarized data.</dd>
+<dt>channel_b: list</dt>
+<dd>List of the bipolrized channels name.</dd>
+<dt>xyz_b: array</dt>
+<dd>Array of the new xyz coordinates.</dd>
+</dl>
+</dd>
+<dt>Example :</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="mi">47</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">47</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">85</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="physiology">
+<h1>Physiology<a class="headerlink" href="#physiology" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">preprocessing.</code><code class="descname">xyz2phy</code><span class="sig-paren">(</span><em>nearest=True</em>, <em>r=5</em>, <em>rm_unfound=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/preproc/physio.html#xyz2phy"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Transform coordinates to physiological informations.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>nearest: bool, optional, [def: True]</dt>
+<dd>If no physiological is found, use this parameter to force
+to search in sphere of interest.</dd>
+<dt>r: integer, optional, [def: 5]</dt>
+<dd>Find physiological informations inside a sphere of
+interest with a radius of r.</dd>
+<dt>rm_unfound: bool, optional, [def: False]</dt>
+<dd>Remove un-found structures</dd>
+</dl>
+</dd>
+</dl>
+<dl class="method">
+<dt id="preprocessing.xyz2phy.search">
+<code class="descname">search</code><span class="sig-paren">(</span><em>df</em>, <em>*keep</em><span class="sig-paren">)</span><a class="headerlink" href="#preprocessing.xyz2phy.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search in a pandas dataframe.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>df: pandas dataframe</dt>
+<dd>The dataframe to filter</dd>
+<dt>keep: tuple/list</dt>
+<dd>Control the informations to search. See the syntax definition</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd>List of row index for informations found.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="preprocessing.xyz2phy.keep">
+<code class="descname">keep</code><span class="sig-paren">(</span><em>df</em>, <em>*keep</em>, <em>keep_idx=True</em><span class="sig-paren">)</span><a class="headerlink" href="#preprocessing.xyz2phy.keep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter a pandas dataframe and keep only interresting rows.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>df: pandas dataframe</dt>
+<dd>The dataframe to filter</dd>
+<dt>keep: tuple/list</dt>
+<dd>Control the informations to keep. See the syntax definition</dd>
+<dt>keep_idx: bool, optional [def</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">True]</span><dd>Add a column to df to check what are the rows that has been
+kept.</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd>A pandas Dataframe with only the informations to keep.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="preprocessing.xyz2phy.remove">
+<code class="descname">remove</code><span class="sig-paren">(</span><em>df</em>, <em>*rm</em>, <em>rm_idx=True</em><span class="sig-paren">)</span><a class="headerlink" href="#preprocessing.xyz2phy.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter a pandas dataframe and remove only interresting rows.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>df: pandas dataframe</dt>
+<dd>The dataframe to be filter</dd>
+<dt>rm: tuple/list</dt>
+<dd>Control the informations to remove. See the syntax definition</dd>
+<dt>rm_idx: bool, optional [def</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">True]</span><dd>Add a column to df to check what are the rows that has been
+removed.</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd>A pandas Dataframe without the removed informations.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">get</code><span class="sig-paren">(</span><em>xyz</em>, <em>channel=[]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/preproc/physio.html#xyz2phy.get"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Get physiological informations from (x,y,z) coordinates.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>xyz: array</dt>
+<dd>Array of coordinates. The shape of xyz must be
+(n_electrodes x 3).</dd>
+<dt>channel: list, optional, [def: []]</dt>
+<dd>List of channels name.</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd>A pandas DataFrame with physiological informations;</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="feature.html" class="btn btn-neutral float-right" title="Presentation">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Brainpipe"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Etienne Combrisson.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.8',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

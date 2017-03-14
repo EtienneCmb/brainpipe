@@ -1,0 +1,419 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>brainpipe.feat.psdfeat &mdash; brainpipe 0.1.8 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="brainpipe 0.1.8 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../index.html" class="fa fa-home"> brainpipe</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <p class="caption"><span class="caption-text">PRE-PROCESSING</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../preprocessing.html">Bipolarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../preprocessing.html#physiology">Physiology</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FEATURES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html#filtering-based">Filtering based</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html">Filtered signal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#amplitude">Amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#power">Power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#time-frequency">Time-Frequency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#phase">Phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#phase-locking-factor">Phase-Locking Factor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html#coupling-features">Coupling features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html">Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html#prefered-phase">Prefered-phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html#phase-locked-power">Phase-locked power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html#event-related-phase-amplitude-coupling">Event Related Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html#phase-locking-value">Phase-Locking Value</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html#psd-based-features">PSD based features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../psdfeat.html">Power Spectrum Density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../psdfeat.html#power-psd">Power PSD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../psdfeat.html#spectral-entropy">Spectral entropy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html#tools">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../featools.html">Physiological bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../featools.html#cross-frequency-vector">Cross-frequency vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../featools.html#simulation">Simulation</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">CLASSIFICATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#define-a-classifier">Define a classifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#define-a-cross-validation">Define a cross-validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#classify">Classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#leave-p-subjects-out">Leave p-subjects out</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#generalization">Generalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#multi-features">Multi-features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">STATISTICS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../stat.html">Binomial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stat.html#permutations">Permutations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#evaluation">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#generate">Generate</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stat.html#multiple-comparisons">Multiple-comparisons</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#bonferroni">Bonferroni</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#false-discovery-rate-fdr">False Discovery Rate (FDR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#maximum-statistic">Maximum statistic</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stat.html#circular-statistics-toolbox">Circular statistics toolbox</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VISUALIZATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../visualization.html">1-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#border-plot">Border plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#p-value-plot">p-value plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#continuous-color">Continuous color</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../visualization.html#d-or-2-d-graphics">1-D or 2-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#add-lines">Add lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#tilerplot">tilerplot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../visualization.html#tools">Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OTHERS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#bpstudy">Bpstudy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#pandas-complements">Pandas complements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#arrays">Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#file-management">File management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#others">Others</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">REFERENCES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#pre-processing">Pre-processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#classification">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#statistics">Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#visualization">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#tools">Tools</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">brainpipe</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>brainpipe.feat.psdfeat</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for brainpipe.feat.psdfeat</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="k">import</span> <span class="n">welch</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">product</span>
+
+<span class="kn">from</span> <span class="nn">brainpipe.tools</span> <span class="k">import</span> <span class="n">binarize</span>
+<span class="kn">from</span> <span class="nn">brainpipe.feat.utils._feat</span> <span class="k">import</span> <span class="n">_manageWindow</span>
+<span class="kn">from</span> <span class="nn">brainpipe.visu.cmon_plt</span> <span class="k">import</span> <span class="n">tilerplot</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PSD&#39;</span><span class="p">,</span> <span class="s1">&#39;powerPSD&#39;</span><span class="p">,</span> <span class="s1">&#39;SpectralEntropy&#39;</span><span class="p">]</span>
+
+<span class="n">commondoc</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+
+<span class="s2">    Args:</span>
+<span class="s2">        sf: int</span>
+<span class="s2">            Sampling frequency</span>
+
+<span class="s2">        npts: int</span>
+<span class="s2">            Number of points of the time serie</span>
+
+<span class="s2">        width: int, optional [def: None]</span>
+<span class="s2">            width of a single window.</span>
+
+<span class="s2">        step: int, optional [def: None]</span>
+<span class="s2">            Each window will be spaced by the &quot;step&quot; value.</span>
+
+<span class="s2">        time: list/array, optional [def: None]</span>
+<span class="s2">            Define a specific time vector</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">supdoc</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        f: tuple/list</span>
+<span class="s2">            List containing the couple of frequency bands to extract spectral</span>
+<span class="s2">            informations. Alternatively, f can be define with the form</span>
+<span class="s2">            f=(fstart, fend, fwidth, fstep) where fstart and fend are the</span>
+<span class="s2">            starting and endind frequencies, fwidth and fstep are the width</span>
+<span class="s2">            and step of each band.</span>
+
+<span class="s2">                &gt;&gt;&gt; # Specify each band:</span>
+<span class="s2">                &gt;&gt;&gt; f = [ [15, 35], [25, 45], [35, 55], [45, 60], [55, 75] ]</span>
+<span class="s2">                &gt;&gt;&gt; # Second option:</span>
+<span class="s2">                &gt;&gt;&gt; f = (15, 75, 20, 10)</span>
+
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">getdoc</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Get the </span><span class="si">{feat}</span><span class="s2"></span>
+
+<span class="s2">        Args:</span>
+<span class="s2">            x: array</span>
+<span class="s2">                Data to get </span><span class="si">{feat}</span><span class="s2">. x can be a vector of (npts), a matrix</span>
+<span class="s2">                (npts, ntrials) or 3D array (nelectrodes, npts, ntrials).</span>
+
+<span class="s2">        Kargs:</span>
+<span class="s2">            kwargs: any supplementar argument are directly passed to the welch</span>
+<span class="s2">            function of scipy.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="PSD"><a class="viewcode-back" href="../../../psdfeat.html#feature.PSD">[docs]</a><span class="k">class</span> <span class="nc">PSD</span><span class="p">(</span><span class="n">tilerplot</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Compute the power spectral density of multiple electrodes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__doc__</span> <span class="o">+=</span> <span class="n">commondoc</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_npts</span> <span class="o">=</span> <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span>
+        <span class="c1"># Manage time and frequencies:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_window</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xvec</span> <span class="o">=</span> <span class="n">_manageWindow</span><span class="p">(</span><span class="n">npts</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span>
+                                                <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PSD.get"><a class="viewcode-back" href="../../../psdfeat.html#feature.PSD.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check size of x:</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nelec</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_npts</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ntrials</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+
+        <span class="c1"># Split x in window:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_window</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">[:,</span> <span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">:]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_window</span><span class="p">]),</span> <span class="p">(</span>
+                                                           <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+        <span class="c1"># Compute PSD:</span>
+        <span class="k">return</span> <span class="n">welch</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_sf</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div></div>
+
+<span class="n">PSD</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">+=</span> <span class="n">getdoc</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">feat</span><span class="o">=</span><span class="s1">&#39;PSD&#39;</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        Returns:</span>
+<span class="s2">            f: frequency vector of shape (nfce,)</span>
+
+<span class="s2">            amp: PSD array of shape (nelectrodes, nfce, nwin, ntrials)</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="powerPSD"><a class="viewcode-back" href="../../../psdfeat.html#feature.powerPSD">[docs]</a><span class="k">class</span> <span class="nc">powerPSD</span><span class="p">(</span><span class="n">tilerplot</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Compute the power based on psd of multiple electrodes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__doc__</span> <span class="o">+=</span> <span class="n">commondoc</span> <span class="o">+</span> <span class="n">supdoc</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># Check the type of f:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">yvec</span> <span class="o">=</span> <span class="n">binarize</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;list&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">yvec</span> <span class="o">=</span> <span class="n">f</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">yvec</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_psd</span> <span class="o">=</span> <span class="n">PSD</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">)</span>
+
+<div class="viewcode-block" id="powerPSD.get"><a class="viewcode-back" href="../../../psdfeat.html#feature.powerPSD.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fpsd</span><span class="p">,</span> <span class="n">amp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_psd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">amp</span><span class="p">[:,</span> <span class="p">(</span><span class="n">fpsd</span> <span class="o">&gt;=</span> <span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">fpsd</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="o">...</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span>
+                                                     <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">yvec</span><span class="p">])</span></div></div>
+
+<span class="n">powerPSD</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">+=</span> <span class="n">getdoc</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">feat</span><span class="o">=</span><span class="s1">&#39;PSD power&#39;</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        Return:</span>
+<span class="s2">            xpow: power array of shape (nfce, nelectrodes, nwin, ntrials)</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+
+<div class="viewcode-block" id="SpectralEntropy"><a class="viewcode-back" href="../../../psdfeat.html#feature.SpectralEntropy">[docs]</a><span class="k">class</span> <span class="nc">SpectralEntropy</span><span class="p">(</span><span class="n">tilerplot</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Compute the spectral entropy based on psd of multiple electrodes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__doc__</span> <span class="o">+=</span> <span class="n">commondoc</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_psd</span> <span class="o">=</span> <span class="n">PSD</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">)</span>
+
+<div class="viewcode-block" id="SpectralEntropy.get"><a class="viewcode-back" href="../../../psdfeat.html#feature.SpectralEntropy.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fpsd</span><span class="p">,</span> <span class="n">amp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_psd</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">fpsd</span><span class="p">)</span>
+        <span class="n">ne</span><span class="p">,</span> <span class="n">namp</span><span class="p">,</span> <span class="n">nw</span><span class="p">,</span> <span class="n">nt</span> <span class="o">=</span> <span class="n">amp</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">iteract</span> <span class="o">=</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">ne</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">nw</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">nt</span><span class="p">))</span>
+
+        <span class="n">xentropy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">ne</span><span class="p">,</span> <span class="n">nw</span><span class="p">,</span> <span class="n">nt</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">iteract</span><span class="p">:</span>
+            <span class="n">curamp</span> <span class="o">=</span> <span class="n">amp</span><span class="p">[</span><span class="n">e</span><span class="p">,</span> <span class="p">:,</span> <span class="n">w</span><span class="p">,</span> <span class="n">t</span><span class="p">]</span>
+            <span class="n">curamp</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">curamp</span><span class="p">)</span>
+            <span class="n">xentropy</span><span class="p">[</span><span class="n">e</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">N</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">curamp</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">curamp</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">xentropy</span></div></div>
+
+<span class="n">SpectralEntropy</span><span class="o">.</span><span class="n">get</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">+=</span> <span class="n">getdoc</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">feat</span><span class="o">=</span><span class="s1">&#39;spectral entropy&#39;</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        Return:</span>
+<span class="s2">            xent: spectral entropy of x of shape (nelectrodes, nwin, ntrials)</span>
+<span class="s2">&quot;&quot;&quot;</span>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Etienne Combrisson.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.1.8',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

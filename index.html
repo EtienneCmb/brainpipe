@@ -1,0 +1,509 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Brainpipe &mdash; brainpipe 0.1.8 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="brainpipe 0.1.8 documentation" href="#"/>
+        <link rel="next" title="Bipolarization" href="preprocessing.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="#" class="fa fa-home"> brainpipe</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <p class="caption"><span class="caption-text">PRE-PROCESSING</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Bipolarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html#physiology">Physiology</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FEATURES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="feature.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#filtering-based">Filtering based</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html">Filtered signal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#amplitude">Amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#power">Power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#time-frequency">Time-Frequency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#phase">Phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#phase-locking-factor">Phase-Locking Factor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#coupling-features">Coupling features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html">Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#prefered-phase">Prefered-phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#phase-locked-power">Phase-locked power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#event-related-phase-amplitude-coupling">Event Related Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#phase-locking-value">Phase-Locking Value</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#psd-based-features">PSD based features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html">Power Spectrum Density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html#power-psd">Power PSD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html#spectral-entropy">Spectral entropy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#tools">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="featools.html">Physiological bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="featools.html#cross-frequency-vector">Cross-frequency vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="featools.html#simulation">Simulation</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">CLASSIFICATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classification.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#define-a-classifier">Define a classifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#define-a-cross-validation">Define a cross-validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#classify">Classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#leave-p-subjects-out">Leave p-subjects out</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#generalization">Generalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#multi-features">Multi-features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">STATISTICS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="stat.html">Binomial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stat.html#permutations">Permutations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#evaluation">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#generate">Generate</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stat.html#multiple-comparisons">Multiple-comparisons</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#bonferroni">Bonferroni</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#false-discovery-rate-fdr">False Discovery Rate (FDR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#maximum-statistic">Maximum statistic</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stat.html#circular-statistics-toolbox">Circular statistics toolbox</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VISUALIZATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">1-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#border-plot">Border plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#p-value-plot">p-value plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#continuous-color">Continuous color</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html#d-or-2-d-graphics">1-D or 2-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#add-lines">Add lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#tilerplot">tilerplot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html#tools">Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OTHERS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#bpstudy">Bpstudy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#pandas-complements">Pandas complements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#arrays">Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#file-management">File management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#others">Others</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">REFERENCES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="references.html#pre-processing">Pre-processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#classification">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#statistics">Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#visualization">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#tools">Tools</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">brainpipe</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="#">Docs</a> &raquo;</li>
+      
+    <li>Brainpipe</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="brainpipe">
+<h1>Brainpipe<a class="headerlink" href="#brainpipe" title="Permalink to this headline">¶</a></h1>
+<p>Brainpipe is a python toolbox dedicated for neuronal signals analysis and machine-learning. The aim is to provide a variety of tools to extract informations from neural activities (features) and use machine-learning to validate hypothesis. The machine-learning used the excellent <a class="reference external" href="http://scikit-learn.org/stable/">scikit-learn</a>  library. Brainpipe can also perform parallel computing and try to optimize RAM usage for our &#8216;large&#8217; datasets. If you want to have a quick overview of what you can actually do, checkout the <a class="reference internal" href="references.html#refpart"><span class="std std-ref">References</span></a>.</p>
+<p>It&#8217;s evolving every day! So if you have problems, bugs or if you want to collaborate and add your own tools, contact me at <a class="reference external" href="mailto:e&#46;combrisson&#37;&#52;&#48;gmail&#46;com">e<span>&#46;</span>combrisson<span>&#64;</span>gmail<span>&#46;</span>com</a></p>
+</div>
+<div class="section" id="requirement">
+<h1>Requirement<a class="headerlink" href="#requirement" title="Permalink to this headline">¶</a></h1>
+<p>brainpipe is developed on Python 3, so the compatibility with python 2 is not guaranted! (not tested yet)</p>
+<p>Please, check if you have this toolbox installed and already up-to-date:</p>
+<ul class="simple">
+<li>matplotlib (visualization)</li>
+<li>scikit-learn (machine learning)</li>
+<li>joblib (parallel computing)</li>
+<li>scipy</li>
+<li>numpy</li>
+<li>psutil</li>
+</ul>
+</div>
+<div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>Ru the following commands :</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone git@github.com:EtienneCmb/brainpipe.git
+</pre></div>
+</div>
+<p>Then, go to the brainpipe cloned folder and run :</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="what-s-new">
+<h1>What&#8217;s new<a class="headerlink" href="#what-s-new" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="v0-1-8">
+<h2>v0.1.8<a class="headerlink" href="#v0-1-8" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Fix LeavePSubjectOut permutations for unique labels.</li>
+<li>Fix classification plot colors.</li>
+</ul>
+</div>
+<div class="section" id="v0-1-6">
+<h2>v0.1.6<a class="headerlink" href="#v0-1-6" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Fix scikit-learn v0.18 compatibility</li>
+<li>Add mutli-features pipelines</li>
+</ul>
+</div>
+<div class="section" id="v0-1-5">
+<h2>v0.1.5<a class="headerlink" href="#v0-1-5" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>classify: fit_stat() has been removed, there is only fit() now. confusion_matrix() has been rename to cm()</li>
+<li>LeavePSubjectOut: new leave p-subjects out cross validation</li>
+<li>classification: embedded visualization (daplot, cmplot), statistics (classify.stat.), dataframe for quick settings summarize (classify.info.) with excel exportation</li>
+<li>New folder: ipython notebook examples</li>
+<li>tools: unique ordered function</li>
+</ul>
+</div>
+<div class="section" id="v0-1-4">
+<h2>v0.1.4<a class="headerlink" href="#v0-1-4" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>PAC: new surrogates method (shuffle amplitude time-series) + phase synchro</li>
+<li>New features (phase-locked power (coupling), ERPAC (coupling), pfdphase (coupling), Phase-Locking Value (coupling), Phase-locking Factor (PLF in spectral) and PSD based features)</li>
+<li>New tools for physiological bands definition</li>
+<li>New plotting function (addPval, continuouscol)</li>
+<li>Start to make the python adaptation of circstat Matlab toolbox</li>
+<li>Add contour to plot2D() and some other parameters</li>
+<li>New doc ! Checkout the <a class="reference internal" href="references.html#refpart"><span class="std std-ref">References</span></a></li>
+<li>Bug fix: pac phase shuffling method, coupling time vector, statictical evaluation of permutations</li>
+</ul>
+</div>
+<div class="section" id="v0-1-0">
+<h2>v0.1.0<a class="headerlink" href="#v0-1-0" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><dl class="first docutils">
+<dt>Statistics:</dt>
+<dd><ul class="first last simple">
+<li>Permutations: array optimized permutation module</li>
+<li>p-values on permutations can be compute on 1 tail (upper and lower part) or two tails</li>
+<li>metric:</li>
+<li>Multiple comparison: maximum statistique, Bonferroni, FDR</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Features:</dt>
+<dd><ul class="first last simple">
+<li>sigfilt//amplitude//power//TF: wilcoxon/Kruskal-Wallis/permutations stat test (comparison with baseline)</li>
+<li>PAC: new Normalized Direct PAC method (Ozkurt, 2012)</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Visualization:</dt>
+<dd><ul class="first last simple">
+<li>tilerplot() with plot1D() and plot2D() with automatic control of subplot</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Tools:</dt>
+<dd><ul class="first last simple">
+<li>Array: ndsplit and ndjoin method which doesn&#8217;t depend on odd/even size (but return list)</li>
+<li>squarefreq() generate a square frequency vector</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="organization">
+<h1>Organization<a class="headerlink" href="#organization" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">PRE-PROCESSING</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Bipolarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html#physiology">Physiology</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">FEATURES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="feature.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#filtering-based">Filtering based</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html">Filtered signal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#amplitude">Amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#power">Power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#time-frequency">Time-Frequency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#phase">Phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#phase-locking-factor">Phase-Locking Factor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#coupling-features">Coupling features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html">Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#prefered-phase">Prefered-phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#phase-locked-power">Phase-locked power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#event-related-phase-amplitude-coupling">Event Related Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#phase-locking-value">Phase-Locking Value</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#psd-based-features">PSD based features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html">Power Spectrum Density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html#power-psd">Power PSD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html#spectral-entropy">Spectral entropy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#tools">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="featools.html">Physiological bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="featools.html#cross-frequency-vector">Cross-frequency vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="featools.html#simulation">Simulation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">CLASSIFICATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classification.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#define-a-classifier">Define a classifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#define-a-cross-validation">Define a cross-validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#classify">Classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#leave-p-subjects-out">Leave p-subjects out</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#generalization">Generalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#multi-features">Multi-features</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">STATISTICS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="stat.html">Binomial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stat.html#permutations">Permutations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#evaluation">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#generate">Generate</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stat.html#multiple-comparisons">Multiple-comparisons</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#bonferroni">Bonferroni</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#false-discovery-rate-fdr">False Discovery Rate (FDR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#maximum-statistic">Maximum statistic</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stat.html#circular-statistics-toolbox">Circular statistics toolbox</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">VISUALIZATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">1-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#border-plot">Border plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#p-value-plot">p-value plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#continuous-color">Continuous color</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html#d-or-2-d-graphics">1-D or 2-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#add-lines">Add lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#tilerplot">tilerplot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html#tools">Tools</a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">OTHERS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#bpstudy">Bpstudy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#pandas-complements">Pandas complements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#arrays">Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#file-management">File management</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tools.html#save-file">Save file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tools.html#load-file">Load file</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#others">Others</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">REFERENCES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="references.html#pre-processing">Pre-processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#classification">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#statistics">Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#visualization">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#tools">Tools</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Indices and tables</p>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="preprocessing.html" class="btn btn-neutral float-right" title="Bipolarization">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Etienne Combrisson.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.8',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,429 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>brainpipe.sys.dataframe &mdash; brainpipe 0.1.8 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="brainpipe 0.1.8 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../index.html" class="fa fa-home"> brainpipe</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <p class="caption"><span class="caption-text">PRE-PROCESSING</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../preprocessing.html">Bipolarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../preprocessing.html#physiology">Physiology</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FEATURES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html#filtering-based">Filtering based</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html">Filtered signal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#amplitude">Amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#power">Power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#time-frequency">Time-Frequency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#phase">Phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#phase-locking-factor">Phase-Locking Factor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html#coupling-features">Coupling features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html">Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html#prefered-phase">Prefered-phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html#phase-locked-power">Phase-locked power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html#event-related-phase-amplitude-coupling">Event Related Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html#phase-locking-value">Phase-Locking Value</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html#psd-based-features">PSD based features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../psdfeat.html">Power Spectrum Density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../psdfeat.html#power-psd">Power PSD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../psdfeat.html#spectral-entropy">Spectral entropy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html#tools">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../featools.html">Physiological bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../featools.html#cross-frequency-vector">Cross-frequency vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../featools.html#simulation">Simulation</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">CLASSIFICATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#define-a-classifier">Define a classifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#define-a-cross-validation">Define a cross-validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#classify">Classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#leave-p-subjects-out">Leave p-subjects out</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#generalization">Generalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#multi-features">Multi-features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">STATISTICS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../stat.html">Binomial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stat.html#permutations">Permutations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#evaluation">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#generate">Generate</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stat.html#multiple-comparisons">Multiple-comparisons</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#bonferroni">Bonferroni</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#false-discovery-rate-fdr">False Discovery Rate (FDR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#maximum-statistic">Maximum statistic</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stat.html#circular-statistics-toolbox">Circular statistics toolbox</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VISUALIZATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../visualization.html">1-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#border-plot">Border plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#p-value-plot">p-value plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#continuous-color">Continuous color</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../visualization.html#d-or-2-d-graphics">1-D or 2-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#add-lines">Add lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#tilerplot">tilerplot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../visualization.html#tools">Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OTHERS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#bpstudy">Bpstudy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#pandas-complements">Pandas complements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#arrays">Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#file-management">File management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#others">Others</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">REFERENCES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#pre-processing">Pre-processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#classification">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#statistics">Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#visualization">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#tools">Tools</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">brainpipe</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>brainpipe.sys.dataframe</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for brainpipe.sys.dataframe</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">warnings</span> <span class="k">import</span> <span class="n">warn</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">n</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pdTools&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="pdTools"><a class="viewcode-back" href="../../../tools.html#preprocessing.pdTools">[docs]</a><span class="k">class</span> <span class="nc">pdTools</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Tools for pandas DataFrame</span>
+
+<span class="sd">    Syntax:</span>
+<span class="sd">        - To search if arg1 is in column1:</span>
+
+<span class="sd">        &gt;&gt;&gt; keep = (&#39;column1&#39;, arg1)</span>
+
+<span class="sd">        - AND condition for ar1 and arg2 in column1:</span>
+
+<span class="sd">        &gt;&gt;&gt; keep = (&#39;column1&#39;, [arg1, 2])</span>
+
+<span class="sd">        - AND condition for arg1 in column1 and arg2 in column2:</span>
+
+<span class="sd">        &gt;&gt;&gt; keep = [(&#39;column1&#39;, arg1), (&#39;column2&#39;, arg2)]</span>
+
+<span class="sd">        - OR condition:</span>
+
+<span class="sd">        &gt;&gt;&gt; keep = (&#39;column1&#39;, arg1), (&#39;column2&#39;, arg2), ...</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="pdTools.search"><a class="viewcode-back" href="../../../tools.html#preprocessing.pdTools.search">[docs]</a>    <span class="k">def</span> <span class="nf">search</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="o">*</span><span class="n">keep</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Search in a pandas dataframe.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df: pandas dataframe</span>
+<span class="sd">                The dataframe to filter</span>
+
+<span class="sd">            keep: tuple/list</span>
+<span class="sd">                Control the informations to search. See the syntax definition</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            List of row index for informations found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_pdSearch</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="o">*</span><span class="n">keep</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="pdTools.keep"><a class="viewcode-back" href="../../../tools.html#preprocessing.pdTools.keep">[docs]</a>    <span class="k">def</span> <span class="nf">keep</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="o">*</span><span class="n">keep</span><span class="p">,</span> <span class="n">keep_idx</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Filter a pandas dataframe and keep only interresting rows.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df: pandas dataframe</span>
+<span class="sd">                The dataframe to filter</span>
+
+<span class="sd">            keep: tuple/list</span>
+<span class="sd">                Control the informations to keep. See the syntax definition</span>
+
+<span class="sd">            keep_idx: bool, optional [def : True]</span>
+<span class="sd">                Add a column to df to check what are the rows that has been</span>
+<span class="sd">                kept.</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            A pandas Dataframe with only the informations to keep.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_pdKeep</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="o">*</span><span class="n">keep</span><span class="p">,</span> <span class="n">keep_idx</span><span class="o">=</span><span class="n">keep_idx</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="pdTools.remove"><a class="viewcode-back" href="../../../tools.html#preprocessing.pdTools.remove">[docs]</a>    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="o">*</span><span class="n">rm</span><span class="p">,</span> <span class="n">rm_idx</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Filter a pandas dataframe and remove only interresting rows.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df: pandas dataframe</span>
+<span class="sd">                The dataframe to be filter</span>
+
+<span class="sd">            rm: tuple/list</span>
+<span class="sd">                Control the informations to remove. See the syntax definition</span>
+
+<span class="sd">            rm_idx: bool, optional [def : True]</span>
+<span class="sd">                Add a column to df to check what are the rows that has been</span>
+<span class="sd">                removed.</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            A pandas Dataframe without the removed informations.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">_pdRm</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="o">*</span><span class="n">rm</span><span class="p">,</span> <span class="n">rm_idx</span><span class="o">=</span><span class="n">rm_idx</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span></div></div>
+
+
+<span class="k">def</span> <span class="nf">_pdSearch</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="o">*</span><span class="n">keep</span><span class="p">):</span>
+    <span class="n">keyList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="c1"># For each keep:</span>
+    <span class="n">index</span><span class="p">,</span> <span class="n">indexCol</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keep</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">list</span><span class="p">:</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span><span class="p">]</span>
+        <span class="c1"># For each &amp; condition:</span>
+        <span class="k">for</span> <span class="n">iN</span><span class="p">,</span> <span class="n">iS</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="n">colName</span><span class="p">,</span> <span class="n">toKeep</span> <span class="o">=</span> <span class="n">iS</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">iS</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="c1"># Check if the column exist :</span>
+            <span class="k">if</span> <span class="n">keyList</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">colName</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">toKeep</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="nb">list</span><span class="p">:</span>
+                    <span class="n">toKeep</span> <span class="o">=</span> <span class="p">[</span><span class="n">toKeep</span><span class="p">]</span>
+                <span class="c1"># Then search in df:</span>
+                <span class="n">indS</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">jN</span><span class="p">,</span> <span class="n">jS</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">toKeep</span><span class="p">):</span>
+                    <span class="n">indS</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">colName</span><span class="p">]</span> <span class="o">==</span> <span class="n">jS</span><span class="p">)[</span><span class="mi">0</span><span class="p">]))</span>
+                <span class="k">if</span> <span class="n">iN</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">indSet</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">indS</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">indSet</span> <span class="o">=</span> <span class="n">indSet</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">indS</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">warn</span><span class="p">(</span><span class="s1">&#39;No column &quot;&#39;</span><span class="o">+</span><span class="n">colName</span> <span class="o">+</span>
+                     <span class="s1">&#39;&quot; found. This argument has been ignored from your search&#39;</span>
+                     <span class="p">)</span>
+                <span class="n">indSet</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">indSet</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">index</span>
+
+
+<span class="k">def</span> <span class="nf">_pdKeep</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="o">*</span><span class="n">keep</span><span class="p">,</span> <span class="n">keep_idx</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Sub keep function</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dfKeep</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+    <span class="n">keepIdx</span> <span class="o">=</span> <span class="n">_pdSearch</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="o">*</span><span class="n">keep</span><span class="p">)</span>
+    <span class="n">indCol</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keepIdx</span><span class="p">:</span>
+        <span class="n">dfKeep</span> <span class="o">=</span> <span class="n">dfKeep</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+        <span class="n">indCol</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">keep_idx</span><span class="p">:</span>
+        <span class="n">dfKeep</span><span class="p">[</span><span class="s1">&#39;keep_idx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">indCol</span>
+
+    <span class="k">return</span> <span class="n">dfKeep</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="nb">list</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">dfKeep</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))]),</span> <span class="n">keepIdx</span>
+
+
+<span class="k">def</span> <span class="nf">_pdRm</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="o">*</span><span class="n">rm</span><span class="p">,</span> <span class="n">rm_idx</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Filter a pandas dataframe and keep only interresting rows.</span>
+<span class="sd">    This function can combine &quot;and&quot; and &quot;or&quot; conditionnal test for</span>
+<span class="sd">    a more flexible control of a dataframe.</span>
+
+<span class="sd">    df : pandas dataframe</span>
+<span class="sd">        The dataframe to be filtered</span>
+
+<span class="sd">    keep : tuple/list</span>
+<span class="sd">        Control the informations to keep</span>
+
+<span class="sd">    indCol : bool, optional [def : True]</span>
+<span class="sd">        Add a column to df to check what are the rows that has been</span>
+<span class="sd">        kept.</span>
+
+<span class="sd">    &amp; : inside the list</span>
+<span class="sd">    + : for the number of arg</span>
+<span class="sd">    Each keep: [(Column1,[s1,s2,...]),(Column2,[s21,s22])]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">dfT</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">rmIdx</span> <span class="o">=</span> <span class="n">_pdSearch</span><span class="p">(</span><span class="n">dfT</span><span class="p">,</span> <span class="o">*</span><span class="n">rm</span><span class="p">)</span>
+    <span class="n">indCol</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">rmIdx</span><span class="p">:</span>
+        <span class="n">indCol</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">setList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">indCol</span><span class="p">))</span>
+    <span class="n">dfT</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">setList</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">fullList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">dfT</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+    <span class="k">if</span> <span class="n">rm_idx</span><span class="p">:</span>
+        <span class="n">dfT</span><span class="p">[</span><span class="s1">&#39;rm_idx&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">fullList</span><span class="p">)</span><span class="o">.</span><span class="n">difference</span><span class="p">(</span><span class="n">setList</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">dfT</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="nb">list</span><span class="p">(</span><span class="n">n</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">dfT</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))]),</span> <span class="n">rmIdx</span>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Etienne Combrisson.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.1.8',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

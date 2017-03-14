@@ -1,0 +1,861 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Phase-Amplitude Coupling &mdash; brainpipe 0.1.8 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="brainpipe 0.1.8 documentation" href="index.html"/>
+        <link rel="up" title="Presentation" href="feature.html"/>
+        <link rel="next" title="Power Spectrum Density" href="psdfeat.html"/>
+        <link rel="prev" title="Filtered signal" href="filtfeat.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> brainpipe</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <p class="caption"><span class="caption-text">PRE-PROCESSING</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Bipolarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html#physiology">Physiology</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FEATURES</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="feature.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#filtering-based">Filtering based</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html">Filtered signal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#amplitude">Amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#power">Power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#time-frequency">Time-Frequency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#phase">Phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#phase-locking-factor">Phase-Locking Factor</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="feature.html#coupling-features">Coupling features</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#prefered-phase">Prefered-phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#phase-locked-power">Phase-locked power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#event-related-phase-amplitude-coupling">Event Related Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#phase-locking-value">Phase-Locking Value</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#psd-based-features">PSD based features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html">Power Spectrum Density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html#power-psd">Power PSD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html#spectral-entropy">Spectral entropy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#tools">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="featools.html">Physiological bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="featools.html#cross-frequency-vector">Cross-frequency vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="featools.html#simulation">Simulation</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">CLASSIFICATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classification.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#define-a-classifier">Define a classifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#define-a-cross-validation">Define a cross-validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#classify">Classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#leave-p-subjects-out">Leave p-subjects out</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#generalization">Generalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#multi-features">Multi-features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">STATISTICS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="stat.html">Binomial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stat.html#permutations">Permutations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#evaluation">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#generate">Generate</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stat.html#multiple-comparisons">Multiple-comparisons</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#bonferroni">Bonferroni</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#false-discovery-rate-fdr">False Discovery Rate (FDR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#maximum-statistic">Maximum statistic</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stat.html#circular-statistics-toolbox">Circular statistics toolbox</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VISUALIZATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">1-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#border-plot">Border plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#p-value-plot">p-value plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#continuous-color">Continuous color</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html#d-or-2-d-graphics">1-D or 2-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#add-lines">Add lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#tilerplot">tilerplot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html#tools">Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OTHERS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#bpstudy">Bpstudy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#pandas-complements">Pandas complements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#arrays">Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#file-management">File management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#others">Others</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">REFERENCES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="references.html#pre-processing">Pre-processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#classification">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#statistics">Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#visualization">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#tools">Tools</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">brainpipe</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="feature.html">Presentation</a> &raquo;</li>
+      
+    <li>Phase-Amplitude Coupling</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/couplingfeat.rst.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="phase-amplitude-coupling">
+<span id="pac"></span><h1>Phase-Amplitude Coupling<a class="headerlink" href="#phase-amplitude-coupling" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">feature.</code><code class="descname">pac</code><span class="sig-paren">(</span><em>sf, npts, Id='113', pha_f=[2, 4], pha_meth='hilbert', pha_cycle=3, amp_f=[60, 200], amp_meth='hilbert', amp_cycle=6, nbins=18, window=None, width=None, step=None, time=None, **kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/feat/coupling/cfc.html#pac"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Compute the phase-amplitude coupling (pac) either in local or
+distant coupling. PAC require three things:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Main method to compute it</li>
+<li>Surrogates to correct the true pac estimation</li>
+<li>A normalization method to correct pas by surrogates</li>
+</ul>
+</div></blockquote>
+<p>Contributor: Juan LP Soto.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>sf: int</dt>
+<dd>Sampling frequency</dd>
+<dt>npts: int</dt>
+<dd>Number of points of the time serie</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>Id: string, optional, [def: &#8216;113&#8217;]</dt>
+<dd><p class="first">The Id correspond to the way of computing pac. Id is composed of
+three digits [ex : Id=&#8216;210&#8217;]</p>
+<blockquote>
+<div><ul>
+<li><p class="first">First digit: refer to the pac method:</p>
+<blockquote>
+<div><ul class="simple">
+<li>&#8216;1&#8217;: Mean Vector Length <a class="footnote-reference" href="#f1" id="id1">[1]</a></li>
+<li>&#8216;2&#8217;: Kullback-Leibler Divergence <a class="footnote-reference" href="#f2" id="id2">[2]</a></li>
+<li>&#8216;3&#8217;: Heights Ratio</li>
+<li>&#8216;4&#8217;: Phase synchrony (or adapted PLV) <a class="footnote-reference" href="#f5" id="id3">[5]</a></li>
+<li>&#8216;5&#8217;: ndPAC <a class="footnote-reference" href="#f3" id="id4">[3]</a></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Second digit: refer to the method for computing surrogates:</p>
+<blockquote>
+<div><ul class="simple">
+<li>&#8216;0&#8217;: No surrogates</li>
+<li>&#8216;1&#8217;: Swap trials phase/amplitude <a class="footnote-reference" href="#f2" id="id5">[2]</a></li>
+<li>&#8216;2&#8217;: Swap trials amplitude <a class="footnote-reference" href="#f4" id="id6">[4]</a></li>
+<li>&#8216;3&#8217;: Shuffle phase time-series</li>
+<li>&#8216;4&#8217;: Shuffle amplitude time-series</li>
+<li>&#8216;5&#8217;: Time lag <a class="footnote-reference" href="#f1" id="id7">[1]</a> [NOT IMPLEMENTED YET]</li>
+<li>&#8216;6&#8217;: Circular shifting [NOT IMPLEMENTED YET]</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p class="first">Third digit: refer to the normalization method for correction:</p>
+<blockquote>
+<div><ul class="simple">
+<li>&#8216;0&#8217;: No normalization</li>
+<li>&#8216;1&#8217;: Substract the mean of surrogates</li>
+<li>&#8216;2&#8217;: Divide by the mean of surrogates</li>
+<li>&#8216;3&#8217;: Substract then divide by the mean of surrogates</li>
+<li>&#8216;4&#8217;: Z-score</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p class="last">So, if Id=&#8216;143&#8217;, this mean that pac will be evaluate using the
+Modulation Index (&#8216;1&#8217;), then surrogates are computing by randomly
+shuffle amplitude values (&#8216;4&#8217;) and finally, the true pac value
+will be normalized by substracting then dividing by the mean of surrogates.</p>
+</dd>
+<dt>pha_f: tuple/list, optional, [def: [2,4]]</dt>
+<dd>List containing the couple of frequency bands for the phase.
+Example: f=[ [2,4], [5,7], [60,250] ]</dd>
+<dt>pha_meth: string, optional, [def: &#8216;hilbert&#8217;]</dt>
+<dd>Method for the phase extraction.</dd>
+<dt>pha_cycle: integer, optional, [def: 3]</dt>
+<dd>Number of cycles for filtering the phase.</dd>
+<dt>amp_f: tuple/list, optional, [def: [60,200]]</dt>
+<dd>List containing the couple of frequency bands for the amplitude.
+Each couple can be either a list or a tuple.</dd>
+<dt>amp_meth: string, optional, [def: &#8216;hilbert&#8217;]</dt>
+<dd>Method for the amplitude extraction.</dd>
+<dt>amp_cycle: integer, optional, [def: 6]</dt>
+<dd>Number of cycles for filtering the amplitude.</dd>
+<dt>nbins: integer, optional, [def: 18]</dt>
+<dd>Some pac method (like Kullback-Leibler Distance or Heights Ratio) need
+a binarization of the phase. nbins control the number of bins.</dd>
+<dt>window: tuple/list/None, optional [def: None]</dt>
+<dd>List/tuple: [100,1500]
+List of list/tuple: [(100,500),(200,4000)]
+Width and step parameters will be ignored.</dd>
+<dt>width: int, optional [def: None]</dt>
+<dd>width of a single window.</dd>
+<dt>step: int, optional [def: None]</dt>
+<dd>Each window will be spaced by the &#8220;step&#8221; value.</dd>
+<dt>time: list/array, optional [def: None]</dt>
+<dd>Define a specific time vector</dd>
+<dt>filtname: string, optional [def: &#8216;fir1&#8217;]</dt>
+<dd><dl class="first last docutils">
+<dt>Name of the filter. Possible values are:</dt>
+<dd><ul class="first last simple">
+<li>&#8216;fir1&#8217;: Window-based FIR filter design</li>
+<li>&#8216;butter&#8217;: butterworth filter</li>
+<li>&#8216;bessel&#8217;: bessel filter</li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>cycle: int, optional [def: 3]</dt>
+<dd>Number of cycle to use for the filter. This parameter
+is only avaible for the &#8216;fir1&#8217; method</dd>
+<dt>order: int, optional [def: 3]</dt>
+<dd>Order of the &#8216;butter&#8217; or &#8216;bessel&#8217; filter</dd>
+<dt>axis: int, optional [def: 0]</dt>
+<dd>Filter accross the dimension &#8216;axis&#8217;</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="f1" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[1]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id7">2</a>)</em> <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2628289/">Canolty et al, 2006</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="f2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[2]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id5">2</a>)</em> <a class="reference external" href="http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2941206/">Tort et al, 2010</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="f3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[3]</a></td><td><a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/22531738/">Ozkurt et al, 2012</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="f4" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[4]</a></td><td><a class="reference external" href="http://www.jneurosci.org/content/33/48/18849.short/">Bahramisharif et al, 2013</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="f5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[5]</a></td><td><a class="reference external" href="http://www.sciencedirect.com/science/article/pii/S0165027008003816">Penny et al, 2008</a></td></tr>
+</tbody>
+</table>
+<dl class="method">
+<dt>
+<code class="descname">get</code><span class="sig-paren">(</span><em>xpha</em>, <em>xamp</em>, <em>n_perm=200</em>, <em>p=0.05</em>, <em>matricial=False</em>, <em>n_jobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/feat/coupling/cfc.html#pac.get"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Get the normalized cfc mesure between an xpha and xamp signals.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>xpha: array</dt>
+<dd>Signal for phase. The shape of xpha should be :
+(n_electrodes x n_pts x n_trials)</dd>
+<dt>xamp: array</dt>
+<dd>Signal for amplitude. The shape of xamp should be :
+(n_electrodes x n_pts x n_trials)</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first docutils">
+<dt>n_perm: integer, optional, [def: 200]</dt>
+<dd>Number of permutations for normalizing the cfc mesure.</dd>
+<dt>p: float, optional, [def: 0.05]</dt>
+<dd>p-value for the statistical method of Ozkurt 2012.</dd>
+<dt>matricial: bool, optional, [def: False]</dt>
+<dd>Some methods can work in matricial computation. This can lead
+to a 10x or 30x time faster. But, please, monitor your RAM usage
+beacause this parameter can use a lot of RAM. So, turn this parameter
+in case of small computation.</dd>
+<dt>n_jobs: integer, optional, [def: -1]</dt>
+<dd>Control the number of jobs for parallel computing. Use 1, 2, ..
+depending of your number or cores. -1 for all the cores.</dd>
+</dl>
+<p class="last">If the same signal is used (example : xpha=x and xamp=x), this mean
+the program compute a local cfc.</p>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>ncfc: array</dt>
+<dd>The cfc mesure of size :
+(n_amplitude x n_phase x n_electrodes x n_windows x n_trials)</dd>
+<dt>pvalue: array</dt>
+<dd>The associated p-values of size :
+(n_amplitude x n_phase x n_electrodes x n_windows)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="figure align-center" id="id10">
+<img alt="_images/pac.png" src="_images/pac.png" />
+<p class="caption"><span class="caption-text">Example of PAC maps for a synthetic coupled signal</span></p>
+</div>
+</div>
+<div class="section" id="prefered-phase">
+<span id="pp"></span><h1>Prefered-phase<a class="headerlink" href="#prefered-phase" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">feature.</code><code class="descname">pfdphase</code><span class="sig-paren">(</span><em>sf, npts, nbins=18, pha_f=[2, 4], pha_meth='hilbert', pha_cycle=3, amp_f=[60, 200], amp_meth='hilbert', amp_cycle=6, window=None, width=None, step=None, time=None, **kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/feat/coupling/cfc.html#pfdphase"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Get the preferred phase of a phase-amplitude coupling</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>sf: int</dt>
+<dd>Sampling frequency</dd>
+<dt>npts: int</dt>
+<dd>Number of points of the time serie</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>nbins: integer, optional, [def: 18]</dt>
+<dd>Number of bins to binarize the amplitude.</dd>
+<dt>pha_f: tuple/list, optional, [def: [2,4]]</dt>
+<dd>List containing the couple of frequency bands for the phase.
+Example: f=[ [2,4], [5,7], [60,250] ]</dd>
+<dt>pha_meth: string, optional, [def: &#8216;hilbert&#8217;]</dt>
+<dd>Method for the phase extraction.</dd>
+<dt>pha_cycle: integer, optional, [def: 3]</dt>
+<dd>Number of cycles for filtering the phase.</dd>
+<dt>amp_f: tuple/list, optional, [def: [60,200]]</dt>
+<dd>List containing the couple of frequency bands for the amplitude.
+Each couple can be either a list or a tuple.</dd>
+<dt>amp_meth: string, optional, [def: &#8216;hilbert&#8217;]</dt>
+<dd>Method for the amplitude extraction.</dd>
+<dt>amp_cycle: integer, optional, [def: 6]</dt>
+<dd>Number of cycles for filtering the amplitude.</dd>
+<dt>window: tuple/list/None, optional [def: None]</dt>
+<dd>List/tuple: [100,1500]
+List of list/tuple: [(100,500),(200,4000)]
+Width and step parameters will be ignored.</dd>
+<dt>width: int, optional [def: None]</dt>
+<dd>width of a single window.</dd>
+<dt>step: int, optional [def: None]</dt>
+<dd>Each window will be spaced by the &#8220;step&#8221; value.</dd>
+<dt>time: list/array, optional [def: None]</dt>
+<dd>Define a specific time vector</dd>
+</dl>
+</dd>
+</dl>
+<dl class="method">
+<dt>
+<code class="descname">get</code><span class="sig-paren">(</span><em>xpha</em>, <em>xamp</em>, <em>n_jobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/feat/coupling/cfc.html#pfdphase.get"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Get the preferred phase</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>xpha: array</dt>
+<dd>Signal for phase. The shape of xpha should be :
+(n_electrodes x n_pts x n_trials)</dd>
+<dt>xamp: array</dt>
+<dd>Signal for amplitude. The shape of xamp should be :
+(n_electrodes x n_pts x n_trials)</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first docutils">
+<dt>n_jobs: integer, optional, [def: -1]</dt>
+<dd>Control the number of jobs for parallel computing. Use 1, 2, ..
+depending of your number or cores. -1 for all the cores.</dd>
+</dl>
+<p class="last">If the same signal is used (example : xpha=x and xamp=x), this mean
+the program compute a local cfc.</p>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>pfp: array</dt>
+<dd>The preferred phase extracted from the mean of trials of size :
+(n_amplitude x n_phase x n_electrodes x n_windows)</dd>
+<dt>prf: array</dt>
+<dd>The preferred phase extracted from each trial of size :
+(n_amplitude x n_phase x n_electrodes x n_windows x n_trials)</dd>
+<dt>ambin: array</dt>
+<dd>The binarized amplitude of size :
+(n_amplitude x n_phase x n_electrodes x n_windows x n_bins x n_trials)</dd>
+<dt>pvalue: array</dt>
+<dd>The associated p-values of size :
+(n_amplitude x n_phase x n_electrodes x n_windows)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="figure align-center" id="id11">
+<img alt="_images/pfdphase.png" src="_images/pfdphase.png" />
+<p class="caption"><span class="caption-text">Example of preferred phase for an alpha-gamma coupling in BA6</span></p>
+</div>
+</div>
+<div class="section" id="phase-locked-power">
+<span id="plp"></span><h1>Phase-locked power<a class="headerlink" href="#phase-locked-power" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">feature.</code><code class="descname">PhaseLockedPower</code><span class="sig-paren">(</span><em>sf, npts, f=(2, 200, 10, 5), pha=[8, 13], time=None, baseline=None, norm=None, **powArgs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/feat/coupling/cfc.html#PhaseLockedPower"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Extract phase-locked power and visualize shifted time-frequency map
+according to phase peak.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>sf: int</dt>
+<dd>Sampling frequency</dd>
+<dt>npts: int</dt>
+<dd>Number of points of the time serie</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first docutils">
+<dt>f: tuple/list, optional, [def: (2, 200, 10, 5)]</dt>
+<dd>The frequency vector (fstart, fend, fwidth, fstep)</dd>
+<dt>pha: tuple/list, optional, [def: [8, 13]]</dt>
+<dd>Frequency for phase.</dd>
+<dt>time: array/list, optional, [def: None]</dt>
+<dd>The time vector to use</dd>
+<dt>baseline: tuple/list, optional, [def: None]</dt>
+<dd>Location of baseline (in sample)</dd>
+<dt>norm: integer, optional, [def: None]</dt>
+<dd><dl class="first last docutils">
+<dt>Normalize method</dt>
+<dd><ul class="first last simple">
+<li>0: No normalisation</li>
+<li>1: Substraction</li>
+<li>2: Division</li>
+<li>3: Substract then divide</li>
+<li>4: Z-score</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="last">powArgs: any supplementar arguments are directly passed to the power
+function.</p>
+</dd>
+</dl>
+<dl class="method">
+<dt>
+<code class="descname">get</code><span class="sig-paren">(</span><em>x</em>, <em>cue</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/feat/coupling/cfc.html#PhaseLockedPower.get"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Get power phase locked</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>x: array</dt>
+<dd>Data of shape (npt, ntrials)</dd>
+<dt>cue: integer</dt>
+<dd>Cue to align time-frequency maps.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd>xpow, xpha, xsig: repectively realigned power, phase and filtered
+signal</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">tflockedplot</code><span class="sig-paren">(</span><em>xpow</em>, <em>sig</em>, <em>cmap='viridis'</em>, <em>vmin=None</em>, <em>vmax=None</em>, <em>ylim=None</em>, <em>alpha=0.3</em>, <em>kind='std'</em>, <em>vColor='r'</em>, <em>sigcolor='slateblue'</em>, <em>fignum=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/feat/coupling/cfc.html#PhaseLockedPower.tflockedplot"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Plot realigned time-frequency maps.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd>xpow, sig: output of the get() method. sig can either be the phase
+or the filtered signal.</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>cmap: string, optional, [def: &#8216;viridis&#8217;]</dt>
+<dd>The colormap to use</dd>
+<dt>vmin, vmax: int/float, otpional, [def: None, None]</dt>
+<dd>Limits of the colorbar</dd>
+<dt>ylim: tuple/list, optional, [def: None]</dt>
+<dd>Limit for the plot of the signal</dd>
+<dt>alpha: float, optional, [def: 0.3]</dt>
+<dd>Transparency of deviation/sem</dd>
+<dt>kind: string, optional, [def: &#8216;std&#8217;]</dt>
+<dd>Choose between &#8216;std&#8217; or &#8216;sem&#8217; to either display standard
+deviation or standard error on the mean for the signal plot</dd>
+<dt>vColor: string, optional, [def: &#8216;r&#8217;]</dt>
+<dd>Color of the vertical line which materialized the choosen cue</dd>
+<dt>sigcolor: string, optional, [def: &#8216;slateblue&#8217;]</dt>
+<dd>Color of the signal</dd>
+<dt>fignum: integer, optional, [def: 0]</dt>
+<dd>Number of the figure</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd>figure, axes1 (TF plot), axes2 (signal plot), axes3 (colorbar)</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="figure align-center" id="id12">
+<img alt="_images/plp.png" src="_images/plp.png" />
+<p class="caption"><span class="caption-text">Event Related Phase-Amplitude</span></p>
+</div>
+</div>
+<div class="section" id="event-related-phase-amplitude-coupling">
+<span id="erpac"></span><h1>Event Related Phase-Amplitude Coupling<a class="headerlink" href="#event-related-phase-amplitude-coupling" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">feature.</code><code class="descname">erpac</code><span class="sig-paren">(</span><em>sf, npts, pha_f=[2, 4], pha_meth='hilbert', pha_cycle=3, amp_f=[60, 200], amp_meth='hilbert', amp_cycle=6, window=None, step=None, width=None, time=None, **kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/feat/coupling/cfc.html#erpac"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Compute Event Related Phase-Amplitude coupling. See <a class="footnote-reference" href="#f6" id="id8">[6]</a></p>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="f6" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id8">[6]</a></td><td><a class="reference external" href="http://www.ncbi.nlm.nih.gov/pubmed/22986076">Voytek et al, 2013</a></td></tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>sf: int</dt>
+<dd>Sampling frequency</dd>
+<dt>npts: int</dt>
+<dd>Number of points of the time serie</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>pha_f: tuple/list, optional, [def: [2,4]]</dt>
+<dd>List containing the couple of frequency bands for the phase.
+Example: f=[ [2,4], [5,7], [60,250] ]</dd>
+<dt>pha_meth: string, optional, [def: &#8216;hilbert&#8217;]</dt>
+<dd>Method for the phase extraction.</dd>
+<dt>pha_cycle: integer, optional, [def: 3]</dt>
+<dd>Number of cycles for filtering the phase.</dd>
+<dt>amp_f: tuple/list, optional, [def: [60,200]]</dt>
+<dd>List containing the couple of frequency bands for the amplitude.
+Each couple can be either a list or a tuple.</dd>
+<dt>amp_meth: string, optional, [def: &#8216;hilbert&#8217;]</dt>
+<dd>Method for the amplitude extraction.</dd>
+<dt>amp_cycle: integer, optional, [def: 6]</dt>
+<dd>Number of cycles for filtering the amplitude.</dd>
+<dt>window: tuple/list/None, optional [def: None]</dt>
+<dd>List/tuple: [100,1500]
+List of list/tuple: [(100,500),(200,4000)]
+Width and step parameters will be ignored.</dd>
+<dt>width: int, optional [def: None]</dt>
+<dd>width of a single window.</dd>
+<dt>step: int, optional [def: None]</dt>
+<dd>Each window will be spaced by the &#8220;step&#8221; value.</dd>
+<dt>time: list/array, optional [def: None]</dt>
+<dd>Define a specific time vector</dd>
+</dl>
+</dd>
+</dl>
+<dl class="method">
+<dt>
+<code class="descname">get</code><span class="sig-paren">(</span><em>xpha</em>, <em>xamp</em>, <em>n_perm=200</em>, <em>n_jobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/feat/coupling/cfc.html#erpac.get"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Get the erpac mesure between an xpha and xamp signals.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>xpha: array</dt>
+<dd>Signal for phase. The shape of xpha should be :
+(n_electrodes x n_pts x n_trials)</dd>
+<dt>xamp: array</dt>
+<dd>Signal for amplitude. The shape of xamp should be :
+(n_electrodes x n_pts x n_trials)</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first docutils">
+<dt>n_perm: integer, optional, [def: 200]</dt>
+<dd>Number of permutations for normalizing the cfc mesure.</dd>
+<dt>n_jobs: integer, optional, [def: -1]</dt>
+<dd>Control the number of jobs for parallel computing. Use 1, 2, ..
+depending of your number or cores. -1 for all the cores.</dd>
+</dl>
+<p class="last">If the same signal is used (example : xpha=x and xamp=x), this mean
+the program compute a local erpac.</p>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>xerpac: array</dt>
+<dd>The erpac mesure of size :
+(n_amplitude x n_phase x n_electrodes x n_windows)</dd>
+<dt>pvalue: array</dt>
+<dd>The associated p-values of size :
+(n_amplitude x n_phase x n_electrodes x n_windows)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="figure align-center" id="id13">
+<img alt="_images/erpac.png" src="_images/erpac.png" />
+<p class="caption"><span class="caption-text">Event Related Phase-Amplitude Coupling</span></p>
+</div>
+</div>
+<div class="section" id="phase-locking-value">
+<span id="plv"></span><h1>Phase-Locking Value<a class="headerlink" href="#phase-locking-value" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">feature.</code><code class="descname">PLV</code><span class="sig-paren">(</span><em>sf, npts, f=[2, 4], method='hilbert', cycle=3, sample=None, time=None, **kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/feat/coupling/cfc.html#PLV"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Compute the Phase-Locking Value <a class="footnote-reference" href="#f7" id="id9">[7]</a></p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>sf: int</dt>
+<dd>Sampling frequency</dd>
+<dt>npts: int</dt>
+<dd>Number of points of the time serie</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>f: tuple/list, optional, [def: [2,4]]</dt>
+<dd>List containing the couple of frequency bands for the phase.
+Example: f=[ [2,4], [5,7], [60,250] ]</dd>
+<dt>method: string, optional, [def: &#8216;hilbert&#8217;]</dt>
+<dd>Method for the phase extraction.</dd>
+<dt>cycle: integer, optional, [def: 3]</dt>
+<dd>Number of cycles for filtering the phase.</dd>
+<dt>sample: list, optional, [def: None]</dt>
+<dd>Select samples in the time series to compute the plv</dd>
+<dt>time: list/array, optional [def: None]</dt>
+<dd>Define a specific time vector</dd>
+<dt>amp_cycle: integer, optional, [def: 6]</dt>
+<dd>Number of cycles for filtering the amplitude.</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="f7" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id9">[7]</a></td><td><a class="reference external" href="http://www.ma.utexas.edu/users/davis/reu/ch3/cwt/lachaux.pdf">Lachaux et al, 1999</a></td></tr>
+</tbody>
+</table>
+<dl class="method">
+<dt>
+<code class="descname">get</code><span class="sig-paren">(</span><em>xelec1</em>, <em>xelec2</em>, <em>n_perm=200</em>, <em>n_jobs=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/feat/coupling/cfc.html#PLV.get"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Get Phase-Locking Values for a set of distant sites</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>xelec1, xelec2: array</dt>
+<dd>PLV will be compute between xelec1 and xelec2. Both matrix
+contains times-series of each trial pear electrodes. It&#8217;s
+not forced that both have the same size but they must have at least
+the same number of time points (npts) and trials (ntrials).
+[xelec1] = (n_elec1, npts, ntrials), [xelec2] = (n_elec2, npts, ntrials)</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>n_perm: int, optional, [def: 200]</dt>
+<dd>Number of permutations to estimate the statistical significiancy
+of the plv mesure</dd>
+<dt>n_jobs: integer, optional, [def: -1]</dt>
+<dd>Control the number of jobs for parallel computing. Use 1, 2, ..
+depending of your number or cores. -1 for all the cores.</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>plv: array</dt>
+<dd>The plv mesure for each phase and across electrodes of size:
+[plv] = (n_pha, n_elec1, n_elec2, n_sample)</dd>
+<dt>pvalues: array</dt>
+<dd>The p-values with the same shape of plv</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="figure align-center" id="id14">
+<img alt="_images/plv.png" src="_images/plv.png" />
+<p class="caption"><span class="caption-text">Example of an alpha PLV</span></p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="psdfeat.html" class="btn btn-neutral float-right" title="Power Spectrum Density">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="filtfeat.html" class="btn btn-neutral" title="Filtered signal"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Etienne Combrisson.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.8',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

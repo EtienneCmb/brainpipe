@@ -1,0 +1,418 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Physiological bands &mdash; brainpipe 0.1.8 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="brainpipe 0.1.8 documentation" href="index.html"/>
+        <link rel="up" title="Presentation" href="feature.html"/>
+        <link rel="next" title="Presentation" href="classification.html"/>
+        <link rel="prev" title="Power Spectrum Density" href="psdfeat.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> brainpipe</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <p class="caption"><span class="caption-text">PRE-PROCESSING</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Bipolarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html#physiology">Physiology</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FEATURES</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="feature.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#filtering-based">Filtering based</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html">Filtered signal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#amplitude">Amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#power">Power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#time-frequency">Time-Frequency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#phase">Phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#phase-locking-factor">Phase-Locking Factor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#coupling-features">Coupling features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html">Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#prefered-phase">Prefered-phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#phase-locked-power">Phase-locked power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#event-related-phase-amplitude-coupling">Event Related Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#phase-locking-value">Phase-Locking Value</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#psd-based-features">PSD based features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html">Power Spectrum Density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html#power-psd">Power PSD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html#spectral-entropy">Spectral entropy</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="feature.html#tools">Tools</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Physiological bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cross-frequency-vector">Cross-frequency vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#simulation">Simulation</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">CLASSIFICATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classification.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#define-a-classifier">Define a classifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#define-a-cross-validation">Define a cross-validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#classify">Classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#leave-p-subjects-out">Leave p-subjects out</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#generalization">Generalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#multi-features">Multi-features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">STATISTICS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="stat.html">Binomial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stat.html#permutations">Permutations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#evaluation">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#generate">Generate</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stat.html#multiple-comparisons">Multiple-comparisons</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#bonferroni">Bonferroni</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#false-discovery-rate-fdr">False Discovery Rate (FDR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#maximum-statistic">Maximum statistic</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stat.html#circular-statistics-toolbox">Circular statistics toolbox</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VISUALIZATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">1-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#border-plot">Border plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#p-value-plot">p-value plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#continuous-color">Continuous color</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html#d-or-2-d-graphics">1-D or 2-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#add-lines">Add lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#tilerplot">tilerplot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html#tools">Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OTHERS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#bpstudy">Bpstudy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#pandas-complements">Pandas complements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#arrays">Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#file-management">File management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#others">Others</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">REFERENCES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="references.html#pre-processing">Pre-processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#classification">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#statistics">Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#visualization">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#tools">Tools</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">brainpipe</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="feature.html">Presentation</a> &raquo;</li>
+      
+    <li>Physiological bands</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/featools.rst.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="physiological-bands">
+<h1>Physiological bands<a class="headerlink" href="#physiological-bands" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="feat.featools.bandRef">
+<code class="descclassname">feat.featools.</code><code class="descname">bandRef</code><span class="sig-paren">(</span><em>return_as='table'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/feat/featools.html#bandRef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#feat.featools.bandRef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the traditionnal physiological frequency bands of interest</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>return_as: string, optional, [def: &#8216;table]</dt>
+<dd>Say how to return bands. Use either &#8216;table&#8217; to get a pandas
+Dataframe or &#8216;list&#8217; to have two list containing bands name
+and definition.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="feat.featools.findBandName">
+<code class="descclassname">feat.featools.</code><code class="descname">findBandName</code><span class="sig-paren">(</span><em>band</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/feat/featools.html#findBandName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#feat.featools.findBandName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the physiological name of a frequency band</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>band: list</dt>
+<dd>List of frequency bands</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd>List of band names</dd>
+<dt>Example:</dt>
+<dd><div class="first last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">band</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">13</span><span class="p">,</span> <span class="mi">60</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">findBandName</span><span class="p">(</span><span class="n">band</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="s1">&#39;Low-gamma&#39;</span><span class="p">,</span> <span class="s1">&#39;VLFC&#39;</span><span class="p">,</span> <span class="s1">&#39;Theta&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="feat.featools.findBandFcy">
+<code class="descclassname">feat.featools.</code><code class="descname">findBandFcy</code><span class="sig-paren">(</span><em>band</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/feat/featools.html#findBandFcy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#feat.featools.findBandFcy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find the physiological frequency band for a given name</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>band: list</dt>
+<dd>List of frequency band name</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd>List of freqeuncy bands</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="cross-frequency-vector">
+<h1>Cross-frequency vector<a class="headerlink" href="#cross-frequency-vector" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="feat.featools.cfcVec">
+<code class="descclassname">feat.featools.</code><code class="descname">cfcVec</code><span class="sig-paren">(</span><em>pha=(2</em>, <em>30</em>, <em>2</em>, <em>1)</em>, <em>amp=(60</em>, <em>200</em>, <em>10</em>, <em>5)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/feat/featools.html#cfcVec"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#feat.featools.cfcVec" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate cross-frequency coupling vectors.</p>
+<dl class="docutils">
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>pha: tuple, optional, [def: (2, 30, 2, 1)]</dt>
+<dd>Frequency parameters for phase. Each argument inside the tuple
+mean (starting fcy, ending fcy, width, step)</dd>
+<dt>amp: tuple, optional, [def: (60, 200, 10, 5)]</dt>
+<dd>Frequency parameters for amplitude. Each argument inside the
+tuple mean (starting fcy, ending fcy, width, step)</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>pVec: array</dt>
+<dd>Centered-frequency vector for the phase</dd>
+<dt>aVec: array</dt>
+<dd>Centered-frequency vector for the amplitude</dd>
+<dt>pTuple: list</dt>
+<dd>List of tuple. Each tuple contain the (starting, ending)
+frequency for phase.</dd>
+<dt>aTuple: list</dt>
+<dd>List of tuple. Each tuple contain the (starting, ending)
+frequency for amplitude.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="simulation">
+<h1>Simulation<a class="headerlink" href="#simulation" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="feat.featools.cfcRndSignals">
+<code class="descclassname">feat.featools.</code><code class="descname">cfcRndSignals</code><span class="sig-paren">(</span><em>fPha=2</em>, <em>fAmp=100</em>, <em>sf=1024</em>, <em>ndatasets=10</em>, <em>tmax=1</em>, <em>chi=0</em>, <em>noise=1</em>, <em>dPha=0</em>, <em>dAmp=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/feat/featools.html#cfcRndSignals"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#feat.featools.cfcRndSignals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate randomly phase-amplitude coupled signals.</p>
+<dl class="docutils">
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>fPha: int/float, optional, [def: 2]</dt>
+<dd>Frequency for phase</dd>
+<dt>fAmp: int/float, optional, [def: 100]</dt>
+<dd>Frequency for amplitude</dd>
+<dt>sf: int, optional, [def: 1024]</dt>
+<dd>Sampling frequency</dd>
+<dt>ndatasets</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">int, optional, [def: 10]</span><dd>Number of datasets</dd>
+<dt>tmax: int/float (1&lt;=tmax&lt;=3), optional, [def: 1]</dt>
+<dd>Length of the time vector. If tmax=2 and sf=1024,
+the number of time points npts=1024*2=2048</dd>
+<dt>chi: int/float (0&lt;=chi&lt;=1), optional, [def: 0]</dt>
+<dd>Amout of coupling. If chi=0, signals of phase and amplitude
+are strongly coupled.</dd>
+<dt>noise: int/float (1&lt;=noise&lt;=3), optional, [def: 1]</dt>
+<dd>Amount of noise</dd>
+<dt>dPha: int/float (0&lt;=dPha&lt;=100), optional, [def: 0]</dt>
+<dd>Introduce a random incertitude on the phase frequency.
+If fPha is 2, and dPha is 50, the frequency for the phase signal
+will be between :
+[2-0.5*2, 2+0.5*2]=[1,3]</dd>
+<dt>dAmp: int/float (0&lt;=dAmp&lt;=100), optional, [def: 0]</dt>
+<dd>Introduce a random incertitude on the amplitude frequency.
+If fAmp is 60, and dAmp is 10, the frequency for the amplitude
+signal will be between :
+[60-0.1*60, 60+0.1*60]=[54,66]</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd><dl class="first last docutils">
+<dt>data: array</dt>
+<dd>The randomly coupled signals. The shape of data will be
+(ndatasets x npts)</dd>
+<dt>time: array</dt>
+<dd>The corresponding time vector</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="classification.html" class="btn btn-neutral float-right" title="Presentation">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="psdfeat.html" class="btn btn-neutral" title="Power Spectrum Density"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Etienne Combrisson.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.8',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

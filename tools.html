@@ -1,0 +1,585 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Tools &mdash; brainpipe 0.1.8 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="brainpipe 0.1.8 documentation" href="index.html"/>
+        <link rel="next" title="References" href="references.html"/>
+        <link rel="prev" title="1-D graphics" href="visualization.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> brainpipe</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <p class="caption"><span class="caption-text">PRE-PROCESSING</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Bipolarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html#physiology">Physiology</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FEATURES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="feature.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#filtering-based">Filtering based</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html">Filtered signal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#amplitude">Amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#power">Power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#time-frequency">Time-Frequency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#phase">Phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#phase-locking-factor">Phase-Locking Factor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#coupling-features">Coupling features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html">Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#prefered-phase">Prefered-phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#phase-locked-power">Phase-locked power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#event-related-phase-amplitude-coupling">Event Related Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#phase-locking-value">Phase-Locking Value</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#psd-based-features">PSD based features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html">Power Spectrum Density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html#power-psd">Power PSD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html#spectral-entropy">Spectral entropy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#tools">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="featools.html">Physiological bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="featools.html#cross-frequency-vector">Cross-frequency vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="featools.html#simulation">Simulation</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">CLASSIFICATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classification.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#define-a-classifier">Define a classifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#define-a-cross-validation">Define a cross-validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#classify">Classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#leave-p-subjects-out">Leave p-subjects out</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#generalization">Generalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#multi-features">Multi-features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">STATISTICS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="stat.html">Binomial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stat.html#permutations">Permutations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#evaluation">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#generate">Generate</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stat.html#multiple-comparisons">Multiple-comparisons</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#bonferroni">Bonferroni</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#false-discovery-rate-fdr">False Discovery Rate (FDR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat.html#maximum-statistic">Maximum statistic</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stat.html#circular-statistics-toolbox">Circular statistics toolbox</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VISUALIZATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">1-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#border-plot">Border plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#p-value-plot">p-value plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#continuous-color">Continuous color</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html#d-or-2-d-graphics">1-D or 2-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#add-lines">Add lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#tilerplot">tilerplot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html#tools">Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OTHERS</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#bpstudy">Bpstudy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pandas-complements">Pandas complements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#arrays">Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#file-management">File management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#others">Others</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">REFERENCES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="references.html#pre-processing">Pre-processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#classification">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#statistics">Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#visualization">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#tools">Tools</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">brainpipe</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Tools</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/tools.rst.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="tools">
+<h1>Tools<a class="headerlink" href="#tools" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="bpstudy">
+<h2>Bpstudy<a class="headerlink" href="#bpstudy" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">system.</code><code class="descname">study</code><span class="sig-paren">(</span><em>name=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/sys/bpstudy.html#study"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Create and manage a study with a files database.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>name: string, optional [def</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">None]</span><dd>Name of the study. If this study already exists, this will load
+the path with the associated database.</dd>
+</dl>
+</dd>
+<dt>Example:</dt>
+<dd><div class="first highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Define variables:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/home/Documents/database&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">studyName</span> <span class="o">=</span> <span class="s1">&#39;MyStudy&#39;</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create a study object :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">studObj</span> <span class="o">=</span> <span class="n">study</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">studyName</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">studObj</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>   <span class="c1"># Create the study</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">studObj</span><span class="o">.</span><span class="n">studies</span><span class="p">()</span>   <span class="c1"># Print the list of studies</span>
+</pre></div>
+</div>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Manage files in your study :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fileList</span> <span class="o">=</span> <span class="n">studObj</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;filter1&#39;</span><span class="p">,</span> <span class="s1">&#39;filter2&#39;</span><span class="p">,</span> <span class="n">folder</span><span class="o">=</span><span class="s1">&#39;features&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Let say that fileList contain two files : [&#39;file1.mat&#39;, &#39;file2.pickle&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Load the second file :</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">studObj</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;features&#39;</span><span class="p">,</span> <span class="s1">&#39;file2.pickle&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="method">
+<dt>
+<code class="descname">add</code><span class="sig-paren">(</span><em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/sys/bpstudy.html#study.add"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Add a new study</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>path: string</dt>
+<dd>path to your study.</dd>
+<dt>The following folders are going to be created :</dt>
+<dd><ul class="first last simple">
+<li>name: the root folder of the study. Same name as the study</li>
+<li>/database: datasets of the study</li>
+<li>/feature: features extracted from the diffrents datasets</li>
+<li>/classified: classified features</li>
+<li>/multifeature: multifeatures files</li>
+<li>/figure: figures of the study</li>
+<li>/physiology: physiological informations</li>
+<li>/backup: backup files</li>
+<li>/setting: study settings</li>
+<li>/other: any other kind of files</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/sys/bpstudy.html#study.delete"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Delete the current study</p>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">load</code><span class="sig-paren">(</span><em>folder</em>, <em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/sys/bpstudy.html#study.load"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Load a file. The file can be a .pickle or .mat</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>folder: string</dt>
+<dd>Specify where the file is located</dd>
+<dt>file: string</dt>
+<dd>the complete name of the file</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd>A dictionary containing all the variables.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">search</code><span class="sig-paren">(</span><em>*args</em>, <em>folder=''</em>, <em>lower=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/sys/bpstudy.html#study.search"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Get a list of files</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>args: string, optional</dt>
+<dd>Add some filters to get a restricted list of files,
+according to the defined filters</dd>
+<dt>folder: string, optional [def: &#8216;&#8217;]</dt>
+<dd>Define a folder to search. By default, no folder is specified
+so the search will focused on the root folder.</dd>
+<dt>lower: bool, optional [def: True]</dt>
+<dd>Define if the search method have to take care of the case. Use
+False if case is important for searching.</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd>A list containing the files found in the folder.</dd>
+</dl>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt>
+<em class="property">static </em><code class="descname">studies</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/sys/bpstudy.html#study.studies"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Get the list of all defined studies</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt>
+<em class="property">static </em><code class="descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/sys/bpstudy.html#study.update"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Update the list of studies</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="pandas-complements">
+<h2>Pandas complements<a class="headerlink" href="#pandas-complements" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt>
+<em class="property">class </em><code class="descclassname">system.</code><code class="descname">pdTools</code><a class="reference internal" href="_modules/brainpipe/sys/dataframe.html#pdTools"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Tools for pandas DataFrame</p>
+<dl class="docutils">
+<dt>Syntax:</dt>
+<dd><ul class="first simple">
+<li>To search if arg1 is in column1:</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">keep</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;column1&#39;</span><span class="p">,</span> <span class="n">arg1</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>AND condition for ar1 and arg2 in column1:</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">keep</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;column1&#39;</span><span class="p">,</span> <span class="p">[</span><span class="n">arg1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>AND condition for arg1 in column1 and arg2 in column2:</li>
+</ul>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">keep</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;column1&#39;</span><span class="p">,</span> <span class="n">arg1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;column2&#39;</span><span class="p">,</span> <span class="n">arg2</span><span class="p">)]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li>OR condition:</li>
+</ul>
+<div class="last highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">keep</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;column1&#39;</span><span class="p">,</span> <span class="n">arg1</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;column2&#39;</span><span class="p">,</span> <span class="n">arg2</span><span class="p">),</span> <span class="o">...</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<dl class="method">
+<dt>
+<code class="descname">keep</code><span class="sig-paren">(</span><em>df</em>, <em>*keep</em>, <em>keep_idx=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/sys/dataframe.html#pdTools.keep"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Filter a pandas dataframe and keep only interresting rows.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>df: pandas dataframe</dt>
+<dd>The dataframe to filter</dd>
+<dt>keep: tuple/list</dt>
+<dd>Control the informations to keep. See the syntax definition</dd>
+<dt>keep_idx: bool, optional [def</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">True]</span><dd>Add a column to df to check what are the rows that has been
+kept.</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd>A pandas Dataframe with only the informations to keep.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">remove</code><span class="sig-paren">(</span><em>df</em>, <em>*rm</em>, <em>rm_idx=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/sys/dataframe.html#pdTools.remove"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Filter a pandas dataframe and remove only interresting rows.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>df: pandas dataframe</dt>
+<dd>The dataframe to be filter</dd>
+<dt>rm: tuple/list</dt>
+<dd>Control the informations to remove. See the syntax definition</dd>
+<dt>rm_idx: bool, optional [def</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">True]</span><dd>Add a column to df to check what are the rows that has been
+removed.</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd>A pandas Dataframe without the removed informations.</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt>
+<code class="descname">search</code><span class="sig-paren">(</span><em>df</em>, <em>*keep</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/sys/dataframe.html#pdTools.search"><span class="viewcode-link">[source]</span></a></dt>
+<dd><p>Search in a pandas dataframe.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>df: pandas dataframe</dt>
+<dd>The dataframe to filter</dd>
+<dt>keep: tuple/list</dt>
+<dd>Control the informations to search. See the syntax definition</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd>List of row index for informations found.</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="arrays">
+<h2>Arrays<a class="headerlink" href="#arrays" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="tools.ndsplit">
+<code class="descclassname">tools.</code><code class="descname">ndsplit</code><span class="sig-paren">(</span><em>x</em>, <em>sp</em>, <em>axis=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tools.html#ndsplit"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.ndsplit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Split array (work for odd dimensions)</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>x: array</dt>
+<dd>Data to split</dd>
+<dt>sp: int</dt>
+<dd>Number of chunk</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>axis: int, optional, [def: 0]</dt>
+<dd>Axis for splitting array</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd>List of splitted arrays</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.ndjoin">
+<code class="descclassname">tools.</code><code class="descname">ndjoin</code><span class="sig-paren">(</span><em>x</em>, <em>axis=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tools.html#ndjoin"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.ndjoin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Join arrays in a list</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>x: list</dt>
+<dd>List of data.</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>axis: optional, [def: 0]</dt>
+<dd>Axis to join arrays</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd>Array</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="file-management">
+<h2>File management<a class="headerlink" href="#file-management" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="save-file">
+<h3>Save file<a class="headerlink" href="#save-file" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="system.savefile">
+<code class="descclassname">system.</code><code class="descname">savefile</code><span class="sig-paren">(</span><em>name</em>, <em>*arg</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/sys/tools.html#savefile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#system.savefile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save a file without carrying of extension.</p>
+<p>arg: for .npy extension
+kwargs: for .pickle or .mat extensions</p>
+</dd></dl>
+
+</div>
+<div class="section" id="load-file">
+<h3>Load file<a class="headerlink" href="#load-file" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="system.loadfile">
+<code class="descclassname">system.</code><code class="descname">loadfile</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/sys/tools.html#loadfile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#system.loadfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Load a file without carrying of extension. The function return
+a dictionnary data.</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="others">
+<h2>Others<a class="headerlink" href="#others" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="tools.p2str">
+<code class="descclassname">tools.</code><code class="descname">p2str</code><span class="sig-paren">(</span><em>p</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tools.html#p2str"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.p2str" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a pvalue to a string. Usefull for saving !</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="tools.uorderlst">
+<code class="descclassname">tools.</code><code class="descname">uorderlst</code><span class="sig-paren">(</span><em>lst</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tools.html#uorderlst"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tools.uorderlst" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a unique set of a list, and preserve order of appearance</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="references.html" class="btn btn-neutral float-right" title="References">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="visualization.html" class="btn btn-neutral" title="1-D graphics"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Etienne Combrisson.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.8',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,711 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Binomial &mdash; brainpipe 0.1.8 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="brainpipe 0.1.8 documentation" href="index.html"/>
+        <link rel="next" title="1-D graphics" href="visualization.html"/>
+        <link rel="prev" title="Presentation" href="classification.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> brainpipe</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <p class="caption"><span class="caption-text">PRE-PROCESSING</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html">Bipolarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="preprocessing.html#physiology">Physiology</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FEATURES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="feature.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#filtering-based">Filtering based</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html">Filtered signal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#amplitude">Amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#power">Power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#time-frequency">Time-Frequency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#phase">Phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="filtfeat.html#phase-locking-factor">Phase-Locking Factor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#coupling-features">Coupling features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html">Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#prefered-phase">Prefered-phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#phase-locked-power">Phase-locked power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#event-related-phase-amplitude-coupling">Event Related Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="couplingfeat.html#phase-locking-value">Phase-Locking Value</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#psd-based-features">PSD based features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html">Power Spectrum Density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html#power-psd">Power PSD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="psdfeat.html#spectral-entropy">Spectral entropy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html#tools">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="featools.html">Physiological bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="featools.html#cross-frequency-vector">Cross-frequency vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="featools.html#simulation">Simulation</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">CLASSIFICATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="classification.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#define-a-classifier">Define a classifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#define-a-cross-validation">Define a cross-validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#classify">Classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#leave-p-subjects-out">Leave p-subjects out</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#generalization">Generalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="classification.html#multi-features">Multi-features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">STATISTICS</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Binomial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#permutations">Permutations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#evaluation">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generate">Generate</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#multiple-comparisons">Multiple-comparisons</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#bonferroni">Bonferroni</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#false-discovery-rate-fdr">False Discovery Rate (FDR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#maximum-statistic">Maximum statistic</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#circular-statistics-toolbox">Circular statistics toolbox</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VISUALIZATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html">1-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#border-plot">Border plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#p-value-plot">p-value plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#continuous-color">Continuous color</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html#d-or-2-d-graphics">1-D or 2-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#add-lines">Add lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="visualization.html#tilerplot">tilerplot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="visualization.html#tools">Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OTHERS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tools.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#bpstudy">Bpstudy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#pandas-complements">Pandas complements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#arrays">Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#file-management">File management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html#others">Others</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">REFERENCES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="references.html#pre-processing">Pre-processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#classification">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#statistics">Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#visualization">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="references.html#tools">Tools</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">brainpipe</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Binomial</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/stat.rst.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">brainpipe.statistics</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><a class="reference internal" href="#bino"><span class="std std-ref">Binomial</span></a></li>
+<li><a class="reference internal" href="#perm"><span class="std std-ref">Permutations</span></a></li>
+<li><a class="reference internal" href="#mltpcomp"><span class="std std-ref">Multiple-comparisons</span></a></li>
+<li><a class="reference internal" href="#circstat"><span class="std std-ref">Circular statistics toolbox</span></a></li>
+</ul>
+<div class="section" id="binomial">
+<span id="bino"></span><h1>Binomial<a class="headerlink" href="#binomial" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="statistics.bino_da2p">
+<code class="descclassname">statistics.</code><code class="descname">bino_da2p</code><span class="sig-paren">(</span><em>y</em>, <em>da</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/stat/binomial.html#bino_da2p"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#statistics.bino_da2p" title="Permalink to this definition">¶</a></dt>
+<dd><p>For a given vector label, get p-values of a decoding accuracy
+using the binomial law.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>y</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">array</span><dd>The vector label</dd>
+<dt>da: int / float / list /array [0 &lt;= da &lt;= 100]</dt>
+<dd>The decoding accuracy array. Ex : da = [75, 33, 25, 17].</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd><dl class="first last docutils">
+<dt>p: ndarray</dt>
+<dd>The p-value associate to each decoding accuracy</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="statistics.bino_p2da">
+<code class="descclassname">statistics.</code><code class="descname">bino_p2da</code><span class="sig-paren">(</span><em>y</em>, <em>p</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/stat/binomial.html#bino_p2da"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#statistics.bino_p2da" title="Permalink to this definition">¶</a></dt>
+<dd><p>For a given vector label, get the decoding accuracy of p-values
+using the binomial law.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>y: array</dt>
+<dd>The vector label</dd>
+<dt>p: int / float / list / array [0 &lt;= p &lt; 1]</dt>
+<dd>p-value. Ex : p = [0.05, 0.01, 0.001, 0.00001]</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd><dl class="first last docutils">
+<dt>da: ndarray</dt>
+<dd>The decoding accuracy associate to each p-value</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="statistics.bino_signifeat">
+<code class="descclassname">statistics.</code><code class="descname">bino_signifeat</code><span class="sig-paren">(</span><em>feat</em>, <em>th</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/stat/binomial.html#bino_signifeat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#statistics.bino_signifeat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get significants features.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>feat: array</dt>
+<dd>Array containing either decoding accuracy (da) either p-values</dd>
+<dt>th: int / float</dt>
+<dd>The threshold in order to find significants features.</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd><dl class="first last docutils">
+<dt>index: array</dt>
+<dd>The index corresponding to significants features</dd>
+<dt>signi_feat: array</dt>
+<dd>The significants features</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="permutations">
+<span id="perm"></span><h1>Permutations<a class="headerlink" href="#permutations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="evaluation">
+<h2>Evaluation<a class="headerlink" href="#evaluation" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="statistics.perm_2pvalue">
+<code class="descclassname">statistics.</code><code class="descname">perm_2pvalue</code><span class="sig-paren">(</span><em>data</em>, <em>perm</em>, <em>n_perm</em>, <em>threshold=None</em>, <em>tail=2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/stat/permutations.html#perm_2pvalue"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#statistics.perm_2pvalue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the associated p-value of a permutation distribution</p>
+<dl class="docutils">
+<dt>Arg:</dt>
+<dd><dl class="first last docutils">
+<dt>data: array</dt>
+<dd>Array of real data. The shape must be (d1, d2, ..., dn)</dd>
+<dt>perm: array</dt>
+<dd>Array of permutations. The shape must be (n_perm, d1, d2, ..., dn)</dd>
+<dt>n_perm: int</dt>
+<dd>Number of permutations</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>threshold: int / float, optional, [def: None]</dt>
+<dd>Every values upper to threshold are going to be set to 1.</dd>
+<dt>tail: int, optional, [def: 2]</dt>
+<dd>Define if the calculation of p-value must take into account one
+or two tails of the permutation distribution</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd><dl class="first last docutils">
+<dt>pvalue</dt>
+ <span class="classifier-delimiter">:</span> <span class="classifier">array</span><dd>Array of associated p-values</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="statistics.perm_metric">
+<code class="descclassname">statistics.</code><code class="descname">perm_metric</code><span class="sig-paren">(</span><em>metric</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/stat/permutations.html#perm_metric"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#statistics.perm_metric" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a metric for permutation normalization.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><p class="first">metric: string/function</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>None: compare directly values without transformation</li>
+<li>&#8216;m_center&#8217;: (A-B)/mean(B) transformation</li>
+<li>&#8216;m_zscore&#8217;: (A-B)/std(B) transformation</li>
+<li>&#8216;m_minus&#8217;: (A-B) transformation</li>
+<li>function: user defined function [def myfcn(A, B): return array_like]</li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="statistics.perm_pvalue2level">
+<code class="descclassname">statistics.</code><code class="descname">perm_pvalue2level</code><span class="sig-paren">(</span><em>perm</em>, <em>p=0.05</em>, <em>maxst=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/stat/permutations.html#perm_pvalue2level"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#statistics.perm_pvalue2level" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get level from which you can consider
+that it&#8217;s p-significant;</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>perm:</dt>
+<dd>Array of permutations of shape
+(n_perm, d1, d2, ..., dn)</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>p: float, optional, [def: 0.05]</dt>
+<dd>p-value to search in permutation distribution</dd>
+<dt>maxst: bool, optional, [def: False]</dt>
+<dd>Correct permutations with maximum statistics</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd><dl class="first last docutils">
+<dt>level: float</dt>
+<dd>The level from which you can consider
+your results as p-significants using permutations</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="generate">
+<h2>Generate<a class="headerlink" href="#generate" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="statistics.perm_rndDatasets">
+<code class="descclassname">statistics.</code><code class="descname">perm_rndDatasets</code><span class="sig-paren">(</span><em>mu=0</em>, <em>sigma=1</em>, <em>dmu=0.1</em>, <em>dsigma=0.1</em>, <em>size=(5</em>, <em>5)</em>, <em>rndstate=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/stat/permutations.html#perm_rndDatasets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#statistics.perm_rndDatasets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate data and permutations uniformly distributed.</p>
+<dl class="docutils">
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>mu: int/float</dt>
+<dd>Center of the distribution</dd>
+<dt>sigma: int/float</dt>
+<dd>Deviation of the distribution</dd>
+<dt>dmu: int/float</dt>
+<dd>Introduce a shift to the mean of data</dd>
+<dt>dsigma: int/float</dt>
+<dd>Introduce a shift to the deviation of data</dd>
+<dt>size: tuple</dt>
+<dd>Size of the generated data and permutations (d1, d2, ..., d3)</dd>
+<dt>rndstate: int</dt>
+<dd>Fix the random state of the machine</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>data: array</dt>
+<dd>Simulated data of shape (n_perm, d1, d2, ..., d3)</dd>
+<dt>perm: array</dt>
+<dd>Simulated permutations of shape (n_perm, d1, d2, ..., d3)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="statistics.perm_swap">
+<code class="descclassname">statistics.</code><code class="descname">perm_swap</code><span class="sig-paren">(</span><em>a</em>, <em>b</em>, <em>n_perm=200</em>, <em>axis=-1</em>, <em>rndstate=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/stat/permutations.html#perm_swap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#statistics.perm_swap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Permute values between two arrays and generate a number of permutations.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>a, b: ndarray</dt>
+<dd>Array to swap values. If axis=-1, the shape of a and b could
+be diffrent. If axis is not -1, the shape of a and b could
+be diffrent along the specified axis, but must be the same on
+all other axis.</dd>
+<dt>n_pem: int</dt>
+<dd>Number of permutations</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>axis: int, optional, [def: -1]</dt>
+<dd>Axis for swapping values. If axis is -1, this mean that all
+values across all dimensions are going to be swap.</dd>
+<dt>rndstate: int</dt>
+<dd>Fix the random state of the machine</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd><dl class="first last docutils">
+<dt>ash, bsh: array</dt>
+<dd>Swapped arrays</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="statistics.perm_rep">
+<code class="descclassname">statistics.</code><code class="descname">perm_rep</code><span class="sig-paren">(</span><em>x</em>, <em>n_perm</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/stat/permutations.html#perm_rep"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#statistics.perm_rep" title="Permalink to this definition">¶</a></dt>
+<dd><p>Repeat a ndarray x n_perm times</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>x: array</dt>
+<dd>Data to repeat of shape (d1, d2, ..., d3)</dd>
+<dt>n_perm: int</dt>
+<dd>Number of permutations</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>xrep: array</dt>
+<dd>Repeated data of shape (n_perm, d1, d2, ..., d3)</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="multiple-comparisons">
+<span id="mltpcomp"></span><h1>Multiple-comparisons<a class="headerlink" href="#multiple-comparisons" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="bonferroni">
+<h2>Bonferroni<a class="headerlink" href="#bonferroni" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="statistics.bonferroni">
+<code class="descclassname">statistics.</code><code class="descname">bonferroni</code><span class="sig-paren">(</span><em>p</em>, <em>axis=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/stat/multcomp.html#bonferroni"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#statistics.bonferroni" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bonferroni correction</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>p: array</dt>
+<dd>Array of p-values</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>axis: int, optional, [def: -1]</dt>
+<dd>Axis to apply the Bonferroni correction. If axis is -1,
+the correction is applied through all dimensions.</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd>Corrected pvalues</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="false-discovery-rate-fdr">
+<h2>False Discovery Rate (FDR)<a class="headerlink" href="#false-discovery-rate-fdr" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="statistics.fdr">
+<code class="descclassname">statistics.</code><code class="descname">fdr</code><span class="sig-paren">(</span><em>p</em>, <em>q</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/stat/multcomp.html#fdr"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#statistics.fdr" title="Permalink to this definition">¶</a></dt>
+<dd><p>False Discovery Rate correction</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>p: array</dt>
+<dd>Array of p-values</dd>
+<dt>q: float</dt>
+<dd>Thresholding p-value</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd><dl class="first last docutils">
+<dt>pcorr: array</dt>
+<dd>Corrected p-values</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="maximum-statistic">
+<h2>Maximum statistic<a class="headerlink" href="#maximum-statistic" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="statistics.maxstat">
+<code class="descclassname">statistics.</code><code class="descname">maxstat</code><span class="sig-paren">(</span><em>perm</em>, <em>axis=-1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/stat/multcomp.html#maxstat"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#statistics.maxstat" title="Permalink to this definition">¶</a></dt>
+<dd><p>Correction by the maximum statistic</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>perm: array</dt>
+<dd>The permutations.</dd>
+<dt>axis: integer, optional, [def: -1]</dt>
+<dd>Use -1 to correct through all dimensions. Otherwise,
+use d1, d2, ... or dn to correct through a specific dimension.</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>permR: array</dt>
+<dd>The re-aranged permutations according to the selectionned
+axis. Then use perm_2pvalues to get the p-value according to this
+distribution.</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="circular-statistics-toolbox">
+<span id="circstat"></span><h1>Circular statistics toolbox<a class="headerlink" href="#circular-statistics-toolbox" title="Permalink to this headline">¶</a></h1>
+<p>Python adaptation of the Matlab toolbox (Berens et al, 2009)</p>
+<dl class="function">
+<dt id="statistics.circ_corrcc">
+<code class="descclassname">statistics.</code><code class="descname">circ_corrcc</code><span class="sig-paren">(</span><em>alpha</em>, <em>x</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/stat/circstat.html#circ_corrcc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#statistics.circ_corrcc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Correlation coefficient between one circular and one linear random
+variable.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>alpha: vector</dt>
+<dd>Sample of angles in radians</dd>
+<dt>x: vector</dt>
+<dd>Sample of linear random variable</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd><dl class="first last docutils">
+<dt>rho: float</dt>
+<dd>Correlation coefficient</dd>
+<dt>pval: float</dt>
+<dd>p-value</dd>
+</dl>
+</dd>
+</dl>
+<p>Code taken from the Circular Statistics Toolbox for Matlab
+By Philipp Berens, 2009
+Python adaptation by Etienne Combrisson</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="statistics.circ_r">
+<code class="descclassname">statistics.</code><code class="descname">circ_r</code><span class="sig-paren">(</span><em>alpha</em>, <em>w=None</em>, <em>d=0</em>, <em>axis=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/stat/circstat.html#circ_r"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#statistics.circ_r" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes mean resultant vector length for circular data.</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>alpha: array</dt>
+<dd>Sample of angles in radians</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>w: array, optional, [def: None]</dt>
+<dd>Number of incidences in case of binned angle data</dd>
+<dt>d: radians, optional, [def: 0]</dt>
+<dd>Spacing of bin centers for binned data, if supplied
+correction factor is used to correct for bias in
+estimation of r</dd>
+<dt>axis: int, optional, [def: 0]</dt>
+<dd>Compute along this dimension</dd>
+</dl>
+</dd>
+<dt>Return:</dt>
+<dd>r: mean resultant length</dd>
+</dl>
+<p>Code taken from the Circular Statistics Toolbox for Matlab
+By Philipp Berens, 2009
+Python adaptation by Etienne Combrisson</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="statistics.circ_rtest">
+<code class="descclassname">statistics.</code><code class="descname">circ_rtest</code><span class="sig-paren">(</span><em>alpha</em>, <em>w=None</em>, <em>d=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/brainpipe/stat/circstat.html#circ_rtest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#statistics.circ_rtest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes Rayleigh test for non-uniformity of circular data.
+H0: the population is uniformly distributed around the circle
+HA: the populatoin is not distributed uniformly around the circle
+Assumption: the distribution has maximally one mode and the data is 
+sampled from a von Mises distribution!</p>
+<dl class="docutils">
+<dt>Args:</dt>
+<dd><dl class="first last docutils">
+<dt>alpha: array</dt>
+<dd>Sample of angles in radians</dd>
+</dl>
+</dd>
+<dt>Kargs:</dt>
+<dd><dl class="first last docutils">
+<dt>w: array, optional, [def: None]</dt>
+<dd>Number of incidences in case of binned angle data</dd>
+<dt>d: radians, optional, [def: 0]</dt>
+<dd>Spacing of bin centers for binned data, if supplied
+correction factor is used to correct for bias in
+estimation of r</dd>
+</dl>
+</dd>
+</dl>
+<p>Code taken from the Circular Statistics Toolbox for Matlab
+By Philipp Berens, 2009
+Python adaptation by Etienne Combrisson</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="visualization.html" class="btn btn-neutral float-right" title="1-D graphics">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="classification.html" class="btn btn-neutral" title="Presentation"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Etienne Combrisson.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.8',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,640 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>brainpipe.clf.MFpipe &mdash; brainpipe 0.1.8 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="brainpipe 0.1.8 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../index.html" class="fa fa-home"> brainpipe</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <p class="caption"><span class="caption-text">PRE-PROCESSING</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../preprocessing.html">Bipolarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../preprocessing.html#physiology">Physiology</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FEATURES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html#filtering-based">Filtering based</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html">Filtered signal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#amplitude">Amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#power">Power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#time-frequency">Time-Frequency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#phase">Phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#phase-locking-factor">Phase-Locking Factor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html#coupling-features">Coupling features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html">Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html#prefered-phase">Prefered-phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html#phase-locked-power">Phase-locked power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html#event-related-phase-amplitude-coupling">Event Related Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html#phase-locking-value">Phase-Locking Value</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html#psd-based-features">PSD based features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../psdfeat.html">Power Spectrum Density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../psdfeat.html#power-psd">Power PSD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../psdfeat.html#spectral-entropy">Spectral entropy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html#tools">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../featools.html">Physiological bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../featools.html#cross-frequency-vector">Cross-frequency vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../featools.html#simulation">Simulation</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">CLASSIFICATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#define-a-classifier">Define a classifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#define-a-cross-validation">Define a cross-validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#classify">Classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#leave-p-subjects-out">Leave p-subjects out</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#generalization">Generalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#multi-features">Multi-features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">STATISTICS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../stat.html">Binomial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stat.html#permutations">Permutations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#evaluation">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#generate">Generate</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stat.html#multiple-comparisons">Multiple-comparisons</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#bonferroni">Bonferroni</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#false-discovery-rate-fdr">False Discovery Rate (FDR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#maximum-statistic">Maximum statistic</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stat.html#circular-statistics-toolbox">Circular statistics toolbox</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VISUALIZATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../visualization.html">1-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#border-plot">Border plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#p-value-plot">p-value plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#continuous-color">Continuous color</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../visualization.html#d-or-2-d-graphics">1-D or 2-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#add-lines">Add lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#tilerplot">tilerplot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../visualization.html#tools">Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OTHERS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#bpstudy">Bpstudy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#pandas-complements">Pandas complements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#arrays">Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#file-management">File management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#others">Others</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">REFERENCES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#pre-processing">Pre-processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#classification">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#statistics">Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#visualization">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#tools">Tools</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">brainpipe</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>brainpipe.clf.MFpipe</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for brainpipe.clf.MFpipe</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">product</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="k">import</span> <span class="n">SVC</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="k">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="p">(</span><span class="n">StratifiedShuffleSplit</span><span class="p">,</span> <span class="n">KFold</span><span class="p">,</span> <span class="n">permutation_test_score</span><span class="p">,</span> <span class="n">GridSearchCV</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">accuracy_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.discriminant_analysis</span> <span class="k">import</span> <span class="n">LinearDiscriminantAnalysis</span>
+<span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="k">import</span> <span class="n">PCA</span>
+<span class="kn">from</span> <span class="nn">sklearn.feature_selection</span> <span class="k">import</span> <span class="n">SelectKBest</span><span class="p">,</span> <span class="n">SelectFdr</span><span class="p">,</span> <span class="n">SelectFpr</span><span class="p">,</span> <span class="n">RFECV</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="k">import</span> <span class="n">Pipeline</span><span class="p">,</span> <span class="n">FeatureUnion</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MFpipe&#39;</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="MFpipe"><a class="viewcode-back" href="../../../classification.html#classification.MFpipe">[docs]</a><span class="k">class</span> <span class="nc">MFpipe</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Define a pipeline of multi-features</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        y: ndarray</span>
+<span class="sd">            Vector label</span>
+
+<span class="sd">        cv: sklearn.cross_validation, optional, (def: default)</span>
+<span class="sd">            An external cross-validation to split in training and testing</span>
+<span class="sd">            to validate the pipeline without overfiting.</span>
+
+<span class="sd">        random_state: ineteger, optional, (def: 0)</span>
+<span class="sd">            Fix the random state of the machine for reproducibility.</span>
+
+<span class="sd">    Return</span>
+<span class="sd">        Multi-features pipeline object</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="c1"># Get variables :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cv</span> <span class="o">=</span> <span class="n">cv</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nfolds</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">n_splits</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_y</span> <span class="o">=</span> <span class="n">y</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nclass</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">best_params_</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pipeline</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+        <span class="c1"># Check cross-validation :</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cv</span><span class="o">.</span><span class="n">random_state</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cv</span><span class="o">.</span><span class="n">random_state</span> <span class="o">=</span> <span class="n">random_state</span>
+
+
+<div class="viewcode-block" id="MFpipe.fit"><a class="viewcode-back" href="../../../classification.html#classification.MFpipe.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rep</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Apply the pipeline.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x: ndarray</span>
+<span class="sd">                Array of features organize as (n_trials, n_features)</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            name: ndarray, optional, (def: None)</span>
+<span class="sd">                Array of string with the same length as the number of features</span>
+
+<span class="sd">            rep: integer, optional, (def: 1)</span>
+<span class="sd">                Number of repetitions for the whole pipeline.</span>
+
+<span class="sd">            n_iter: integer, optional, (def: 5)</span>
+<span class="sd">                Number of iterations in order to find the best set of</span>
+<span class="sd">                parameters</span>
+
+<span class="sd">            n_jobs: integer, optional, (def: 1)</span>
+<span class="sd">                Number of jobs for parallel computing. Use -1 for all jobs.</span>
+
+<span class="sd">            verbose: integer, optional, (def: 0)</span>
+<span class="sd">                Control displaying state</span>
+
+<span class="sd">        Return</span>
+<span class="sd">            da: the final vector of decoding accuracy of shape (n_repetitions,)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Save some usefull variables :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rep</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_iter</span> <span class="o">=</span> <span class="n">rep</span><span class="p">,</span> <span class="n">n_iter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ntrials</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nfeat</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+
+        <span class="c1"># Define features name :</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;f&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_nfeat</span><span class="p">)])</span>
+        <span class="k">elif</span> <span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nfeat</span><span class="p">:</span>
+                <span class="n">name</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nfeat</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;The length of name must be the same as the number of features in x&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_name</span> <span class="o">=</span> <span class="n">name</span>
+
+        <span class="c1"># Pre-defined matrix :</span>
+        <span class="n">da</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">rep</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y_predict</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="n">outstr</span> <span class="o">=</span> <span class="s1">&#39;REP: </span><span class="si">{r}</span><span class="s1">/&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;, FOLD: </span><span class="si">{f}</span><span class="s1">/&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_nfolds</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; = </span><span class="si">{param}</span><span class="s1">&#39;</span>
+
+        <span class="c1"># Loop on repetitions :</span>
+        <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rep</span><span class="p">):</span>
+
+            <span class="c1"># Pre-defined label vectors and estimator/params:</span>
+            <span class="n">yAll_pred</span><span class="p">,</span> <span class="n">yAll_true</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+            <span class="n">best_estimator_</span><span class="p">,</span> <span class="n">best_params_</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+
+            <span class="c1"># Loop on training/testing index :</span>
+            <span class="n">iterator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">trainIdx</span><span class="p">,</span> <span class="n">testIdx</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">iterator</span><span class="p">):</span>
+
+                <span class="c1"># Training/testing set :</span>
+                <span class="n">xtrain</span><span class="p">,</span> <span class="n">ytrain</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">trainIdx</span><span class="p">,</span> <span class="p">:],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y</span><span class="p">[</span><span class="n">trainIdx</span><span class="p">]</span>
+                <span class="n">xtest</span><span class="p">,</span> <span class="n">ytest</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">testIdx</span><span class="p">,</span> <span class="p">:],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y</span><span class="p">[</span><span class="n">testIdx</span><span class="p">]</span>
+
+                <span class="c1"># Cross-validate the choice of parameters  :</span>
+                <span class="n">cv</span> <span class="o">=</span> <span class="n">StratifiedShuffleSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">n_iter</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+                <span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="n">verbose</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)</span>
+                <span class="n">grid</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">xtrain</span><span class="p">,</span> <span class="n">ytrain</span><span class="p">)</span>
+                <span class="n">grid</span><span class="o">.</span><span class="n">best_estimator_</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">xtrain</span><span class="p">,</span> <span class="n">ytrain</span><span class="p">)</span>
+
+                <span class="c1"># Save best estimator/params for each fold :</span>
+                <span class="n">best_estimator_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">)</span>
+                <span class="n">best_params_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+
+                <span class="c1"># Step print :</span>
+                <span class="k">if</span> <span class="n">verbose</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">outstr</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">param</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)))</span>
+
+                <span class="c1"># Evaluate on testing :</span>
+                <span class="n">yAll_pred</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">grid</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">xtest</span><span class="p">))</span>
+                <span class="n">yAll_true</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">ytest</span><span class="p">)</span>
+
+            <span class="c1"># Save best estimator/params for each repetition :</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">best_estimator_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">best_estimator_</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">best_params_</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">best_params_</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">y_predict</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">yAll_pred</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">y_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">yAll_true</span><span class="p">)</span>
+
+            <span class="c1"># Evaluate the decoding of this repetition :</span>
+            <span class="n">da</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span>  <span class="n">accuracy_score</span><span class="p">(</span><span class="n">yAll_true</span><span class="p">,</span> <span class="n">yAll_pred</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span>
+
+            <span class="c1"># Update random_state for the next repetition :</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cv</span><span class="o">.</span><span class="n">random_state</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                <span class="c1"># score, daperm, pvalue = permutation_test_score(grid.best_estimator_, xtest, ytest, scoring=&quot;accuracy&quot;, cv=3,</span>
+                <span class="c1">#                                                n_permutations=100, n_jobs=1)</span>
+                <span class="c1"># print(&#39;SCORE: &#39;, score, &#39;DAPERM: &#39;, daperm, &#39;PVALUE: &#39;, pvalue)</span>
+
+        <span class="k">return</span> <span class="n">da</span></div>
+
+
+<div class="viewcode-block" id="MFpipe.custom_pipeline"><a class="viewcode-back" href="../../../classification.html#classification.MFpipe.custom_pipeline">[docs]</a>    <span class="k">def</span> <span class="nf">custom_pipeline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pipeline</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Send a custom pipeline</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            pipeline: sklearn.Pipeline, optional, (def: None)</span>
+<span class="sd">                The pipeline to use</span>
+
+<span class="sd">            grid: sklearn.GridCv, optional, (def: None)</span>
+<span class="sd">                A grid for parameters optimisation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pipeline</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">,</span> <span class="n">grid</span></div>
+
+
+<div class="viewcode-block" id="MFpipe.default_pipeline"><a class="viewcode-back" href="../../../classification.html#classification.MFpipe.default_pipeline">[docs]</a>    <span class="k">def</span> <span class="nf">default_pipeline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">n_pca</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_best</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">lda_shrink</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">svm_C</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                         <span class="n">svm_gamma</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">fdr_alpha</span><span class="o">=</span><span class="p">[</span><span class="mf">0.05</span><span class="p">],</span> <span class="n">fpr_alpha</span><span class="o">=</span><span class="p">[</span><span class="mf">0.05</span><span class="p">]):</span>
+        <span class="sd">&quot;&quot;&quot;Use a default combination of parameters for building a pipeline</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name: string</span>
+<span class="sd">                The string for building a default pipeline (see examples below)</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            n_pca: integer, optional, (def: 10)</span>
+<span class="sd">                The number of components to search</span>
+
+<span class="sd">            n_best: integer, optional, (def: 10)</span>
+<span class="sd">                Number of best features to consider using a statistical method</span>
+
+<span class="sd">            lda_shrink: integer, optional, (def: 10)</span>
+<span class="sd">                Fit optimisation parameter for the lda</span>
+
+<span class="sd">            svm_C/svm_gamma: integer, optional, (def: 10/10)</span>
+<span class="sd">                Parameters to optimize for the svm</span>
+
+<span class="sd">            fdr/fpr_alpha: list, optional, (def: [0.05])</span>
+<span class="sd">                List of float for selecting features using a fdr or fpr</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">            &gt;&gt;&gt; # Basic classifiers :</span>
+<span class="sd">            &gt;&gt;&gt; name = &#39;lda&#39; # or name = &#39;svm_linear&#39; for a linear SVM</span>
+<span class="sd">            &gt;&gt;&gt; # Combine a classifier with a feature selection method :</span>
+<span class="sd">            &gt;&gt;&gt; name = &#39;lda_fdr_fpr_kbest_pca&#39;</span>
+<span class="sd">            &gt;&gt;&gt; # The method above will use an LDA for the features evaluation</span>
+<span class="sd">            &gt;&gt;&gt; # and will combine a FDR, FPR, k-Best and pca feature seelction.</span>
+<span class="sd">            &gt;&gt;&gt; # Now we can combine with classifier optimisation :</span>
+<span class="sd">            &gt;&gt;&gt; name = &#39;lda_optimized_pca&#39; # will try to optimize an LDA with a pca</span>
+<span class="sd">            &gt;&gt;&gt; name = &#39;svm_kernel_C_gamma_kbest&#39; # optimize a SVM by trying</span>
+<span class="sd">            &gt;&gt;&gt; # diffrent kernels (linear/RBF), and optimize C and gamma parameters</span>
+<span class="sd">            &gt;&gt;&gt; # combine with a k-Best features selection.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># ----------------------------------------------------------------</span>
+        <span class="c1"># DEFINED COMBINORS</span>
+        <span class="c1"># ----------------------------------------------------------------</span>
+        <span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">()</span>
+        <span class="n">selection</span> <span class="o">=</span> <span class="n">SelectKBest</span><span class="p">()</span>
+        <span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+        <span class="n">fdr</span> <span class="o">=</span> <span class="n">SelectFdr</span><span class="p">()</span>
+        <span class="n">fpr</span> <span class="o">=</span> <span class="n">SelectFpr</span><span class="p">()</span>
+
+        <span class="c1"># ----------------------------------------------------------------</span>
+        <span class="c1"># RANGE DEFINITION</span>
+        <span class="c1"># ---------------------------------------------------------</span>
+        <span class="n">pca_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_pca</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">kbest_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_best</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">C_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="n">svm_C</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mf">2.</span><span class="p">)</span> <span class="c1">#np.logspace(-2, 2, svm_C)</span>
+        <span class="n">gamma_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">svm_gamma</span><span class="p">,</span> <span class="n">base</span><span class="o">=</span><span class="mf">2.</span><span class="p">)</span> <span class="c1">#np.logspace(-9, 2, svm_gamma)</span>
+
+        <span class="c1"># Check range :</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">kbest_range</span><span class="o">.</span><span class="n">size</span><span class="p">:</span> <span class="n">kbest_range</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">pca_range</span><span class="o">.</span><span class="n">size</span><span class="p">:</span> <span class="n">pca_range</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">C_range</span><span class="o">.</span><span class="n">size</span><span class="p">:</span> <span class="n">C_range</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">gamma_range</span><span class="o">.</span><span class="n">size</span><span class="p">:</span> <span class="n">gamma_range</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;auto&#39;</span><span class="p">]</span>
+
+        <span class="c1"># ----------------------------------------------------------------</span>
+        <span class="c1"># DEFINED PIPELINE ELEMENTS</span>
+        <span class="c1"># ----------------------------------------------------------------</span>
+        <span class="n">pipeline</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">grid</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">combine</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># ----------------------------------------------------------------</span>
+        <span class="c1"># BUILD CLASSIFIER</span>
+        <span class="c1"># ----------------------------------------------------------------</span>
+        <span class="c1"># -&gt; SCALE :</span>
+        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;scale&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">pipeline</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;scaler&quot;</span><span class="p">,</span> <span class="n">scaler</span><span class="p">))</span>
+
+        <span class="c1"># -&gt; LDA :</span>
+        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;lda&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+
+            <span class="c1"># Default :</span>
+            <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;optimized&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">clf</span> <span class="o">=</span> <span class="n">LinearDiscriminantAnalysis</span><span class="p">(</span><span class="n">priors</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">_nclass</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_nclass</span><span class="p">))</span>
+
+            <span class="c1"># Optimized :</span>
+            <span class="k">elif</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;optimized&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">clf</span> <span class="o">=</span> <span class="n">LinearDiscriminantAnalysis</span><span class="p">(</span><span class="n">priors</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">_nclass</span><span class="p">]</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">_nclass</span><span class="p">),</span> <span class="n">solver</span><span class="o">=</span><span class="s1">&#39;lsqr&#39;</span><span class="p">)</span>
+                <span class="n">grid</span><span class="p">[</span><span class="s1">&#39;clf__shrinkage&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="n">lda_shrink</span><span class="p">)</span>
+
+        <span class="c1"># -&gt; SVM :</span>
+        <span class="k">elif</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;svm&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+
+            <span class="c1"># Linear/RBF standard kernel :</span>
+            <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;kernel&#39;</span><span class="p">:</span><span class="s1">&#39;linear&#39;</span><span class="p">}</span>
+            <span class="k">elif</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;rbf&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;kernel&#39;</span><span class="p">:</span><span class="s1">&#39;rbf&#39;</span><span class="p">}</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+
+            <span class="c1"># Optimized :</span>
+            <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;optimized&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+
+                <span class="c1"># Kernel optimization :</span>
+                <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;kernel&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">grid</span><span class="p">[</span><span class="s1">&#39;clf__kernel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;linear&#39;</span><span class="p">,</span> <span class="s1">&#39;rbf&#39;</span><span class="p">)</span>
+
+                <span class="c1"># C optimization :</span>
+                <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;_c_&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">grid</span><span class="p">[</span><span class="s1">&#39;clf__C&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">C_range</span>
+
+                <span class="c1"># Gamma optimization :</span>
+                <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;gamma&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">grid</span><span class="p">[</span><span class="s1">&#39;clf__gamma&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gamma_range</span>
+
+
+            <span class="n">clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># ----------------------------------------------------------------</span>
+        <span class="c1"># BUILD COMBINE</span>
+        <span class="c1"># ----------------------------------------------------------------</span>
+        <span class="c1"># -&gt; FDR :</span>
+        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;fdr&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">combine</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;fdr&quot;</span><span class="p">,</span> <span class="n">fdr</span><span class="p">))</span>
+            <span class="n">grid</span><span class="p">[</span><span class="s1">&#39;features__fdr__alpha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fdr_alpha</span>
+
+        <span class="c1"># -&gt; FPR :</span>
+        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;fpr&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">combine</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;fpr&quot;</span><span class="p">,</span> <span class="n">fpr</span><span class="p">))</span>
+            <span class="n">grid</span><span class="p">[</span><span class="s1">&#39;features__fpr__alpha&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fpr_alpha</span>
+
+        <span class="c1"># -&gt; PCA :</span>
+        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;pca&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">combine</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;pca&quot;</span><span class="p">,</span> <span class="n">pca</span><span class="p">))</span>
+            <span class="n">grid</span><span class="p">[</span><span class="s1">&#39;features__pca__n_components&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pca_range</span>
+
+        <span class="c1"># -&gt; kBest :</span>
+        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;kbest&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">combine</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;kBest&quot;</span><span class="p">,</span> <span class="n">selection</span><span class="p">))</span>
+            <span class="n">grid</span><span class="p">[</span><span class="s1">&#39;features__kBest__k&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kbest_range</span>
+
+        <span class="c1"># -&gt; RFECV :</span>
+        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;rfecv&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="n">rfecv</span> <span class="o">=</span> <span class="n">RFECV</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span>
+            <span class="n">combine</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;RFECV&quot;</span><span class="p">,</span> <span class="n">rfecv</span><span class="p">))</span>
+
+        <span class="c1"># if combine is empty, select all features :</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">combine</span><span class="p">):</span>
+            <span class="n">combine</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;kBest&quot;</span><span class="p">,</span> <span class="n">SelectKBest</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="s1">&#39;all&#39;</span><span class="p">)))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">combine</span> <span class="o">=</span> <span class="n">FeatureUnion</span><span class="p">(</span><span class="n">combine</span><span class="p">)</span>
+
+        <span class="c1"># ----------------------------------------------------------------</span>
+        <span class="c1"># SAVE PIPELINE</span>
+        <span class="c1"># ----------------------------------------------------------------</span>
+        <span class="c1"># Build ordered pipeline :</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">combine</span><span class="p">):</span>
+            <span class="n">pipeline</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;features&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">combine</span><span class="p">))</span>
+        <span class="n">pipeline</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="s2">&quot;clf&quot;</span><span class="p">,</span> <span class="n">clf</span><span class="p">))</span>
+
+        <span class="c1"># Save pipeline :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">pipeline</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span> <span class="o">=</span> <span class="n">grid</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pipename</span> <span class="o">=</span> <span class="n">name</span></div>
+        <span class="c1"># print(&#39;Default pipeline set&#39;)</span>
+        <span class="c1"># print(&#39;\nCOMBINE: &#39;, self.combine, &#39;\n\nPIPELINE: &#39;, self.pipeline, &#39;\n\nGRID: &#39;, self.grid)</span>
+
+
+<div class="viewcode-block" id="MFpipe.selected_features"><a class="viewcode-back" href="../../../classification.html#classification.MFpipe.selected_features">[docs]</a>    <span class="k">def</span> <span class="nf">selected_features</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the number of times a feature was selected</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">):</span>
+            <span class="c1"># Get selected features from the best estimator :</span>
+            <span class="n">iterator</span> <span class="o">=</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_rep</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_nfolds</span><span class="p">))</span>
+            <span class="n">fselected</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">featrange</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_nfeat</span><span class="p">)[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">:</span>
+                <span class="n">estimator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">best_estimator_</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">get_params</span><span class="p">()[</span><span class="s1">&#39;features&#39;</span><span class="p">]</span>
+                <span class="n">fselected</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">estimator</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">featrange</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)))</span>
+            <span class="c1"># Get the count for each feature :</span>
+            <span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fselected</span><span class="p">))</span>
+            <span class="n">selectedBins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_nfeat</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+            <span class="n">selectedBins</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bins</span><span class="p">))]</span> <span class="o">=</span> <span class="n">bins</span>
+            <span class="c1"># Put everything in a Dataframe :</span>
+            <span class="n">resum</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Name&#39;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">_name</span><span class="p">,</span> <span class="s1">&#39;Count&#39;</span><span class="p">:</span><span class="n">selectedBins</span><span class="p">,</span>
+                                 <span class="s1">&#39;Percent&#39;</span><span class="p">:</span><span class="mi">100</span><span class="o">*</span><span class="n">selectedBins</span><span class="o">/</span><span class="n">selectedBins</span><span class="o">.</span><span class="n">sum</span><span class="p">()},</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span> <span class="s1">&#39;Count&#39;</span><span class="p">,</span> <span class="s1">&#39;Percent&#39;</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">resum</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;You must run the fit() method before&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MFpipe.get_grid"><a class="viewcode-back" href="../../../classification.html#classification.MFpipe.get_grid">[docs]</a>    <span class="k">def</span> <span class="nf">get_grid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_splits</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the cross-validated grid search object</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            n_splits: int, optional, (def: 3)</span>
+<span class="sd">                The number of folds for the cross-validation</span>
+
+<span class="sd">            n_jobs: int, optional, (def: 1)</span>
+<span class="sd">                Number of jobs to use for parallel processing</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            grid: a sklearn.GridSearchCV object with the defined pipeline</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pipeline</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">grid</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">StratifiedShuffleSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">n_splits</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">n_splits</span><span class="p">),</span>
+                                <span class="n">param_grid</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;You must first define a pipeline&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">grid</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">pipename</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pipename</span>
+
+    <span class="nd">@pipename</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">pipename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_pipeline</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Pipeline updated&#39;</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Etienne Combrisson.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.1.8',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

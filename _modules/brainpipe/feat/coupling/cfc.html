@@ -1,0 +1,1271 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>brainpipe.feat.coupling.cfc &mdash; brainpipe 0.1.8 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../search.html"/>
+    <link rel="top" title="brainpipe 0.1.8 documentation" href="../../../../index.html"/>
+        <link rel="up" title="Module code" href="../../../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../../index.html" class="fa fa-home"> brainpipe</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <p class="caption"><span class="caption-text">PRE-PROCESSING</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../preprocessing.html">Bipolarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../preprocessing.html#physiology">Physiology</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FEATURES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../feature.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../feature.html#filtering-based">Filtering based</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../filtfeat.html">Filtered signal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../filtfeat.html#amplitude">Amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../filtfeat.html#power">Power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../filtfeat.html#time-frequency">Time-Frequency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../filtfeat.html#phase">Phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../filtfeat.html#phase-locking-factor">Phase-Locking Factor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../feature.html#coupling-features">Coupling features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../couplingfeat.html">Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../couplingfeat.html#prefered-phase">Prefered-phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../couplingfeat.html#phase-locked-power">Phase-locked power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../couplingfeat.html#event-related-phase-amplitude-coupling">Event Related Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../couplingfeat.html#phase-locking-value">Phase-Locking Value</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../feature.html#psd-based-features">PSD based features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../psdfeat.html">Power Spectrum Density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../psdfeat.html#power-psd">Power PSD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../psdfeat.html#spectral-entropy">Spectral entropy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../feature.html#tools">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../featools.html">Physiological bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../featools.html#cross-frequency-vector">Cross-frequency vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../featools.html#simulation">Simulation</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">CLASSIFICATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classification.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classification.html#define-a-classifier">Define a classifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classification.html#define-a-cross-validation">Define a cross-validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classification.html#classify">Classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classification.html#leave-p-subjects-out">Leave p-subjects out</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classification.html#generalization">Generalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classification.html#multi-features">Multi-features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">STATISTICS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../stat.html">Binomial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../stat.html#permutations">Permutations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../stat.html#evaluation">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../stat.html#generate">Generate</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../stat.html#multiple-comparisons">Multiple-comparisons</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../stat.html#bonferroni">Bonferroni</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../stat.html#false-discovery-rate-fdr">False Discovery Rate (FDR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../stat.html#maximum-statistic">Maximum statistic</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../stat.html#circular-statistics-toolbox">Circular statistics toolbox</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VISUALIZATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../visualization.html">1-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../visualization.html#border-plot">Border plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../visualization.html#p-value-plot">p-value plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../visualization.html#continuous-color">Continuous color</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../visualization.html#d-or-2-d-graphics">1-D or 2-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../visualization.html#add-lines">Add lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../visualization.html#tilerplot">tilerplot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../visualization.html#tools">Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OTHERS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tools.html#bpstudy">Bpstudy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tools.html#pandas-complements">Pandas complements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tools.html#arrays">Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tools.html#file-management">File management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tools.html#others">Others</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">REFERENCES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../references.html">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../references.html#pre-processing">Pre-processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../references.html#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../references.html#classification">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../references.html#statistics">Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../references.html#visualization">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../references.html#tools">Tools</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">brainpipe</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+      
+    <li>brainpipe.feat.coupling.cfc</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for brainpipe.feat.coupling.cfc</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">joblib</span> <span class="k">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
+<span class="kn">from</span> <span class="nn">psutil</span> <span class="k">import</span> <span class="n">cpu_count</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">product</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="k">import</span> <span class="n">erfinv</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">norm</span> 
+
+<span class="kn">from</span> <span class="nn">brainpipe.feat.utils._feat</span> <span class="k">import</span> <span class="p">(</span><span class="n">_manageWindow</span><span class="p">,</span> <span class="n">_manageFrequencies</span><span class="p">,</span>
+                                        <span class="n">_checkref</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">brainpipe.feat.filtering</span> <span class="k">import</span> <span class="n">fextract</span><span class="p">,</span> <span class="n">docfilter</span>
+<span class="kn">from</span> <span class="nn">brainpipe.feat.coupling.pac._pac</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">brainpipe.feat.coupling.pac.pacmeth</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">brainpipe.visu.cmon_plt</span> <span class="k">import</span> <span class="n">tilerplot</span>
+<span class="kn">from</span> <span class="nn">brainpipe.tools</span> <span class="k">import</span> <span class="n">binarize</span><span class="p">,</span> <span class="n">binArray</span>
+<span class="kn">from</span> <span class="nn">brainpipe.statistics</span> <span class="k">import</span> <span class="n">perm_2pvalue</span><span class="p">,</span> <span class="n">circ_corrcc</span><span class="p">,</span> <span class="n">circ_rtest</span>
+<span class="kn">from</span> <span class="nn">brainpipe.feat.utils._feat</span> <span class="k">import</span> <span class="n">normalize</span>
+<span class="kn">from</span> <span class="nn">brainpipe.feature</span> <span class="k">import</span> <span class="n">power</span><span class="p">,</span> <span class="n">phase</span><span class="p">,</span> <span class="n">sigfilt</span>
+<span class="kn">from</span> <span class="nn">brainpipe.visual</span> <span class="k">import</span> <span class="n">addLines</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pac&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;PhaseLockedPower&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;erpac&#39;</span><span class="p">,</span> 
+           <span class="s1">&#39;pfdphase&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;PLV&#39;</span>
+           <span class="p">]</span>
+
+
+<span class="n">windoc</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        window: tuple/list/None, optional [def: None]</span>
+<span class="s2">            List/tuple: [100,1500]</span>
+<span class="s2">            List of list/tuple: [(100,500),(200,4000)]</span>
+<span class="s2">            Width and step parameters will be ignored.</span>
+
+<span class="s2">        width: int, optional [def: None]</span>
+<span class="s2">            width of a single window.</span>
+
+<span class="s2">        step: int, optional [def: None]</span>
+<span class="s2">            Each window will be spaced by the &quot;step&quot; value.</span>
+
+<span class="s2">        time: list/array, optional [def: None]</span>
+<span class="s2">            Define a specific time vector</span>
+
+<span class="s2">    &quot;&quot;&quot;</span>
+
+<span class="n">Footnotes</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+
+<span class="s2">    .. rubric:: Footnotes</span>
+<span class="s2">    .. [#f1] `Canolty et al, 2006 &lt;http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2628289/&gt;`_</span>
+<span class="s2">    .. [#f2] `Tort et al, 2010 &lt;http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2941206/&gt;`_</span>
+<span class="s2">    .. [#f3] `Ozkurt et al, 2012 &lt;http://www.ncbi.nlm.nih.gov/pubmed/22531738/&gt;`_</span>
+<span class="s2">    .. [#f4] `Bahramisharif et al, 2013 &lt;http://www.jneurosci.org/content/33/48/18849.short/&gt;`_</span>
+<span class="s2">    .. [#f5] `Penny et al, 2008 &lt;http://www.sciencedirect.com/science/article/pii/S0165027008003816&gt;`_</span>
+
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="k">def</span> <span class="nf">cfcparafilt</span><span class="p">(</span><span class="n">xpha</span><span class="p">,</span> <span class="n">xamp</span><span class="p">,</span> <span class="n">n_jobs</span><span class="p">,</span> <span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Parallel filtering through electrode dimension</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nelec</span> <span class="o">=</span> <span class="n">xpha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="c1"># Run para filtering :</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">_cfcparafilt</span><span class="p">)(</span>
+            <span class="n">xpha</span><span class="p">[</span><span class="n">e</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">xamp</span><span class="p">[</span><span class="n">e</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="bp">self</span><span class="p">,</span>
+            <span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nelec</span><span class="p">))</span>
+    <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pha</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">amp</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_cfcparafilt</span><span class="p">(</span><span class="n">xpha</span><span class="p">,</span> <span class="n">xamp</span><span class="p">,</span> <span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Sub parallel filtering function</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get the filter for phase/amplitude properties :</span>
+    <span class="n">phaMeth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pha</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pha</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_npts</span><span class="p">)</span>
+    <span class="n">ampMeth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_amp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_amp</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_npts</span><span class="p">)</span>
+    <span class="c1"># Filt phase and amplitude :</span>
+    <span class="n">pha</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pha</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">xpha</span><span class="p">,</span> <span class="n">phaMeth</span><span class="p">)</span>
+    <span class="n">amp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_amp</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">xamp</span><span class="p">,</span> <span class="n">ampMeth</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span>
+
+
+<span class="k">class</span> <span class="nc">_coupling</span><span class="p">(</span><span class="n">tilerplot</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pha_f</span><span class="p">,</span> <span class="n">pha_kind</span><span class="p">,</span> <span class="n">pha_meth</span><span class="p">,</span> <span class="n">pha_cycle</span><span class="p">,</span>
+                 <span class="n">amp_f</span><span class="p">,</span> <span class="n">amp_kind</span><span class="p">,</span> <span class="n">amp_meth</span><span class="p">,</span> <span class="n">amp_cycle</span><span class="p">,</span>
+                 <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># Define windows and frequency :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pha</span> <span class="o">=</span> <span class="n">fextract</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="n">pha_kind</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">pha_meth</span><span class="p">,</span>
+                             <span class="n">cycle</span><span class="o">=</span><span class="n">pha_cycle</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_amp</span> <span class="o">=</span> <span class="n">fextract</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="n">amp_kind</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">amp_meth</span><span class="p">,</span>
+                             <span class="n">cycle</span><span class="o">=</span><span class="n">amp_cycle</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_window</span><span class="p">,</span> <span class="n">xvec</span> <span class="o">=</span> <span class="n">_manageWindow</span><span class="p">(</span><span class="n">npts</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">,</span>
+                                           <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span>
+                                           <span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_pha</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_manageFrequencies</span><span class="p">(</span><span class="n">pha_f</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_amp</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_manageFrequencies</span><span class="p">(</span><span class="n">amp_f</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">time</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">npts</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_window</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_window</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="n">npts</span><span class="p">)]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_window</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="c1"># self.xvec = [0, npts]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">binArray</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_window</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Get variables :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_step</span> <span class="o">=</span> <span class="n">step</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nPha</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pha</span><span class="o">.</span><span class="n">f</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nAmp</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_amp</span><span class="o">.</span><span class="n">f</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sf</span> <span class="o">=</span> <span class="n">sf</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_npts</span> <span class="o">=</span> <span class="n">npts</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nwin</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_window</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pha</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pha</span><span class="o">.</span><span class="n">f</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">amp</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_amp</span><span class="o">.</span><span class="n">f</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="pac"><a class="viewcode-back" href="../../../../couplingfeat.html#feature.pac">[docs]</a><span class="k">class</span> <span class="nc">pac</span><span class="p">(</span><span class="n">_coupling</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Compute the phase-amplitude coupling (pac) either in local or</span>
+<span class="sd">    distant coupling. PAC require three things:</span>
+
+<span class="sd">        - Main method to compute it</span>
+<span class="sd">        - Surrogates to correct the true pac estimation</span>
+<span class="sd">        - A normalization method to correct pas by surrogates</span>
+
+<span class="sd">    Contributor: Juan LP Soto.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        sf: int</span>
+<span class="sd">            Sampling frequency</span>
+
+<span class="sd">        npts: int</span>
+<span class="sd">            Number of points of the time serie</span>
+
+<span class="sd">    Kargs:</span>
+<span class="sd">        Id: string, optional, [def: &#39;113&#39;]</span>
+<span class="sd">            The Id correspond to the way of computing pac. Id is composed of</span>
+<span class="sd">            three digits [ex : Id=&#39;210&#39;]</span>
+
+<span class="sd">                * First digit: refer to the pac method:</span>
+
+<span class="sd">                    - &#39;1&#39;: Mean Vector Length [#f1]_</span>
+<span class="sd">                    - &#39;2&#39;: Kullback-Leibler Divergence [#f2]_</span>
+<span class="sd">                    - &#39;3&#39;: Heights Ratio</span>
+<span class="sd">                    - &#39;4&#39;: Phase synchrony (or adapted PLV) [#f5]_</span>
+<span class="sd">                    - &#39;5&#39;: ndPAC [#f3]_</span>
+
+<span class="sd">                * Second digit: refer to the method for computing surrogates:</span>
+
+<span class="sd">                    - &#39;0&#39;: No surrogates</span>
+<span class="sd">                    - &#39;1&#39;: Swap trials phase/amplitude [#f2]_</span>
+<span class="sd">                    - &#39;2&#39;: Swap trials amplitude [#f4]_</span>
+<span class="sd">                    - &#39;3&#39;: Shuffle phase time-series</span>
+<span class="sd">                    - &#39;4&#39;: Shuffle amplitude time-series</span>
+<span class="sd">                    - &#39;5&#39;: Time lag [#f1]_ [NOT IMPLEMENTED YET]</span>
+<span class="sd">                    - &#39;6&#39;: Circular shifting [NOT IMPLEMENTED YET]</span>
+
+<span class="sd">                * Third digit: refer to the normalization method for correction:</span>
+
+<span class="sd">                    - &#39;0&#39;: No normalization</span>
+<span class="sd">                    - &#39;1&#39;: Substract the mean of surrogates</span>
+<span class="sd">                    - &#39;2&#39;: Divide by the mean of surrogates</span>
+<span class="sd">                    - &#39;3&#39;: Substract then divide by the mean of surrogates</span>
+<span class="sd">                    - &#39;4&#39;: Z-score</span>
+
+<span class="sd">            So, if Id=&#39;143&#39;, this mean that pac will be evaluate using the</span>
+<span class="sd">            Modulation Index (&#39;1&#39;), then surrogates are computing by randomly</span>
+<span class="sd">            shuffle amplitude values (&#39;4&#39;) and finally, the true pac value</span>
+<span class="sd">            will be normalized by substracting then dividing by the mean of surrogates.</span>
+
+<span class="sd">        pha_f: tuple/list, optional, [def: [2,4]]</span>
+<span class="sd">            List containing the couple of frequency bands for the phase.</span>
+<span class="sd">            Example: f=[ [2,4], [5,7], [60,250] ]</span>
+
+<span class="sd">        pha_meth: string, optional, [def: &#39;hilbert&#39;]</span>
+<span class="sd">            Method for the phase extraction.</span>
+
+<span class="sd">        pha_cycle: integer, optional, [def: 3]</span>
+<span class="sd">            Number of cycles for filtering the phase.</span>
+
+<span class="sd">        amp_f: tuple/list, optional, [def: [60,200]]</span>
+<span class="sd">            List containing the couple of frequency bands for the amplitude.</span>
+<span class="sd">            Each couple can be either a list or a tuple.</span>
+
+<span class="sd">        amp_meth: string, optional, [def: &#39;hilbert&#39;]</span>
+<span class="sd">            Method for the amplitude extraction.</span>
+
+<span class="sd">        amp_cycle: integer, optional, [def: 6]</span>
+<span class="sd">            Number of cycles for filtering the amplitude.</span>
+
+<span class="sd">        nbins: integer, optional, [def: 18]</span>
+<span class="sd">            Some pac method (like Kullback-Leibler Distance or Heights Ratio) need</span>
+<span class="sd">            a binarization of the phase. nbins control the number of bins.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__doc__</span> <span class="o">+=</span> <span class="n">windoc</span> <span class="o">+</span> <span class="n">docfilter</span> <span class="o">+</span> <span class="n">Footnotes</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">Id</span><span class="o">=</span><span class="s1">&#39;113&#39;</span><span class="p">,</span> <span class="n">pha_f</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">pha_meth</span><span class="o">=</span><span class="s1">&#39;hilbert&#39;</span><span class="p">,</span>
+                 <span class="n">pha_cycle</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">amp_f</span><span class="o">=</span><span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">amp_meth</span><span class="o">=</span><span class="s1">&#39;hilbert&#39;</span><span class="p">,</span> <span class="n">amp_cycle</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+                 <span class="n">nbins</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># Check pha and amp methods:</span>
+        <span class="n">_checkref</span><span class="p">(</span><span class="s1">&#39;pha_meth&#39;</span><span class="p">,</span> <span class="n">pha_meth</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;hilbert&#39;</span><span class="p">,</span> <span class="s1">&#39;hilbert1&#39;</span><span class="p">,</span> <span class="s1">&#39;hilbert2&#39;</span><span class="p">])</span>
+        <span class="n">_checkref</span><span class="p">(</span><span class="s1">&#39;amp_meth&#39;</span><span class="p">,</span> <span class="n">amp_meth</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;hilbert&#39;</span><span class="p">,</span> <span class="s1">&#39;hilbert1&#39;</span><span class="p">,</span> <span class="s1">&#39;hilbert2&#39;</span><span class="p">])</span>
+
+        <span class="c1"># Check the type of f:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pha_f</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pha_f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="n">pha_f</span> <span class="o">=</span> <span class="n">binarize</span><span class="p">(</span>
+                <span class="n">pha_f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pha_f</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">pha_f</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">pha_f</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;list&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">amp_f</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">amp_f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="n">amp_f</span> <span class="o">=</span> <span class="n">binarize</span><span class="p">(</span>
+                <span class="n">amp_f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">amp_f</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">amp_f</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">amp_f</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;list&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xvec</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Initalize pac object :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Id</span> <span class="o">=</span> <span class="n">Id</span>
+        <span class="n">me</span> <span class="o">=</span> <span class="n">Id</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="c1"># Manage settings :</span>
+        <span class="c1">#   1 - Choose if we extract phase or amplitude :</span>
+        <span class="c1">#       - Methods using phase // amplitude :</span>
+        <span class="k">if</span> <span class="n">me</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;6&#39;</span><span class="p">]:</span>
+            <span class="n">pha_kind</span><span class="p">,</span> <span class="n">amp_kind</span> <span class="o">=</span> <span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="s1">&#39;amplitude&#39;</span>
+        <span class="c1">#       - Methods using phase // phase :</span>
+        <span class="k">elif</span> <span class="n">me</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;4&#39;</span><span class="p">]:</span>
+            <span class="n">pha_kind</span><span class="p">,</span> <span class="n">amp_kind</span> <span class="o">=</span> <span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="s1">&#39;amplitude&#39;</span>
+        <span class="c1">#   2 - Specific case of Ozkurt :</span>
+        <span class="k">if</span> <span class="n">me</span> <span class="o">==</span> <span class="s1">&#39;5&#39;</span><span class="p">:</span>
+            <span class="n">Id</span> <span class="o">=</span> <span class="s1">&#39;500&#39;</span>
+        <span class="c1"># Initialize cfc :</span>
+        <span class="n">_coupling</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pha_f</span><span class="p">,</span> <span class="n">pha_kind</span><span class="p">,</span> <span class="n">pha_meth</span><span class="p">,</span> <span class="n">pha_cycle</span><span class="p">,</span>
+                           <span class="n">amp_f</span><span class="p">,</span> <span class="n">amp_kind</span><span class="p">,</span> <span class="n">amp_meth</span><span class="p">,</span> <span class="n">amp_cycle</span><span class="p">,</span>
+                           <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># Get pac model :</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">ModelStr</span><span class="p">,</span> <span class="n">SurStr</span><span class="p">,</span> <span class="n">NormStr</span> <span class="o">=</span> <span class="n">CfcSettings</span><span class="p">(</span><span class="n">Id</span><span class="p">,</span> <span class="n">nbins</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Method : &#39;</span><span class="o">+</span><span class="n">ModelStr</span><span class="p">,</span> <span class="s1">&#39;Surrogates : &#39;</span><span class="o">+</span><span class="n">SurStr</span><span class="p">,</span>
+                      <span class="s1">&#39;Normalization : &#39;</span><span class="o">+</span><span class="n">NormStr</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nbins</span> <span class="o">=</span> <span class="n">nbins</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">phafilt</span> <span class="o">=</span> <span class="s1">&#39;Phase : &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pha</span><span class="p">)</span>
+        <span class="n">ampfilt</span> <span class="o">=</span> <span class="s1">&#39;Amplitude : &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_amp</span><span class="p">)</span>
+        <span class="n">met</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;,</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;,</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;,</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">cfcStr</span> <span class="o">=</span> <span class="s1">&#39;Crossfrequency Coupling(step=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_step</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;, width=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_width</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;, Id=&#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">Id</span><span class="o">+</span><span class="s1">&#39;, nbins=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_nbins</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;,</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="n">met</span>
+
+        <span class="k">return</span> <span class="n">cfcStr</span><span class="o">+</span><span class="n">phafilt</span><span class="o">+</span><span class="s1">&#39;,</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="n">ampfilt</span><span class="o">+</span><span class="s1">&#39;)&#39;</span>
+
+<div class="viewcode-block" id="pac.get"><a class="viewcode-back" href="../../../../couplingfeat.html#feature.pac.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xpha</span><span class="p">,</span> <span class="n">xamp</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">matricial</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the normalized cfc mesure between an xpha and xamp signals.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            xpha: array</span>
+<span class="sd">                Signal for phase. The shape of xpha should be :</span>
+<span class="sd">                (n_electrodes x n_pts x n_trials)</span>
+
+<span class="sd">            xamp: array</span>
+<span class="sd">                Signal for amplitude. The shape of xamp should be :</span>
+<span class="sd">                (n_electrodes x n_pts x n_trials)</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            n_perm: integer, optional, [def: 200]</span>
+<span class="sd">                Number of permutations for normalizing the cfc mesure.</span>
+
+<span class="sd">            p: float, optional, [def: 0.05]</span>
+<span class="sd">                p-value for the statistical method of Ozkurt 2012.</span>
+
+<span class="sd">            matricial: bool, optional, [def: False]</span>
+<span class="sd">                Some methods can work in matricial computation. This can lead</span>
+<span class="sd">                to a 10x or 30x time faster. But, please, monitor your RAM usage</span>
+<span class="sd">                beacause this parameter can use a lot of RAM. So, turn this parameter</span>
+<span class="sd">                in case of small computation.</span>
+
+<span class="sd">            n_jobs: integer, optional, [def: -1]</span>
+<span class="sd">                Control the number of jobs for parallel computing. Use 1, 2, ..</span>
+<span class="sd">                depending of your number or cores. -1 for all the cores.</span>
+
+<span class="sd">            If the same signal is used (example : xpha=x and xamp=x), this mean</span>
+<span class="sd">            the program compute a local cfc.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            ncfc: array</span>
+<span class="sd">                The cfc mesure of size :</span>
+<span class="sd">                (n_amplitude x n_phase x n_electrodes x n_windows x n_trials)</span>
+
+<span class="sd">            pvalue: array</span>
+<span class="sd">                The associated p-values of size :</span>
+<span class="sd">                (n_amplitude x n_phase x n_electrodes x n_windows)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check the inputs variables :</span>
+        <span class="n">xpha</span><span class="p">,</span> <span class="n">xamp</span> <span class="o">=</span> <span class="n">_cfcCheck</span><span class="p">(</span><span class="n">xpha</span><span class="p">,</span> <span class="n">xamp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_npts</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_perm</span> <span class="o">=</span> <span class="n">n_perm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_matricial</span> <span class="o">=</span> <span class="n">matricial</span>
+        <span class="k">if</span> <span class="n">n_perm</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">p</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">n_perm</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">p</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">N</span> <span class="o">=</span> <span class="n">xpha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Manage jobs repartition :</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">N</span> <span class="o">&lt;</span> <span class="n">cpu_count</span><span class="p">())</span> <span class="ow">and</span> <span class="p">(</span><span class="n">n_jobs</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">surJob</span> <span class="o">=</span> <span class="n">n_jobs</span>
+            <span class="n">elecJob</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">N</span> <span class="o">&gt;=</span> <span class="n">cpu_count</span><span class="p">())</span> <span class="ow">and</span> <span class="p">(</span><span class="n">n_jobs</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">surJob</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">elecJob</span> <span class="o">=</span> <span class="n">n_jobs</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">surJob</span><span class="p">,</span> <span class="n">elecJob</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
+
+        <span class="c1"># Get the unormalized cfc and surogates:</span>
+        <span class="n">cfcsu</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">elecJob</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">_cfcFiltSuro</span><span class="p">)(</span>
+            <span class="n">xpha</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">xamp</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">surJob</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+        <span class="n">uCfc</span><span class="p">,</span> <span class="n">Suro</span><span class="p">,</span> <span class="n">mSuro</span><span class="p">,</span> <span class="n">stdSuro</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">cfcsu</span><span class="p">)</span>
+        <span class="n">uCfc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">uCfc</span><span class="p">)</span>
+
+        <span class="c1"># Permutations ans stat:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Id</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="s1">&#39;5&#39;</span><span class="p">):</span>
+            <span class="c1"># Compute permutations :</span>
+            <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_perm</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Id</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="s1">&#39;0&#39;</span><span class="p">):</span>
+                <span class="n">Suro</span><span class="p">,</span> <span class="n">mSuro</span><span class="p">,</span> <span class="n">stdSuro</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                    <span class="n">Suro</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mSuro</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">stdSuro</span><span class="p">)</span>
+
+                <span class="c1"># Normalize each cfc:</span>
+                <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">Norm</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">CfcSettings</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Id</span><span class="p">)</span>
+                <span class="n">nCfc</span> <span class="o">=</span> <span class="n">Norm</span><span class="p">(</span><span class="n">uCfc</span><span class="p">,</span> <span class="n">mSuro</span><span class="p">,</span> <span class="n">stdSuro</span><span class="p">)</span>
+
+                <span class="c1"># Confidence interval :</span>
+                <span class="n">pvalue</span> <span class="o">=</span> <span class="n">perm_2pvalue</span><span class="p">(</span><span class="n">uCfc</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">rollaxis</span><span class="p">(</span><span class="n">Suro</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span>
+                                      <span class="bp">self</span><span class="o">.</span><span class="n">n_perm</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+                <span class="k">return</span> <span class="n">nCfc</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">pvalue</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">uCfc</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="kc">None</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">Id</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="s1">&#39;5&#39;</span><span class="p">:</span>
+            <span class="c1"># Ozkurt threshold :</span>
+            <span class="n">xlim</span> <span class="o">=</span> <span class="p">(</span><span class="n">erfinv</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">p</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <span class="c1"># Set to zero non-significant values:</span>
+            <span class="n">idxUn</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">uCfc</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="o">*</span><span class="n">xlim</span><span class="p">)</span>
+            <span class="n">uCfc</span><span class="p">[</span><span class="n">idxUn</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">return</span> <span class="n">uCfc</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="kc">None</span></div></div>
+
+
+<div class="viewcode-block" id="PhaseLockedPower"><a class="viewcode-back" href="../../../../couplingfeat.html#feature.PhaseLockedPower">[docs]</a><span class="k">class</span> <span class="nc">PhaseLockedPower</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Extract phase-locked power and visualize shifted time-frequency map</span>
+<span class="sd">    according to phase peak.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        sf: int</span>
+<span class="sd">            Sampling frequency</span>
+
+<span class="sd">        npts: int</span>
+<span class="sd">            Number of points of the time serie</span>
+
+<span class="sd">    Kargs:</span>
+<span class="sd">        f: tuple/list, optional, [def: (2, 200, 10, 5)]</span>
+<span class="sd">            The frequency vector (fstart, fend, fwidth, fstep)</span>
+
+<span class="sd">        pha: tuple/list, optional, [def: [8, 13]]</span>
+<span class="sd">            Frequency for phase.</span>
+
+<span class="sd">        time: array/list, optional, [def: None]</span>
+<span class="sd">            The time vector to use</span>
+
+<span class="sd">        baseline: tuple/list, optional, [def: None]</span>
+<span class="sd">            Location of baseline (in sample)</span>
+
+<span class="sd">        norm: integer, optional, [def: None]</span>
+<span class="sd">            Normalize method</span>
+<span class="sd">                - 0: No normalisation</span>
+<span class="sd">                - 1: Substraction</span>
+<span class="sd">                - 2: Division</span>
+<span class="sd">                - 3: Substract then divide</span>
+<span class="sd">                - 4: Z-score</span>
+
+<span class="sd">        powArgs: any supplementar arguments are directly passed to the power</span>
+<span class="sd">        function.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">pha</span><span class="o">=</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">13</span><span class="p">],</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">baseline</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">powArgs</span><span class="p">):</span>
+        <span class="c1"># Define objects:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_normBck</span> <span class="o">=</span> <span class="n">norm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_baseline</span> <span class="o">=</span> <span class="n">baseline</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_powObj</span> <span class="o">=</span> <span class="n">power</span><span class="p">(</span>
+            <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">baseline</span><span class="o">=</span><span class="n">baseline</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">,</span> <span class="o">**</span><span class="n">powArgs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_phaObj</span> <span class="o">=</span> <span class="n">phase</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">pha</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sigObj</span> <span class="o">=</span> <span class="n">sigfilt</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">pha</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PhaseLockedPower.get"><a class="viewcode-back" href="../../../../couplingfeat.html#feature.PhaseLockedPower.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">cue</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get power phase locked</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x: array</span>
+<span class="sd">                Data of shape (npt, ntrials)</span>
+
+<span class="sd">            cue: integer</span>
+<span class="sd">                Cue to align time-frequency maps.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            xpow, xpha, xsig: repectively realigned power, phase and filtered</span>
+<span class="sd">            signal</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Find cue according to define time vector</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cue</span> <span class="o">=</span> <span class="n">cue</span>
+        <span class="n">xvec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_powObj</span><span class="o">.</span><span class="n">xvec</span>
+        <span class="n">cue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">xvec</span><span class="p">)</span><span class="o">-</span><span class="n">cue</span><span class="p">)</span><span class="o">.</span><span class="n">argmin</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cueIdx</span> <span class="o">=</span> <span class="n">cue</span>
+        <span class="c1"># Extact power, phase and filtered signal:</span>
+        <span class="n">xpow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_powObj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">xpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_phaObj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">xsig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sigObj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="c1"># Re-align:</span>
+        <span class="n">xpha_s</span><span class="p">,</span> <span class="n">xpow_s</span><span class="p">,</span> <span class="n">xsig_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span>
+            <span class="n">xpha</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">xpow</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">xsig</span><span class="p">)</span>
+        <span class="n">nTrials</span> <span class="o">=</span> <span class="n">xsig</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nTrials</span><span class="p">):</span>
+            <span class="c1"># Get shifting:</span>
+            <span class="n">move</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_PeakDetection</span><span class="p">(</span><span class="n">xsig</span><span class="p">[:,</span> <span class="n">k</span><span class="p">],</span> <span class="n">cue</span><span class="p">)</span>
+            <span class="c1"># Apply shifting:</span>
+            <span class="n">xpha_s</span><span class="p">[:,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ShiftSignal</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">xpha</span><span class="p">[:,</span> <span class="n">k</span><span class="p">]),</span> <span class="n">move</span><span class="p">)</span>
+            <span class="n">xsig_s</span><span class="p">[:,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ShiftSignal</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">xsig</span><span class="p">[:,</span> <span class="n">k</span><span class="p">]),</span> <span class="n">move</span><span class="p">)</span>
+            <span class="n">xpow_s</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ShiftSignal</span><span class="p">(</span><span class="n">xpow</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">k</span><span class="p">],</span> <span class="n">move</span><span class="p">)</span>
+        <span class="n">xpow_s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">xpow_s</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># Normalize mean power:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normBck</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">bsl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_baseline</span>
+            <span class="n">xFm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">xpow_s</span><span class="p">[:,</span> <span class="n">bsl</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">bsl</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">baseline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">xFm</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">xpow_s</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+            <span class="n">xpow_s</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">xpow_s</span><span class="p">,</span> <span class="n">baseline</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_normBck</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">xpow_s</span><span class="p">,</span> <span class="n">xpha_s</span><span class="p">,</span> <span class="n">xsig_s</span></div>
+
+<div class="viewcode-block" id="PhaseLockedPower.tflockedplot"><a class="viewcode-back" href="../../../../couplingfeat.html#feature.PhaseLockedPower.tflockedplot">[docs]</a>    <span class="k">def</span> <span class="nf">tflockedplot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xpow</span><span class="p">,</span> <span class="n">sig</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                     <span class="n">ylim</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;std&#39;</span><span class="p">,</span> <span class="n">vColor</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span>
+                     <span class="n">sigcolor</span><span class="o">=</span><span class="s1">&#39;slateblue&#39;</span><span class="p">,</span> <span class="n">fignum</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Plot realigned time-frequency maps.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            xpow, sig: output of the get() method. sig can either be the phase</span>
+<span class="sd">            or the filtered signal.</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            cmap: string, optional, [def: &#39;viridis&#39;]</span>
+<span class="sd">                The colormap to use</span>
+
+<span class="sd">            vmin, vmax: int/float, otpional, [def: None, None]</span>
+<span class="sd">                Limits of the colorbar</span>
+
+<span class="sd">            ylim: tuple/list, optional, [def: None]</span>
+<span class="sd">                Limit for the plot of the signal</span>
+
+<span class="sd">            alpha: float, optional, [def: 0.3]</span>
+<span class="sd">                Transparency of deviation/sem</span>
+
+<span class="sd">            kind: string, optional, [def: &#39;std&#39;]</span>
+<span class="sd">                Choose between &#39;std&#39; or &#39;sem&#39; to either display standard</span>
+<span class="sd">                deviation or standard error on the mean for the signal plot</span>
+
+<span class="sd">            vColor: string, optional, [def: &#39;r&#39;]</span>
+<span class="sd">                Color of the vertical line which materialized the choosen cue</span>
+
+<span class="sd">            sigcolor: string, optional, [def: &#39;slateblue&#39;]</span>
+<span class="sd">                Color of the signal</span>
+
+<span class="sd">            fignum: integer, optional, [def: 0]</span>
+<span class="sd">                Number of the figure</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            figure, axes1 (TF plot), axes2 (signal plot), axes3 (colorbar)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">matplotlib.gridspec</span> <span class="k">as</span> <span class="nn">gridspec</span>
+        <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+        <span class="n">xvec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_powObj</span><span class="o">.</span><span class="n">xvec</span>
+        <span class="n">yvec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_powObj</span><span class="o">.</span><span class="n">yvec</span>
+
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">fignum</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+        <span class="n">gs</span> <span class="o">=</span> <span class="n">gridspec</span><span class="o">.</span><span class="n">GridSpec</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+        <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">::,</span> <span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">ax3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="c1"># TF:</span>
+        <span class="n">im</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">xpow</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">,</span>
+                        <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="n">xvec</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xvec</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">yvec</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">yvec</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+        <span class="n">addLines</span><span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">vLines</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cue</span><span class="p">],</span> <span class="n">vShape</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;-&#39;</span><span class="p">],</span> <span class="n">vWidth</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                 <span class="n">vColor</span><span class="o">=</span><span class="p">[</span><span class="n">vColor</span><span class="p">])</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency (hz)&#39;</span><span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="s1">&#39;off&#39;</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+        <span class="n">ax1</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+
+        <span class="n">cb</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">cax</span><span class="o">=</span><span class="n">ax3</span><span class="p">)</span>
+        <span class="n">cb</span><span class="o">.</span><span class="n">set_ticks</span><span class="p">(</span><span class="n">cb</span><span class="o">.</span><span class="n">get_clim</span><span class="p">())</span>
+        <span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;Power modulations&#39;</span><span class="p">,</span> <span class="n">labelpad</span><span class="o">=-</span><span class="mi">10</span><span class="p">)</span>
+
+        <span class="c1"># Signal:</span>
+        <span class="n">xm</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;std&#39;</span><span class="p">:</span>
+            <span class="n">x2add</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;sem&#39;</span><span class="p">:</span>
+            <span class="n">x2add</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xm</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">xlow</span><span class="p">,</span> <span class="n">xhigh</span> <span class="o">=</span> <span class="n">xm</span><span class="o">-</span><span class="n">x2add</span><span class="p">,</span> <span class="n">xm</span><span class="o">+</span><span class="n">x2add</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xvec</span><span class="p">,</span> <span class="n">xm</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">sigcolor</span><span class="p">)</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">xvec</span><span class="p">,</span> <span class="n">xlow</span><span class="p">,</span> <span class="n">xhigh</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">,</span>
+                         <span class="n">color</span><span class="o">=</span><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_color</span><span class="p">())</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">ax2</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">())</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">which</span><span class="o">=</span><span class="s1">&#39;both&#39;</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="s1">&#39;off&#39;</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+        <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ylim</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ylim</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ax2</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+        <span class="n">addLines</span><span class="p">(</span><span class="n">ax2</span><span class="p">,</span> <span class="n">vLines</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_cue</span><span class="p">],</span> <span class="n">vShape</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;-&#39;</span><span class="p">],</span> <span class="n">vWidth</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span>
+                 <span class="n">vColor</span><span class="o">=</span><span class="p">[</span><span class="n">vColor</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">plt</span><span class="o">.</span><span class="n">gcf</span><span class="p">(),</span> <span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span></div>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_PeakDetection</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">cue</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Detect peaks in a signal and return the shifting length</span>
+<span class="sd">        corresponding to the defined cue</span>
+<span class="sd">        sig: vector</span>
+<span class="sd">        cue: integer (in sample)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">peaks</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sig</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">sig</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">sig</span><span class="p">[</span><span class="n">k</span><span class="p">])</span> <span class="ow">and</span> <span class="p">(</span><span class="n">sig</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">sig</span><span class="p">[</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="n">peaks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="n">minPeak</span> <span class="o">=</span> <span class="n">peaks</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">peaks</span><span class="p">)</span><span class="o">-</span><span class="n">cue</span><span class="p">)</span><span class="o">.</span><span class="n">argmin</span><span class="p">()]</span>
+        <span class="k">return</span> <span class="n">minPeak</span><span class="o">-</span><span class="n">cue</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_ShiftSignal</span><span class="p">(</span><span class="n">sig</span><span class="p">,</span> <span class="n">move</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">npts</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">sigShift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">sig</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">move</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sigShift</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="n">npts</span><span class="o">-</span><span class="n">move</span><span class="p">]</span> <span class="o">=</span> <span class="n">sig</span><span class="p">[:,</span> <span class="n">move</span><span class="p">::]</span>
+        <span class="k">elif</span> <span class="n">move</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">sigShift</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">move</span><span class="p">)::]</span> <span class="o">=</span> <span class="n">sig</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="n">npts</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">move</span><span class="p">)]</span>
+        <span class="k">return</span> <span class="n">sigShift</span></div>
+
+
+<div class="viewcode-block" id="erpac"><a class="viewcode-back" href="../../../../couplingfeat.html#feature.erpac">[docs]</a><span class="k">class</span> <span class="nc">erpac</span><span class="p">(</span><span class="n">_coupling</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Compute Event Related Phase-Amplitude coupling. See [#f6]_</span>
+
+<span class="sd">    .. rubric:: Footnotes</span>
+<span class="sd">    .. [#f6] `Voytek et al, 2013 &lt;http://www.ncbi.nlm.nih.gov/pubmed/22986076&gt;`_</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        sf: int</span>
+<span class="sd">            Sampling frequency</span>
+
+<span class="sd">        npts: int</span>
+<span class="sd">            Number of points of the time serie</span>
+
+<span class="sd">    Kargs:</span>
+<span class="sd">        pha_f: tuple/list, optional, [def: [2,4]]</span>
+<span class="sd">            List containing the couple of frequency bands for the phase.</span>
+<span class="sd">            Example: f=[ [2,4], [5,7], [60,250] ]</span>
+
+<span class="sd">        pha_meth: string, optional, [def: &#39;hilbert&#39;]</span>
+<span class="sd">            Method for the phase extraction.</span>
+
+<span class="sd">        pha_cycle: integer, optional, [def: 3]</span>
+<span class="sd">            Number of cycles for filtering the phase.</span>
+
+<span class="sd">        amp_f: tuple/list, optional, [def: [60,200]]</span>
+<span class="sd">            List containing the couple of frequency bands for the amplitude.</span>
+<span class="sd">            Each couple can be either a list or a tuple.</span>
+
+<span class="sd">        amp_meth: string, optional, [def: &#39;hilbert&#39;]</span>
+<span class="sd">            Method for the amplitude extraction.</span>
+
+<span class="sd">        amp_cycle: integer, optional, [def: 6]</span>
+<span class="sd">            Number of cycles for filtering the amplitude.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__doc__</span> <span class="o">+=</span> <span class="n">windoc</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">pha_f</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">pha_meth</span><span class="o">=</span><span class="s1">&#39;hilbert&#39;</span><span class="p">,</span>
+                 <span class="n">pha_cycle</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">amp_f</span><span class="o">=</span><span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">amp_meth</span><span class="o">=</span><span class="s1">&#39;hilbert&#39;</span><span class="p">,</span> <span class="n">amp_cycle</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+                 <span class="n">window</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># Check pha and amp methods:</span>
+        <span class="n">_checkref</span><span class="p">(</span><span class="s1">&#39;pha_meth&#39;</span><span class="p">,</span> <span class="n">pha_meth</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;hilbert&#39;</span><span class="p">,</span> <span class="s1">&#39;hilbert1&#39;</span><span class="p">,</span> <span class="s1">&#39;hilbert2&#39;</span><span class="p">])</span>
+        <span class="n">_checkref</span><span class="p">(</span><span class="s1">&#39;amp_meth&#39;</span><span class="p">,</span> <span class="n">amp_meth</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;hilbert&#39;</span><span class="p">,</span> <span class="s1">&#39;hilbert1&#39;</span><span class="p">,</span> <span class="s1">&#39;hilbert2&#39;</span><span class="p">])</span>
+
+        <span class="c1"># Check the type of f:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pha_f</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pha_f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="n">pha_f</span> <span class="o">=</span> <span class="n">binarize</span><span class="p">(</span>
+                <span class="n">pha_f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pha_f</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">pha_f</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">pha_f</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;list&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">amp_f</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">amp_f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="n">amp_f</span> <span class="o">=</span> <span class="n">binarize</span><span class="p">(</span>
+                <span class="n">amp_f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">amp_f</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">amp_f</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">amp_f</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;list&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Initialize cfc :</span>
+        <span class="n">_coupling</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pha_f</span><span class="p">,</span> <span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="n">pha_meth</span><span class="p">,</span> <span class="n">pha_cycle</span><span class="p">,</span>
+                           <span class="n">amp_f</span><span class="p">,</span> <span class="s1">&#39;amplitude&#39;</span><span class="p">,</span> <span class="n">amp_meth</span><span class="p">,</span> <span class="n">amp_cycle</span><span class="p">,</span>
+                           <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="erpac.get"><a class="viewcode-back" href="../../../../couplingfeat.html#feature.erpac.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xpha</span><span class="p">,</span> <span class="n">xamp</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the erpac mesure between an xpha and xamp signals.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            xpha: array</span>
+<span class="sd">                Signal for phase. The shape of xpha should be :</span>
+<span class="sd">                (n_electrodes x n_pts x n_trials)</span>
+
+<span class="sd">            xamp: array</span>
+<span class="sd">                Signal for amplitude. The shape of xamp should be :</span>
+<span class="sd">                (n_electrodes x n_pts x n_trials)</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            n_perm: integer, optional, [def: 200]</span>
+<span class="sd">                Number of permutations for normalizing the cfc mesure.</span>
+
+<span class="sd">            n_jobs: integer, optional, [def: -1]</span>
+<span class="sd">                Control the number of jobs for parallel computing. Use 1, 2, ..</span>
+<span class="sd">                depending of your number or cores. -1 for all the cores.</span>
+
+<span class="sd">            If the same signal is used (example : xpha=x and xamp=x), this mean</span>
+<span class="sd">            the program compute a local erpac.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            xerpac: array</span>
+<span class="sd">                The erpac mesure of size :</span>
+<span class="sd">                (n_amplitude x n_phase x n_electrodes x n_windows)</span>
+
+<span class="sd">            pvalue: array</span>
+<span class="sd">                The associated p-values of size :</span>
+<span class="sd">                (n_amplitude x n_phase x n_electrodes x n_windows)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check and get methods:</span>
+        <span class="n">xpha</span><span class="p">,</span> <span class="n">xamp</span> <span class="o">=</span> <span class="n">_cfcCheck</span><span class="p">(</span><span class="n">xpha</span><span class="p">,</span> <span class="n">xamp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_npts</span><span class="p">)</span>
+        <span class="n">npha</span><span class="p">,</span> <span class="n">namp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nPha</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nAmp</span>
+        <span class="n">phaMeth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pha</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pha</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_npts</span><span class="p">)</span>
+        <span class="n">ampMeth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_amp</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_amp</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_npts</span><span class="p">)</span>
+        
+        <span class="c1"># Extract phase and amplitude:</span>
+        <span class="n">nelec</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">ntrials</span> <span class="o">=</span> <span class="n">xpha</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">xp</span><span class="p">,</span> <span class="n">xa</span> <span class="o">=</span> <span class="n">cfcparafilt</span><span class="p">(</span><span class="n">xpha</span><span class="p">,</span> <span class="n">xamp</span><span class="p">,</span> <span class="n">n_jobs</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+        <span class="c1"># Window:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_window</span> <span class="o">==</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="n">npts</span><span class="p">)]):</span>
+            <span class="n">xp</span> <span class="o">=</span> <span class="n">binArray</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_window</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">xa</span> <span class="o">=</span> <span class="n">binArray</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_window</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">npts</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+        <span class="c1"># Extract ERPAC and surrogates:</span>
+        <span class="n">iteract</span> <span class="o">=</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">nelec</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">npha</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">namp</span><span class="p">))</span>
+        <span class="n">xerpac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nelec</span><span class="p">,</span> <span class="n">npha</span><span class="p">,</span> <span class="n">namp</span><span class="p">,</span> <span class="n">npts</span><span class="p">))</span>
+        <span class="n">pval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">xerpac</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">iteract</span><span class="p">:</span>
+            <span class="n">xerpac</span><span class="p">[</span><span class="n">e</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="p">:],</span> <span class="n">pval</span><span class="p">[</span><span class="n">e</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">_erpac</span><span class="p">(</span><span class="n">xp</span><span class="p">[</span><span class="n">e</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+                                  <span class="n">xa</span><span class="p">[</span><span class="n">e</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">n_perm</span><span class="p">,</span> <span class="n">n_jobs</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">xerpac</span><span class="p">,</span> <span class="n">pval</span></div></div>
+
+<span class="k">def</span> <span class="nf">_erpac</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">xa</span><span class="p">,</span> <span class="n">n_perm</span><span class="p">,</span> <span class="n">n_jobs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Sub erpac function</span>
+<span class="sd">    [xp] = [xa] = (npts, ntrials)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">npts</span><span class="p">,</span> <span class="n">ntrials</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">shape</span>
+    <span class="c1"># Compute ERPAC</span>
+    <span class="n">xerpac</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">npts</span><span class="p">,))</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">npts</span><span class="p">):</span>
+        <span class="n">xerpac</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">circ_corrcc</span><span class="p">(</span><span class="n">xp</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="p">:],</span> <span class="n">xa</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="p">:])[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Compute surrogates:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">_erpacSuro</span><span class="p">)(</span>
+            <span class="n">xp</span><span class="p">,</span> <span class="n">xa</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">ntrials</span><span class="p">)</span> <span class="k">for</span> <span class="n">pe</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_perm</span><span class="p">))</span>
+    <span class="n">suro</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="c1"># Normalize erpac:</span>
+    <span class="n">xerpac</span> <span class="o">=</span> <span class="p">(</span><span class="n">xerpac</span> <span class="o">-</span> <span class="n">suro</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="o">/</span><span class="n">suro</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Get p-value:</span>
+    <span class="n">pvalue</span> <span class="o">=</span> <span class="n">norm</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">xerpac</span><span class="p">))</span><span class="o">*</span><span class="mi">2</span>
+
+    <span class="k">return</span> <span class="n">xerpac</span><span class="p">,</span> <span class="n">pvalue</span>
+
+<span class="k">def</span> <span class="nf">_erpacSuro</span><span class="p">(</span><span class="n">xp</span><span class="p">,</span> <span class="n">xa</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">ntrials</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Parallel surrogates</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Permute ntrials (only for amplitude):</span>
+    <span class="n">perm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">ntrials</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">npts</span><span class="p">):</span>
+        <span class="n">suro</span> <span class="o">=</span> <span class="n">circ_corrcc</span><span class="p">(</span><span class="n">xp</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="p">:],</span> <span class="n">xa</span><span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="n">perm</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">suro</span>
+
+
+<div class="viewcode-block" id="pfdphase"><a class="viewcode-back" href="../../../../couplingfeat.html#feature.pfdphase">[docs]</a><span class="k">class</span> <span class="nc">pfdphase</span><span class="p">(</span><span class="n">_coupling</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Get the preferred phase of a phase-amplitude coupling</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        sf: int</span>
+<span class="sd">            Sampling frequency</span>
+
+<span class="sd">        npts: int</span>
+<span class="sd">            Number of points of the time serie</span>
+
+<span class="sd">    Kargs:</span>
+<span class="sd">        nbins: integer, optional, [def: 18]</span>
+<span class="sd">            Number of bins to binarize the amplitude.</span>
+
+<span class="sd">        pha_f: tuple/list, optional, [def: [2,4]]</span>
+<span class="sd">            List containing the couple of frequency bands for the phase.</span>
+<span class="sd">            Example: f=[ [2,4], [5,7], [60,250] ]</span>
+
+<span class="sd">        pha_meth: string, optional, [def: &#39;hilbert&#39;]</span>
+<span class="sd">            Method for the phase extraction.</span>
+
+<span class="sd">        pha_cycle: integer, optional, [def: 3]</span>
+<span class="sd">            Number of cycles for filtering the phase.</span>
+
+<span class="sd">        amp_f: tuple/list, optional, [def: [60,200]]</span>
+<span class="sd">            List containing the couple of frequency bands for the amplitude.</span>
+<span class="sd">            Each couple can be either a list or a tuple.</span>
+
+<span class="sd">        amp_meth: string, optional, [def: &#39;hilbert&#39;]</span>
+<span class="sd">            Method for the amplitude extraction.</span>
+
+<span class="sd">        amp_cycle: integer, optional, [def: 6]</span>
+<span class="sd">            Number of cycles for filtering the amplitude.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">__doc__</span> <span class="o">+=</span> <span class="n">windoc</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">nbins</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">pha_f</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">pha_meth</span><span class="o">=</span><span class="s1">&#39;hilbert&#39;</span><span class="p">,</span>
+                 <span class="n">pha_cycle</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">amp_f</span><span class="o">=</span><span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">amp_meth</span><span class="o">=</span><span class="s1">&#39;hilbert&#39;</span><span class="p">,</span> <span class="n">amp_cycle</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+                 <span class="n">window</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># Check pha and amp methods:</span>
+        <span class="n">_checkref</span><span class="p">(</span><span class="s1">&#39;pha_meth&#39;</span><span class="p">,</span> <span class="n">pha_meth</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;hilbert&#39;</span><span class="p">,</span> <span class="s1">&#39;hilbert1&#39;</span><span class="p">,</span> <span class="s1">&#39;hilbert2&#39;</span><span class="p">])</span>
+        <span class="n">_checkref</span><span class="p">(</span><span class="s1">&#39;amp_meth&#39;</span><span class="p">,</span> <span class="n">amp_meth</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;hilbert&#39;</span><span class="p">,</span> <span class="s1">&#39;hilbert1&#39;</span><span class="p">,</span> <span class="s1">&#39;hilbert2&#39;</span><span class="p">])</span>
+
+        <span class="c1"># Check the type of f:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pha_f</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pha_f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="n">pha_f</span> <span class="o">=</span> <span class="n">binarize</span><span class="p">(</span>
+                <span class="n">pha_f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">pha_f</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">pha_f</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">pha_f</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;list&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">amp_f</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">amp_f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="n">amp_f</span> <span class="o">=</span> <span class="n">binarize</span><span class="p">(</span>
+                <span class="n">amp_f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">amp_f</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">amp_f</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">amp_f</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;list&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xvec</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="c1"># Binarize phase vector :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_binsize</span> <span class="o">=</span> <span class="mi">360</span> <span class="o">/</span> <span class="n">nbins</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_phabin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_binsize</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">phabin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">_phabin</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span>
+                                      <span class="bp">self</span><span class="o">.</span><span class="n">_phabin</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_binsize</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Initialize coupling:</span>
+        <span class="n">_coupling</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pha_f</span><span class="p">,</span> <span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="n">pha_meth</span><span class="p">,</span> <span class="n">pha_cycle</span><span class="p">,</span>
+                           <span class="n">amp_f</span><span class="p">,</span> <span class="s1">&#39;amplitude&#39;</span><span class="p">,</span> <span class="n">amp_meth</span><span class="p">,</span> <span class="n">amp_cycle</span><span class="p">,</span>
+                           <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nbins</span> <span class="o">=</span> <span class="n">nbins</span>
+
+<div class="viewcode-block" id="pfdphase.get"><a class="viewcode-back" href="../../../../couplingfeat.html#feature.pfdphase.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xpha</span><span class="p">,</span> <span class="n">xamp</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the preferred phase</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            xpha: array</span>
+<span class="sd">                Signal for phase. The shape of xpha should be :</span>
+<span class="sd">                (n_electrodes x n_pts x n_trials)</span>
+
+<span class="sd">            xamp: array</span>
+<span class="sd">                Signal for amplitude. The shape of xamp should be :</span>
+<span class="sd">                (n_electrodes x n_pts x n_trials)</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            n_jobs: integer, optional, [def: -1]</span>
+<span class="sd">                Control the number of jobs for parallel computing. Use 1, 2, ..</span>
+<span class="sd">                depending of your number or cores. -1 for all the cores.</span>
+
+<span class="sd">            If the same signal is used (example : xpha=x and xamp=x), this mean</span>
+<span class="sd">            the program compute a local cfc.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            pfp: array</span>
+<span class="sd">                The preferred phase extracted from the mean of trials of size :</span>
+<span class="sd">                (n_amplitude x n_phase x n_electrodes x n_windows)</span>
+
+<span class="sd">            prf: array</span>
+<span class="sd">                The preferred phase extracted from each trial of size :</span>
+<span class="sd">                (n_amplitude x n_phase x n_electrodes x n_windows x n_trials)</span>
+
+<span class="sd">            ambin: array</span>
+<span class="sd">                The binarized amplitude of size :</span>
+<span class="sd">                (n_amplitude x n_phase x n_electrodes x n_windows x n_bins x n_trials)</span>
+
+<span class="sd">            pvalue: array</span>
+<span class="sd">                The associated p-values of size :</span>
+<span class="sd">                (n_amplitude x n_phase x n_electrodes x n_windows)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check the inputs variables :</span>
+        <span class="n">xpha</span><span class="p">,</span> <span class="n">xamp</span> <span class="o">=</span> <span class="n">_cfcCheck</span><span class="p">(</span><span class="n">xpha</span><span class="p">,</span> <span class="n">xamp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_npts</span><span class="p">)</span>
+        <span class="n">nelec</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">ntrials</span> <span class="o">=</span> <span class="n">xamp</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">namp</span><span class="p">,</span> <span class="n">npha</span><span class="p">,</span> <span class="n">nwin</span><span class="p">,</span> <span class="n">nbins</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nAmp</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nPha</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nwin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nbins</span>
+        <span class="n">phabin</span><span class="p">,</span> <span class="n">binsize</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_phabin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_binsize</span>
+
+        <span class="c1"># Get filtered phase and amplitude ;</span>
+        <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span> <span class="o">=</span> <span class="n">cfcparafilt</span><span class="p">(</span><span class="n">xpha</span><span class="p">,</span> <span class="n">xamp</span><span class="p">,</span> <span class="n">n_jobs</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+
+        <span class="c1"># Bring phase from [-pi,pi] to [0, 360]</span>
+        <span class="n">pha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">((</span><span class="n">pha</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span><span class="o">%</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span>
+
+        <span class="c1"># Windowing phase an amplitude :</span>
+        <span class="n">pha</span> <span class="o">=</span> <span class="p">[</span><span class="n">pha</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">:]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_window</span><span class="p">]</span>
+        <span class="n">amp</span> <span class="o">=</span> <span class="p">[</span><span class="n">amp</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">:]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_window</span><span class="p">]</span>
+
+        <span class="c1"># Define iter product :</span>
+        <span class="n">iteract</span> <span class="o">=</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">namp</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">npha</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">nelec</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">nwin</span><span class="p">))</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">_pfp</span><span class="p">)(</span>
+                <span class="n">pha</span><span class="p">[</span><span class="n">w</span><span class="p">][</span><span class="n">e</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">amp</span><span class="p">[</span><span class="n">w</span><span class="p">][</span><span class="n">e</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+                <span class="n">phabin</span><span class="p">,</span> <span class="n">binsize</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">iteract</span><span class="p">)</span>
+
+        <span class="c1"># Manage dim and output :</span>
+        <span class="n">pfp</span><span class="p">,</span> <span class="n">prf</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">ampbin</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">data</span>
+        <span class="n">ls</span> <span class="o">=</span> <span class="p">[</span><span class="n">namp</span><span class="p">,</span> <span class="n">npha</span><span class="p">,</span> <span class="n">nelec</span><span class="p">,</span> <span class="n">nwin</span><span class="p">,</span> <span class="n">nbins</span><span class="p">,</span> <span class="n">ntrials</span><span class="p">]</span>
+        <span class="n">ampbin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">ampbin</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">*</span><span class="nb">tuple</span><span class="p">(</span><span class="n">ls</span><span class="p">))</span>
+        <span class="n">prf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">prf</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">*</span><span class="nb">tuple</span><span class="p">(</span><span class="n">ls</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]))</span>
+        <span class="n">pval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pval</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">*</span><span class="nb">tuple</span><span class="p">(</span><span class="n">ls</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">2</span><span class="p">]))</span>
+        <span class="n">ls</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">pfp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pfp</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">*</span><span class="nb">tuple</span><span class="p">(</span><span class="n">ls</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">pfp</span><span class="p">,</span> <span class="n">prf</span><span class="p">,</span> <span class="n">ampbin</span><span class="p">,</span> <span class="n">pval</span></div></div>
+        
+<span class="k">def</span> <span class="nf">_pfp</span><span class="p">(</span><span class="n">pha</span><span class="p">,</span> <span class="n">amp</span><span class="p">,</span> <span class="n">phabin</span><span class="p">,</span> <span class="n">binsize</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Sub prefered phase function</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">nbin</span><span class="p">,</span> <span class="n">nt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">phabin</span><span class="p">),</span> <span class="n">pha</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">ampbin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">phabin</span><span class="p">),</span> <span class="n">nt</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+    <span class="c1"># Binarize amplitude accros all trials :</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nt</span><span class="p">):</span>
+        <span class="n">curpha</span><span class="p">,</span> <span class="n">curamp</span> <span class="o">=</span> <span class="n">pha</span><span class="p">[:,</span> <span class="n">t</span><span class="p">],</span> <span class="n">amp</span><span class="p">[:,</span> <span class="n">t</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">phabin</span><span class="p">):</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">curpha</span> <span class="o">&gt;=</span> <span class="n">p</span><span class="p">,</span> <span class="n">curpha</span> <span class="o">&lt;</span> <span class="n">p</span><span class="o">+</span><span class="n">binsize</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">idx</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">ampbin</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">curamp</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ampbin</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">ampbin</span><span class="p">[:,</span> <span class="n">t</span><span class="p">]</span> <span class="o">/=</span> <span class="n">ampbin</span><span class="p">[:,</span> <span class="n">t</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="c1"># Find prefered phase and p-values :</span>
+    <span class="n">pfp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">phabin</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">+</span><span class="n">binsize</span><span class="o">/</span><span class="mi">2</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">ampbin</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)])</span>
+    <span class="n">pvalue</span> <span class="o">=</span> <span class="n">circ_rtest</span><span class="p">(</span><span class="n">pfp</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">prf</span> <span class="o">=</span> <span class="n">phabin</span><span class="p">[</span><span class="n">ampbin</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">argmax</span><span class="p">()]</span><span class="o">+</span><span class="n">binsize</span><span class="o">/</span><span class="mi">2</span>
+    
+    <span class="k">return</span> <span class="n">pfp</span><span class="p">,</span> <span class="n">prf</span><span class="p">,</span> <span class="n">pvalue</span><span class="p">,</span> <span class="n">ampbin</span>
+
+
+<div class="viewcode-block" id="PLV"><a class="viewcode-back" href="../../../../couplingfeat.html#feature.PLV">[docs]</a><span class="k">class</span> <span class="nc">PLV</span><span class="p">(</span><span class="n">_coupling</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Compute the Phase-Locking Value [#f7]_</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        sf: int</span>
+<span class="sd">            Sampling frequency</span>
+
+<span class="sd">        npts: int</span>
+<span class="sd">            Number of points of the time serie</span>
+
+<span class="sd">    Kargs:</span>
+<span class="sd">        f: tuple/list, optional, [def: [2,4]]</span>
+<span class="sd">            List containing the couple of frequency bands for the phase.</span>
+<span class="sd">            Example: f=[ [2,4], [5,7], [60,250] ]</span>
+
+<span class="sd">        method: string, optional, [def: &#39;hilbert&#39;]</span>
+<span class="sd">            Method for the phase extraction.</span>
+
+<span class="sd">        cycle: integer, optional, [def: 3]</span>
+<span class="sd">            Number of cycles for filtering the phase.</span>
+
+<span class="sd">        sample: list, optional, [def: None]</span>
+<span class="sd">            Select samples in the time series to compute the plv</span>
+
+<span class="sd">        time: list/array, optional [def: None]</span>
+<span class="sd">            Define a specific time vector</span>
+
+<span class="sd">        amp_cycle: integer, optional, [def: 6]</span>
+<span class="sd">            Number of cycles for filtering the amplitude.</span>
+
+<span class="sd">    .. rubric:: Footnotes</span>
+<span class="sd">    .. [#f7] `Lachaux et al, 1999 &lt;http://www.ma.utexas.edu/users/davis/reu/ch3/cwt/lachaux.pdf&gt;`_</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;hilbert&#39;</span><span class="p">,</span> <span class="n">cycle</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                 <span class="n">sample</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># Check pha and amp methods:</span>
+        <span class="n">_checkref</span><span class="p">(</span><span class="s1">&#39;pha_meth&#39;</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;hilbert&#39;</span><span class="p">,</span> <span class="s1">&#39;hilbert1&#39;</span><span class="p">,</span> <span class="s1">&#39;hilbert2&#39;</span><span class="p">])</span>
+
+        <span class="c1"># Check the type of f:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="n">binarize</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;list&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Initialize PLV :</span>
+        <span class="n">_coupling</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">cycle</span><span class="p">,</span>
+                           <span class="n">f</span><span class="p">,</span> <span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">cycle</span><span class="p">,</span>
+                           <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">time</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">npts</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="n">time</span>
+
+        <span class="k">if</span> <span class="n">sample</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">sample</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">npts</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sample</span> <span class="o">=</span> <span class="n">sample</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time</span> <span class="o">=</span> <span class="n">time</span><span class="p">[</span><span class="n">sample</span><span class="p">]</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">amp</span>
+
+<div class="viewcode-block" id="PLV.get"><a class="viewcode-back" href="../../../../couplingfeat.html#feature.PLV.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xelec1</span><span class="p">,</span> <span class="n">xelec2</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get Phase-Locking Values for a set of distant sites</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            xelec1, xelec2: array</span>
+<span class="sd">                PLV will be compute between xelec1 and xelec2. Both matrix</span>
+<span class="sd">                contains times-series of each trial pear electrodes. It&#39;s</span>
+<span class="sd">                not forced that both have the same size but they must have at least</span>
+<span class="sd">                the same number of time points (npts) and trials (ntrials).</span>
+<span class="sd">                [xelec1] = (n_elec1, npts, ntrials), [xelec2] = (n_elec2, npts, ntrials)</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            n_perm: int, optional, [def: 200]</span>
+<span class="sd">                Number of permutations to estimate the statistical significiancy</span>
+<span class="sd">                of the plv mesure</span>
+
+<span class="sd">            n_jobs: integer, optional, [def: -1]</span>
+<span class="sd">                Control the number of jobs for parallel computing. Use 1, 2, ..</span>
+<span class="sd">                depending of your number or cores. -1 for all the cores.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            plv: array</span>
+<span class="sd">                The plv mesure for each phase and across electrodes of size:</span>
+<span class="sd">                [plv] = (n_pha, n_elec1, n_elec2, n_sample)</span>
+
+<span class="sd">            pvalues: array</span>
+<span class="sd">                The p-values with the same shape of plv</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check the inputs variables :</span>
+        <span class="k">if</span> <span class="n">xelec1</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">xelec1</span> <span class="o">=</span> <span class="n">xelec1</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">xelec2</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">xelec2</span> <span class="o">=</span> <span class="n">xelec2</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">xelec1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_npts</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">xelec2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_npts</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The second dimension of xelec1 and xelec2 must be &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_npts</span><span class="p">))</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">xelec1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">::]),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">xelec2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">::])):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;xelec1 and xelec2 could have a diffrent number of electrodes&quot;</span>
+                             <span class="s2">&quot; but the number of time points and trials must be the same.&quot;</span><span class="p">)</span>
+        <span class="n">nelec1</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">ntrials</span><span class="p">,</span> <span class="n">nelec2</span><span class="p">,</span> <span class="n">npha</span> <span class="o">=</span> <span class="o">*</span><span class="n">xelec1</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">xelec2</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_nPha</span>
+
+        <span class="c1"># Get filtered phase for xelec1 and xelec2 :</span>
+        <span class="n">xcat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">xelec1</span><span class="p">,</span> <span class="n">xelec2</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">del</span> <span class="n">xelec1</span><span class="p">,</span> <span class="n">xelec2</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">_plvfilt</span><span class="p">)(</span>
+                    <span class="n">xcat</span><span class="p">[</span><span class="n">e</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="bp">self</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">xcat</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+        <span class="n">xp1</span><span class="p">,</span> <span class="n">xp2</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">nelec1</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">nelec1</span><span class="p">::,</span> <span class="o">...</span><span class="p">]</span>
+        <span class="k">del</span> <span class="n">data</span>
+
+        <span class="c1"># Select samples :</span>
+        <span class="n">xp1</span><span class="p">,</span> <span class="n">xp2</span> <span class="o">=</span> <span class="n">xp1</span><span class="p">[:,</span> <span class="p">:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sample</span><span class="p">,</span> <span class="p">:],</span> <span class="n">xp2</span><span class="p">[:,</span> <span class="p">:,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sample</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">npts</span> <span class="o">=</span> <span class="n">xp1</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+        <span class="c1"># Compute true PLV:</span>
+        <span class="n">iteract</span> <span class="o">=</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">nelec1</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">nelec2</span><span class="p">))</span>
+        <span class="n">plv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">_plv</span><span class="p">)(</span>
+                    <span class="n">xp1</span><span class="p">[</span><span class="n">e1</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">xp2</span><span class="p">[</span><span class="n">e2</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span> <span class="k">for</span> <span class="n">e1</span><span class="p">,</span> <span class="n">e2</span> <span class="ow">in</span> <span class="n">iteract</span><span class="p">))</span>
+        <span class="n">plv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">plv</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">nelec1</span><span class="p">,</span> <span class="n">nelec2</span><span class="p">,</span> <span class="n">npha</span><span class="p">,</span> <span class="n">npts</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+        <span class="c1"># Compute surrogates:</span>
+        <span class="n">pvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">plv</span><span class="p">)</span>
+        <span class="n">perm</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">ntrials</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_perm</span><span class="p">)]</span>
+        <span class="n">iteract</span> <span class="o">=</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">nelec1</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">nelec2</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">e1</span><span class="p">,</span> <span class="n">e2</span> <span class="ow">in</span> <span class="n">iteract</span><span class="p">:</span>
+            <span class="n">pvalues</span><span class="p">[:,</span> <span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="o">=</span> <span class="n">_plvstat</span><span class="p">(</span><span class="n">xp1</span><span class="p">[</span><span class="n">e1</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">xp2</span><span class="p">[</span><span class="n">e2</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span>
+                                               <span class="n">plv</span><span class="p">[:,</span> <span class="n">e1</span><span class="p">,</span> <span class="n">e2</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">n_perm</span><span class="p">,</span> <span class="n">n_jobs</span><span class="p">,</span> <span class="n">perm</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">plv</span><span class="p">,</span> <span class="n">pvalues</span></div></div>
+    
+<span class="k">def</span> <span class="nf">_plvfilt</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Sub PLV filt</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get the filter for phase/amplitude properties :</span>
+    <span class="n">fMeth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pha</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pha</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_npts</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pha</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fMeth</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_plvstat</span><span class="p">(</span><span class="n">xp1</span><span class="p">,</span> <span class="n">xp2</span><span class="p">,</span> <span class="n">plv</span><span class="p">,</span> <span class="n">n_perm</span><span class="p">,</span> <span class="n">n_jobs</span><span class="p">,</span> <span class="n">perm</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Sub plv-stat function</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Compute plv for each permutation of xp2 trials :</span>
+    <span class="n">plvs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)(</span><span class="n">delayed</span><span class="p">(</span><span class="n">_plv</span><span class="p">)(</span>
+                 <span class="n">xp1</span><span class="p">,</span> <span class="n">xp2</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">p</span><span class="p">])</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">perm</span><span class="p">))</span>
+
+    <span class="c1"># Get p-values from permutations :</span>
+    <span class="k">return</span> <span class="n">perm_2pvalue</span><span class="p">(</span><span class="n">plv</span><span class="p">,</span> <span class="n">plvs</span><span class="p">,</span> <span class="n">n_perm</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_plv</span><span class="p">(</span><span class="n">phi1</span><span class="p">,</span> <span class="n">phi2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;PLV, (lachaux et al, 1999)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="p">(</span><span class="n">phi1</span><span class="o">-</span><span class="n">phi2</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Etienne Combrisson.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'0.1.8',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

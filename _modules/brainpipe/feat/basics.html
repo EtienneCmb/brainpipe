@@ -1,0 +1,820 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>brainpipe.feat.basics &mdash; brainpipe 0.1.8 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="brainpipe 0.1.8 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../index.html" class="fa fa-home"> brainpipe</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <p class="caption"><span class="caption-text">PRE-PROCESSING</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../preprocessing.html">Bipolarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../preprocessing.html#physiology">Physiology</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FEATURES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html#filtering-based">Filtering based</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html">Filtered signal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#amplitude">Amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#power">Power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#time-frequency">Time-Frequency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#phase">Phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../filtfeat.html#phase-locking-factor">Phase-Locking Factor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html#coupling-features">Coupling features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html">Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html#prefered-phase">Prefered-phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html#phase-locked-power">Phase-locked power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html#event-related-phase-amplitude-coupling">Event Related Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../couplingfeat.html#phase-locking-value">Phase-Locking Value</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html#psd-based-features">PSD based features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../psdfeat.html">Power Spectrum Density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../psdfeat.html#power-psd">Power PSD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../psdfeat.html#spectral-entropy">Spectral entropy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../feature.html#tools">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../featools.html">Physiological bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../featools.html#cross-frequency-vector">Cross-frequency vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../featools.html#simulation">Simulation</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">CLASSIFICATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#define-a-classifier">Define a classifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#define-a-cross-validation">Define a cross-validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#classify">Classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#leave-p-subjects-out">Leave p-subjects out</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#generalization">Generalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../classification.html#multi-features">Multi-features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">STATISTICS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../stat.html">Binomial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stat.html#permutations">Permutations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#evaluation">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#generate">Generate</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stat.html#multiple-comparisons">Multiple-comparisons</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#bonferroni">Bonferroni</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#false-discovery-rate-fdr">False Discovery Rate (FDR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../stat.html#maximum-statistic">Maximum statistic</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stat.html#circular-statistics-toolbox">Circular statistics toolbox</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VISUALIZATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../visualization.html">1-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#border-plot">Border plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#p-value-plot">p-value plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#continuous-color">Continuous color</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../visualization.html#d-or-2-d-graphics">1-D or 2-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#add-lines">Add lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../visualization.html#tilerplot">tilerplot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../visualization.html#tools">Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OTHERS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../tools.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#bpstudy">Bpstudy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#pandas-complements">Pandas complements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#arrays">Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#file-management">File management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../tools.html#others">Others</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">REFERENCES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../references.html">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#pre-processing">Pre-processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#classification">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#statistics">Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#visualization">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../references.html#tools">Tools</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../index.html">brainpipe</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      
+    <li>brainpipe.feat.basics</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for brainpipe.feat.basics</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">brainpipe.feat.filtering</span> <span class="k">import</span> <span class="n">fextract</span><span class="p">,</span> <span class="n">docfilter</span>
+<span class="kn">from</span> <span class="nn">brainpipe.tools</span> <span class="k">import</span> <span class="n">binarize</span><span class="p">,</span> <span class="n">binArray</span>
+<span class="kn">from</span> <span class="nn">brainpipe.feat.utils._feat</span> <span class="k">import</span> <span class="p">(</span><span class="n">_manageWindow</span><span class="p">,</span> <span class="n">_manageFrequencies</span><span class="p">,</span>
+                                        <span class="n">normalize</span><span class="p">,</span> <span class="n">_checkref</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">brainpipe.visu.cmon_plt</span> <span class="k">import</span> <span class="n">tilerplot</span>
+<span class="kn">from</span> <span class="nn">brainpipe.statistics</span> <span class="k">import</span> <span class="p">(</span><span class="n">perm_swap</span><span class="p">,</span> <span class="n">perm_metric</span><span class="p">,</span> <span class="n">perm_2pvalue</span><span class="p">,</span>
+                                  <span class="n">maxstat</span><span class="p">,</span> <span class="n">circ_rtest</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">wilcoxon</span><span class="p">,</span> <span class="n">kruskal</span>
+
+<span class="kn">from</span> <span class="nn">joblib</span> <span class="k">import</span> <span class="n">Parallel</span><span class="p">,</span> <span class="n">delayed</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">product</span>
+<span class="kn">from</span> <span class="nn">warnings</span> <span class="k">import</span> <span class="n">warn</span>
+
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;sigfilt&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;amplitude&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;power&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;TF&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;phase&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;PLF&#39;</span>
+           <span class="p">]</span>
+
+
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># DOCUMENTATION</span>
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="n">docsignal</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;norm: int, optional [def: None]</span>
+<span class="s2">            Number to choose the normalization method</span>
+<span class="s2">                - 0: No normalisation</span>
+<span class="s2">                - 1: Substraction</span>
+<span class="s2">                - 2: Division</span>
+<span class="s2">                - 3: Substract then divide</span>
+<span class="s2">                - 4: Z-score</span>
+
+<span class="s2">        baseline: tuple/list of int [def: None]</span>
+<span class="s2">            Define a window to normalize the power</span>
+
+<span class="s2">        split: int or list of int, optional [def: None]</span>
+<span class="s2">            Split the frequency band f in &quot;split&quot; band width.</span>
+<span class="s2">            If f is a list which contain couple of frequencies,</span>
+<span class="s2">            split is a list too.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">supfilter</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        kwargs: supplementar arguments for filtering</span>
+<span class="s2">&quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">docfilter</span> <span class="o">+</span> <span class="s2">&quot;&quot;&quot;</span>
+
+<span class="s2">.. automethod:: get&quot;&quot;&quot;</span>
+
+
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># MAIN SPECTRAL CLASS</span>
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="k">class</span> <span class="nc">_spectral</span><span class="p">(</span><span class="n">tilerplot</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;This class is optimized for 3D arrays.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        sf: int</span>
+<span class="sd">            Sampling frequency</span>
+
+<span class="sd">        npts: int</span>
+<span class="sd">            Number of points of the time serie</span>
+
+<span class="sd">        f: tuple/list</span>
+<span class="sd">            List containing the couple of frequency bands to extract spectral</span>
+<span class="sd">            informations. Alternatively, f can be define with the form</span>
+<span class="sd">            f=(fstart, fend, fwidth, fstep) where fstart and fend are the</span>
+<span class="sd">            starting and endind frequencies, fwidth and fstep are the width</span>
+<span class="sd">            and step of each band.</span>
+
+<span class="sd">                &gt;&gt;&gt; # Specify each band:</span>
+<span class="sd">                &gt;&gt;&gt; f = [ [15, 35], [25, 45], [35, 55], [45, 60], [55, 75] ]</span>
+<span class="sd">                &gt;&gt;&gt; # Second option:</span>
+<span class="sd">                &gt;&gt;&gt; f = (15, 75, 20, 10)</span>
+
+<span class="sd">        window: tuple/list/None, optional [def: None]</span>
+<span class="sd">            List/tuple: [100,1500]</span>
+<span class="sd">            List of list/tuple: [(100,500),(200,4000)]</span>
+<span class="sd">            None and the width and step parameters will be considered</span>
+
+<span class="sd">        width: int, optional [def: None]</span>
+<span class="sd">            width of a single window.</span>
+
+<span class="sd">        step: int, optional [def: None]</span>
+<span class="sd">            Each window will be spaced by the &quot;step&quot; value.</span>
+
+<span class="sd">        time: list/array, optional [def: None]</span>
+<span class="sd">            Define a specific time vector</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">kind</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">baseline</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span>
+                 <span class="n">width</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">split</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">meanT</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="c1"># Check the type of f:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="n">binarize</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">f</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;list&#39;</span><span class="p">)</span>
+        <span class="c1"># Manage time and frequencies:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_window</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">xvec</span> <span class="o">=</span> <span class="n">_manageWindow</span><span class="p">(</span>
+            <span class="n">npts</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fSplit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fSplitIndex</span> <span class="o">=</span> <span class="n">_manageFrequencies</span><span class="p">(</span>
+            <span class="n">f</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="n">split</span><span class="p">)</span>
+        <span class="c1"># Get variables :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_baseline</span> <span class="o">=</span> <span class="n">baseline</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_norm</span> <span class="o">=</span> <span class="n">norm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_width</span> <span class="o">=</span> <span class="n">width</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_step</span> <span class="o">=</span> <span class="n">step</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_split</span> <span class="o">=</span> <span class="n">split</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_nf</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_sf</span> <span class="o">=</span> <span class="n">sf</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_npts</span> <span class="o">=</span> <span class="n">npts</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">yvec</span> <span class="o">=</span> <span class="p">[</span><span class="nb">round</span><span class="p">((</span><span class="n">k</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">k</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">f</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_kind</span> <span class="o">=</span> <span class="n">kind</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_fobj</span> <span class="o">=</span> <span class="n">fextract</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">kind</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_meanT</span> <span class="o">=</span> <span class="n">meanT</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_window</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">time</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">xvec</span> <span class="o">=</span> <span class="n">binArray</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_window</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xvec</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xvec</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">extractStr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fobj</span><span class="p">)</span>
+        <span class="n">powStr</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{ki}</span><span class="s1">(norm=</span><span class="si">{no}</span><span class="s1">, step=</span><span class="si">{st}</span><span class="s1">, width=</span><span class="si">{wi}</span><span class="s1">, split=</span><span class="si">{sp}</span><span class="s1">,</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">powStr</span> <span class="o">=</span> <span class="n">powStr</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ki</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_kind</span><span class="p">,</span> <span class="n">no</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_norm</span><span class="p">,</span> <span class="n">st</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_step</span><span class="p">,</span>
+                               <span class="n">wi</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_width</span><span class="p">,</span> <span class="n">sp</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_split</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">powStr</span><span class="o">+</span><span class="n">extractStr</span><span class="o">+</span><span class="s1">&#39;)&#39;</span>
+
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">statmeth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_perm</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;m_center&#39;</span><span class="p">,</span>
+            <span class="n">maxstat</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the spectral feature of the signal x.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x: array</span>
+<span class="sd">                Data with a shape of (n_electrodes x n_pts x n_trials)</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            statmeth: string, optional, [def: None]</span>
+<span class="sd">                Method to evaluate the statistical significiancy. To get p-values,</span>
+<span class="sd">                the program will compare real values with a defined baseline. As a</span>
+<span class="sd">                consequence, the &#39;norm&#39; and &#39;baseline&#39; parameter should not be None.</span>
+
+<span class="sd">                - &#39;permutation&#39;: randomly shuffle real data with baseline.Control the number of permutations with the n_perm parameter. For example, if n_perm = 1000, this mean that minimum p-valueswill be 0.001.</span>
+<span class="sd">                - &#39;wilcoxon&#39;: Wilcoxon signed-rank test</span>
+<span class="sd">                - &#39;kruskal&#39;: Kruskal-Wallis H-test</span>
+
+<span class="sd">            n_perm: integer, optional, [def: 200]</span>
+<span class="sd">                Number of permutations for assessing statistical significiancy.</span>
+
+<span class="sd">            tail: int, optional, [def: 2]</span>
+<span class="sd">                For the permutation method, get p-values from one or two tails of</span>
+<span class="sd">                the distribution. Use -1 for testing A&lt;B, 1 for A&gt;B and 2 for A~=B.</span>
+
+<span class="sd">            metric: string/function type, optional, [def: &#39;m_center&#39;]</span>
+<span class="sd">                Use diffrent metrics to normalize data and permutations by the</span>
+<span class="sd">                defined baseline. Use:</span>
+
+<span class="sd">                - None: compare directly values without transformation</span>
+<span class="sd">                - &#39;m_center&#39;: (A-B)/mean(B) transformation</span>
+<span class="sd">                - &#39;m_zscore&#39;: (A-B)/std(B) transformation</span>
+<span class="sd">                - &#39;m_minus&#39;: (A-B) transformation</span>
+<span class="sd">                - function: user defined function [def myfcn(A, B): return array_like]</span>
+
+<span class="sd">            maxstat: bool, optional, [def: False]</span>
+<span class="sd">                Correct p-values with maximum statistique. If maxstat is True,</span>
+<span class="sd">                the correction will be applied only trhough frequencies.</span>
+
+<span class="sd">            n_jobs: integer, optional, [def: -1]</span>
+<span class="sd">                Control the number of jobs to extract features. If</span>
+<span class="sd">                n_jobs = -1, all the jobs are used.</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            xF: array</span>
+<span class="sd">                The un/normalized feature of x, with a shape of</span>
+<span class="sd">                (n_frequency x n_electrodes x n_window x n_trials)</span>
+
+<span class="sd">            pvalues: array</span>
+<span class="sd">                p-values with a shape of (n_frequency x n_electrodes x n_window)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Get variables :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_statmeth</span> <span class="o">=</span> <span class="n">statmeth</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_n_perm</span> <span class="o">=</span> <span class="n">n_perm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_2t</span> <span class="o">=</span> <span class="n">tail</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mxst</span> <span class="o">=</span> <span class="n">maxstat</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_metric</span> <span class="o">=</span> <span class="n">metric</span>
+
+        <span class="c1"># Check input size :</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_npts</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;The second dimension must be &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_npts</span><span class="p">))</span>
+        <span class="n">nfeat</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">warnmsg</span> <span class="o">=</span> <span class="s1">&#39;You define a normalization but no baseline has been&#39;</span> <span class="o">+</span> \
+                  <span class="s1">&#39; specified. Normalization will be ignore&#39;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_norm</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_baseline</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">):</span>
+            <span class="n">warn</span><span class="p">(</span><span class="n">warnmsg</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_norm</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Check statistical method :</span>
+        <span class="k">if</span> <span class="n">statmeth</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">_checkref</span><span class="p">(</span><span class="s1">&#39;statmeth&#39;</span><span class="p">,</span> <span class="n">statmeth</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;permutation&#39;</span><span class="p">,</span> <span class="s1">&#39;wilcoxon&#39;</span><span class="p">,</span> <span class="s1">&#39;kruskal&#39;</span><span class="p">])</span>
+
+        <span class="c1"># run feature computation:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)(</span>
+            <span class="n">delayed</span><span class="p">(</span><span class="n">_get</span><span class="p">)(</span><span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="bp">self</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nfeat</span><span class="p">))</span>
+        <span class="n">xF</span><span class="p">,</span> <span class="n">pvalues</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="c1"># Re-organize data :</span>
+        <span class="n">xF</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">xF</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pvalues</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">pvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pvalues</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pvalues</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Remove last dimension (for TF):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_meanT</span><span class="p">:</span>
+            <span class="n">xF</span> <span class="o">=</span> <span class="n">xF</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">xF</span><span class="p">,</span> <span class="n">pvalues</span>
+
+
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># SUB GET FUNCTION</span>
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="k">def</span> <span class="nf">_get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Sub get function.</span>
+
+<span class="sd">    Get the spectral info of x.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Unpack args :</span>
+    <span class="n">bsl</span><span class="p">,</span> <span class="n">norm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_baseline</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_norm</span>
+    <span class="n">n_perm</span><span class="p">,</span> <span class="n">statmeth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_perm</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_statmeth</span>
+
+    <span class="c1"># Get the filter properties and apply:</span>
+    <span class="n">fMeth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fobj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fSplit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_npts</span><span class="p">)</span>
+    <span class="n">xF</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fobj</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fMeth</span><span class="p">)</span>
+    <span class="n">nf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">nt</span> <span class="o">=</span> <span class="n">xF</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="c1"># Statistical evaluation :</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">n_perm</span> <span class="ow">is</span> <span class="ow">not</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">bsl</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">statmeth</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">pvalues</span> <span class="o">=</span> <span class="n">_evalstat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xF</span><span class="p">,</span> <span class="n">bsl</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">pvalues</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Mean through trials:</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_meanT</span><span class="p">:</span>
+        <span class="n">xF</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">xF</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Normalize power :</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">norm</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">bsl</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">xFm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">xF</span><span class="p">[:,</span> <span class="n">bsl</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">bsl</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">:],</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">baseline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">xFm</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">xF</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">xF</span> <span class="o">=</span> <span class="n">normalize</span><span class="p">(</span><span class="n">xF</span><span class="p">,</span> <span class="n">baseline</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">)</span>
+
+    <span class="c1"># Mean Frequencies :</span>
+    <span class="n">xF</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">binArray</span><span class="p">(</span><span class="n">xF</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fSplitIndex</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Mean time :</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_window</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">xF</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">binArray</span><span class="p">(</span><span class="n">xF</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_window</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">xF</span><span class="p">,</span> <span class="n">pvalues</span>
+
+
+<span class="k">def</span> <span class="nf">_evalstat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">bsl</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Statistical evaluation of features</span>
+
+<span class="sd">    [x] = [xn] = (nFce, npts, nTrials)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Unpack variables:</span>
+    <span class="n">statmeth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_statmeth</span>
+    <span class="n">n_perm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_perm</span>
+    <span class="n">tail</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_2t</span>
+    <span class="n">maxst</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mxst</span>
+
+    <span class="c1"># Mean Frequencies :</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">binArray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fSplitIndex</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># Get the baseline and set to same shape of x:</span>
+    <span class="n">xFm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="n">bsl</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span><span class="n">bsl</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">:],</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Mean time :</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_window</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">binArray</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_window</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># Repeat baseline:</span>
+    <span class="n">baseline</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">xFm</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># Get shape of x:</span>
+    <span class="n">nf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">nt</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">pvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">nf</span><span class="p">,</span> <span class="n">npts</span><span class="p">))</span>
+
+    <span class="c1"># Switch between methods:</span>
+    <span class="c1">#   -&gt; Permutations</span>
+    <span class="c1"># Loops on time and matrix for frequency (avoid RAM usage but increase speed)</span>
+    <span class="k">if</span> <span class="n">statmeth</span> <span class="o">==</span> <span class="s1">&#39;permutation&#39;</span><span class="p">:</span>
+        <span class="c1"># Get metric:</span>
+        <span class="n">fcn</span> <span class="o">=</span> <span class="n">perm_metric</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_metric</span><span class="p">)</span>
+        <span class="c1"># Apply metric to x and baseline:</span>
+        <span class="n">xN</span> <span class="o">=</span> <span class="n">fcn</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">baseline</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># For each time points:</span>
+        <span class="k">for</span> <span class="n">pts</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">npts</span><span class="p">):</span>
+            <span class="c1"># Randomly swap x // baseline :</span>
+            <span class="n">perm</span> <span class="o">=</span> <span class="n">perm_swap</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="n">pts</span><span class="p">,</span> <span class="p">:],</span> <span class="n">baseline</span><span class="p">[:,</span> <span class="n">pts</span><span class="p">,</span> <span class="p">:],</span>
+                             <span class="n">n_perm</span><span class="o">=</span><span class="n">n_perm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">rndstate</span><span class="o">=</span><span class="mi">0</span><span class="o">+</span><span class="n">pts</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="c1"># Normalize permutations by baline:</span>
+            <span class="n">perm</span> <span class="o">=</span> <span class="n">fcn</span><span class="p">(</span><span class="n">perm</span><span class="p">,</span> <span class="n">baseline</span><span class="p">[:,</span> <span class="n">pts</span><span class="p">,</span> <span class="p">:])</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+            <span class="c1"># Maximum stat (correct through frequencies):</span>
+            <span class="k">if</span> <span class="n">maxst</span><span class="p">:</span>
+                <span class="n">perm</span> <span class="o">=</span> <span class="n">maxstat</span><span class="p">(</span><span class="n">perm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="c1"># Get pvalues :</span>
+            <span class="n">pvalues</span><span class="p">[:,</span> <span class="n">pts</span><span class="p">]</span> <span class="o">=</span> <span class="n">perm_2pvalue</span><span class="p">(</span><span class="n">xN</span><span class="p">[:,</span> <span class="n">pts</span><span class="p">],</span> <span class="n">perm</span><span class="p">,</span> <span class="n">n_perm</span><span class="p">,</span> <span class="n">tail</span><span class="o">=</span><span class="n">tail</span><span class="p">)</span>
+
+    <span class="c1">#   -&gt; Wilcoxon // Kruskal-Wallis:</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Get the method:</span>
+        <span class="k">if</span> <span class="n">statmeth</span> <span class="o">==</span> <span class="s1">&#39;wilcoxon&#39;</span><span class="p">:</span>
+            <span class="k">def</span> <span class="nf">fcn</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span> <span class="k">return</span> <span class="n">wilcoxon</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">statmeth</span> <span class="o">==</span> <span class="s1">&#39;kruskal&#39;</span><span class="p">:</span>
+            <span class="k">def</span> <span class="nf">fcn</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span> <span class="k">return</span> <span class="n">kruskal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+        <span class="c1"># Apply:</span>
+        <span class="n">ite</span> <span class="o">=</span> <span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">nf</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">npts</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ite</span><span class="p">:</span>
+            <span class="n">pvalues</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">fcn</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="p">:],</span> <span class="n">xFm</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="p">:])</span>
+
+    <span class="k">return</span> <span class="n">pvalues</span>
+
+
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># FILTERED SIGNAL</span>
+<span class="c1"># ------------------------------------------------------------</span>
+<div class="viewcode-block" id="sigfilt"><a class="viewcode-back" href="../../../filtfeat.html#feature.sigfilt">[docs]</a><span class="k">class</span> <span class="nc">sigfilt</span><span class="p">(</span><span class="n">_spectral</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Extract the filtered signal. &quot;&quot;&quot;</span>
+    <span class="n">__doc__</span> <span class="o">+=</span> <span class="n">_spectral</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">+</span> <span class="n">docsignal</span> <span class="o">+</span> <span class="n">supfilter</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">baseline</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">window</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">split</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">_spectral</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="s1">&#39;signal&#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">baseline</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span>
+                           <span class="s1">&#39;filter&#39;</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">split</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span>
+                           <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># AMPLITUDE</span>
+<span class="c1"># ------------------------------------------------------------</span>
+<div class="viewcode-block" id="amplitude"><a class="viewcode-back" href="../../../filtfeat.html#feature.amplitude">[docs]</a><span class="k">class</span> <span class="nc">amplitude</span><span class="p">(</span><span class="n">_spectral</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Extract the amplitude of the signal. &quot;&quot;&quot;</span>
+    <span class="n">__doc__</span> <span class="o">+=</span> <span class="n">_spectral</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">+</span> <span class="n">docsignal</span>
+    <span class="n">__doc__</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    method: string</span>
+<span class="s2">        Method to transform the signal. Possible values are:</span>
+<span class="s2">            - &#39;hilbert&#39;: apply a hilbert transform to each column</span>
+<span class="s2">            - &#39;hilbert1&#39;: hilbert transform to a whole matrix</span>
+<span class="s2">            - &#39;hilbert2&#39;: 2D hilbert transform</span>
+<span class="s2">            - &#39;wavelet&#39;: wavelet transform</span>
+<span class="s2">    &quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">supfilter</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">baseline</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">method</span><span class="o">=</span><span class="s1">&#39;hilbert1&#39;</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">split</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">_checkref</span><span class="p">(</span><span class="s1">&#39;method&#39;</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;hilbert&#39;</span><span class="p">,</span> <span class="s1">&#39;hilbert1&#39;</span><span class="p">,</span> <span class="s1">&#39;hilbert2&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;wavelet&#39;</span><span class="p">])</span>
+        <span class="n">_spectral</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="s1">&#39;amplitude&#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">baseline</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span>
+                           <span class="n">method</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">split</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span>
+                           <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># POWER</span>
+<span class="c1"># ------------------------------------------------------------</span>
+<div class="viewcode-block" id="power"><a class="viewcode-back" href="../../../filtfeat.html#feature.power">[docs]</a><span class="k">class</span> <span class="nc">power</span><span class="p">(</span><span class="n">_spectral</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Extract the power of the signal. &quot;&quot;&quot;</span>
+    <span class="n">__doc__</span> <span class="o">+=</span> <span class="n">_spectral</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">+</span> <span class="n">docsignal</span>
+    <span class="n">__doc__</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    method: string</span>
+<span class="s2">        Method to transform the signal. Possible values are:</span>
+<span class="s2">            - &#39;hilbert&#39;: apply a hilbert transform to each column</span>
+<span class="s2">            - &#39;hilbert1&#39;: hilbert transform to a whole matrix</span>
+<span class="s2">            - &#39;hilbert2&#39;: 2D hilbert transform</span>
+<span class="s2">            - &#39;wavelet&#39;: wavelet transform</span>
+<span class="s2">    &quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">supfilter</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="p">[</span><span class="mi">60</span><span class="p">,</span> <span class="mi">200</span><span class="p">],</span> <span class="n">baseline</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">method</span><span class="o">=</span><span class="s1">&#39;hilbert1&#39;</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">split</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">_checkref</span><span class="p">(</span><span class="s1">&#39;method&#39;</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;hilbert&#39;</span><span class="p">,</span> <span class="s1">&#39;hilbert1&#39;</span><span class="p">,</span> <span class="s1">&#39;hilbert2&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;wavelet&#39;</span><span class="p">])</span>
+        <span class="n">_spectral</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="s1">&#39;power&#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">baseline</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span>
+                           <span class="n">method</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">split</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span>
+                           <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># TIME-FREQUENCY MAP</span>
+<span class="c1"># ------------------------------------------------------------</span>
+<div class="viewcode-block" id="TF"><a class="viewcode-back" href="../../../filtfeat.html#feature.TF">[docs]</a><span class="k">class</span> <span class="nc">TF</span><span class="p">(</span><span class="n">_spectral</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Extract the time-frequency map of the signal. &quot;&quot;&quot;</span>
+    <span class="n">__doc__</span> <span class="o">+=</span> <span class="n">_spectral</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">+</span> <span class="n">docsignal</span>
+    <span class="n">__doc__</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    method: string</span>
+<span class="s2">        Method to transform the signal. Possible values are:</span>
+<span class="s2">            - &#39;hilbert&#39;: apply a hilbert transform to each column</span>
+<span class="s2">            - &#39;hilbert1&#39;: hilbert transform to a whole matrix</span>
+<span class="s2">            - &#39;hilbert2&#39;: 2D hilbert transform</span>
+<span class="s2">            - &#39;wavelet&#39;: wavelet transform</span>
+<span class="s2">    &quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">supfilter</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">baseline</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">method</span><span class="o">=</span><span class="s1">&#39;hilbert1&#39;</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">_checkref</span><span class="p">(</span><span class="s1">&#39;method&#39;</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;hilbert&#39;</span><span class="p">,</span> <span class="s1">&#39;hilbert1&#39;</span><span class="p">,</span> <span class="s1">&#39;hilbert2&#39;</span><span class="p">,</span>
+                  <span class="s1">&#39;wavelet&#39;</span><span class="p">])</span>
+        <span class="n">_spectral</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="s1">&#39;power&#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">baseline</span><span class="p">,</span> <span class="n">norm</span><span class="p">,</span>
+                           <span class="n">method</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span>
+                           <span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+
+<span class="c1"># ------------------------------------------------------------</span>
+<span class="c1"># PHASE</span>
+<span class="c1"># ------------------------------------------------------------</span>
+<div class="viewcode-block" id="phase"><a class="viewcode-back" href="../../../filtfeat.html#feature.phase">[docs]</a><span class="k">class</span> <span class="nc">phase</span><span class="p">(</span><span class="n">_spectral</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Extract the phase of a signal. &quot;&quot;&quot;</span>
+    <span class="n">__doc__</span> <span class="o">+=</span> <span class="n">_spectral</span><span class="o">.</span><span class="n">__doc__</span>
+    <span class="n">__doc__</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;method: string</span>
+<span class="s2">        Method to transform the signal. Possible values are:</span>
+<span class="s2">            - &#39;hilbert&#39;: apply a hilbert transform to each column</span>
+<span class="s2">            - &#39;hilbert1&#39;: hilbert transform to a whole matrix</span>
+<span class="s2">            - &#39;hilbert2&#39;: 2D hilbert transform</span>
+<span class="s2">    &quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">supfilter</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;hilbert&#39;</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">_checkref</span><span class="p">(</span><span class="s1">&#39;method&#39;</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;hilbert&#39;</span><span class="p">,</span> <span class="s1">&#39;hilbert1&#39;</span><span class="p">,</span> <span class="s1">&#39;hilbert2&#39;</span><span class="p">])</span>
+        <span class="n">_spectral</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span>
+                           <span class="n">window</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="phase.get"><a class="viewcode-back" href="../../../filtfeat.html#feature.phase.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">getstat</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the spectral phase of the signal x.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x: array</span>
+<span class="sd">                Data with a shape of (n_electrodes x n_pts x n_trials)</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            getstat: bool, optional, [def: True]</span>
+<span class="sd">                Set it to True if p-values should be computed. Satistical</span>
+<span class="sd">                p-values are comptuted using Rayleigh test.</span>
+
+<span class="sd">            n_jobs: integer, optional, [def: -1]</span>
+<span class="sd">                Control the number of jobs to extract features. If</span>
+<span class="sd">                n_jobs = -1, all the jobs are used.</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            xF: array</span>
+<span class="sd">                The phase of x, with a shape of</span>
+<span class="sd">                (n_frequency x n_electrodes x n_window x n_trials)</span>
+
+<span class="sd">            pvalues: array</span>
+<span class="sd">                p-values with a shape of (n_frequency x n_electrodes x n_window)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Check input size :</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_npts</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;The second dimension must be &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_npts</span><span class="p">))</span>
+        <span class="n">nfeat</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_getstat</span> <span class="o">=</span> <span class="n">getstat</span>
+        <span class="c1"># run feature computation:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">Parallel</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)(</span>
+            <span class="n">delayed</span><span class="p">(</span><span class="n">_phase</span><span class="p">)(</span><span class="n">x</span><span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="bp">self</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nfeat</span><span class="p">))</span>
+        <span class="n">xF</span><span class="p">,</span> <span class="n">pvalues</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">)</span>
+        <span class="c1"># Manage output type:</span>
+        <span class="k">if</span> <span class="n">pvalues</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">pvalues</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">pvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pvalues</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">xF</span><span class="p">),</span> <span class="n">pvalues</span></div></div>
+
+<span class="k">def</span> <span class="nf">_phase</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Sub-phase function</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Get the filter properties and apply:</span>
+    <span class="n">fMeth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fobj</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_sf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fSplit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_npts</span><span class="p">)</span>
+    <span class="n">xF</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fobj</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fMeth</span><span class="p">)</span>
+
+    <span class="c1"># Mean time :</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_window</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">xF</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">binArray</span><span class="p">(</span><span class="n">xF</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_window</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">nf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">nt</span> <span class="o">=</span> <span class="n">xF</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="c1"># Get p-value:</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getstat</span><span class="p">:</span>
+        <span class="n">pvalues</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nf</span><span class="p">,</span> <span class="n">npts</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nf</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">npts</span><span class="p">):</span>
+                <span class="n">pvalues</span><span class="p">[</span><span class="n">f</span><span class="p">,</span> <span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">circ_rtest</span><span class="p">(</span><span class="n">xF</span><span class="p">[</span><span class="n">f</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="p">:])[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">pvalues</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">xF</span><span class="p">,</span> <span class="n">pvalues</span>
+
+
+<div class="viewcode-block" id="PLF"><a class="viewcode-back" href="../../../filtfeat.html#feature.PLF">[docs]</a><span class="k">class</span> <span class="nc">PLF</span><span class="p">(</span><span class="n">phase</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Extract the phase-locking factor of a signal. &quot;&quot;&quot;</span>
+    <span class="n">__doc__</span> <span class="o">+=</span> <span class="n">_spectral</span><span class="o">.</span><span class="n">__doc__</span>
+    <span class="n">__doc__</span> <span class="o">+=</span> <span class="s2">&quot;&quot;&quot;method: string</span>
+<span class="s2">        Method to transform the signal. Possible values are:</span>
+<span class="s2">            - &#39;hilbert&#39;: apply a hilbert transform to each column</span>
+<span class="s2">            - &#39;hilbert1&#39;: hilbert transform to a whole matrix</span>
+<span class="s2">            - &#39;hilbert2&#39;: 2D hilbert transform</span>
+<span class="s2">    &quot;&quot;&quot;</span> <span class="o">+</span> <span class="n">supfilter</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;hilbert&#39;</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">width</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">phase</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">,</span>
+                       <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__phaO</span> <span class="o">=</span> <span class="n">phase</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">f</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">,</span>
+                            <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="n">step</span><span class="p">,</span> <span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PLF.get"><a class="viewcode-back" href="../../../filtfeat.html#feature.PLF.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">getstat</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the phase-locking factor of the signal x.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x: array</span>
+<span class="sd">                Data with a shape of (n_electrodes x n_pts x n_trials)</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            getstat: bool, optional, [def: True]</span>
+<span class="sd">                Set it to True if p-values should be computed. Satistical</span>
+<span class="sd">                p-values are comptuted using Rayleigh test.</span>
+
+<span class="sd">            n_jobs: integer, optional, [def: -1]</span>
+<span class="sd">                Control the number of jobs to extract features. If</span>
+<span class="sd">                n_jobs = -1, all the jobs are used.</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            plf: array</span>
+<span class="sd">                The PLF of x, with a shape of</span>
+<span class="sd">                (n_frequency x n_electrodes x n_window)</span>
+
+<span class="sd">            pvalues: array</span>
+<span class="sd">                p-values with a shape of (n_frequency x n_electrodes x n_window)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Get phase and p-values</span>
+        <span class="n">xf</span><span class="p">,</span> <span class="n">pval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__phaO</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">getstat</span><span class="o">=</span><span class="n">getstat</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)</span>
+        <span class="c1"># Get plf</span>
+        <span class="n">plf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="p">(</span><span class="n">xf</span><span class="p">))</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">plf</span><span class="p">,</span> <span class="n">pval</span></div></div>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Etienne Combrisson.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'0.1.8',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

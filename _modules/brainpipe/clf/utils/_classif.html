@@ -1,0 +1,841 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>brainpipe.clf.utils._classif &mdash; brainpipe 0.1.8 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../../search.html"/>
+    <link rel="top" title="brainpipe 0.1.8 documentation" href="../../../../index.html"/>
+        <link rel="up" title="Module code" href="../../../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../../index.html" class="fa fa-home"> brainpipe</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <p class="caption"><span class="caption-text">PRE-PROCESSING</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../preprocessing.html">Bipolarization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../preprocessing.html#physiology">Physiology</a></li>
+</ul>
+<p class="caption"><span class="caption-text">FEATURES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../feature.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../feature.html#filtering-based">Filtering based</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../filtfeat.html">Filtered signal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../filtfeat.html#amplitude">Amplitude</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../filtfeat.html#power">Power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../filtfeat.html#time-frequency">Time-Frequency</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../filtfeat.html#phase">Phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../filtfeat.html#phase-locking-factor">Phase-Locking Factor</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../feature.html#coupling-features">Coupling features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../couplingfeat.html">Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../couplingfeat.html#prefered-phase">Prefered-phase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../couplingfeat.html#phase-locked-power">Phase-locked power</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../couplingfeat.html#event-related-phase-amplitude-coupling">Event Related Phase-Amplitude Coupling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../couplingfeat.html#phase-locking-value">Phase-Locking Value</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../feature.html#psd-based-features">PSD based features</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../psdfeat.html">Power Spectrum Density</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../psdfeat.html#power-psd">Power PSD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../psdfeat.html#spectral-entropy">Spectral entropy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../feature.html#tools">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../featools.html">Physiological bands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../featools.html#cross-frequency-vector">Cross-frequency vector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../featools.html#simulation">Simulation</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">CLASSIFICATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classification.html">Presentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classification.html#define-a-classifier">Define a classifier</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classification.html#define-a-cross-validation">Define a cross-validation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classification.html#classify">Classify</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classification.html#leave-p-subjects-out">Leave p-subjects out</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classification.html#generalization">Generalization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../classification.html#multi-features">Multi-features</a></li>
+</ul>
+<p class="caption"><span class="caption-text">STATISTICS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../stat.html">Binomial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../stat.html#permutations">Permutations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../stat.html#evaluation">Evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../stat.html#generate">Generate</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../stat.html#multiple-comparisons">Multiple-comparisons</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../stat.html#bonferroni">Bonferroni</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../stat.html#false-discovery-rate-fdr">False Discovery Rate (FDR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../stat.html#maximum-statistic">Maximum statistic</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../stat.html#circular-statistics-toolbox">Circular statistics toolbox</a></li>
+</ul>
+<p class="caption"><span class="caption-text">VISUALIZATION</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../visualization.html">1-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../visualization.html#border-plot">Border plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../visualization.html#p-value-plot">p-value plot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../visualization.html#continuous-color">Continuous color</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../visualization.html#d-or-2-d-graphics">1-D or 2-D graphics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../visualization.html#add-lines">Add lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../visualization.html#tilerplot">tilerplot</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../visualization.html#tools">Tools</a></li>
+</ul>
+<p class="caption"><span class="caption-text">OTHERS</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tools.html">Tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tools.html#bpstudy">Bpstudy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tools.html#pandas-complements">Pandas complements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tools.html#arrays">Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tools.html#file-management">File management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tools.html#others">Others</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">REFERENCES</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../references.html">References</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../references.html#pre-processing">Pre-processing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../references.html#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../references.html#classification">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../references.html#statistics">Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../references.html#visualization">Visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../references.html#tools">Tools</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">brainpipe</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+      
+    <li>brainpipe.clf.utils._classif</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for brainpipe.clf.utils._classif</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">pandas</span> <span class="k">import</span> <span class="n">ExcelWriter</span>
+<span class="kn">from</span> <span class="nn">warnings</span> <span class="k">import</span> <span class="n">warn</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="k">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">confusion_matrix</span>
+<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="k">import</span> <span class="n">clone</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.discriminant_analysis</span> <span class="k">import</span> <span class="p">(</span><span class="n">LinearDiscriminantAnalysis</span><span class="p">,</span>
+                                           <span class="n">QuadraticDiscriminantAnalysis</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="k">import</span> <span class="n">SVC</span><span class="p">,</span> <span class="n">LinearSVC</span><span class="p">,</span> <span class="n">NuSVC</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="k">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="k">import</span> <span class="n">RandomForestClassifier</span><span class="p">,</span> <span class="n">VotingClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="k">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="k">import</span> <span class="n">GaussianNB</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="k">import</span> <span class="p">(</span><span class="n">StratifiedKFold</span><span class="p">,</span> <span class="n">KFold</span><span class="p">,</span> <span class="n">LeaveOneOut</span><span class="p">,</span>
+                                     <span class="n">StratifiedShuffleSplit</span><span class="p">,</span> <span class="n">ShuffleSplit</span><span class="p">,</span>
+                                     <span class="n">LeaveOneGroupOut</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">brainpipe.statistics</span> <span class="k">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">brainpipe.tools</span> <span class="k">import</span> <span class="n">uorderlst</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_classification&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;_info&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;_cvscore&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;checkXY&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;defClf&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;defCv&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;defVoting&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;clfstat&#39;</span>
+           <span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">_classification</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Sub-classification class</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">clf</span><span class="o">=</span><span class="s1">&#39;lda&#39;</span><span class="p">,</span> <span class="n">cvtype</span><span class="o">=</span><span class="s1">&#39;skfold&#39;</span><span class="p">,</span> <span class="n">clfArg</span><span class="o">=</span><span class="p">{},</span> <span class="n">cvArg</span><span class="o">=</span><span class="p">{}):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_y</span> <span class="o">=</span> <span class="n">y</span>
+        <span class="c1"># Defineclassifier and cross-valdation :</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_defineClf</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="o">**</span><span class="n">clfArg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_defineCv</span><span class="p">(</span><span class="n">cvtype</span><span class="p">,</span> <span class="o">**</span><span class="n">cvArg</span><span class="p">)</span>
+        <span class="c1"># Get info:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">info</span> <span class="o">=</span> <span class="n">_info</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cv</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clf</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_updatestring</span><span class="p">()</span>
+        <span class="c1"># Stat tools:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stat</span> <span class="o">=</span> <span class="n">clfstat</span><span class="p">()</span>
+
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lgStr</span>
+
+    <span class="k">def</span> <span class="nf">_defineClf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clf</span><span class="p">,</span> <span class="o">**</span><span class="n">clfArg</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sub-function for defining classifier</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
+            <span class="n">clf</span> <span class="o">=</span> <span class="n">defClf</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_y</span><span class="p">,</span> <span class="n">clf</span><span class="o">=</span><span class="n">clf</span><span class="p">,</span> <span class="o">**</span><span class="n">clfArg</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="s1">&#39;shStr&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="s1">&#39;lgStr&#39;</span><span class="p">):</span>
+                <span class="n">clf</span><span class="o">.</span><span class="n">shStr</span><span class="p">,</span> <span class="n">clf</span><span class="o">.</span><span class="n">lgStr</span> <span class="o">=</span> <span class="s1">&#39;custom&#39;</span><span class="p">,</span> <span class="s1">&#39;Custom classifier&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lgStr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_clf</span> <span class="o">=</span> <span class="n">clf</span>
+
+    <span class="k">def</span> <span class="nf">_defineCv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cvtype</span><span class="o">=</span><span class="s1">&#39;skfold&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">cvArg</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sub-function for defining cross-validation</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">cvtype</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">cvtype</span> <span class="o">=</span> <span class="n">defCv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_y</span><span class="p">,</span> <span class="n">cvtype</span><span class="o">=</span><span class="n">cvtype</span><span class="p">,</span> <span class="o">**</span><span class="n">cvArg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cv</span> <span class="o">=</span> <span class="n">cvtype</span>
+
+    <span class="k">def</span> <span class="nf">change_clf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clf</span><span class="o">=</span><span class="s1">&#39;lda&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">clfArg</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Change the classifier</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">oldclf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clf</span><span class="o">.</span><span class="n">lgStr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_defineClf</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="o">**</span><span class="n">clfArg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_updatestring</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">info</span> <span class="o">=</span> <span class="n">_info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cv</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clf</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Classifier updated from a &#39;</span><span class="o">+</span><span class="n">oldclf</span><span class="o">+</span><span class="s1">&#39; to a &#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_clf</span><span class="o">.</span><span class="n">lgStr</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">change_cv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cvtype</span><span class="o">=</span><span class="s1">&#39;skfold&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">cvArg</span><span class="p">):</span>
+        <span class="n">oldcv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cv</span><span class="o">.</span><span class="n">lgStr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_defineCv</span><span class="p">(</span><span class="n">cvtype</span><span class="p">,</span> <span class="o">**</span><span class="n">cvArg</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_updatestring</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">info</span> <span class="o">=</span> <span class="n">_info</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cv</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clf</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Cross-validation updated from a &#39;</span><span class="o">+</span><span class="n">oldcv</span><span class="o">+</span><span class="s1">&#39; to a &#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_cv</span><span class="o">.</span><span class="n">lgStr</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_updatestring</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_shStr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clf</span><span class="o">.</span><span class="n">shStr</span> <span class="o">+</span><span class="s1">&#39; / &#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_cv</span><span class="o">.</span><span class="n">shStr</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lgStr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clf</span><span class="o">.</span><span class="n">lgStr</span> <span class="o">+</span><span class="s1">&#39; / &#39;</span><span class="o">+</span><span class="bp">self</span><span class="o">.</span><span class="n">_cv</span><span class="o">.</span><span class="n">lgStr</span>
+
+
+<span class="k">class</span> <span class="nc">_info</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Get info of current classification settings</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">clf</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clfinfo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clfinfo</span><span class="p">(</span><span class="n">cv</span><span class="p">,</span> <span class="n">clf</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">statinfo</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_statinfo</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_clfinfo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">clf</span><span class="p">):</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Classifier&#39;</span><span class="p">:</span><span class="n">clf</span><span class="o">.</span><span class="n">lgStr</span><span class="p">,</span>
+                             <span class="s1">&#39;Cross-validation&#39;</span><span class="p">:</span><span class="n">cv</span><span class="o">.</span><span class="n">lgStr</span><span class="p">,</span>
+                             <span class="s1">&#39;Repetition&#39;</span><span class="p">:[</span><span class="n">cv</span><span class="o">.</span><span class="n">rep</span><span class="p">],</span>
+                             <span class="s1">&#39;Class&#39;</span><span class="p">:[</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">y</span><span class="p">))],</span>
+                             <span class="s1">&#39;Chance (theorical, %)&#39;</span><span class="p">:[</span><span class="mi">100</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">y</span><span class="p">))]</span>
+                            <span class="p">})</span>
+        <span class="k">return</span> <span class="n">info</span>
+
+    <span class="k">def</span> <span class="nf">_statinfo</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">info</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Class&#39;</span><span class="p">:[</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">))],</span>
+                             <span class="s1">&#39;N-class&#39;</span><span class="p">:[</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">))],</span>
+                             <span class="s1">&#39;Chance (theorical, %)&#39;</span><span class="p">:[</span><span class="mi">100</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">))],</span>
+                             <span class="s1">&#39;Chance (binomial, %)&#39;</span><span class="p">:[{</span><span class="s1">&#39;p_0.05&#39;</span><span class="p">:</span><span class="n">bino_p2da</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">),</span>
+                                                      <span class="s1">&#39;p_0.01&#39;</span><span class="p">:</span><span class="n">bino_p2da</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">),</span>
+                                                      <span class="s1">&#39;p_0.001&#39;</span><span class="p">:</span><span class="n">bino_p2da</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">)</span>
+                                                     <span class="p">}]</span>
+                            <span class="p">})</span>
+        <span class="k">return</span> <span class="n">info</span>
+
+    <span class="k">def</span> <span class="nf">_featinfo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clf</span><span class="p">,</span> <span class="n">cv</span><span class="p">,</span> <span class="n">da</span><span class="p">,</span> <span class="n">grp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pbino</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pperm</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="c1"># Manage input arguments :</span>
+        <span class="n">dastd</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">da</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="mi">100</span>
+        <span class="n">dam</span> <span class="o">=</span> <span class="n">da</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">grp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">grp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">str</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dam</span><span class="p">))])</span>
+        <span class="k">if</span> <span class="n">pbino</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">pbino</span> <span class="o">=</span> <span class="n">bino_da2p</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">dam</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pperm</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">pperm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">dam</span><span class="p">),))</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">dam</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">dastd</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">pbino</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">pperm</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">grp</span><span class="p">)])</span><span class="o">.</span><span class="n">T</span>
+
+        <span class="c1"># Create the dataframe:</span>
+        <span class="n">subcol</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;DA (%)&#39;</span><span class="p">,</span> <span class="s1">&#39;STD (+/-)&#39;</span><span class="p">,</span> <span class="s1">&#39;p-values (Binomial)&#39;</span><span class="p">,</span> <span class="s1">&#39;p-values (Permutations)&#39;</span><span class="p">,</span> <span class="s1">&#39;Group&#39;</span><span class="p">]</span>
+        <span class="n">str2repeat</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">shStr</span><span class="o">+</span><span class="s1">&#39; / &#39;</span><span class="o">+</span><span class="n">cv</span><span class="o">.</span><span class="n">shStr</span>
+        <span class="n">idxtuple</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="p">[[</span><span class="n">str2repeat</span><span class="p">]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">subcol</span><span class="p">),</span> <span class="n">subcol</span><span class="p">]))</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">(</span><span class="n">idxtuple</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Settings&#39;</span><span class="p">,</span> <span class="s1">&#39;Results&#39;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">index</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">to_excel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="s1">&#39;myfile.xlsx&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Export informations to a excel file</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            filename: string</span>
+<span class="sd">                Name of the excel file ex: filename=&#39;myfile.xlsx&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">ExcelWriter</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clfinfo</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span><span class="s1">&#39;Classifier&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">statinfo</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span><span class="s1">&#39;Statistics&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">featinfo</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span><span class="s1">&#39;Features&#39;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Informations about features has been ignored. Run fit()&#39;</span><span class="p">)</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+
+
+<span class="k">def</span> <span class="nf">_cvscore</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">clf</span><span class="p">,</span> <span class="n">cvS</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get the decoding accuracy of one cross-validation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">y_pred</span><span class="p">,</span> <span class="n">y_true</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="n">iterator</span> <span class="o">=</span> <span class="n">cvS</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">trainidx</span><span class="p">,</span> <span class="n">testidx</span> <span class="ow">in</span> <span class="n">iterator</span><span class="p">:</span>
+        <span class="n">xtrain</span><span class="p">,</span> <span class="n">xtest</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">trainidx</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">testidx</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+        <span class="n">ytrain</span><span class="p">,</span> <span class="n">ytest</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">trainidx</span><span class="p">,</span> <span class="o">...</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">testidx</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+        <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">xtrain</span><span class="p">,</span> <span class="n">ytrain</span><span class="p">)</span>
+        <span class="n">y_pred</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">xtest</span><span class="p">))</span>
+        <span class="n">y_true</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">ytest</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">100</span><span class="o">*</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">),</span> <span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span>
+
+
+<span class="k">def</span> <span class="nf">checkXY</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">mf</span><span class="p">,</span> <span class="n">grp</span><span class="p">,</span> <span class="n">center</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Prepare the inputs x and y</span>
+<span class="sd">    x.shape = (ntrials, nfeat)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span>
+
+    <span class="c1"># Normalize features :</span>
+    <span class="k">if</span> <span class="n">center</span><span class="p">:</span>
+        <span class="n">x_m</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">x_m</span><span class="p">)</span><span class="o">/</span><span class="n">x_m</span>
+
+    <span class="c1"># Group parameter :</span>
+    <span class="k">if</span> <span class="n">grp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">mf</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">grp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">grp</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">mf</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">grp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">grp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">grp</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="n">ugrp</span> <span class="o">=</span> <span class="n">uorderlst</span><span class="p">(</span><span class="n">grp</span><span class="p">)</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">grp</span> <span class="o">==</span> <span class="n">k</span><span class="p">)[</span><span class="mi">0</span><span class="p">]])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">ugrp</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">grp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">grp</span><span class="o">.</span><span class="n">size</span> <span class="o">!=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;The grp parameter must have the same size as the&#39;</span>
+                             <span class="s1">&#39; number of features (&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;)&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">x</span><span class="p">[:,</span> <span class="n">k</span><span class="p">])</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+
+    <span class="k">return</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
+
+
+
+
+<div class="viewcode-block" id="defClf"><a class="viewcode-back" href="../../../../classification.html#classification.defClf">[docs]</a><span class="k">class</span> <span class="nc">defClf</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Choose a classifier and switch easyly between classifiers</span>
+<span class="sd">    implemented in scikit-learn.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        y: array</span>
+<span class="sd">            The vector label</span>
+
+<span class="sd">    clf: int or string, optional, [def: 0]</span>
+<span class="sd">        Define a classifier. Use either an integer or a string</span>
+<span class="sd">        Choose between:</span>
+
+<span class="sd">            - 0 / &#39;lda&#39;: Linear Discriminant Analysis (LDA)</span>
+<span class="sd">            - 1 / &#39;svm&#39;: Support Vector Machine (SVM)</span>
+<span class="sd">            - 2 / &#39;linearsvm&#39; : Linear SVM</span>
+<span class="sd">            - 3 / &#39;nusvm&#39;: Nu SVM</span>
+<span class="sd">            - 4 / &#39;nb&#39;: Naive Bayesian</span>
+<span class="sd">            - 5 / &#39;knn&#39;: k-Nearest Neighbor</span>
+<span class="sd">            - 6 / &#39;rf&#39;: Random Forest</span>
+<span class="sd">            - 7 / &#39;lr&#39;: Logistic Regression</span>
+<span class="sd">            - 8 / &#39;qda&#39;: Quadratic Discriminant Analysis</span>
+
+<span class="sd">    kern: string, optional, [def: &#39;rbf&#39;]</span>
+<span class="sd">        Kernel of the &#39;svm&#39; classifier</span>
+
+<span class="sd">    n_knn: int, optional, [def: 10]</span>
+<span class="sd">        Number of neighbors for the &#39;knn&#39; classifier</span>
+
+<span class="sd">    n_tree: int, optional, [def: 100]</span>
+<span class="sd">        Number of trees for the &#39;rf&#39; classifier</span>
+
+<span class="sd">    Kargs:</span>
+<span class="sd">        optional arguments. To define other parameters, see the description of</span>
+<span class="sd">        scikit-learn.</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        A scikit-learn classification objects with two supplementar arguments :</span>
+
+<span class="sd">            - lgStr : long description of the classifier</span>
+<span class="sd">            - shStr : short description of the classifier</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">clf</span><span class="o">=</span><span class="s1">&#39;lda&#39;</span><span class="p">,</span> <span class="n">kern</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="n">n_knn</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_tree</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                 <span class="n">priors</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lgStr</span>
+
+    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">clf</span><span class="o">=</span><span class="s1">&#39;lda&#39;</span><span class="p">,</span> <span class="n">kern</span><span class="o">=</span><span class="s1">&#39;rbf&#39;</span><span class="p">,</span> <span class="n">n_knn</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">n_tree</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+                <span class="n">priors</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="c1"># Use a pre-defined classifier :</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">)):</span>
+            <span class="c1"># Default value for priors :</span>
+            <span class="n">priors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y</span><span class="p">))]</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
+
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+            <span class="c1"># LDA :</span>
+            <span class="k">if</span> <span class="n">clf</span> <span class="o">==</span> <span class="s1">&#39;lda&#39;</span> <span class="ow">or</span> <span class="n">clf</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">clfObj</span> <span class="o">=</span> <span class="n">LinearDiscriminantAnalysis</span><span class="p">(</span>
+                    <span class="n">priors</span><span class="o">=</span><span class="n">priors</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">clfObj</span><span class="o">.</span><span class="n">lgStr</span> <span class="o">=</span> <span class="s1">&#39;Linear Discriminant Analysis&#39;</span>
+                <span class="n">clfObj</span><span class="o">.</span><span class="n">shStr</span> <span class="o">=</span> <span class="s1">&#39;LDA&#39;</span>
+
+            <span class="c1"># SVM : ‘linear’, ‘poly’, ‘rbf’, ‘sigmoid’, ‘precomputed’ or a callable</span>
+            <span class="k">elif</span> <span class="n">clf</span> <span class="o">==</span> <span class="s1">&#39;svm&#39;</span> <span class="ow">or</span> <span class="n">clf</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">clfObj</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="n">kern</span><span class="p">,</span> <span class="n">probability</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">clfObj</span><span class="o">.</span><span class="n">lgStr</span> <span class="o">=</span> <span class="s1">&#39;Support Vector Machine (kernel=&#39;</span> <span class="o">+</span> <span class="n">kern</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
+                <span class="n">clfObj</span><span class="o">.</span><span class="n">shStr</span> <span class="o">=</span> <span class="s1">&#39;SVM-&#39;</span> <span class="o">+</span> <span class="n">kern</span>
+
+            <span class="c1"># Linear SVM:</span>
+            <span class="k">elif</span> <span class="n">clf</span> <span class="o">==</span> <span class="s1">&#39;linearsvm&#39;</span> <span class="ow">or</span> <span class="n">clf</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">clfObj</span> <span class="o">=</span> <span class="n">LinearSVC</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">clfObj</span><span class="o">.</span><span class="n">lgStr</span> <span class="o">=</span> <span class="s1">&#39;Linear Support Vector Machine&#39;</span>
+                <span class="n">clfObj</span><span class="o">.</span><span class="n">shStr</span> <span class="o">=</span> <span class="s1">&#39;LSVM&#39;</span>
+
+            <span class="c1"># Nu SVM :</span>
+            <span class="k">elif</span> <span class="n">clf</span> <span class="o">==</span> <span class="s1">&#39;nusvm&#39;</span> <span class="ow">or</span> <span class="n">clf</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">clfObj</span> <span class="o">=</span> <span class="n">NuSVC</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">clfObj</span><span class="o">.</span><span class="n">lgStr</span> <span class="o">=</span> <span class="s1">&#39;Nu Support Vector Machine&#39;</span>
+                <span class="n">clfObj</span><span class="o">.</span><span class="n">shStr</span> <span class="o">=</span> <span class="s1">&#39;NuSVM&#39;</span>
+
+            <span class="c1"># Naive Bayesian :</span>
+            <span class="k">elif</span> <span class="n">clf</span> <span class="o">==</span> <span class="s1">&#39;nb&#39;</span> <span class="ow">or</span> <span class="n">clf</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="n">clfObj</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">clfObj</span><span class="o">.</span><span class="n">lgStr</span> <span class="o">=</span> <span class="s1">&#39;Naive Baysian&#39;</span>
+                <span class="n">clfObj</span><span class="o">.</span><span class="n">shStr</span> <span class="o">=</span> <span class="s1">&#39;NB&#39;</span>
+
+            <span class="c1"># KNN :</span>
+            <span class="k">elif</span> <span class="n">clf</span> <span class="o">==</span> <span class="s1">&#39;knn&#39;</span> <span class="ow">or</span> <span class="n">clf</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="n">clfObj</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="n">n_knn</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">clfObj</span><span class="o">.</span><span class="n">lgStr</span> <span class="o">=</span> <span class="s1">&#39;k-Nearest Neighbor (neighbor=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n_knn</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
+                <span class="n">clfObj</span><span class="o">.</span><span class="n">shStr</span> <span class="o">=</span> <span class="s1">&#39;KNN-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n_knn</span><span class="p">)</span>
+
+            <span class="c1"># Random forest :</span>
+            <span class="k">elif</span> <span class="n">clf</span> <span class="o">==</span> <span class="s1">&#39;rf&#39;</span> <span class="ow">or</span> <span class="n">clf</span> <span class="o">==</span> <span class="mi">6</span><span class="p">:</span>
+                <span class="n">clfObj</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="n">n_tree</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">clfObj</span><span class="o">.</span><span class="n">lgStr</span> <span class="o">=</span> <span class="s1">&#39;Random Forest (tree=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n_tree</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
+                <span class="n">clfObj</span><span class="o">.</span><span class="n">shStr</span> <span class="o">=</span> <span class="s1">&#39;RF-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">n_tree</span><span class="p">)</span>
+
+            <span class="c1"># Logistic regression :</span>
+            <span class="k">elif</span> <span class="n">clf</span> <span class="o">==</span> <span class="s1">&#39;lr&#39;</span> <span class="ow">or</span> <span class="n">clf</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>
+                <span class="n">clfObj</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">clfObj</span><span class="o">.</span><span class="n">lgStr</span> <span class="o">=</span> <span class="s1">&#39;Logistic Regression&#39;</span>
+                <span class="n">clfObj</span><span class="o">.</span><span class="n">shStr</span> <span class="o">=</span> <span class="s1">&#39;LogReg&#39;</span>
+
+            <span class="c1"># QDA :</span>
+            <span class="k">elif</span> <span class="n">clf</span> <span class="o">==</span> <span class="s1">&#39;qda&#39;</span> <span class="ow">or</span> <span class="n">clf</span> <span class="o">==</span> <span class="mi">8</span><span class="p">:</span>
+                <span class="n">clfObj</span> <span class="o">=</span> <span class="n">QuadraticDiscriminantAnalysis</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="n">clfObj</span><span class="o">.</span><span class="n">lgStr</span> <span class="o">=</span> <span class="s1">&#39;Quadratic Discriminant Analysis&#39;</span>
+                <span class="n">clfObj</span><span class="o">.</span><span class="n">shStr</span> <span class="o">=</span> <span class="s1">&#39;QDA&#39;</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;No classifier &quot;&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">clf</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;&quot;&quot; found&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Use a custom classifier :</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">clfObj</span> <span class="o">=</span> <span class="n">clf</span>
+            <span class="n">clfObj</span><span class="o">.</span><span class="n">shStr</span> <span class="o">=</span> <span class="s1">&#39;custom&#39;</span>
+            <span class="n">clfObj</span><span class="o">.</span><span class="n">lgStr</span> <span class="o">=</span> <span class="s1">&#39;Custom classifier&#39;</span>
+
+
+        <span class="k">return</span> <span class="n">clfObj</span></div>
+
+
+
+<span class="k">class</span> <span class="nc">defVoting</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Define a voting classifier</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        y: list/array</span>
+<span class="sd">            The label vector</span>
+
+<span class="sd">    Kargs:</span>
+<span class="sd">        estimators: list, optional, (def: [])</span>
+<span class="sd">            A list a pre-build estimators using defClf()</span>
+
+<span class="sd">        clfArgs: list, optional, (def: [])</span>
+<span class="sd">            Instead of sending a list of pre-defined classifiers,</span>
+<span class="sd">            build estimators directly using a list of dictionnaries</span>
+<span class="sd">            to pass to the defClf class.</span>
+
+<span class="sd">    Return</span>
+<span class="sd">        clf: a classifier object</span>
+
+<span class="sd">    Example:</span>
+<span class="sd">        &gt;&gt;&gt; # Build two classifiers :</span>
+<span class="sd">        &gt;&gt;&gt; clf0 = defClf(y, clf=&#39;lda&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; clf1 = defClf(y, clf=&#39;svm&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; # Build the voting classifier :</span>
+<span class="sd">        &gt;&gt;&gt; clf = defVoting(y, estimators=[clf0, clf1])</span>
+<span class="sd">        &gt;&gt;&gt; # Alternatively, thos steps can be done in one line :</span>
+<span class="sd">        &gt;&gt;&gt; clf = defVoting(y, clfArgs=[{&#39;clf&#39;:&#39;lda&#39;}, {&#39;clf&#39;:&#39;svm&#39;}])</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">estimators</span><span class="o">=</span><span class="p">[],</span> <span class="n">clfArgs</span><span class="o">=</span><span class="p">[],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="c1"># estimators is not list :</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">estimators</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;estimators must be a list of classifiers define with defClf&#39;</span><span class="p">)</span>
+        <span class="c1"># estimators is list and not empty :</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">estimators</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">estimators</span><span class="p">)):</span>
+            <span class="n">clfObj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_voting</span><span class="p">(</span><span class="n">estimators</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># estimators is list :</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">estimators</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">clfArgs</span><span class="p">):</span>
+            <span class="n">estimators</span> <span class="o">=</span> <span class="p">[</span><span class="n">defClf</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">clfArgs</span><span class="p">]</span>
+            <span class="n">clfObj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_voting</span><span class="p">(</span><span class="n">estimators</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">clfObj</span>
+
+    <span class="k">def</span> <span class="nf">_voting</span><span class="p">(</span><span class="n">estimators</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Build the classifier</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">clfObj</span> <span class="o">=</span> <span class="n">VotingClassifier</span><span class="p">([(</span><span class="n">k</span><span class="o">.</span><span class="n">shStr</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">estimators</span><span class="p">],</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">clfObj</span><span class="o">.</span><span class="n">lgStr</span> <span class="o">=</span> <span class="s1">&#39; + &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">k</span><span class="o">.</span><span class="n">lgStr</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">estimators</span><span class="p">])</span>
+        <span class="n">clfObj</span><span class="o">.</span><span class="n">shStr</span> <span class="o">=</span> <span class="s1">&#39; + &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">k</span><span class="o">.</span><span class="n">shStr</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">estimators</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">clfObj</span>
+
+
+<div class="viewcode-block" id="defCv"><a class="viewcode-back" href="../../../../classification.html#classification.defCv">[docs]</a><span class="k">class</span> <span class="nc">defCv</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Choose a cross_validation (CV) and switch easyly between</span>
+<span class="sd">    CV implemented in scikit-learn.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        y: array</span>
+<span class="sd">            The vector label</span>
+
+<span class="sd">    kargs:</span>
+<span class="sd">        cvtype: string, optional, [def: skfold]</span>
+<span class="sd">            Define a cross_validation. Choose between :</span>
+
+<span class="sd">                - &#39;skfold&#39;: Stratified k-Fold</span>
+<span class="sd">                - &#39;kfold&#39;: k-fold</span>
+<span class="sd">                - &#39;sss&#39;: Stratified Shuffle Split</span>
+<span class="sd">                - &#39;ss&#39;: Shuffle Split</span>
+<span class="sd">                - &#39;loo&#39;: Leave One Out</span>
+<span class="sd">                - &#39;lolo&#39;: Leave One Label Out</span>
+
+<span class="sd">        n_folds: integer, optional, [def: 10]</span>
+<span class="sd">            Number of folds</span>
+
+<span class="sd">        rndstate: integer, optional, [def: 0]</span>
+<span class="sd">            Define a random state. Usefull to replicate a result</span>
+
+<span class="sd">        rep: integer, optional, [def: 10]</span>
+<span class="sd">            Number of repetitions</span>
+
+<span class="sd">        kwargs: optional arguments. To define other parameters,</span>
+<span class="sd">        see the description of scikit-learn.</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        A list of scikit-learn cross-validation objects with two supplementar</span>
+<span class="sd">        arguments:</span>
+
+<span class="sd">            - lgStr: long description of the cross_validation</span>
+<span class="sd">            - shStr: short description of the cross_validation</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cvtype</span><span class="o">=</span><span class="s1">&#39;skfold&#39;</span><span class="p">,</span> <span class="n">n_folds</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">rndstate</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">rep</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                 <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cvr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">rep</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rep</span> <span class="o">=</span> <span class="n">rep</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rep</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cvr</span><span class="p">[</span><span class="n">k</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">lgStr</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">shStr</span> <span class="o">=</span> <span class="n">_define</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">cvtype</span><span class="o">=</span><span class="n">cvtype</span><span class="p">,</span> <span class="n">n_splits</span><span class="o">=</span><span class="n">n_folds</span><span class="p">,</span>
+                                                          <span class="n">rndstate</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">rep</span><span class="o">=</span><span class="n">rep</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lgStr</span></div>
+
+
+<span class="k">def</span> <span class="nf">_define</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">cvtype</span><span class="o">=</span><span class="s1">&#39;skfold&#39;</span><span class="p">,</span> <span class="n">n_splits</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">rndstate</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">rep</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c1"># Stratified k-fold :</span>
+    <span class="k">if</span> <span class="n">cvtype</span> <span class="o">==</span> <span class="s1">&#39;skfold&#39;</span><span class="p">:</span>
+        <span class="n">cvT</span> <span class="o">=</span> <span class="n">StratifiedKFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">n_splits</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                              <span class="n">random_state</span><span class="o">=</span><span class="n">rndstate</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">lgStr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-times, &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n_splits</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; Stratified k-folds&#39;</span>
+        <span class="n">shStr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-rep_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n_splits</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="n">cvtype</span>
+
+    <span class="c1"># k-fold :</span>
+    <span class="k">elif</span> <span class="n">cvtype</span> <span class="o">==</span> <span class="s1">&#39;kfold&#39;</span><span class="p">:</span>
+        <span class="n">cvT</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">n_splits</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">random_state</span><span class="o">=</span><span class="n">rndstate</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">lgStr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-times, &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n_splits</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; k-folds&#39;</span>
+        <span class="n">shStr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-rep_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n_splits</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="n">cvtype</span>
+
+    <span class="c1"># Shuffle stratified k-fold :</span>
+    <span class="k">elif</span> <span class="n">cvtype</span> <span class="o">==</span> <span class="s1">&#39;sss&#39;</span><span class="p">:</span>
+        <span class="n">cvT</span> <span class="o">=</span> <span class="n">StratifiedShuffleSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">n_splits</span><span class="p">,</span>
+                                     <span class="n">test_size</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">n_splits</span><span class="p">,</span>
+                                     <span class="n">random_state</span><span class="o">=</span><span class="n">rndstate</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">lgStr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-times, test size 1/&#39;</span> <span class="o">+</span> \
+            <span class="nb">str</span><span class="p">(</span><span class="n">n_splits</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; Shuffle Stratified Split&#39;</span>
+        <span class="n">shStr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-rep_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n_splits</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="n">cvtype</span>
+
+    <span class="c1"># Shuffle stratified :</span>
+    <span class="k">elif</span> <span class="n">cvtype</span> <span class="o">==</span> <span class="s1">&#39;ss&#39;</span><span class="p">:</span>
+        <span class="n">cvT</span> <span class="o">=</span> <span class="n">ShuffleSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">rep</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">n_splits</span><span class="p">,</span>
+                           <span class="n">random_state</span><span class="o">=</span><span class="n">rndstate</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">lgStr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-times, test size 1/&#39;</span> <span class="o">+</span> \
+            <span class="nb">str</span><span class="p">(</span><span class="n">n_splits</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; Shuffle Stratified&#39;</span>
+        <span class="n">shStr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-rep_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n_splits</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="n">cvtype</span>
+
+    <span class="c1"># Leave One Out :</span>
+    <span class="k">elif</span> <span class="n">cvtype</span> <span class="o">==</span> <span class="s1">&#39;loo&#39;</span><span class="p">:</span>
+        <span class="n">cvT</span> <span class="o">=</span> <span class="n">LeaveOneOut</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+        <span class="n">lgStr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-times, Leave One Out&#39;</span>
+        <span class="n">shStr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-rep_&#39;</span><span class="o">+</span><span class="n">cvtype</span>
+
+    <span class="c1"># Leave One Label Out :</span>
+    <span class="k">elif</span> <span class="n">cvtype</span> <span class="o">==</span> <span class="s1">&#39;lolo&#39;</span><span class="p">:</span>
+        <span class="n">cvT</span> <span class="o">=</span> <span class="n">LeaveOneGroupOut</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">lgStr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-times, leave One Label Out&#39;</span>
+        <span class="n">shStr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">rep</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-rep_&#39;</span><span class="o">+</span><span class="n">cvtype</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;No cross-validation &quot;&#39;</span><span class="o">+</span><span class="n">cvtype</span><span class="o">+</span><span class="s1">&#39;&quot;&quot; found&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">cvT</span><span class="p">,</span> <span class="n">lgStr</span><span class="p">,</span> <span class="n">shStr</span>
+
+
+
+<span class="k">class</span> <span class="nc">clfstat</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Specific statistic class for classification</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">bino_da2pvalue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">da</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">bino_da2p</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">da</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">bino_pvalue2da</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">bino_p2da</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">perm_da2pvalue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">da</span><span class="p">,</span> <span class="n">daperm</span><span class="p">,</span> <span class="n">multcomp</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">multp</span><span class="o">=</span><span class="mf">0.05</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get p-values (corrected or not) from decoding accuracies</span>
+<span class="sd">        computed using permutations</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            da: array</span>
+<span class="sd">                Array of true decoding of shape n_features</span>
+
+<span class="sd">            daperm:</span>
+<span class="sd">                Array of decoding for permutations of shape</span>
+<span class="sd">                n_perm x n_features</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            multcomp: string, optional, [def: None]</span>
+<span class="sd">                Apply a multiple correction to p-values. Use either:</span>
+
+<span class="sd">                - &#39;maxstat&#39;: maximum statistics</span>
+<span class="sd">                - &#39;bonferroni&#39;: bonferroni correction</span>
+<span class="sd">                - &#39;fdr&#39;: False Discovery Rate correction</span>
+
+<span class="sd">            multp: float, optional, [def: 0.05]</span>
+<span class="sd">                p-value to use for multiplt comparison</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            pvalue: array</span>
+<span class="sd">                Corrected (or not) p-values of shape n_features</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">da</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">da</span> <span class="o">=</span> <span class="n">da</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">da</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">da</span><span class="p">)</span>
+        <span class="c1"># Maximum statistic correction :</span>
+        <span class="k">if</span> <span class="n">multcomp</span> <span class="o">==</span> <span class="s1">&#39;maxstat&#39;</span><span class="p">:</span>
+            <span class="n">daperm</span> <span class="o">=</span> <span class="n">maxstat</span><span class="p">(</span><span class="n">daperm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">pvalue</span> <span class="o">=</span> <span class="n">perm_2pvalue</span><span class="p">(</span><span class="n">da</span><span class="p">,</span> <span class="n">daperm</span><span class="p">,</span> <span class="n">daperm</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tail</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1"># bonferroni, fdr correction:</span>
+        <span class="k">if</span> <span class="n">multcomp</span> <span class="o">==</span> <span class="s1">&#39;bonferroni&#39;</span><span class="p">:</span>
+            <span class="n">pvalue</span> <span class="o">=</span> <span class="n">bonferroni</span><span class="p">(</span><span class="n">pvalue</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">multcomp</span> <span class="o">==</span> <span class="s1">&#39;fdr&#39;</span><span class="p">:</span>
+            <span class="n">pvalue</span> <span class="o">=</span> <span class="n">fdr</span><span class="p">(</span><span class="n">pvalue</span><span class="p">,</span> <span class="n">multp</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pvalue</span>
+
+    <span class="k">def</span> <span class="nf">perm_pvalue2da</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">daperm</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">maxst</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the decoding accuracy from permutations from</span>
+<span class="sd">        which you can consider that it&#39;s p-significant;</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            daperm:</span>
+<span class="sd">                Array of decoding for permutations of shape</span>
+<span class="sd">                n_perm x n_features</span>
+
+<span class="sd">        Kargs:</span>
+<span class="sd">            p: float, optional, [def: 0.05]</span>
+<span class="sd">                p-value to search in permutation distribution</span>
+
+<span class="sd">            maxst: bool, optional, [def: False]</span>
+<span class="sd">                Correct permutations with maximum statistics</span>
+
+<span class="sd">        Return:</span>
+<span class="sd">            dapval: float</span>
+<span class="sd">                The decoding accuracy from which you can consider</span>
+<span class="sd">                your results as p-significants using permutations</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">perm_pvalue2level</span><span class="p">(</span><span class="n">daperm</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="p">,</span> <span class="n">maxst</span><span class="o">=</span><span class="n">maxst</span><span class="p">)</span>
+
+<span class="n">clfstat</span><span class="o">.</span><span class="n">bino_da2pvalue</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">+=</span> <span class="n">bino_da2p</span><span class="o">.</span><span class="n">__doc__</span>
+<span class="n">clfstat</span><span class="o">.</span><span class="n">bino_pvalue2da</span><span class="o">.</span><span class="n">__doc__</span> <span class="o">+=</span> <span class="n">bino_p2da</span><span class="o">.</span><span class="n">__doc__</span>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Etienne Combrisson.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'0.1.8',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
