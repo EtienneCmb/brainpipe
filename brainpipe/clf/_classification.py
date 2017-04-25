@@ -333,7 +333,6 @@ class generalization(object):
         self.cv = cvtype
         if isinstance(cvtype, list):
             cvtype = cvtype[0]
-        print(cvtype)
         # Check the size of x:
         x = np.atleast_3d(x)
         npts, ntrials = len(time), len(y)
@@ -351,7 +350,7 @@ class generalization(object):
                 xy = x[i, ...]
                 # If cv is defined, do a cv on the diagonal
                 if (k == i) and (cvtype is not None):
-                    da[i, k] = _cvscore(xx, y, clf, self._cv.cvr[0])[0]/100
+                    da[i, k] = _cvscore(xx, y, clf, self.cv.cvr[0])[0]/100
                 # If cv is not defined, let the diagonal at zero
                 elif (k == i) and (cvtype is None):
                     pass
