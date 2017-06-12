@@ -4,16 +4,19 @@
 
 Version : 0.1.0
 
-## Documentation :
-Start with the [documentation](https://etiennecmb.github.io/)
-
 ## Description
-Brainpipe is a toolbox to analyse neuro-physiological signals. For instance, it's specialised for eeg, seeg and ecog signals. The aim of this toolbox is to extract informations from data [= features], to classify them and to find the best features combination from wide variety of features. Here is the list of the current implemented modules and there respectiv description:
+
+Brainpipe is a toolbox dedicated to the analysis and classification of neuro-physiological signals. Brainpipe allows for the extraction of a wide range of features from brain signals and the application of a wide range of machine learning algorithms based on scikit-learn. For now the available processing and feature extraction functionlities are tailored to EEG, MEG, intracranial EEG (SEEG & ECoG) signals. Brainpipe can be used for single and multi-feature classification and provides a flexible and easiliy extendable tool for neuroscience data mining. Checkout the [documentation](https://etiennecmb.github.io/) and see intructions for installation.
+
+Brainpipe is a package primarily written by Etienne Combrisson, as part of his PhD research work, suprvised by Prof Karim Jerbi (CoCo Lab, Psychology Department, University of Montreal, QC, Canada) and Prof Aymeric Guillot (University Claude Bernard Lyon 1, Inter-University Laboratory of Human Movement Biology, Lyon, France).
+
+The current version of Brainpipe consists of the following modules:
 - bpstudy : managed features / file database
-- Extract physiological informations using mni/talairach coordonates of electrodes
-- feature : extract power, phase, phase-amplitude coupling features
-- optimized classification using scikit-learn
-- find the optimal combination of features
+- Extracts anatomical information using mni/talairach coordinates of sites (e.g. electrode locations in intracranial EEG)
+- feature : extracts a wide range of features, including: power, phase, phase-amplitude coupling
+- Optimized classification and feature combination using a range of techniques based on scikit-learn 
+
+![brainpipe](https://github.com/EtienneCmb/brainpipe/blob/master/docs/image/bplogo.png "brainpipe")
 
 ## Modules
 
