@@ -1,15 +1,22 @@
 Brainpipe
 *********
 
-Brainpipe is a python toolbox dedicated for neuronal signals analysis and machine-learning. The aim is to provide a variety of tools to extract informations from neural activities (features) and use machine-learning to validate hypothesis. The machine-learning used the excellent `scikit-learn <http://scikit-learn.org/stable/>`_  library. Brainpipe can also perform parallel computing and try to optimize RAM usage for our 'large' datasets. If you want to have a quick overview of what you can actually do, checkout the :ref:`refpart`.
+Brainpipe is a python toolbox dedicated to the analysis and classification of neuro-physiological signals. Brainpipe allows for the extraction of a wide range of features from brain signals and the application of a wide range of machine learning algorithms based on the `scikit-learn <http://scikit-learn.org/stable/>`_ library. For now the available processing and feature extraction functionlities are tailored to EEG, MEG, intracranial EEG (SEEG & ECoG) signals. Brainpipe can be used for single and multi-feature classification and provides a flexible and easiliy extendable tool for neuroscience data mining.
 
-It's evolving every day! So if you have problems, bugs or if you want to collaborate and add your own tools, contact me at e.combrisson@gmail.com
+Brainpipe can also perform parallel computing and try to optimize RAM usage for our ‘large’ datasets. If you want to have a quick overview of what you can actually do, checkout the :ref:`refpart`.
 
-	
+It’s evolving every day! So if you have problems, bugs or if you want to collaborate and add your own tools, contact me at e.combrisson@gmail.com
 
-Requirement
-***********
-brainpipe is developed on Python 3, so the compatibility with python 2 is not guaranted! (not tested yet)
+Brainpipe is a package primarily written by Etienne Combrisson, as part of his PhD research work, suprvised by Prof Karim Jerbi (CoCo Lab, Psychology Department, University of Montreal, QC, Canada) and Prof Aymeric Guillot (University Claude Bernard Lyon 1, Inter-University Laboratory of Human Movement Biology, Lyon, France)
+
+
+.. figure::  images/bplogo.png
+   :align:   center
+
+Requirements
+************
+
+brainpipe is developed on Python 3 but should be compatible with Python 2.
 
 Please, check if you have this toolbox installed and already up-to-date:
 
