@@ -16,7 +16,7 @@ The current version of Brainpipe consists of the following modules:
 - feature : extracts a wide range of features, including: power, phase, phase-amplitude coupling
 - Optimized classification and feature combination using a range of techniques based on scikit-learn 
 
-![brainpipe](https://github.com/EtienneCmb/brainpipe/blob/master/docs/image/bplogo.png "brainpipe")
+![brainpipe](https://github.com/EtienneCmb/brainpipe/blob/master/docs/images/bplogo.png "brainpipe")
 
 ## Modules
 
