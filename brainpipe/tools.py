@@ -1,3 +1,4 @@
+import re
 import numpy as np
 
 __all__ = ['binarize',
@@ -194,3 +195,14 @@ def uorderlst(lst):
     seen = set()
     seen_add = seen.add
     return [x for x in lst if not (x in seen or seen_add(x))]
+
+
+def cut_string(txt, pattern, opt_length, replace):
+    sizes = np.array([[k.start(), k.end()] for k in re.finditer(pattern, txt)])
+    if not sizes.size:
+        return txt
+    sizes_ratio = sizes[:, 0] / opt_length
+    if not sizes_ratio.max() > 1:
+        return txt
+    cut_at = np.abs(sizes_ratio - 1).argmin()
+    return txt[:sizes[cut_at, 0]] + replace + txt[sizes[cut_at, 1]::]
