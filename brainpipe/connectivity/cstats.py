@@ -3,6 +3,8 @@ import numpy as np
 from itertools import permutations
 from scipy import spatial, stats
 
+from .correction import _axes_correction
+
 
 def random_phase(ts, axis=0):
     """Random phase for statistical assessment of connectivity.
@@ -43,11 +45,10 @@ def random_phase(ts, axis=0):
     sz_pos = [1] * ts.ndim
     sz_pos[axis] = pos - 1
     phi_pos = np.random.uniform(0, 2 * np.pi, sz_pos)
-    pos_slice = [slice(None)] * ts.ndim
-    pos_slice[axis] = slice(1, pos)
+    pos_slice = _axes_correction(axis, ts.ndim, slice(1, pos))
+    neg_slice = _axes_correction(axis, ts.ndim, slice(neg, n_pts))
     phi[pos_slice] = phi_pos
-    pos_slice[axis] = slice(neg, n_pts)
-    phi[pos_slice] = -np.flip(phi_pos, axis)
+    phi[neg_slice] = -np.flip(phi_pos, axis)
     ts_dft += 1j * phi
     # Perform inverse DFT and keep only real :
     ts_idft = np.fft.ifft(ts_dft, axis=axis).real

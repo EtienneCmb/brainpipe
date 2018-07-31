@@ -2,6 +2,13 @@
 import numpy as np
 
 
+def _axes_correction(axis, ndim, num):
+    """Get a slice at a specific axis."""
+    axes = [slice(None)] * ndim
+    axes[axis] = num
+    return tuple(axes)
+
+
 def get_pairs(n, part='upper'):
     """Get connectivity pairs of the upper triangle.
 

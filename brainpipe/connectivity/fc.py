@@ -4,6 +4,7 @@ import logging
 import numpy as np
 from scipy import stats, signal
 
+from .correction import _axes_correction
 from ..info_th.mi import _mi
 from ..sys import set_log_level
 
@@ -32,13 +33,6 @@ def _fc_mtd_mean(x, y, **kwargs):
     """Multiplication of temporal derivatives between two time-series."""
     _ts, _pval = _fc_mtd(x, y, **kwargs)
     return _ts.mean(), _pval.mean()
-
-
-def _axes_correction(axis, ndim, num):
-    """Get a slice at a specific axis."""
-    axes = [slice(None)] * ndim
-    axes[axis] = num
-    return axes
 
 
 def _directional_ts(ts_1, ts_2, axis, lag):
