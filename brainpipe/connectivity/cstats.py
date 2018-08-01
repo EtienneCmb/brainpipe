@@ -1,9 +1,7 @@
 """Statistics for connectivity."""
 import numpy as np
 from itertools import permutations
-from scipy import spatial, stats
-
-from .correction import _axes_correction
+from scipy import spatial
 
 
 def random_phase(ts, axis=0):
@@ -28,31 +26,22 @@ def random_phase(ts, axis=0):
     connectivity MRI. Neuroimage.
     """
     n_pts = ts.shape[axis]
-    pos, neg = n_pts // 2, n_pts // 2 + 1
     # Demean the time-series :
-    ts_m = ts.mean(axis=axis, keepdims=True)
-    ts_d = ts - ts_m
+    # ts_m = ts.mean(axis=axis, keepdims=True)
+    ts_d = ts  # - ts_m
     # Compute the DFT :
-    ts_dft = np.fft.fft(ts_d, axis=axis)
-    # ------------------------------------------------------------
-    # RANDOM PHASE
-    # ------------------------------------------------------------
-    # Prepare phase before broadcasting :
-    sz = [1] * ts.ndim
-    sz[axis] = ts.shape[axis]
-    phi = np.zeros(sz)
-    # Define posive phase :
-    sz_pos = [1] * ts.ndim
-    sz_pos[axis] = pos - 1
-    phi_pos = np.random.uniform(0, 2 * np.pi, sz_pos)
-    pos_slice = _axes_correction(axis, ts.ndim, slice(1, pos))
-    neg_slice = _axes_correction(axis, ts.ndim, slice(neg, n_pts))
-    phi[pos_slice] = phi_pos
-    phi[neg_slice] = -np.flip(phi_pos, axis)
-    ts_dft += 1j * phi
-    # Perform inverse DFT and keep only real :
-    ts_idft = np.fft.ifft(ts_dft, axis=axis).real
-    return ts_idft + ts_m
+    ts_dft = np.fft.rfft(ts_d, axis=axis)
+    # Prepare the random phase :
+    phi_shape = [1] * ts_dft.ndim
+    phi_shape[axis] = ts_dft.shape[axis]
+    phi = np.random.uniform(0, 2 * np.pi, phi_shape)
+    # Repeat the phase across all dimensions :
+    phi_rep = list(ts.shape)
+    phi_rep[axis] = 1
+    phi = np.tile(phi, phi_rep)
+    # Add this phase to the DFT :
+    ts_dft = np.abs(ts_dft) * np.exp(1j * phi)
+    return np.fft.irfft(ts_dft, n=n_pts, axis=axis)  # + ts_m
 
 
 def mantel(x, y, perms=100, method='pearson', tail='two-tail'):
