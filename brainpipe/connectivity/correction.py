@@ -176,3 +176,48 @@ def anat_based_mean(x, df, col, xyz=None):
         return x_r, labels, xyz_r
     else:
         return x_r, labels
+
+
+def ravel_connect(connect, part='upper'):
+    """Ravel a connectivity array.
+
+    Parameters
+    ----------
+    connect : array_like
+        Connectivity array of shape (n_sites, n_sites) to ravel
+    part : {'upper', 'lower', 'both'}
+        Part of the connectivity array to get.
+
+    Returns
+    -------
+    connect : array_like
+        Ravel version of the connectivity array.
+    """
+    assert isinstance(connect, np.ndarray) and (connect.ndim == 2)
+    assert connect.shape[0] == connect.shape[1]
+    pairs = get_pairs(connect.shape[0], part=part, as_array=False)
+    return connect[pairs]
+
+
+def unravel_connect(connect, n_sites, part='upper'):
+    """Unravel a connectivity array.
+
+    Parameters
+    ----------
+    connect : array_like
+        Connectivity array of shape (n_sites, n_sites) to ravel
+    n_sites : int
+        Number of sites in the connectivity array.
+    part : {'upper', 'lower', 'both'}
+        Part of the connectivity array to get.
+
+    Returns
+    -------
+    connect : array_like
+        Unravel version of the connectivity array.
+    """
+    assert isinstance(connect, np.ndarray) and (connect.ndim == 1)
+    pairs = get_pairs(n_sites, part=part, as_array=False)
+    connect_ur = np.zeros((n_sites, n_sites), dtype=connect.dtype)
+    connect_ur[pairs[0], pairs[1]] = connect
+    return connect_ur

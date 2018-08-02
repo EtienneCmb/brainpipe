@@ -102,7 +102,7 @@ def permute_connectivity(connect, n_perm=200, rndstate=0, part='upper'):
 
 
 def statistical_summary(connect, n_perm=200, part='upper', method='l2',
-                        as_pval=True, tail=1, verbose=None):
+                        as_pval=True, tail=1, threshold=None, verbose=None):
     """Get a statistical summary across a time dimension.
 
     Parameters
@@ -125,6 +125,8 @@ def statistical_summary(connect, n_perm=200, part='upper', method='l2',
     tail : int | 1
         If `as_pval` is True, specify if one tail or two should be considered
         when p-values are computed.
+    threshold: float | None
+        Every values over `threshold` are set to 1.
     verbose : bool, str, int, or None
         The verbosity of messages to print. If a str, it can be either
         PROFILER, DEBUG, INFO, WARNING, ERROR, or CRITICAL.
@@ -156,7 +158,8 @@ def statistical_summary(connect, n_perm=200, part='upper', method='l2',
     # If needed, return p-values instead of permutations
     connect_sum = fc_summarize(connect, axis=2, method=method, verbose=False)
     assert connect_sum.ndim == 2
-    return perm_2pvalue(connect_sum, connect_psum, n_perm, tail=tail)
+    return perm_2pvalue(connect_sum, connect_psum, n_perm, tail=tail,
+                        threshold=threshold)
 
 
 def random_phase(ts, axis=0):
