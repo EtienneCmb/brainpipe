@@ -65,6 +65,9 @@ class TestFc(object):  # noqa
         # MEAN :
         mean = fc_summarize(_dfc, 1, 'mean')
         idx += [np.r_[np.where(mean == mean.max())]]
+        # L2 :
+        mean = fc_summarize(_dfc, 1, 'l2')
+        idx += [np.r_[np.where(mean == mean.max())]]
         # COEFVAR :
         coefvar = fc_summarize(_pvals, 1, 'coefvar')
         idx += [np.r_[np.where(coefvar == coefvar.min())]]
