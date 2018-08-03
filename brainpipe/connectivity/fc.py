@@ -2,7 +2,7 @@
 import logging
 
 import numpy as np
-from scipy import stats, signal
+from scipy import stats, signal, linalg
 
 from .correction import _axes_correction
 from ..info_th.mi import _mi
@@ -332,3 +332,47 @@ def directional_dfc(ts_1, ts_2, win, lag, axis=0, sf=1., measure='corr',
     logger.info("Compute directional dFC using %s" % measure)
     return dfc(ts_1_lag, ts_2_lag, win, axis, sf, measure, overlap, win_opt,
                bins, verbose)
+
+
+def partial_corr(ts, z_score=False):
+    """Partial correlation.
+
+    Linear partial correlation coefficients between pairs of variables in ts,
+    controlling for the remaining variables in ts.
+
+    Parameters
+    ----------
+    ts : array_like
+        Time-series of shape (n, p) with the different variables. Each column
+        of c is taken as a variable
+
+    Returns
+    -------
+    p_corr : array_like
+        correlation array of shape (p, p) whee P[i, j] contains the partial
+        correlation of c[:, i] and c[:, j] controlling for the remaining
+        variables in c.
+    """
+    c = ts.copy()
+    if z_score:
+        c -= ts.mean(axis=0, keepdims=True)
+        c /= ts.std(axis=0, keepdims=True)
+    p = c.shape[1]
+    p_corr = np.zeros((p, p), dtype=np.float)
+    for i in range(p):
+        p_corr[i, i] = 0.
+        for j in range(i + 1, p):
+            idx = np.ones(p, dtype=np.bool)
+            idx[i] = False
+            idx[j] = False
+            beta_i = linalg.lstsq(c[:, idx], c[:, j])[0]
+            beta_j = linalg.lstsq(c[:, idx], c[:, i])[0]
+
+            res_j = c[:, j] - c[:, idx].dot(beta_i)
+            res_i = c[:, i] - c[:, idx].dot(beta_j)
+
+            corr = stats.pearsonr(res_i, res_j)[0]
+            p_corr[i, j] = corr
+            p_corr[j, i] = corr
+
+    return p_corr
