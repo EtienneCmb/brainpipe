@@ -6,7 +6,7 @@ from scipy import stats, signal, linalg
 
 from .correction import _axes_correction
 from ..info_th.mi import _mi
-from ..sys import set_log_level
+from ..system import set_log_level
 
 
 logger = logging.getLogger('brainpipe')
@@ -352,6 +352,10 @@ def partial_corr(ts, z_score=False):
         correlation array of shape (p, p) whee P[i, j] contains the partial
         correlation of c[:, i] and c[:, j] controlling for the remaining
         variables in c.
+
+    Notes
+    -----
+    Original code : https://gist.github.com/fabianp/9396204419c7b638d38f
     """
     c = ts.copy()
     if z_score:

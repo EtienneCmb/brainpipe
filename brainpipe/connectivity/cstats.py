@@ -6,7 +6,7 @@ from itertools import permutations
 from scipy import spatial
 
 from .correction import get_pairs
-from ..sys import set_log_level
+from ..system import set_log_level
 from ..statistics import perm_2pvalue
 
 

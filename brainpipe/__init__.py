@@ -1,9 +1,6 @@
 import logging
 
-from .preprocessing import *
-from .classification import *
-from .feature import *
-from .sys import set_log_level
+from .system import set_log_level
 
 """Set 'info' as the default logging level
 """

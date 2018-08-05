@@ -1,8 +1,2 @@
 include runner README.md
 recursive-include brainpipe/atlas/labels *
-recursive-include brainpipe/clf *
-recursive-include brainpipe/feat *
-recursive-include brainpipe/preproc *
-recursive-include brainpipe/stat *
-recursive-include brainpipe/sys *
-recursive-include brainpipe/visu *
