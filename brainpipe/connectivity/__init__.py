@@ -4,3 +4,4 @@ from .correction import (remove_site_contact, anat_based_reorder,  # noqa
                          anat_based_mean, get_pairs, ravel_connect,
                          unravel_connect)
 from .fc import (sfc, directional_sfc, dfc, directional_dfc, partial_corr)  # noqa
+from .stgc import covgc_time  # noqa

@@ -141,3 +141,15 @@ def set_log_level(verbose=None, match=None):
                              "%s" % ', '.join(LOGGING_TYPES))
     if isinstance(match, str):
         _lh._str_pattern = match
+
+
+def progress_bar(value, endvalue, bar_length=20, pre_st=None):
+    """Progress bar."""
+    percent = float(value) / endvalue
+    arrow = '-' * int(round(percent * bar_length) - 1) + '>'
+    spaces = ' ' * (bar_length - len(arrow))
+    pre_st = '' if not isinstance(pre_st, str) else pre_st
+
+    sys.stdout.write("\r{0} [{1}] {2}%".format(pre_st, arrow + spaces,
+                                               int(round(percent * 100))))
+    sys.stdout.flush()

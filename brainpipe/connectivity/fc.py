@@ -343,15 +343,17 @@ def partial_corr(ts, z_score=False):
     Parameters
     ----------
     ts : array_like
-        Time-series of shape (n, p) with the different variables. Each column
-        of c is taken as a variable
+        Array of shape (n, p) with the different variables. Each column
+        of ts is taken as a variable
+    z_score : bool | False
+        Z-score the data (data - mean / deviation).
 
     Returns
     -------
     p_corr : array_like
         correlation array of shape (p, p) whee P[i, j] contains the partial
-        correlation of c[:, i] and c[:, j] controlling for the remaining
-        variables in c.
+        correlation of ts[:, i] and ts[:, j] controlling for the remaining
+        variables in ts.
 
     Notes
     -----
@@ -362,6 +364,7 @@ def partial_corr(ts, z_score=False):
         c -= ts.mean(axis=0, keepdims=True)
         c /= ts.std(axis=0, keepdims=True)
     p = c.shape[1]
+
     p_corr = np.zeros((p, p), dtype=np.float)
     for i in range(p):
         p_corr[i, i] = 0.

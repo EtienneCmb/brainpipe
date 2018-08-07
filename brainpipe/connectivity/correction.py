@@ -86,7 +86,7 @@ def remove_site_contact(mat, channels, mode='soft', remove_lower=False):
     return select
 
 
-def anat_based_reorder(c, df, col):
+def anat_based_reorder(c, df, col, part='upper'):
     """Reorder and connectivity array according to anatomy.
 
     Parameters
@@ -97,6 +97,8 @@ def anat_based_reorder(c, df, col):
         DataFrame containing anamical informations.
     col : str
         Name of the column to use in the DataFrame.
+    part : {'upper', 'lower', 'both'}
+        Part of the connectivity array to get.
 
     Returns
     -------
@@ -115,7 +117,7 @@ def anat_based_reorder(c, df, col):
     labels = list(df.keys())
     index = np.concatenate([list(k) for k in grp.values()])
     # Get pairs :
-    pairs = np.c_[np.triu_indices(n_elec, k=1)]
+    pairs = np.c_[get_pairs(n_elec, part=part, as_array=False)]
     # Reconstruct the array :
     c_r = np.zeros_like(c)
     for k, i in pairs:
