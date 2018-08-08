@@ -32,16 +32,55 @@ Author: Etienne Combrisson <e.combrisson@gmail.com>
 """
 import logging
 
+from joblib import Parallel, delayed
+
 import numpy as np
 from numpy.linalg import det
 from numpy.lib.scimath import log
 
-from ..system import set_log_level, progress_bar
+from ..system import set_log_level
 
 logger = logging.getLogger('brainpipe')
 
 
-def covgc_time(x, dt, lag, t0, verbose=None):
+def _covgc(x, lag, dt, ind_t, p):
+    # Extract data for a given pair of sources
+    x_ = np.squeeze(x[p[0], ind_t]).reshape(lag + 1, dt)
+    y_ = np.squeeze(x[p[1], ind_t]).reshape(lag + 1, dt)
+
+    # ---------------------------------------------------------------------
+    # Conditional Entropies
+    # ---------------------------------------------------------------------
+    # h_ycy : H(Y_i+1|Y_i) = H(Y_i+1) - H(Y_i)
+    det_yi1 = det(np.cov(y_))
+    det_yi = det(np.cov(y_[1::, :]))
+    h_ycy = log(det_yi1) - log(det_yi)
+    # h_ycx : H(Y_i+1|X_i,Y_i) = H(Y_i+1,X_i,Y_i) - H(X_i,Y_i)
+    det_yxi1 = det(np.cov(np.r_[y_, x_[1::, :]]))
+    det_yxi = det(np.cov(np.r_[y_[1::, :], x_[1::, :]]))
+    h_ycx = log(det_yxi1) - log(det_yxi)
+    # h_xcx : H(X_i+1|X_i) = H(X_i+1) - H(X_i)
+    det_xi1 = det(np.cov(x_))
+    det_xi = det(np.cov(x_[1::, :]))
+    h_xcx = log(det_xi1) - log(det_xi)
+    # h_xcy : H(X_i+1|X_i,Y_i) = H(X_i+1,X_i,Y_i) - H(X_i,Y_i)
+    det_xyi1 = det(np.cov(np.r_[x_, y_[1::, :]]))
+    h_xcy = log(det_xyi1) - log(det_yxi)
+    # h_xxcyy: H(X_i+1,Y_i+1|X_i,Y_i) = H(X_i+1,Y_i+1,X_i,Y_i) - H(X_i,Y_i)
+    det_xyi1 = det(np.cov(np.r_[x_, y_]))
+    h_xxcyy = log(det_xyi1) - log(det_yxi)
+
+    # ---------------------------------------------------------------------
+    # Causality measures
+    # ---------------------------------------------------------------------
+    gc = np.zeros((3,), dtype=complex)
+    gc[0] = h_ycy - h_ycx            # gc[pairs[:, 0] -> pairs[:, 1]]
+    gc[1] = h_xcx - h_xcy            # gc[pairs[:, 1] -> pairs[:, 0]]
+    gc[2] = h_ycx + h_xcy - h_xxcyy  # gc[x_.y_]
+    return gc
+
+
+def covgc_time(x, dt, lag, t0, n_jobs=1, verbose=None):
     """Single trials covariance-based Granger Causality for gaussian variables.
 
     Parameters
@@ -54,6 +93,12 @@ def covgc_time(x, dt, lag, t0, verbose=None):
         Number of samples for the lag within each trial
     t0 : int
         Zero time in samples
+    n_jobs: int | 1
+        Control the number of jobs to cumpute the decoding accuracy. If
+        -1, all the jobs are used.
+    verbose : bool, str, int, or None
+        The verbosity of messages to print. If a str, it can be either
+        PROFILER, DEBUG, INFO, WARNING, ERROR, or CRITICAL.
 
     Returns
     -------
@@ -90,40 +135,9 @@ def covgc_time(x, dt, lag, t0, verbose=None):
     # Normalisation coefficient for gaussian entropy
     # c = np.log( 2 * np.pi * np.exp(1))  # not use
     # Loop over number of pairs
-    for i_p, p in enumerate(pairs):
-        progress_bar(i_p, n_pairs, pre_st='    Computing pair ')
-        # Extract data for a given pair of sources
-        x_ = np.squeeze(x[p[0], ind_t]).reshape(lag + 1, dt)
-        y_ = np.squeeze(x[p[1], ind_t]).reshape(lag + 1, dt)
-
-        # ---------------------------------------------------------------------
-        # Conditional Entropies
-        # ---------------------------------------------------------------------
-        # h_ycy : H(Y_i+1|Y_i) = H(Y_i+1) - H(Y_i)
-        det_yi1 = det(np.cov(y_))
-        det_yi = det(np.cov(y_[1::, :]))
-        h_ycy = log(det_yi1) - log(det_yi)
-        # h_ycx : H(Y_i+1|X_i,Y_i) = H(Y_i+1,X_i,Y_i) - H(X_i,Y_i)
-        det_yxi1 = det(np.cov(np.r_[y_, x_[1::, :]]))
-        det_yxi = det(np.cov(np.r_[y_[1::, :], x_[1::, :]]))
-        h_ycx = log(det_yxi1) - log(det_yxi)
-        # h_xcx : H(X_i+1|X_i) = H(X_i+1) - H(X_i)
-        det_xi1 = det(np.cov(x_))
-        det_xi = det(np.cov(x_[1::, :]))
-        h_xcx = log(det_xi1) - log(det_xi)
-        # h_xcy : H(X_i+1|X_i,Y_i) = H(X_i+1,X_i,Y_i) - H(X_i,Y_i)
-        det_xyi1 = det(np.cov(np.r_[x_, y_[1::, :]]))
-        h_xcy = log(det_xyi1) - log(det_yxi)
-        # h_xxcyy: H(X_i+1,Y_i+1|X_i,Y_i) = H(X_i+1,Y_i+1,X_i,Y_i) - H(X_i,Y_i)
-        det_xyi1 = det(np.cov(np.r_[x_, y_]))
-        h_xxcyy = log(det_xyi1) - log(det_yxi)
-
-        # ---------------------------------------------------------------------
-        # Causality measures
-        # ---------------------------------------------------------------------
-        gc[i_p, 0] = h_ycy - h_ycx            # gc[pairs[:, 0] -> pairs[:, 1]]
-        gc[i_p, 1] = h_xcx - h_xcy            # gc[pairs[:, 1] -> pairs[:, 0]]
-        gc[i_p, 2] = h_ycx + h_xcy - h_xxcyy  # gc[x_.y_]
+    gc = Parallel(n_jobs=n_jobs)(delayed(_covgc)(x, lag, dt, ind_t, p)
+                                 for p in pairs)
+    gc = np.asarray(gc)
 
     gc_real = np.abs(gc)
     gc_real[np.isinf(gc_real)] = 0.
