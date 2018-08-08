@@ -44,6 +44,7 @@ logger = logging.getLogger('brainpipe')
 
 
 def _covgc(x, lag, dt, ind_t, p):
+    logger.info("    Compute pair (%i, %i)" % (p[0], p[1]))
     # Extract data for a given pair of sources
     x_ = np.squeeze(x[p[0], ind_t]).reshape(lag + 1, dt)
     y_ = np.squeeze(x[p[1], ind_t]).reshape(lag + 1, dt)
@@ -93,9 +94,15 @@ def covgc_time(x, dt, lag, t0, seed=None, n_jobs=1, verbose=None):
         Number of samples for the lag within each trial
     t0 : int
         Zero time in samples
-    seed : int | None
-        Seed base single trial Granger causality. `seed` should be an integer
-        otherwise, casality is computed across all pairs.
+    seed : int, list, array_like | None
+        Seed based single trial Granger causality. `seed` can either be :
+
+            * None : compute between all possible non-redundant pairs
+            * int : compute between the specified seed and all other sources
+            * list, vector array : compute between all possible non-redundant
+              pairs inside the list.
+            * 2d array_like : compute between specific pairs. Must an array of
+              shape (n_pairs, 2)
     n_jobs: int | 1
         Control the number of jobs to cumpute the decoding accuracy. If
         -1, all the jobs are used.
@@ -109,7 +116,7 @@ def covgc_time(x, dt, lag, t0, seed=None, n_jobs=1, verbose=None):
         Granger Causality arranged as (number of pairs) x (3 directionalities
         (pair[:, 0]->pair[:, 1], pair[:, 1]->pair[:, 0], instantaneous))
     pairs : array_like
-        Indices of sources arranged as number of pairs x 2
+        Indices of sources of shape (n_pairs, 2)
 
     Notes
     -----
@@ -132,12 +139,24 @@ def covgc_time(x, dt, lag, t0, seed=None, n_jobs=1, verbose=None):
     ind_t = ind_t.ravel()
     # Pairs between sources
     if isinstance(seed, int):
-        logger.info("    Seed %i based connectivity" % seed)
+        logger.info("    Seed based (%i) connectivity" % seed)
         sources_ = np.delete(np.arange(n_so), seed)
         pairs = np.c_[np.full((len(sources_),), seed), sources_]
+    elif isinstance(seed, (list, np.ndarray)):
+        logger.info("    Custom pairs connectivity")
+        seed = np.asarray(seed)
+        if isinstance(seed, list) or (seed.ndim == 1):
+            pairs = []
+            for k_i, k in enumerate(seed[:-1]):
+                for i in seed[k_i + 1:]:
+                    pairs += [(k, i)]
+        elif seed.ndim == 2:
+            assert seed.shape[1] == 2
+            pairs = seed
     else:
         logger.info("    Pairwise based connectivity")
         pairs = np.c_[np.triu_indices(n_so, k=1)]
+    pairs = np.asarray(pairs)
     n_pairs = pairs.shape[0]
     logger.info("    %i pairs found" % n_pairs)
     # Init
