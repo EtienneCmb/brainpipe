@@ -220,10 +220,11 @@ class Study(object):
         full_path = os.path.join(self.path, name)
         if os.path.isdir(full_path):
             logger.warning("Folder %s already exist" % name)
-            return None
+            return full_path
         self._bpfolders(full_path)
         assert os.path.isdir(full_path)
         logger.info("    Folder %s added" % name)
+        return full_path
 
     def load(self, file, folder=None):
         """Load a file.
