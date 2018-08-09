@@ -128,8 +128,8 @@ def covgc_time(x, dt, lag, t0, seed=None, n_jobs=1, verbose=None):
     set_log_level(verbose)
     assert all([isinstance(k, int) for k in [dt, lag, t0]])
     logger.info("Compute single trial Granger Causality. Parameters :"
-                "\n    Time window : %i samples\n    Lag : %i samples"
-                "\n    Zero-time : %i samples" % (dt, lag, t0))
+                "\n    Time window, Lag, Zero-time : (%i, %i, %i) "
+                "samples" % (dt, lag, t0))
     # Data parameters. Size = sources x time points
     n_so, n_ti = x.shape
     # Select a single window according to index t0
@@ -139,11 +139,12 @@ def covgc_time(x, dt, lag, t0, seed=None, n_jobs=1, verbose=None):
     ind_t = ind_t.ravel()
     # Pairs between sources
     if isinstance(seed, int):
-        logger.info("    Seed based (%i) connectivity" % seed)
+        _str = "    Seed based (%i) connectivity" % seed
+        logger.info()
         sources_ = np.delete(np.arange(n_so), seed)
         pairs = np.c_[np.full((len(sources_),), seed), sources_]
     elif isinstance(seed, (list, np.ndarray)):
-        logger.info("    Custom pairs connectivity")
+        _str = "    Custom pairs connectivity"
         seed = np.asarray(seed)
         if isinstance(seed, list) or (seed.ndim == 1):
             pairs = []
@@ -154,11 +155,11 @@ def covgc_time(x, dt, lag, t0, seed=None, n_jobs=1, verbose=None):
             assert seed.shape[1] == 2
             pairs = seed
     else:
-        logger.info("    Pairwise based connectivity")
+        _str = "    Pairwise based connectivity"
         pairs = np.c_[np.triu_indices(n_so, k=1)]
     pairs = np.asarray(pairs)
     n_pairs = pairs.shape[0]
-    logger.info("    %i pairs found" % n_pairs)
+    logger.info(_str + ' (%i pairs found)' % n_pairs)
     # Init
     gc = np.zeros((n_pairs, 3), dtype=complex)
     # Normalisation coefficient for gaussian entropy
