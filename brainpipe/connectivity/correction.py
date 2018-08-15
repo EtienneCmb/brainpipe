@@ -38,7 +38,7 @@ def get_pairs(n, part='upper', as_array=True):
         _idx = np.r_[high, low]
         idx = (_idx[:, 0], _idx[:, 1])
     if as_array:
-        return np.r_[idx]
+        return np.c_[idx]
     else:
         return idx
 
