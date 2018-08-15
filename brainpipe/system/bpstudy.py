@@ -205,9 +205,20 @@ class Study(object):
             files.sort()
         return files
 
-    def path_to_folder(self, folder):
-        """Get the path to a folder."""
-        return os.path.join(self.path, folder)
+    def path_to_folder(self, folder, force=False):
+        """Get the path to a folder.
+
+        Parameters
+        ----------
+        folder : string
+            Name of the folder.
+        force : bool | False
+            Force the creation if doesn't exist.
+        """
+        path = os.path.join(self.path, folder)
+        if not os.path.isdir(path) and force:
+            self._bpfolders(path)
+        return path
 
     def add_folder(self, name):
         """Add a folder to the study.
