@@ -203,7 +203,7 @@ class _spectral(tilerplot):
             _checkref('statmeth', statmeth, ['permutation', 'wilcoxon', 'kruskal'])
 
         # run feature computation:
-        data = Parallel(n_jobs=n_jobs)(
+        data = Parallel(n_jobs=n_jobs, prefer='threads')(
             delayed(_get)(x[k, ...], self) for k in range(nfeat))
         xF, pvalues = zip(*data)
 
