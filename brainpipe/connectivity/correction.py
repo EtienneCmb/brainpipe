@@ -43,7 +43,8 @@ def get_pairs(n, part='upper', as_array=True):
         return idx
 
 
-def remove_site_contact(mat, channels, mode='soft', remove_lower=False):
+def remove_site_contact(mat, channels, mode='soft', remove_lower=False,
+                        symmetrical=False):
     """Remove proximate contacts for SEEG electrodes in a connectivity array.
 
     Parameters
@@ -57,6 +58,8 @@ def remove_site_contact(mat, channels, mode='soft', remove_lower=False):
         connectivty that come from the same electrode.
     remove_lower : bool | False
         Remove lower triangle.
+    symmetrical : bool | False
+        Get a symmetrical mask.
 
     Returns
     -------
@@ -83,6 +86,10 @@ def remove_site_contact(mat, channels, mode='soft', remove_lower=False):
         select[i, to_remove] = True
     # Remove lower triangle :
     select[np.tril_indices(n_elec)] = remove_lower
+    # Symmetrical render :
+    if symmetrical:
+        select = symmetrize(select.astype(int)).astype(bool)
+    select[np.diag_indices(n_elec)] = True
     return select
 
 
@@ -223,3 +230,21 @@ def unravel_connect(connect, n_sites, part='upper'):
     connect_ur = np.zeros((n_sites, n_sites), dtype=connect.dtype)
     connect_ur[pairs[0], pairs[1]] = connect
     return connect_ur
+
+
+def symmetrize(arr):
+    """Make an array symmetrical.
+
+    Parameters
+    ----------
+    arr : array_like
+        Connectivity array of shape (n_sources, n_sources)
+
+    Returns
+    -------
+    arr : array_like
+        Symmetrical connectivity array.
+    """
+    assert isinstance(arr, np.ndarray)
+    assert (arr.ndim == 2) and (arr.shape[0] == arr.shape[1])
+    return arr + arr.T - np.diag(arr.diagonal())
