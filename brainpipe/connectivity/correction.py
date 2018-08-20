@@ -248,3 +248,36 @@ def symmetrize(arr):
     assert isinstance(arr, np.ndarray)
     assert (arr.ndim == 2) and (arr.shape[0] == arr.shape[1])
     return arr + arr.T - np.diag(arr.diagonal())
+
+
+def concat_connect(connect):
+    """Concatenate connectivity arrays.
+
+    Parameters
+    ----------
+    connect : list, tuple
+        List of connectivity arrays.
+
+    Returns
+    -------
+    aconnect : array_like
+        Merged connectivity arrays.
+    """
+    assert isinstance(connect, (list, tuple)), ("`connect` should either be a "
+                                                "list or a tuple of arrays")
+    assert np.all([k.ndim == 2 for k in connect]), ("`connect` sould be a list"
+                                                    " of 2d arrays")
+    # Shape inspection :
+    shapes = [k.shape[0] for k in connect]
+    sh = np.sum([shapes])
+    aconnect = np.zeros((sh, sh), dtype=float)
+    # Inspect if any masked array :
+    if np.any([np.ma.is_masked(k) for k in connect]):
+        aconnect = np.ma.masked_array(aconnect, mask=True)
+    # Merge arrays :
+    q = 0
+    for k, (c, s) in enumerate(zip(connect, shapes)):
+        sl = slice(q, q + s)
+        aconnect[sl, sl] = c
+        q += s
+    return aconnect

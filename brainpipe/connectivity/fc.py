@@ -183,7 +183,7 @@ def _dfc(ts, meth, sp_idx, win_opt, **kwargs):
 
 
 def dfc(ts_1, ts_2, win, axis=0, sf=1., measure='corr', overlap=None,
-        win_opt=None, bins=64, verbose=None):
+        win_opt=None, bins=64, ping=False, verbose=None):
     """Compute dynamic functional connectivity (dFC).
 
     The only difference with sFC is that dFC used a sliding window with an
@@ -211,6 +211,9 @@ def dfc(ts_1, ts_2, win, axis=0, sf=1., measure='corr', overlap=None,
         Window optimization parameter if a sliding window is used.
     bins : int | 64
         Number of bins. See `brainpipe.info_th.cmi` for further details.
+    ping : bool
+        If True, dFC is not computed but the indicies used to split the
+        time-series are returned.
     verbose : bool, str, int, or None
         The verbosity of messages to print. If a str, it can be either
         PROFILER, DEBUG, INFO, WARNING, ERROR, or CRITICAL.
@@ -249,6 +252,8 @@ def dfc(ts_1, ts_2, win, axis=0, sf=1., measure='corr', overlap=None,
     stop = np.arange(win, n_pts, step).astype(int)
     assert len(start) == len(stop)
     sp_idx = np.c_[start, stop]
+    if ping:
+        return sp_idx
     # Get window opimization ;
     if win_opt is 'hamming':
         w_opt, w_msg = signal.hamming(win), 'hamming'

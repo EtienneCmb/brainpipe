@@ -9,7 +9,7 @@ from scipy.io import loadmat, savemat
 from .read_json import load_json, save_json
 
 
-def save_file(name, *arg, **kwargs):
+def save_file(name, *arg, compress=False, **kwargs):
     """Save a file without carrying of extension.
 
     Parameters
@@ -28,7 +28,10 @@ def save_file(name, *arg, **kwargs):
     elif file_ext == '.npy':  # Numpy (single array)
         np.save(name, *arg)
     elif file_ext == '.npz':  # Numpy (multi array)
-        np.savez(name, kwargs)
+        if compress:
+            np.savez_compressed(name, kwargs)
+        else:
+            np.savez(name, kwargs)
     elif file_ext == '.json':  # JSON
         save_json(name, kwargs)
     else:

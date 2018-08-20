@@ -267,7 +267,7 @@ class Study(object):
         logger.info('    %s loaded' % file)
         return arch
 
-    def save(self, file, *arg, folder=None, **kwargs):
+    def save(self, file, *arg, folder=None, compress=False, **kwargs):
         """Save a file.
 
         This method support to save :
@@ -291,7 +291,7 @@ class Study(object):
         """
         folder = '' if not isinstance(folder, str) else folder
         full_path = os.path.join(self.path, folder, file)
-        save_file(full_path, *arg, **kwargs)
+        save_file(full_path, *arg, compress=compress, **kwargs)
         logger.info("    %s saved" % full_path)
 
     def load_config(self, file, entry=None):
