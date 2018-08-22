@@ -1,188 +1,153 @@
+"""iEEG referencing."""
+import logging
+
 import numpy as np
 from re import findall
 
-__all__ = ['bipolarization']
+from brainpipe.system import set_log_level
+
+logger = logging.getLogger('brainpipe')
 
 
-def _chaninspect(strlst, tofind):
-    """In a list, find "tofind" which can be a srting or integer
+def ieeg_referencing(data, channels, xyz=None, method='bipolar', sep='.',
+                     ignore=None, verbose=None):
+    """Rereferencing intracranial data.
+
+    Parameters
+    ----------
+    data : array_like
+        Array of data of shape (n_channels, n_pts, n_trials)
+    channels : list
+        List of channels with a length of (n_channels).
+    xyz : array_like | None
+        Array of MNI/Talairach coordinates of shape (n_channels, 3)
+    method : {'bipolar', 'laplacian'}
+        Referencing method.
+    sep : string | '.'
+        Channel name separator (e.g "v1.124" will be considered as "v1" with
+        `sep='.'`)
+    ignore : list | None
+        List of channel index to ignore.
+    verbose : bool, str, int, or None
+        The verbosity of messages to print. If a str, it can be either
+        PROFILER, DEBUG, INFO, WARNING, ERROR, or CRITICAL.
+
+    Returns
+    -------
+    data_b : array_like
+        Bipolarized data.
+    chan_b : array_like
+        Name of the bipolarized channels.
+    xyz_b : array_like
+        Bipolarized coordinates.
     """
-    # Check tofind parameter :
-    if not isinstance(tofind, list):
-        if isinstance(tofind, (int, str)):
-            tofind = [tofind]
+    methods = dict(bipolar=_ref_bipolar, laplacian=_ref_laplacian)
+    n_chan_data, n_pts, n_trials = data.shape
+    n_chan = len(channels)
+    set_log_level(verbose)
+    channels = np.asarray(channels)
+    # Checking :
+    assert isinstance(data, np.ndarray), "data should be an array"
+    assert data.ndim == 3, "data should be (n_channels, n_pts, n_trials)"
+    assert n_chan_data == n_chan, ("The number of channels along dimension 0 "
+                                   "should be %i" % (n_chan))
+    if ignore is not None:
+        msg = "ignore should either be a list, a tuple or an array of integers"
+        assert isinstance(ignore, (list, tuple, np.ndarray)), msg
+        assert len(ignore), msg
+        assert all([isinstance(k, int) for k in ignore]), msg
+        ignore = np.asarray(ignore)
+    consider = np.ones((n_chan,), dtype=bool)
+    assert method in methods, "method should be %s" % ', '.join(methods)
+    logger.info("Referencing %i channels using %s method" % (n_chan, method))
+    if not isinstance(xyz, np.ndarray) or (xyz.shape[0] != n_chan):
+        xyz = np.zeros((n_chan, 3))
+        logger.info("    No coordinates detected")
+
+    # Preprocess channel names by separating channel names / number:
+    chnames, chnums = [], []
+    for num, k in enumerate(channels):
+        # Remove spaces and separation :
+        channels[num] = k.strip().replace(' ', '').split(sep)[0]
+        # Get only the name / number :
+        if findall(r'\d+', k):
+            number = findall(r'\d+', k)[0]
+            chnums.append(int(number))
+            chnames.append(k.split(number)[0])
         else:
-            tofind = list(tofind)
-    # Find channels :
+            chnums.append(-1)
+            chnames.append(k)
+    chnums, chnames = np.asarray(chnums), np.asarray(chnames)
+
+    # Find if some channels have to be ignored :
+    if isinstance(ignore, (tuple, list, np.ndarray)):
+        ignore = np.asarray(ignore)
+        consider[ignore] = False
+    consider[chnums == -1] = False
+    logger.info('    %i channels are going to be ignored (%s)' % (
+                (~consider).sum(), ', '.join(channels[~consider].tolist())))
+
+    # Get index to bipolarize :
+    _fcn = methods[method]
+    return _fcn(data, xyz, channels, chnames, chnums, consider)
+
+
+def _ref_bipolar(data, xyz, channels, chnames, chnums, consider):
+    """Referencing using bipolarization."""
     idx = []
-    for name in tofind:
-        if isinstance(name, str):
-            idx.append(strlst.index(name))
-        elif isinstance(name, int):
-            idx.append(name)
+    for num in range(len(channels)):
+        if not consider[num]:
+            continue
+        # Get the name of the current electrode and the needed one :
+        need_elec = str(chnames[num]) + str(int(chnums[num]) - 1)
+        is_present = channels == need_elec
+        if not any(is_present):
+            continue
+        # Find where is located the electrode :
+        idx_need = np.where(is_present)[0]
+        assert len(idx_need) == 1, ("Multiple channels have the same name "
+                                    "%s" % ', '.join(['%s (%i)' % (channels[k],
+                                    k) for k in idx_need]))  # noqa
+        idx += [[num, idx_need[0]]]
 
-    return idx
+    logger.info("    Reference iEEG data using bipolarization")
+    chan_b = []
+    n_pts, n_trials = data.shape[1], data.shape[2]
+    data_b = np.zeros((len(idx), n_pts, n_trials), dtype=data.dtype)
+    xyz_b = np.zeros((len(idx), 3))
+    for k, i in enumerate(idx):
+        chan_b += ['%s-%s' % (channels[i[0]], channels[i[1]])]
+        data_b[k, ...] = data[i[0], ...] - data[i[1], ...]
+        xyz_b[k, ...] = np.c_[xyz[i[0], :], xyz[i[1], :]].mean(1)
+    return data_b, chan_b, xyz_b
 
 
-def bipolarization(data, channel, dim=0, xyz=None, sep='.', unbip=None,
-                   rmchan=None, keepchan='all', rmspace=True, rmalone=True):
-    """Bipolarize data
+def _ref_laplacian(data, xyz, channels, chnames, chnums, consider):
+    """Referencing using laplacian."""
+    idx = []
+    for num in range(len(channels)):
+        if not consider[num]:
+            continue
+        # Get the name of the current electrode and the needed one :
+        need_elec_left = str(chnames[num]) + str(int(chnums[num]) - 1)
+        need_elec_right = str(chnames[num]) + str(int(chnums[num]) + 1)
+        is_present_left = channels == need_elec_left
+        is_present_right = channels == need_elec_right
+        if not any(is_present_left) and not any(is_present_right):
+            continue
+        # Find where are located left / right electrodes :
+        idx_need_left = np.where(is_present_left)[0]
+        idx_need_right = np.where(is_present_right)[0]
+        assert (len(idx_need_left) <= 1) and (len(idx_need_right) <= 1)
+        idx += [[num, np.r_[idx_need_left, idx_need_right].tolist()]]
 
-    Args:
-        data: array
-            Data to bipolarize
-
-        channel: list
-            List of channels name
-
-    Kwargs:
-        dim: integer, optional, [def: 0]
-            Specify where is the channel dimension of data
-
-        xyz: array, optional, [def: None]
-            Electrode coordinates. Must be a n_channel x 3
-
-        sep: string, optional, [def: '.']
-            Separator to simplify electrode names by removing undesired name
-            after the sep. For example, if channel = ['h1.025', 'h2.578']
-            and sep='.', the final name will be 'h2-h1'.
-
-        unbip: list, optional, [def: None]
-            Channel that don't need a bipolarization but to keep.
-            This list can either be the index or the name of the channel.
-
-        rmchan: list, optional, [def: None]
-            Channel to remove. This list can either be the index or the
-            name of the channel.
-
-        keepchan: list, optional, [def: 'all']
-            Channel to keep. This list can either be the index or the
-            name of the channel.
-
-        rmspace: bool, optional, [def: True]
-            Remove undesired space in channel names.
-
-        rmalone: bool, optional, [def: True]
-            Remove electrodes that cannot be bipolarized.
-
-    Returns:
-        data_b: array
-            Bipolarized data.
-
-        channel_b: list
-            List of the bipolrized channels name.
-
-        xyz_b: array
-            Array of the new xyz coordinates.
-
-    Example :
-        >>> x = 47
-        >>> f = np.array(47, 54, 85)
-    """
-    # Check data size :
-    if data.shape[dim] != len(channel):
-        raise ValueError("Dimension {dim} of data must be "
-                         "{val}".format(dim=dim, val=len(channel)))
-    if dim is not 0:
-        data = np.swapaxes(data, 0, dim)
-
-    # Check if the user is not trying to keep and remove the same elec :
-    if (rmchan is not None) and (keepchan is not None):
-        # Check if there is no intersection :
-        inter = list(set(rmchan).intersection(set(keepchan)))
-        if inter:
-            raise ValueError("You are trying to keep and to remove the "
-                             "same channel {inter}. You have to "
-                             "choose !".format(inter=inter))
-
-    # Remove channels :
-    if rmchan is not None:
-        # Find channels :
-        chan2rm = _chaninspect(channel, rmchan)
-        # Remove in data :
-        data = np.delete(data, chan2rm, axis=0)
-        # Update chhanel names :
-        channel = [i for num, i in enumerate(channel) if num not in chan2rm]
-
-    # Channels to keep :
-    if keepchan is 'all':
-        pass
-    else:
-        # Find channels :
-        chan2keep = _chaninspect(channel, keepchan)
-        # Keep data and channel :
-        data = data[chan2keep, ...]
-        channel = [channel[i] for i in chan2keep]
-
-    # Get list of channel that don't need bipolarization :
-    if unbip is not None:
-        unbipidx = _chaninspect(channel, unbip)
-    else:
-        unbipidx = []
-
-    # Use a separator for the channel name :
-    chanShort = [i.strip().replace(' ', '').split(sep)[0] for i in channel]
-    if sep is not None:
-        channel = chanShort
-
-    # Get num list :
-    numlst = [[] if findall(
-        r'\d+', i) == [] else int(findall(r'\d+', i)[0]) for i in chanShort]
-
-    # Find channel association :
-    channel_b, idx_b = [], []
-    for num, chan in enumerate(chanShort):
-        # Get current letter and num :
-        cnum = numlst[num]
-        cletter = chan.split(str(cnum))[0]
-        # If chan is consider and there is a number in the elec name :
-        if (num not in unbipidx) and cnum:
-            # Try to find elec-1 :
-            try:
-                # Search if num-1 exist :
-                id_1 = chanShort.index(cletter+str(cnum-1))
-                # Append new name :
-                channel_b.append(channel[num]+'-'+channel[id_1])
-                # Append idx to substract :
-                idx_b.append([num, id_1])
-            except:
-                if (cnum != 1) and not rmalone:
-                    channel_b.append(chan)
-                    idx_b.append(num)
-        else:
-            if not rmalone:
-                channel_b.append(chan)
-                idx_b.append(num)
-
-    # Bipolarized data and mean of xyz :
-    data_b, xyz_b = [], []
-    if idx_b:
-        for idx in idx_b:
-            # ::::::::::::::: DATA ::::::::::::::::
-            # Bipolarized :
-            if isinstance(idx, list):
-                data_b.append(data[idx[0], ...] - data[idx[1], ...])
-            # Keep intact :
-            elif isinstance(idx, int):
-                data_b.append(data[idx, ...])
-
-            # ::::::::::::::: XYZ ::::::::::::::::
-            if xyz is not None:
-                # Bipolarized :
-                if isinstance(idx, list):
-                    xyz_b.append((xyz[idx[0], :]+xyz[idx[1], :])/2)
-                # Keep intact :
-                elif isinstance(idx, int):
-                    xyz_b.append(xyz[idx, :])
-
-    # Remove undesired space :
-    if rmspace:
-        channel_b = [i.strip().replace(' ', '') for i in channel_b]
-
-    # Finally swapaxis if not 0 :
-    if dim is not 0:
-        data_b = np.swapaxes(np.array(data_b), 0, dim)
-    else:
-        data_b = np.array(data_b)
-
-    return data_b, channel_b, np.array(xyz_b)
+    logger.info("    Reference iEEG data using laplacian")
+    chan_b = []
+    n_pts, n_trials = data.shape[1], data.shape[2]
+    data_b = np.zeros((len(idx), n_pts, n_trials), dtype=data.dtype)
+    xyz_b = np.zeros((len(idx), 3))
+    for k, i in enumerate(idx):
+        chan_b += ['%s-m(%s)' % (channels[i[0]], ', '.join(channels[i[1]]))]
+        data_b[k, ...] = data[i[0], ...] - data[i[1], ...].mean(axis=0)
+        xyz_b[k, ...] = np.c_[xyz[i[0], :], xyz[i[1], :].mean(axis=0)].mean(1)
+    return data_b, chan_b, xyz_b
