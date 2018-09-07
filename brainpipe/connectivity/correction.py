@@ -250,13 +250,15 @@ def symmetrize(arr):
     return arr + arr.T - np.diag(arr.diagonal())
 
 
-def concat_connect(connect):
+def concat_connect(connect, fill_with=0.):
     """Concatenate connectivity arrays.
 
     Parameters
     ----------
     connect : list, tuple
         List of connectivity arrays.
+    fill_with : float | 0.
+        Fill value.
 
     Returns
     -------
@@ -270,7 +272,7 @@ def concat_connect(connect):
     # Shape inspection :
     shapes = [k.shape[0] for k in connect]
     sh = np.sum([shapes])
-    aconnect = np.zeros((sh, sh), dtype=float)
+    aconnect = np.full((sh, sh), fill_with, dtype=float)
     # Inspect if any masked array :
     if np.any([np.ma.is_masked(k) for k in connect]):
         aconnect = np.ma.masked_array(aconnect, mask=True)
