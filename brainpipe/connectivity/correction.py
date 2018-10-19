@@ -134,7 +134,7 @@ def anat_based_reorder(c, df, col, part='upper'):
 
 
 def anat_based_mean(x, df, col, xyz=None):
-    """Take the mean of a connectivity array according to anatomcal structures.
+    """Get mean of a connectivity array according to anatomical structures.
 
     Parameters
     ----------

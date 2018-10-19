@@ -1,5 +1,5 @@
 from .cstats import (random_phase, fc_summarize, permute_connectivity,  # noqa
-                     statistical_summary)
+                     statistical_summary, mantel)
 from .correction import (remove_site_contact, anat_based_reorder,  # noqa
                          anat_based_mean, get_pairs, ravel_connect,
                          unravel_connect, symmetrize, concat_connect)

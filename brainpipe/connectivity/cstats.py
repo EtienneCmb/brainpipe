@@ -4,6 +4,8 @@ import logging
 import numpy as np
 from itertools import permutations
 from scipy import spatial
+from tempfile import mkdtemp
+import os.path as path
 
 from .correction import get_pairs
 from ..system import set_log_level
@@ -102,7 +104,8 @@ def permute_connectivity(connect, n_perm=200, rndstate=0, part='upper'):
 
 
 def statistical_summary(connect, n_perm=200, part='upper', method='l2',
-                        as_pval=True, tail=1, threshold=None, verbose=None):
+                        as_pval=True, tail=1, threshold=None, cache=True,
+                        verbose=None):
     """Get a statistical summary across a time dimension.
 
     Parameters
@@ -143,15 +146,26 @@ def statistical_summary(connect, n_perm=200, part='upper', method='l2',
     logger.info("Statistical summary of %s part using %s method on %i "
                 "permutations" % (part, method, n_perm))
 
-    connect_p = np.zeros((n_perm, *connect.shape), dtype=connect.dtype)
+    perm_shape = (n_perm, *connect.shape)
+    if not cache:
+        connect_p = np.zeros(perm_shape, dtype=connect.dtype)
+    else:
+        cache_dir = mkdtemp()
+        filename = path.join(cache_dir, 'permutations.dat')
+        logger.info("    Caching data to %s" % filename)
+        connect_p = np.memmap(filename, dtype='float32', mode='w+',
+                              shape=perm_shape)
     for k in range(n_times):
         # Randomize the connectivity array :
-        connect_p[..., k] = permute_connectivity(connect[..., k],
-                                                 n_perm=n_perm, part='upper',
-                                                 rndstate=k)
+        connect_p[..., k] = permute_connectivity(
+            connect[..., k], n_perm=n_perm, part='upper', rndstate=k)
     # Summarize the array along the time dimension :
     connect_psum = fc_summarize(connect_p, axis=3, method=method,
                                 verbose=False)
+    if cache:
+        from shutil import rmtree
+        rmtree(cache_dir)
+        logger.info("    Remove cache")
     assert connect_psum.ndim == 3
     if not as_pval:
         return connect_psum
@@ -202,12 +216,14 @@ def random_phase(ts, axis=0):
     return np.fft.irfft(ts_dft, n=n_pts, axis=axis)  # + ts_m
 
 
-def mantel(x, y, perms=100, method='pearson', tail='two-tail'):
+def mantel(x, y, n_perm=100, method='pearson', tail='two-tail'):
     """Perform the mantel test.
 
     Takes two distance matrices (either redundant matrices or condensed
     vectors) and performs a Mantel test. The Mantel test is a significance test
     of the correlation between two distance matrices.
+
+    Adapted from : https://github.com/jwcarr/MantelTest
 
     Parameters
     ----------
@@ -216,7 +232,7 @@ def mantel(x, y, perms=100, method='pearson', tail='two-tail'):
     y : array_like
       Second distance matrix (condensed or redundant), where the order of
       elements corresponds to the order of elements in the first matrix.
-    perms : int | 100
+    n_perm : int | 100
       The number of permutations to perform. A larger number gives more
       reliable results but takes longer to run. If the actual number
       of possible permutations is smaller, the program will enumerate all
@@ -240,14 +256,24 @@ def mantel(x, y, perms=100, method='pearson', tail='two-tail'):
     assert x.shape == y.shape
     # Ensure that x and y are formatted as Numpy arrays.
     x, y = np.asarray(x, dtype=float), np.asarray(y, dtype=float)
+    x[np.diag_indices_from(x)] = 0.
+    y[np.diag_indices_from(y)] = 0.
+
+    # Get if arrays have 0 on diagonal and are 2D :
+    x_isdiag = spatial.distance.is_valid_dm(x)
+    y_isdiag = spatial.distance.is_valid_dm(y)
+    x_iscondensed = spatial.distance.is_valid_y(x)
+    y_iscondensed = spatial.distance.is_valid_y(y)
 
     # Check that x and y are valid distance matrices.
-    if not spatial.distance.is_valid_dm(x) and spatial.distance.is_valid_y(x) == False:
-        raise ValueError("x is not a valid condensed or redundant distance matrix")
-    if spatial.distance.is_valid_dm(y) == False and spatial.distance.is_valid_y(y) == False:
-        raise ValueError('y is not a valid condensed or redundant distance matrix')
+    msg_assert = "%s is not a valid condensed or redundant distance matrix"
+    if not x_isdiag and not x_iscondensed:
+        raise ValueError(msg_assert % 'x')
+    if not y_isdiag and not y_iscondensed:
+        raise ValueError(msg_assert % 'y')
 
-    # If x or y is a redundant distance matrix, reduce it to a condensed distance matrix.
+    # If x or y is a redundant distance matrix, reduce it to a condensed
+    # distance matrix.
     if x.ndim == 2:
         x = spatial.distance.squareform(x, force='tovector', checks=False)
     if y.ndim == 2:
@@ -259,20 +285,20 @@ def mantel(x, y, perms=100, method='pearson', tail='two-tail'):
 
     # Now we're ready to start the Mantel test using a number of optimizations:
     #
-    # 1. We don't need to recalculate the pairwise distances between the objects
-    #    on every permutation. They've already been calculated, so we can use a
-    #    simple matrix shuffling technique to avoid recomputing them. This works
-    #    like memoization.
+    # 1. We don't need to recalculate the pairwise distances between the
+    #    objects on every permutation. They've already been calculated, so we
+    #    can use a simple matrix shuffling technique to avoid recomputing them.
+    #    This works like memoization.
     #
     # 2. Rather than compute correlation coefficients, we'll just compute the
-    #    covariances. This works because the denominator in the equation for the
-    #    correlation coefficient will yield the same result however the objects
-    #    are permuted, making it redundant. Removing the denominator leaves us
-    #    with the covariance.
+    #    covariances. This works because the denominator in the equation for
+    #    the correlation coefficient will yield the same result however the
+    #    objects are permuted, making it redundant. Removing the denominator
+    #    leaves us with the covariance.
     #
-    # 3. Rather than permute the y distances and derive the residuals to calculate
-    #    the covariance with the x distances, we'll represent the y residuals in
-    #    the matrix and shuffle those directly.
+    # 3. Rather than permute the y distances and derive the residuals to
+    #    calculate the covariance with the x distances, we'll represent the y
+    #    residuals in the matrix and shuffle those directly.
     #
     # 4. If the number of possible permutations is less than the number of
     #    permutations that were requested, we'll run a deterministic test where
@@ -284,10 +310,11 @@ def mantel(x, y, perms=100, method='pearson', tail='two-tail'):
     x_residuals, y_residuals = x - x.mean(), y - y.mean()
 
     # Expand the y residuals to a redundant matrix.
-    y_residuals_as_matrix = spatial.distance.squareform(y_residuals, force='tomatrix', checks=False)
+    y_resid_as_mat = spatial.distance.squareform(y_residuals, force='tomatrix',
+                                                 checks=False)
 
     # Get the number of objects.
-    m = y_residuals_as_matrix.shape[0]
+    m = y_resid_as_mat.shape[0]
 
     # Calculate the number of possible matrix permutations.
     n = np.math.factorial(m)
@@ -296,22 +323,24 @@ def mantel(x, y, perms=100, method='pearson', tail='two-tail'):
     y_residuals_permuted = np.zeros(y_residuals.shape[0], dtype=float)
 
     # If the number of requested permutations is greater than the number of
-    # possible permutations (m!) or the perms parameter is set to 0, then run a
-    # deterministic Mantel test ...
-    if perms >= n or perms == 0:
+    # possible permutations (m!) or the n_perm parameter is set to 0, then run
+    # a deterministic Mantel test ...
+    if n_perm >= n or n_perm == 0:
 
         # Initialize an empty array to store the covariances.
         covariances = np.zeros(n, dtype=float)
 
-        # Enumerate all permutations of row/column orders and iterate over them.
+        # Enumerate all permutations of row/column orders and iterate over them
         for i, order in enumerate(permutations(range(m))):
 
             # Take a permutation of the matrix.
-            y_residuals_as_matrix_permuted = y_residuals_as_matrix[order, :][:, order]
+            y_resid_as_mat_permuted = y_resid_as_mat[order, :][:, order]
 
             # Condense the permuted version of the matrix. Rather than use
-            # distance.squareform(), we call directly into the C wrapper for speed.
-            spatial.distance._distance_wrap.to_vector_from_squareform_wrap(y_residuals_as_matrix_permuted, y_residuals_permuted)
+            # distance.squareform(), we call directly into the C wrapper for
+            # speed.
+            spatial.distance._distance_wrap.to_vector_from_squareform_wrap(
+                y_resid_as_mat_permuted, y_residuals_permuted)
 
             # Compute and store the covariance.
             covariances[i] = (x_residuals * y_residuals_permuted).sum()
@@ -320,7 +349,7 @@ def mantel(x, y, perms=100, method='pearson', tail='two-tail'):
     else:
 
         # Initialize an empty array to store the covariances.
-        covariances = np.zeros(perms, dtype=float)
+        covariances = np.zeros(n_perm, dtype=float)
 
         # Initialize an array to store the permutation order.
         order = np.arange(m)
@@ -329,23 +358,27 @@ def mantel(x, y, perms=100, method='pearson', tail='two-tail'):
         covariances[0] = (x_residuals * y_residuals).sum()
 
         # ...and then run the random permutations.
-        for i in range(1, perms):
+        for i in range(1, n_perm):
 
             # Choose a random order in which to permute the rows and columns.
             np.random.shuffle(order)
 
             # Take a permutation of the matrix.
-            y_residuals_as_matrix_permuted = y_residuals_as_matrix[order, :][:, order]
+            y_resid_as_mat_permuted = y_resid_as_mat[order, :][:, order]
 
             # Condense the permuted version of the matrix. Rather than use
-            # distance.squareform(), we call directly into the C wrapper for speed.
-            spatial.distance._distance_wrap.to_vector_from_squareform_wrap(y_residuals_as_matrix_permuted, y_residuals_permuted)
+            # distance.squareform(), we call directly into the C wrapper for
+            # speed.
+            spatial.distance._distance_wrap.to_vector_from_squareform_wrap(
+                y_resid_as_mat_permuted, y_residuals_permuted)
 
             # Compute and store the covariance.
             covariances[i] = (x_residuals * y_residuals_permuted).sum()
 
-    # Calculate the veridical correlation coefficient from the veridical covariance.
-    r = covariances[0] / np.sqrt((x_residuals ** 2).sum() * (y_residuals ** 2).sum())
+    # Calculate the veridical correlation coefficient from the veridical
+    # covariance.
+    r = covariances[0] / \
+        np.sqrt((x_residuals ** 2).sum() * (y_residuals ** 2).sum())
 
     # Calculate the empirical p-value for the upper or lower tail.
     if tail == 'upper':
@@ -353,7 +386,8 @@ def mantel(x, y, perms=100, method='pearson', tail='two-tail'):
     elif tail == 'lower':
         p = (covariances <= covariances[0]).sum() / float(covariances.shape[0])
     elif tail == 'two-tail':
-        p = (abs(covariances) >= abs(covariances[0])).sum() / float(covariances.shape[0])
+        p = (abs(covariances) >= abs(covariances[0])).sum(
+        ) / float(covariances.shape[0])
 
     # Calculate the standard score.
     z = (covariances[0] - covariances.mean()) / covariances.std()

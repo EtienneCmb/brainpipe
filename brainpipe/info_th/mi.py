@@ -22,6 +22,51 @@ def shannon_entropy(x):
     return -np.sum(nnz_x * np.log2(nnz_x))
 
 
+def qinfo(x, bins=64, win=None, overlap=.5):
+    """Get the quantity of informations of a single time-series.
+
+    Parameters
+    ----------
+    x : array_like
+        Time-series of shape (n_pts,)
+    bins : int | 64
+        Number of bins used for the histogram to get the probability of each
+        ellement.
+    win : int | None
+        If `win` is an int, the quantity of information is computed using a
+        sliding window.
+    overlap : float | .5
+        Overlap between sliding window. Must be between 0. and 1.
+
+    Returns
+    -------
+    h_x : array_like
+        The quantity of informations.
+    """
+    assert x.ndim == 1
+    assert isinstance(bins, int)
+    n_pts = len(x)
+    if isinstance(win, int):
+        step = win - int(overlap * win)
+        # Get split index for moving average :
+        start = np.arange(0, n_pts - win, step).astype(int)
+        stop = np.arange(win, n_pts, step).astype(int)
+        assert len(start) == len(stop)
+        # Split the signal :
+        _x = []
+        for s, p in zip(start, stop):
+            _x += [x[s:p]]
+    else:
+        _x = [x]
+    # Compute quantity of info :
+    h_x = np.zeros((len(_x),), dtype=float)
+    for i, k in enumerate(_x):
+        p_x = np.histogram(k, bins)[0]
+        p_x = p_x / p_x.sum()
+        h_x[i] = shannon_entropy(p_x)
+    return h_x
+
+
 def _mi_xy(xy, bins):
     # Rebuild x and y :
     n_pts = int(len(xy) / 2)
@@ -59,7 +104,7 @@ def _mi(x, y, bins=64):
 
 
 def cmi(x, y, axis=0, bins=64):
-    """Compute the cross mutual information of two arrays.
+    """Compute mutual information between two arrays.
 
     MI = H(x) + H(y) - H((x, y))
 
