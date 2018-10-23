@@ -117,7 +117,7 @@ class Study(object):
         self._bpfolders(os.path.join(path, self.name))
         # Subfolders :
         sfold = ['config', 'database', 'feature', 'classified', 'multifeature',
-                 'figure', 'backup', 'anatomy', 'setting', 'other']
+                 'figure', 'backup', 'anatomy', 'setting', 'other', 'script']
         _ = [self._bpfolders(os.path.join(path, self.name, k)) for k in sfold]  # noqa
         # Add the study to the bpsetting file:
         now = datetime.now()
@@ -153,7 +153,8 @@ class Study(object):
     # -------------------------------------------------------------
     # Manage Files:
     # -------------------------------------------------------------
-    def search(self, *args, folder='', case=True, full_path=True, sort=True):
+    def search(self, *args, folder='', intersection=True, case=True,
+               full_path=True, sort=True):
         """Get a list of files.
 
         Parameters
@@ -164,6 +165,9 @@ class Study(object):
         folder : string | ''
             Define a folder to search. By default, no folder is specified
             so the search will focused on the root folder.
+        intersection : bool | True
+            Specify if the intersection should be considered across search
+            patterns or the union.
         case : bool | True
             Define if the search method have to take care of the case.
         full_path : bool | True
@@ -180,7 +184,6 @@ class Study(object):
         dir_path = os.path.join(self.path, folder)
         assert os.path.isdir(dir_path)
         def_file = os.listdir(dir_path)
-        n_files, n_args = len(def_file), len(args)
         # Case sentitive (or not) :
         if not case:
             dir_file = [k.lower() for k in def_file]
@@ -188,14 +191,19 @@ class Study(object):
         else:
             dir_file = def_file
 
-        if not n_args:
+        if not len(args):
             files = dir_file
         else:
-            filter_feat = np.zeros((n_files, n_args), dtype=bool)
-            for i, k in product(range(n_files), range(n_args)):
-                filter_feat[i, k] = bool(dir_file[i].find(args[k]) + 1)
-            is_searched = np.all(filter_feat, 1)
-            files = [k for k, i in zip(def_file, is_searched) if i]
+            if intersection:
+                files = self._search_files(def_file, dir_file, args,
+                                           intersection)
+            else:
+                files = []
+                for a in args:
+                    files += self._search_files(def_file, dir_file, [a],
+                                                intersection)
+                sort = False
+
         logger.info("    %i files found : %s" % (len(files), ', '.join(files)))
         # Full path :
         if full_path:
@@ -204,6 +212,17 @@ class Study(object):
         if sort:
             files.sort()
         return files
+
+    @staticmethod
+    def _search_files(def_file, dir_file, args, intersection):
+        """Get the list of files according to string patterns."""
+        n_files, n_args = len(dir_file), len(args)
+        filter_feat = np.zeros((n_files, n_args), dtype=bool)
+        for i, k in product(range(n_files), range(n_args)):
+            filter_feat[i, k] = bool(dir_file[i].find(args[k]) + 1)
+        fcn = np.all if intersection else np.any
+        is_searched = fcn(filter_feat, 1)
+        return [k for k, i in zip(def_file, is_searched) if i]
 
     def path_to_folder(self, folder, force=False):
         """Get the path to a folder.
@@ -341,6 +360,26 @@ class Study(object):
         full_path = os.path.join(self.path, 'config', file)
         update_json(full_path, kw, backup)
         logger.info("    %s configuration file has been updated" % file)
+
+    def load_script(self, filename):
+        """Load a script.
+
+        Parameters
+        ----------
+        filename : string
+            Name of the .py file to load.
+
+        Returns
+        -------
+        mod : module
+            The desired module to load.
+        """
+        from importlib.util import spec_from_file_location, module_from_spec
+        full_path = os.path.join(self.path, 'script', filename)
+        spec = spec_from_file_location('module_name', full_path)
+        module = module_from_spec(spec)
+        spec.loader.exec_module(module)
+        return module
 
     @property
     def studies(self):
