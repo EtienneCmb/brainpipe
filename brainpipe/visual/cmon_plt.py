@@ -108,8 +108,8 @@ def rmaxis(ax, rmax):
     """
     for loc, spine in ax.spines.items():
         if loc in rmax:
-            spine.set_color('none')  # don't draw spine
-            ax.tick_params(**{loc: 'off'})
+            spine.set_color(None)  # don't draw spine
+            ax.tick_params(**{loc: False})
 
 def despine(ax, dpax, outward=10):
     """Despine axis of a existing plot
