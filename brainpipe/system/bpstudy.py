@@ -10,6 +10,7 @@ from datetime import datetime
 from shutil import rmtree
 import matplotlib.pyplot as plt
 
+from .logging import set_log_level
 from ..io import (load_json, save_json, update_json, load_file, save_file,
                   safety_save)
 
@@ -46,7 +47,8 @@ class Study(object):
     >>> data = studObj.load('features', 'file2.pickle')
     """
 
-    def __init__(self, name):  # noqa
+    def __init__(self, name, verbose=None):  # noqa
+        set_log_level(verbose)
         assert isinstance(name, str)
         self.name = name
         # Get path to the bp file :
@@ -154,7 +156,7 @@ class Study(object):
     # Manage Files:
     # -------------------------------------------------------------
     def search(self, *args, folder='', intersection=True, case=True,
-               full_path=True, sort=True):
+               full_path=True, sort=True, verbose=None):
         """Get a list of files.
 
         Parameters
@@ -180,6 +182,7 @@ class Study(object):
         files : list
             A list containing the files found in the folder.
         """
+        set_log_level(verbose)
         # Get path and files in the folder :
         dir_path = os.path.join(self.path, folder)
         assert os.path.isdir(dir_path)
@@ -256,7 +259,7 @@ class Study(object):
         logger.info("    Folder %s added" % name)
         return full_path
 
-    def load(self, file, folder=None):
+    def load(self, file, folder=None, verbose=None):
         """Load a file.
 
         This method support to load :
@@ -280,6 +283,7 @@ class Study(object):
         file
             The loaded file.
         """
+        set_log_level(verbose)
         folder = '' if not isinstance(folder, str) else folder
         full_path = os.path.join(self.path, folder, file)
         arch = load_file(full_path)
