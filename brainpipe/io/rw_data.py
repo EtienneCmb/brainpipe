@@ -50,9 +50,10 @@ def load_file(name):
     assert os.path.isfile(name)
     file_name, file_ext = os.path.splitext(name)
     if file_ext == '.pickle':  # Pickle :
-        with open(name, "rb") as f:
-            arch = pickle.load(f)
-        return arch
+        return pd.read_pickle(name)
+        # with open(name, "rb") as f:
+        #     arch = pickle.load(f)
+        # return arch
     elif file_ext == '.mat':  # Matlab :
         return loadmat(name)
     elif file_ext in ['.npy', '.npz']:  # Numpy (single / multi array)
