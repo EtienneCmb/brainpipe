@@ -156,7 +156,7 @@ class Study(object):
     # Manage Files:
     # -------------------------------------------------------------
     def search(self, *args, folder='', intersection=True, case=True,
-               full_path=True, sort=True, verbose=None):
+               full_path=True, sort=True, split=None, verbose=None):
         """Get a list of files.
 
         Parameters
@@ -176,6 +176,8 @@ class Study(object):
             Get files with full path (True) or only file names (False).
         sort : bool | True
             Sort files.
+        split : int | None
+            Split the returned list of filst into smaller list.
 
         Returns
         -------
@@ -214,6 +216,10 @@ class Study(object):
         # Sort :
         if sort:
             files.sort()
+        # Split :
+        if isinstance(split, int) and (split < len(files)):
+            split = len(files) if split == -1 else split
+            files = [k.tolist() for k in np.array_split(files, split)]
         return files
 
     @staticmethod
