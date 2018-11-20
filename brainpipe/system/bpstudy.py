@@ -156,7 +156,8 @@ class Study(object):
     # Manage Files:
     # -------------------------------------------------------------
     def search(self, *args, folder='', intersection=True, case=True,
-               full_path=True, sort=True, split=None, verbose=None):
+               full_path=True, sort=True, exclude=None, split=None,
+               verbose=None):
         """Get a list of files.
 
         Parameters
@@ -176,6 +177,8 @@ class Study(object):
             Get files with full path (True) or only file names (False).
         sort : bool | True
             Sort files.
+        exclude : list | None
+            Exclude a list of files.
         split : int | None
             Split the returned list of filst into smaller list.
 
@@ -209,6 +212,9 @@ class Study(object):
                                                 intersection)
                 sort = False
 
+        # Exclude files :
+        if isinstance(exclude, (list, tuple, np.ndarray)):
+            files = [k for k in files if k not in exclude]
         logger.info("    %i files found : %s" % (len(files), ', '.join(files)))
         # Full path :
         if full_path:
