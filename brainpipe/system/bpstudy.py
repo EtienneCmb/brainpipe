@@ -223,7 +223,8 @@ class Study(object):
         if sort:
             files.sort()
         # Split :
-        if isinstance(split, int) and (split < len(files)):
+        if isinstance(split, int):
+            split = -1 if split >= len(files) else split
             split = len(files) if split == -1 else split
             files = [k.tolist() for k in np.array_split(files, split)]
         return files
