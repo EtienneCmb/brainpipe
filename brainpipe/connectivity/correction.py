@@ -1,6 +1,6 @@
 """Connectivity correction function."""
 import numpy as np
-
+import pandas as pd
 
 def _axes_correction(axis, ndim, num):
     """Get a slice at a specific axis."""
@@ -133,7 +133,7 @@ def anat_based_reorder(c, df, col, part='upper'):
     return c_r, labels, index
 
 
-def anat_based_mean(x, df, col, xyz=None):
+def anat_based_mean(x, df, col, fill_with=0., xyz=None):
     """Get mean of a connectivity array according to anatomical structures.
 
     Parameters
@@ -144,6 +144,8 @@ def anat_based_mean(x, df, col, xyz=None):
         DataFrame containing anamical informations.
     col : str
         Name of the column to use in the DataFrame.
+    fill_with : float | 0.
+        Fill non-connectivity values.
     xyz : array_like | None
         Array of coordinate of each electrode.
 
@@ -158,33 +160,38 @@ def anat_based_mean(x, df, col, xyz=None):
     """
     assert isinstance(x, np.ndarray) and x.ndim == 2
     assert col in df.keys()
-    # Force masked array conversion :
+    # Get labels and roi's indices :
+    gp = df.groupby(col, sort=False).groups
+    labels, rois = list(gp.keys()), list(gp.values())
+    n_roi = len(labels)
+
+    # Process the connectivity array :
+    np.fill_diagonal(x, 0.)
     is_masked = np.ma.is_masked(x)
-    if not is_masked:
-        x = np.ma.masked_array(x, mask=False)
-    mask = x.mask
-    # Group DataFrame column :
-    grp = df.groupby(col).groups
-    labels = list(grp.keys())
-    index = list(grp.values())
-    n_labels = len(labels)
-    x_r = np.ma.zeros((n_labels, n_labels), dtype=float)
-    mask_r = np.zeros((n_labels, n_labels), dtype=bool)
-    for r in range(n_labels):
-        for c in range(n_labels):
-            r_idx, c_idx = np.array(index[r]), np.array(index[c])
-            mask_r[r, c] = (~mask[r_idx, :][:, c_idx]).any()
-            x_r[r, c] = x[r_idx, :][:, c_idx].mean()
-    x_r = np.ma.masked_array(x_r.data, mask=~mask_r)
-    if not is_masked:
-        x_r = np.array(x_r)
-    if isinstance(xyz, np.ndarray) and (xyz.shape[0] == x.shape[0]):
-        xyz_r = np.zeros((n_labels, 3))
-        for k, i in enumerate(index):
-            xyz_r[k, :] = xyz[i, :].mean(0)
-        return x_r, labels, xyz_r
+    if is_masked:
+        x.mask = np.triu(x.mask)
+        np.fill_diagonal(x.mask, True)
+        x += x.T
+        con = np.ma.ones((n_roi, n_roi), dtype=float)
     else:
-        return x_r, labels
+        x = np.triu(x)
+        x += x.T
+        con = np.zeros((n_roi, n_roi), dtype=float)
+
+    # Take the mean inside rois :
+    for r, rows in enumerate(rois):
+        _r = np.array(rows).reshape(-1, 1)
+        for c, cols in enumerate(rois):
+            con[r, c] = x[_r, np.array(cols)].mean()
+
+    # xyz coordinates :
+    if xyz is None:
+        return con, list(labels)
+    elif isinstance(xyz, np.ndarray) and len(df) == xyz.shape[0]:
+        df['X'], df['Y'], df['Z'] = xyz[:, 0], xyz[:, 1], xyz[:, 2]
+        df = df.groupby(col, sort=False).mean().reset_index().set_index(col)
+        df = df.loc[labels].reset_index()
+        return con, list(labels), np.array(df[['X', 'Y', 'Z']])
 
 
 def ravel_connect(connect, part='upper'):
