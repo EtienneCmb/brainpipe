@@ -157,7 +157,7 @@ class Study(object):
     # -------------------------------------------------------------
     def search(self, *args, folder='', intersection=True, case=True,
                full_path=True, sort=True, exclude=None, split=None,
-               verbose=None):
+               load=False, verbose=None):
         """Get a list of files.
 
         Parameters
@@ -181,6 +181,8 @@ class Study(object):
             Exclude a list of files.
         split : int | None
             Split the returned list of filst into smaller list.
+        load : bool | False
+            Load the file if len(files) == 1.
 
         Returns
         -------
@@ -227,7 +229,12 @@ class Study(object):
             split = -1 if split >= len(files) else split
             split = len(files) if split == -1 else split
             files = [k.tolist() for k in np.array_split(files, split)]
-        return files
+        # Load :
+        if load:
+            assert (len(files) == 1), "Can only load files if len(files) == 1"
+            return self.load(files[0], folder=folder)
+        else:
+            return files
 
     @staticmethod
     def _search_files(def_file, dir_file, args, intersection):
