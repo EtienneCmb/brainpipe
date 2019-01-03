@@ -231,7 +231,9 @@ class Study(object):
             files = [k.tolist() for k in np.array_split(files, split)]
         # Load :
         if load:
-            assert (len(files) == 1), "Can only load files if len(files) == 1"
+            if len(files) > 1:
+                raise IOError("Can only load files if len(files) == 1. "
+                              "Files found : %s" % '\n'.join(files))
             return self.load(files[0], folder=folder)
         else:
             return files
