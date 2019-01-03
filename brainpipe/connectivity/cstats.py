@@ -256,8 +256,9 @@ def mantel(x, y, n_perm=100, method='pearson', tail='two-tail'):
     assert x.shape == y.shape
     # Ensure that x and y are formatted as Numpy arrays.
     x, y = np.asarray(x, dtype=float), np.asarray(y, dtype=float)
-    x[np.diag_indices_from(x)] = 0.
-    y[np.diag_indices_from(y)] = 0.
+    if x.ndim == y.ndim == 2:
+        x[np.diag_indices_from(x)] = 0.
+        y[np.diag_indices_from(y)] = 0.
 
     # Get if arrays have 0 on diagonal and are 2D :
     x_isdiag = spatial.distance.is_valid_dm(x)
@@ -331,10 +332,10 @@ def mantel(x, y, n_perm=100, method='pearson', tail='two-tail'):
         covariances = np.zeros(n, dtype=float)
 
         # Enumerate all permutations of row/column orders and iterate over them
-        for i, order in enumerate(permutations(range(m))):
+        for i, idx in enumerate(permutations(range(m))):
 
             # Take a permutation of the matrix.
-            y_resid_as_mat_permuted = y_resid_as_mat[order, :][:, order]
+            y_resid_as_mat_permuted = y_resid_as_mat[idx.reshape(-1, 1), idx]
 
             # Condense the permuted version of the matrix. Rather than use
             # distance.squareform(), we call directly into the C wrapper for
@@ -345,26 +346,24 @@ def mantel(x, y, n_perm=100, method='pearson', tail='two-tail'):
             # Compute and store the covariance.
             covariances[i] = (x_residuals * y_residuals_permuted).sum()
 
-    # ... otherwise run a stochastic Mantel test.
-    else:
+    else:  # ... otherwise run a stochastic Mantel test.
 
         # Initialize an empty array to store the covariances.
         covariances = np.zeros(n_perm, dtype=float)
 
         # Initialize an array to store the permutation order.
-        order = np.arange(m)
+        idx = np.arange(m)
 
         # Store the veridical covariance in 0th position...
         covariances[0] = (x_residuals * y_residuals).sum()
 
         # ...and then run the random permutations.
         for i in range(1, n_perm):
-
             # Choose a random order in which to permute the rows and columns.
-            np.random.shuffle(order)
+            np.random.shuffle(idx)
 
             # Take a permutation of the matrix.
-            y_resid_as_mat_permuted = y_resid_as_mat[order, :][:, order]
+            y_resid_as_mat_permuted = y_resid_as_mat[idx.reshape(-1, 1), idx]
 
             # Condense the permuted version of the matrix. Rather than use
             # distance.squareform(), we call directly into the C wrapper for
