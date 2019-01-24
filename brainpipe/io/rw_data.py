@@ -34,6 +34,11 @@ def save_file(name, *arg, compress=False, **kwargs):
             np.savez(name, kwargs)
     elif file_ext == '.json':  # JSON
         save_json(name, kwargs)
+    elif file_ext == '.xlsx':  # JSON
+        assert isinstance(arg[0], pd.DataFrame)
+        writer = pd.ExcelWriter(name)
+        arg[0].to_excel(writer)
+        writer.save()
     else:
         raise IOError("Extension %s not supported." % file_ext)
 
@@ -66,6 +71,9 @@ def load_file(name):
         return pd.read_excel(name)
     elif file_ext in ['.xls', '.xlsx']:  # CSV
         return pd.read_csv(name)
+    elif file_ext in ['.hdf5']:  # HDF5
+        import h5py
+        return h5py.File(name, 'r')
     else:
         raise IOError("Extension %s not supported." % file_ext)
 

@@ -1,5 +1,5 @@
 from .utils._physio import loadatlas, pos2label
-from ..system import pdTools
+from ..system.dataframe import pdTools
 
 __all__ = ['xyz2phy']
 

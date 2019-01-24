@@ -2,9 +2,10 @@
 import logging
 
 import numpy as np
+import pandas as pd
 from re import findall
 
-from brainpipe.system import set_log_level
+from ..system.logging import set_log_level
 
 logger = logging.getLogger('brainpipe')
 
@@ -151,3 +152,101 @@ def _ref_laplacian(data, xyz, channels, chnames, chnums, consider):
         data_b[k, ...] = data[i[0], ...] - data[i[1], ...].mean(axis=0)
         xyz_b[k, ...] = np.c_[xyz[i[0], :], xyz[i[1], :].mean(axis=0)].mean(1)
     return data_b, chan_b, xyz_b
+
+
+def contact_bipo_to_mono(contact):
+    """Convert a list of bipolar contacts into unique monopolar sites.
+
+    Parameters
+    ----------
+    contact : list
+        List of bipolar contact.
+
+    Returns
+    -------
+    contact_r : list
+        List of unsorted monopolar contacts.
+    """
+    from textwrap import wrap
+    contact = [k.strip().replace(' ', '').replace('-', '') for k in contact]
+    _split = []
+    for k in contact:
+        _k = wrap(k, int(np.ceil(len(k) / 2)))
+        assert len(_k) == 2, "Wrong channel conversion %s" % str(_k)
+        _split += list(_k)
+    _split = np.ravel(_split)
+    c_unique = []
+    _ = [c_unique.append(k) for k in _split if k not in c_unique]  # noqa
+    return c_unique
+
+
+def contact_mono_to_bipo(contact, sep='-'):
+    """Convert a list of monopolar contacts into bipolar contacts.
+
+    Parameters
+    ----------
+    contact : list
+        List of monopolar contact.
+    sep : string | '-'
+        String separator between bipolar contact.
+
+    Returns
+    -------
+    contact_r : list
+        List of bipolar contacts.
+    """
+    bip = []
+    for k in contact:
+        letter = ''.join([i for i in k if not i.isdigit()])
+        number = int(findall(r'\d+', k)[0])
+        previous_contact = '%s%i' % (letter, number - 1)
+        if previous_contact in contact:
+            bip += ['%s%s%s' % (k, sep, previous_contact)]
+    return bip
+
+
+def flat_bipolar_contact(contact):
+    """Get a flatten version of bipolar contacts.
+
+    For example, "A'12 - A'11" -> "A'12A'11"
+
+    Parameters
+    ----------
+    contact : list
+        List of contacts.
+
+    Returns
+    -------
+    contact_c : list
+        List of flattened contacts.
+    """
+    repl = {' ': '', '-': ''}
+    for i, k in enumerate(contact):
+        for o, n in repl.items():
+            contact[i] = k.replace(o, n)
+    return contact
+
+
+def clean_contact(contact):
+    """Clean contact's name.
+
+    For example "A02 - A01" -> "A2-A1"
+
+    Parameters
+    ----------
+    contact : list
+        List of contacts.
+
+    Returns
+    -------
+    contact_c : list
+        List of cleaned contacts.
+    """
+    chan_repl = {'01': '1', '02': '2', '03': '3', '04': '4', '05': '5',
+                 '06': '6', '07': '7', '08': '8', '09': '9', ' ': '', 'p': "'"}
+    if not isinstance(contact, pd.Series):
+        contact = pd.Series(data=contact, name='contact')
+    contact.replace(chan_repl, regex=True, inplace=True)
+    contact = contact.str.upper()
+    contact = contact.str.strip()
+    return list(contact)

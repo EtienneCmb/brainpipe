@@ -119,7 +119,8 @@ class Study(object):
         self._bpfolders(os.path.join(path, self.name))
         # Subfolders :
         sfold = ['config', 'database', 'feature', 'classified', 'multifeature',
-                 'figure', 'backup', 'anatomy', 'setting', 'other', 'script']
+                 'figure', 'backup', 'anatomy', 'setting', 'other', 'script',
+                 'xyz', 'channels']
         _ = [self._bpfolders(os.path.join(path, self.name, k)) for k in sfold]  # noqa
         # Add the study to the bpsetting file:
         now = datetime.now()
