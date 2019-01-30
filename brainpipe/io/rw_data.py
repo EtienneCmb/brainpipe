@@ -92,3 +92,41 @@ def safety_save(name):
             name = fname + '(' + str(k) + ')' + fext
         k += 1
     return name
+
+
+def hdf5_write_str(lst):
+    """String conversion for writting HDF5.
+
+    Parameters
+    ----------
+    lst : array_like
+        List of strings
+
+    Returns
+    -------
+    lst : array_like
+        Encoded list of strings
+    """
+    if isinstance(lst, str):
+        return lst.encode('ascii', 'ignore')
+    else:
+        return [k.encode('ascii', 'ignore') for k in lst]
+
+
+def hdf5_read_str(lst):
+    """String conversion for reading HDF5.
+
+    Parameters
+    ----------
+    lst : array_like
+        List of strings
+
+    Returns
+    -------
+    lst : array_like
+        ConveDecodedrted list of strings
+    """
+    if isinstance(lst, (list, tuple, np.ndarray)):
+        return [k.decode('utf-8') for k in lst]
+    else:
+        return lst.decode('utf-8')
