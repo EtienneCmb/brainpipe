@@ -117,7 +117,7 @@ def _ref_bipolar(data, xyz, channels, chnames, chnums, consider):
     data_b = np.zeros((len(idx), n_pts, n_trials), dtype=data.dtype)
     xyz_b = np.zeros((len(idx), 3))
     for k, i in enumerate(idx):
-        chan_b += ['%s-%s' % (channels[i[0]], channels[i[1]])]
+        chan_b += ['%s - %s' % (channels[i[0]], channels[i[1]])]
         data_b[k, ...] = data[i[0], ...] - data[i[1], ...]
         xyz_b[k, ...] = np.c_[xyz[i[0], :], xyz[i[1], :]].mean(1)
     return data_b, chan_b, xyz_b
@@ -148,7 +148,7 @@ def _ref_laplacian(data, xyz, channels, chnames, chnums, consider):
     data_b = np.zeros((len(idx), n_pts, n_trials), dtype=data.dtype)
     xyz_b = np.zeros((len(idx), 3))
     for k, i in enumerate(idx):
-        chan_b += ['%s-m(%s)' % (channels[i[0]], ', '.join(channels[i[1]]))]
+        chan_b += ['%s - m(%s)' % (channels[i[0]], ', '.join(channels[i[1]]))]
         data_b[k, ...] = data[i[0], ...] - data[i[1], ...].mean(axis=0)
         xyz_b[k, ...] = np.c_[xyz[i[0], :], xyz[i[1], :].mean(axis=0)].mean(1)
     return data_b, chan_b, xyz_b
@@ -197,11 +197,14 @@ def contact_mono_to_bipo(contact, sep='-'):
     """
     bip = []
     for k in contact:
-        letter = ''.join([i for i in k if not i.isdigit()])
-        number = int(findall(r'\d+', k)[0])
-        previous_contact = '%s%i' % (letter, number - 1)
-        if previous_contact in contact:
-            bip += ['%s%s%s' % (k, sep, previous_contact)]
+        try:
+            letter = ''.join([i for i in k if not i.isdigit()])
+            number = int(findall(r'\d+', k)[0])
+            previous_contact = '%s%i' % (letter, number - 1)
+            if previous_contact in contact:
+                bip += ['%s%s%s' % (k, sep, previous_contact)]
+        except:
+            logger.info('%s is not an SEEG channel' % k)
     return bip
 
 

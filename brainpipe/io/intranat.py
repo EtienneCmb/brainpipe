@@ -45,7 +45,7 @@ def intranat_csv(path, as_df=True, clean=True, channels=None, verbose=None):
     for row in data:
         contents.append(row)
 
-    save_space = 0
+    # save_space = 0
     # Find the string 'contact' to identify the starting line
     for i1 in range(len(contents[1])):
         for i2 in range(10):
@@ -53,8 +53,8 @@ def intranat_csv(path, as_df=True, clean=True, channels=None, verbose=None):
                 if contents[i2][i1] == 'contact':
                     savec = i1
                     savel = i2
-                if contents[i2][i1] == 'Use of MNI Template':
-                    save_space = i2
+                # if contents[i2][i1] == 'Use of MNI Template':
+                #     save_space = i2
             except:
                 continue
 
@@ -67,13 +67,20 @@ def intranat_csv(path, as_df=True, clean=True, channels=None, verbose=None):
         i = i + 2
         while (startl + i < len(contents)) and contents[startl + i]:
             # standard name : 'Ap12' (not A'12, Ap21, a'1a'2...)
-            nametmp = contents[startl + i][savec]
+            nametmp = contents[startl + i][savec].replace('-', ' - ')
 
-            testpol = re.search(" - ", nametmp)
+            testpol = re.search("-", nametmp)
             if testpol is not None:
                 polarity = 'bipolar'
             else:
                 polarity = 'monopolar'
+
+            if polarity == 'bipolar':  # test if it's A02-A01 or A01-A02
+                assert ('-' in nametmp) and (len(nametmp) % 2 == 1)
+                number = [int(n) for n in re.findall(r'\d+', nametmp)]
+                if number[0] < number[1]:
+                    # logger.warning('Contacts %s inverted' % nametmp)
+                    nametmp = ' - '.join(list(reversed(nametmp.split(' - '))))
 
             if nametmp not in contacts_infos.keys():
                 contacts_infos[polarity].update({nametmp: {}})

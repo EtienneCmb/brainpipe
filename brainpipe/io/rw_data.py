@@ -71,7 +71,7 @@ def load_file(name):
         return pd.read_excel(name)
     elif file_ext in ['.xls', '.xlsx']:  # CSV
         return pd.read_csv(name)
-    elif file_ext in ['.hdf5']:  # HDF5
+    elif file_ext in ['.hdf5', '.h5']:  # HDF5
         import h5py
         return h5py.File(name, 'r')
     else:
