@@ -197,7 +197,7 @@ def intranat_save_anat(df_contact, save_as, **kwargs):
     kwargs : dict | {}
         Additional dataframes that also need to be saved.
     """
-    assert isinstance(df_contact, pd.DataFrame)
+    assert isinstance(df_contact, dict)
     writer = pd.ExcelWriter(save_as)
     df_contact['bipolar'].to_excel(writer, 'Bipolar')
     df_contact['monopolar'].to_excel(writer, 'Monopolar')
