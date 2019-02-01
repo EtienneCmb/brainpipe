@@ -288,6 +288,8 @@ def intranat_group_anatomy(df, save_as, groupby='MarsAtlas'):
 
 
 def _find_in_df(df, col, pat):
+    pat = [pat] if isinstance(pat, str) else pat
+    assert isinstance(pat, (list, tuple))
     if col is None or pat is None:
         return np.ones((len(df),), dtype=bool)
     is_inside = np.zeros((len(df), len(pat)), dtype=bool)
@@ -327,9 +329,12 @@ def intranat_get_roi(df, roi, segmentation='MarsAtlas', polarity='bipolar'):
             df = intranat_load_anat(df, polarity)
         else:
             df = intranat_merge_anatomy(df)
-    if segmentation == 'MarsAtlas':
-        df.replace(dict(R_='', L_=''), inplace=True, regex=True)
-    is_inside = _find_in_df(df, segmentation, roi)
-    df_roi = df.iloc[is_inside].reset_index(drop=True)
-    idx_roi = np.arange(len(df))[is_inside]
+    if isinstance(roi, (str, list, tuple)):
+        if segmentation == 'MarsAtlas':
+            df.replace(dict(R_='', L_=''), inplace=True, regex=True)
+        is_inside = _find_in_df(df, segmentation, roi)
+        df_roi = df.iloc[is_inside].reset_index(drop=True)
+        idx_roi = np.arange(len(df))[is_inside]
+    else:
+        df_roi, idx_roi = df, slice(None)
     return df_roi, idx_roi
