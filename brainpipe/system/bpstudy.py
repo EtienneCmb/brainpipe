@@ -408,6 +408,27 @@ class Study(object):
         spec.loader.exec_module(module)
         return module
 
+    def join(self, file, folder=None):
+        """Join the name of a file with a destination folder.
+
+        Parameters
+        ----------
+        file : str
+            File name
+        folder : str | None
+            Destination folder. If None, path to the study is used instead
+
+        Returns
+        -------
+        path : str
+            The joined path
+        """
+        if isinstance(folder, str):
+            _path = self.path_to_folder(folder)
+        else:
+            _path = self.path
+        return os.path.join(_path, file)
+
     @property
     def studies(self):
         """Get doc."""
