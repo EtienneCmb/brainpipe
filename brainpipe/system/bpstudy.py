@@ -408,7 +408,7 @@ class Study(object):
         spec.loader.exec_module(module)
         return module
 
-    def join(self, file, folder=None):
+    def join(self, file, folder=None, force=False):
         """Join the name of a file with a destination folder.
 
         Parameters
@@ -417,6 +417,8 @@ class Study(object):
             File name
         folder : str | None
             Destination folder. If None, path to the study is used instead
+        force : bool | False
+            Force the creation of the destination folder if it doesn't exist
 
         Returns
         -------
@@ -424,7 +426,7 @@ class Study(object):
             The joined path
         """
         if isinstance(folder, str):
-            _path = self.path_to_folder(folder)
+            _path = self.path_to_folder(folder, force=force)
         else:
             _path = self.path
         return os.path.join(_path, file)
