@@ -334,7 +334,7 @@ def intranat_get_roi(df, roi, segmentation='MarsAtlas', polarity='bipolar'):
             df.replace(dict(R_='', L_=''), inplace=True, regex=True)
         is_inside = _find_in_df(df, segmentation, roi)
         df_roi = df.iloc[is_inside].reset_index(drop=True)
-        idx_roi = np.arange(len(df))[is_inside] if len(df_roi) else slice(None)
+        idx_roi = np.array(df.index)[is_inside] if len(df_roi) else slice(None)
     else:
         df_roi, idx_roi = df, slice(None)
     return df_roi, idx_roi
