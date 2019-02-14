@@ -298,7 +298,8 @@ def _find_in_df(df, col, pat):
     return is_inside.any(axis=1)
 
 
-def intranat_get_roi(df, roi, segmentation='MarsAtlas', polarity='bipolar'):
+def intranat_get_roi(df, roi, segmentation='MarsAtlas', polarity='bipolar',
+                     hemisphere=None):
     """Get contact name and index that are contained inside an ROI.
 
     Parameters
@@ -312,6 +313,8 @@ def intranat_get_roi(df, roi, segmentation='MarsAtlas', polarity='bipolar'):
         'Freesurfer'...)
     polarity : {'bipolar', 'monopolar'}
         The contact polarity to get
+    hemisphere : string | None
+        Hemisphere to select. Use either 'L', 'R' or None.
 
     Returns
     -------
@@ -330,8 +333,11 @@ def intranat_get_roi(df, roi, segmentation='MarsAtlas', polarity='bipolar'):
         else:
             df = intranat_merge_anatomy(df)
     if isinstance(roi, (str, list, tuple)):
-        if segmentation == 'MarsAtlas':
+        if (segmentation == 'MarsAtlas') and (hemisphere not in ['L', 'R']):
             df.replace(dict(R_='', L_=''), inplace=True, regex=True)
+        else:
+            roi = [roi] if isinstance(roi, str) else roi
+            roi = ['%s_' % hemisphere + k for k in roi]
         is_inside = _find_in_df(df, segmentation, roi)
         df_roi = df.iloc[is_inside].reset_index(drop=True)
         idx_roi = np.array(df.index)[is_inside] if len(df_roi) else slice(None)
