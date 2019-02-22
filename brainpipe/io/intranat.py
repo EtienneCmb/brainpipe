@@ -264,7 +264,7 @@ def intranat_merge_anatomy(df_lst):
     return pd.concat(df_lst, ignore_index=False, join='inner').reset_index()
 
 
-def intranat_group_anatomy(df, save_as, groupby='MarsAtlas'):
+def intranat_group_anatomy(df, save_as, groupby='MarsAtlas', ):
     """Group the anatomy of multiple anatomical files.
 
     Parameters
@@ -273,6 +273,8 @@ def intranat_group_anatomy(df, save_as, groupby='MarsAtlas'):
         DataFrame or list of anatomical dataframes
     save_as : string
         Name of the grouped dataframe to save
+    groupby : string | 'MarsAtlas'
+        Column to use for grouping
     """
     if isinstance(df, (list, tuple)):
         df = intranat_merge_anatomy(df)
@@ -344,3 +346,82 @@ def intranat_get_roi(df, roi, segmentation='MarsAtlas', polarity='bipolar',
     else:
         df_roi, idx_roi = df, slice(None)
     return df_roi, idx_roi
+
+
+def intranat_group_roi(anats, subjects=None, groupby='MarsAtlas',
+                       merge_roi=None, rm_bad_channels=True, rm_roi=None,
+                       verbose=None):
+    """Merge and group anatomy across subjects.
+
+    Parameters
+    ----------
+    anats : dict
+        Anatomy across subjects. This parameter must be a dictionary organize
+        as follow :
+            {
+                "suj_1": {
+                    "anatomy": pd.DataFrame,
+                    "bad_channels": [
+                        0, 1, 2
+                    ]
+                },
+                "suj_2": {
+                    "anatomy": pd.DataFrame
+                }
+            }
+    subjects : list | None
+        List of subjects name. This parameter can be used to have a fix order
+        of subject name
+    groupby : str | 'MarsAtlas'
+        Name of the column to use for grouping anatomy
+    merge_roi : dict | None
+        Use this parameter to group merge several ROI. For example, use
+        dict(L_OFCvl='L_OFC', L_OFCvm='L_OFC') to merge left OFC vl and vm into
+        OFC
+    rm_bad_channels : bool | True
+        Remove bad channels. If True, a "bad_channels" must be present for the
+        subject
+    rm_roi : list, str | None
+        List of ROIs to remove
+
+    Returns
+    -------
+    df_roi : pd.DataFrame
+        A multi-indexed grouped dataframe. The first level correspond to the
+        name of the ROI and the second, to the subject'name.
+    """
+    set_log_level(verbose)
+    assert isinstance(anats, dict)
+    # Subject detection
+    subjects = list(anats.keys()) if subjects is None else subjects
+    assert isinstance(subjects, list)
+    n_suj = len(subjects)
+    logger.info("Group anatomy by %s of %i subjects" % (groupby, n_suj))
+    # Concatenate and merge dataframes
+    df = []
+    for s in subjects:
+        _suj = anats[s]
+        _df = _suj['anatomy']
+        _df['Subjects'] = [s] * len(_df)
+        # Remove bad channels
+        if rm_bad_channels and ("bad_channels" in _suj.keys()):
+            bad = _suj['bad_channels']
+            logger.info("    %i bad channels removed for %s" % (len(bad), s))
+            _df = _df.drop(bad, axis=0).reset_index()
+        df += [_df]
+    df = intranat_merge_anatomy(df)
+    # Merge rois
+    if isinstance(merge_roi, dict):
+        logger.info("    Merge ROIs")
+        df.replace(merge_roi, regex=True, inplace=True)
+    # Group anatomy
+    gp = df.groupby([groupby, 'Subjects'])
+    df_roi = pd.DataFrame(gp.size())
+    df_roi['Indices'] = [list(k) for k in gp.groups.values()]
+    if rm_roi is not None:
+        rm_roi = [rm_roi] if isinstance(rm_roi, str) else rm_roi
+        assert isinstance(rm_roi, list)
+        logger.info("    Remove ROIs : %s" % ', '.join(rm_roi))
+        df_roi.drop(rm_roi, axis=0, inplace=True)
+    df_roi.rename(columns={0: "#"}, inplace=True)
+    return df_roi
