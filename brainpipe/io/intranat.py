@@ -411,7 +411,7 @@ def intranat_group_roi(anats, subjects=None, groupby='MarsAtlas',
             logger.info("    %i bad channels removed for %s" % (len(bad), s))
             _df = _df.drop(bad, axis=0)
         df += [_df]
-    df = intranat_merge_anatomy(df)
+    df = pd.concat(df, ignore_index=False, join='inner')
     # Merge rois
     if isinstance(merge_roi, dict):
         logger.info("    Merge ROIs")
