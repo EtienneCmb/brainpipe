@@ -409,7 +409,7 @@ def intranat_group_roi(anats, subjects=None, groupby='MarsAtlas',
         if rm_bad_channels and ("bad_channels" in _suj.keys()):
             bad = _suj['bad_channels']
             logger.info("    %i bad channels removed for %s" % (len(bad), s))
-            _df = _df.drop(bad, axis=0).reset_index()
+            _df = _df.drop(bad, axis=0)
         df += [_df]
     df = intranat_merge_anatomy(df)
     # Merge rois
