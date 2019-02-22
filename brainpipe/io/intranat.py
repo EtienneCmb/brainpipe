@@ -386,6 +386,8 @@ def intranat_group_roi(anats, subjects=None, groupby='MarsAtlas',
 
     Returns
     -------
+    df : pd.DataFrame
+        The merge dataframe
     df_roi : pd.DataFrame
         A multi-indexed grouped dataframe. The first level correspond to the
         name of the ROI and the second, to the subject'name.
@@ -424,4 +426,4 @@ def intranat_group_roi(anats, subjects=None, groupby='MarsAtlas',
         logger.info("    Remove ROIs : %s" % ', '.join(rm_roi))
         df_roi.drop(rm_roi, axis=0, inplace=True)
     df_roi.rename(columns={0: "#"}, inplace=True)
-    return df_roi
+    return df, df_roi
