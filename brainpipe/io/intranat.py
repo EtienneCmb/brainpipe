@@ -65,8 +65,9 @@ def intranat_csv(path, as_df=True, clean=True, channels=None, verbose=None):
             # standard name : 'Ap12' (not A'12, Ap21, a'1a'2...)
             nametmp = contents[startl + i][savec].replace('-', ' - ')
 
+            # now we need to find out if it's a bipolar or monopolar channel
             testpol = re.search("-", nametmp)
-            if testpol is not None:
+            if (testpol is not None) and len(re.findall('\d', nametmp)):
                 polarity = 'bipolar'
             else:
                 polarity = 'monopolar'
