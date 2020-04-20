@@ -1,2 +1,2 @@
 from .cmon_plt import (addLines, BorderPlot, tilerplot, addPval, rmaxis,  # noqa
-                       despine, continuouscol)
+                       despine, continuouscol, get_turbo_cmap)

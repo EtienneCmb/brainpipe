@@ -431,6 +431,31 @@ class Study(object):
             _path = self.path
         return os.path.join(_path, file)
 
+    def save_pdf_report(self, save_as, figs, folder=None, **kwargs):
+        """Build a pdf report from a list of figures.
+
+        Parameters
+        ----------
+        save_as : str
+            Path to the pdf file to save (e.g 'test.pdf')
+        figs : list
+            List of figures to save as the pdf
+        folder : str | None
+            Folder where to save the report. If None, the path is inferred from
+            the `save_as` input
+        kwargs : dict | {}
+            Additional arguments are passed to plt.savefig (e.g dpi=300etc.)
+        """
+        from matplotlib.backends.backend_pdf import PdfPages
+
+        assert isinstance(figs, list)
+        if isinstance(folder, str):
+            save_as = self.join(save_as, folder=folder, force=True)
+        with PdfPages(save_as) as pdf:
+            for fig in figs:
+                pdf.savefig(fig, **kwargs)
+                plt.close()
+
     @property
     def studies(self):
         """Get doc."""
