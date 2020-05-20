@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 from re import findall
 
-from ..system.logging import set_log_level
+from brainpipe.system.logging import set_log_level
 
 logger = logging.getLogger('brainpipe')
 
@@ -246,10 +246,14 @@ def clean_contact(contact):
         List of cleaned contacts.
     """
     chan_repl = {'01': '1', '02': '2', '03': '3', '04': '4', '05': '5',
-                 '06': '6', '07': '7', '08': '8', '09': '9', ' ': '', 'p': "'"}
+                 '06': '6', '07': '7', '08': '8', '09': '9', ' ': ''}
     if not isinstance(contact, pd.Series):
         contact = pd.Series(data=contact, name='contact')
     contact.replace(chan_repl, regex=True, inplace=True)
+    # replace p -> ' (only if single letters)
+    for n_c, c in enumerate(contact):
+        if ("p" in c) and len(findall(r'[A-Za-z]+', c)[0]) > 1:
+            contact[n_c] = contact[n_c].replace('p', "'")
     contact = contact.str.upper()
     contact = contact.str.strip()
     return list(contact)
