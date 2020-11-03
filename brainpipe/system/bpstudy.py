@@ -1,6 +1,7 @@
 """Handle brainpipe studies (files and folders)."""
 import os
 import re
+import sys
 import logging
 
 import numpy as np
@@ -455,6 +456,37 @@ class Study(object):
             for fig in figs:
                 pdf.savefig(fig, **kwargs)
                 plt.close()
+
+    def runtime(self, save=True, verbose=None):
+        """Computes and save how long a function takes to execute.
+        """
+        from datetime import date
+        hist_file = 'runtime.txt'
+        date_format = "%d/%m/%Y %H:%M:%S"
+        set_log_level(verbose)
+
+        if not hasattr(self, '_runtime_past'):
+            self._runtime_script = sys.argv[0]
+            self._runtime_past = datetime.now()
+            line = self._runtime_past.strftime(date_format)
+            logger.info(f'    Start timer : {line}')
+        else:
+            if save:
+                path = self.join(hist_file, folder='cache', force=True)
+                mode = "a+" if os.path.isfile(path) else "w+"
+                f = open(path, mode)
+                # define an instantaneous datetime
+                now = datetime.now()
+                # get past and today dates and deltatime
+                past_date = self._runtime_past.strftime(date_format)
+                now_date = now.strftime(date_format)
+                elapsed = now - self._runtime_past
+                # define the string to write
+                line = (f"{past_date}\t{now_date}\t{self._runtime_script}"
+                        f"\t{elapsed}\r\n")
+                f.write(line)
+                f.close()
+                logger.info(f"    Elapsed time : {elapsed}")
 
     @property
     def studies(self):
